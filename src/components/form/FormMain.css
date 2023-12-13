@@ -1,0 +1,99 @@
+.form__button>p {
+    display: none;
+    color: red;
+    font-size: 1rem;
+}
+
+.post-twice {
+    font-weight: 400;
+}
+
+
+.form {
+    display: none;
+    /* display: block; */
+
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 20%;
+    max-width: 600px;
+    font-size: clamp(14px, 4vw, 18px);
+    padding: 0.5rem;
+    background-color: #c6c6c6;
+    border: 0.2rem var(--form-border-color) solid;
+    border-radius: 0.4rem;
+}
+
+.form :not(:last-child) {
+    margin-bottom: 1em;
+}
+
+.form__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.form__btn-close:active {
+    background-color: #f2b0b0;
+}
+
+.form__top h1 {
+    font-size: clamp(18px, 4vw, 24px);
+    margin-bottom: 1em;
+
+
+}
+
+.form__block- {
+    display: flex;
+    align-items: center;
+}
+
+.form__inp-mail {
+    border: 0.2rem var(--form-border-color) solid;
+    border-radius: 0.4rem;
+    padding: clamp(0.4rem, 1vw, 1rem);
+    margin-left: 1em;
+    background-color: #fff;
+}
+
+.form__block-inp {
+    display: flex;
+    align-items: center;
+}
+
+.form__block-inp h4 {}
+
+.form__block-inp textarea {
+    width: 100%;
+    height: 10rem;
+    resize: none;
+    border: 0.2rem var(--form-border-color) solid;
+    border-radius: 0.4rem;
+    padding: clamp(0.4rem, 1vw, 1rem);
+}
+
+
+
+.main__out {
+    border-radius: 0.4rem;
+    background-color: #ffffff;
+
+}
+
+
+.main__out-message {
+    padding: 0.8rem;
+}
+
+.main__out-message :not(:last-child) {
+    margin-bottom: 1em;
+}
+
+.main__out-text {}
+
+.main__out-message button:hover {
+    background-color: #f2b0b0;
+}
