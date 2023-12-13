@@ -23,9 +23,6 @@ export default function FormMain() {
   // ============ errors =================================================
 
   const validErrorMesageOutEmail = () => {
-    console.log('validErrorMesageOutEmail');
-    console.log(emailValidation.isDirty);
-
     if (emailValidation.isDirty && emailValidation.isEmpty) {
       return (
         <div className="validate validate--email" style={{ color: 'red' }}>
@@ -86,23 +83,16 @@ export default function FormMain() {
   let noActivBtn = false;
 
   let addComment = (event) => {
-    console.log('add-comment');
-
     const formInpMail = document.querySelector('.form__inp-mail');
     let comments = [];
     let commentValue = formText.current.value;
-    console.log(commentValue);
     if (email && commentValue !== '' && comment.indexOf(commentValue) === -1) {
-      console.log('noActivBtn--- job');
-
       comments = [...comment, commentValue];
       postTwice.classList.remove('post-twice');
       postTwice.style.display = 'none';
       noActivBtn =
         !emailValidation.inputValid || !textAreaValidation.inputValid;
     } else if (commentValue === '') {
-      console.log('commentValue zero  ---------------------------');
-
       formInpMail.focus();
       comments = [...comment];
       formText = '';
@@ -114,7 +104,6 @@ export default function FormMain() {
       postTwice.style.display = 'block';
     }
 
-    console.log(comments);
     setComment(comments);
   };
 
