@@ -67,7 +67,7 @@ export const useValidation = (value, validations) => {
 // ======= useInput ==================================================
 export const useInput = (initialValue, validations) => {
   const [value, setValue] = useState(initialValue);
-  const [isDirty, setDirty] = useState(false);
+  const [isDirty, setDirty] = useState(true);
   const valid = useValidation(value, validations);
 
   const onChange = (e) => {

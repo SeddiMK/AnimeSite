@@ -5,7 +5,12 @@
 }
 
 .post-twice {
+    display: none;
     font-weight: 400;
+    font-size: 1rem;
+    color: red;
+    margin-bottom: 0.8rem;
+
 }
 
 
@@ -25,14 +30,13 @@
     border-radius: 0.4rem;
 }
 
-.form :not(:last-child) {
-    margin-bottom: 1em;
-}
+
 
 .form__top {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 1em;
 }
 
 .form__btn-close:active {
@@ -42,29 +46,46 @@
 .form__top h1 {
     font-size: clamp(18px, 4vw, 24px);
     margin-bottom: 1em;
+}
 
+.form__block {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    margin-bottom: 1em;
 
 }
 
-.form__block- {
-    display: flex;
-    align-items: center;
+.form__block-mail {
+    margin-left: 1em;
 }
 
 .form__inp-mail {
     border: 0.2rem var(--form-border-color) solid;
     border-radius: 0.4rem;
-    padding: clamp(0.4rem, 1vw, 1rem);
-    margin-left: 1em;
+    padding: clamp(0.2rem, 0.6vw, 0.7rem);
+
     background-color: #fff;
+    margin-bottom: 0.2em;
+
+}
+
+.validate {
+    font-size: 1rem;
+    margin-bottom: 0.5em;
 }
 
 .form__block-inp {
     display: flex;
     align-items: center;
+    margin-bottom: 0.4em;
+
 }
 
-.form__block-inp h4 {}
+
+.form__block-inp h4 {
+    margin-bottom: 0.5em;
+}
 
 .form__block-inp textarea {
     width: 100%;
@@ -74,6 +95,7 @@
     border-radius: 0.4rem;
     padding: clamp(0.4rem, 1vw, 1rem);
 }
+
 
 
 

@@ -1,9 +1,13 @@
 import './FormMain.css';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useInput } from '../Validate';
 
 export default function FormMain() {
   const form = document.querySelector('form.form');
+  // const btnSendComment = document.querySelector(
+  //   'button.main__btn-send-comment'
+  // );
+
   const emailValidation = useInput('', {
     isEmpty: true,
     minLengthError: 3,
@@ -11,16 +15,17 @@ export default function FormMain() {
   });
   const textAreaValidation = useInput('', {
     isEmpty: true,
-    minLengthError: 3,
+    minLengthError: 1,
     // repeatMessage: false,
   });
 
-  let noActivBtn =
-    !emailValidation.inputValid || !textAreaValidation.inputValid;
-  let postTwice = document.querySelector('.form__button>p');
+  let postTwice = document.querySelector('.validate--textarea-duble-send>p');
   // ============ errors =================================================
 
   const validErrorMesageOutEmail = () => {
+    console.log('validErrorMesageOutEmail');
+    console.log(emailValidation.isDirty);
+
     if (emailValidation.isDirty && emailValidation.isEmpty) {
       return (
         <div className="validate validate--email" style={{ color: 'red' }}>
@@ -44,6 +49,7 @@ export default function FormMain() {
       );
     }
   };
+
   //===============================
   //  let searchArrayMessage = comment.indexOf(textAreaValidation.value) !== -1;
 
@@ -76,44 +82,76 @@ export default function FormMain() {
   const [email, setEmail] = useState('');
   let newDelArr = [];
   let formText = React.createRef();
+  // =========noActivBtn== disabled={noActivBtn} =========================
+  let noActivBtn = false;
 
   let addComment = (event) => {
+    console.log('add-comment');
+
+    const formInpMail = document.querySelector('.form__inp-mail');
     let comments = [];
     let commentValue = formText.current.value;
+    console.log(commentValue);
+    if (email && commentValue !== '' && comment.indexOf(commentValue) === -1) {
+      console.log('noActivBtn--- job');
 
-    if (email && comment.indexOf(commentValue) === -1) {
       comments = [...comment, commentValue];
       postTwice.classList.remove('post-twice');
       postTwice.style.display = 'none';
-    } else {
+      noActivBtn =
+        !emailValidation.inputValid || !textAreaValidation.inputValid;
+    } else if (commentValue === '') {
+      console.log('commentValue zero  ---------------------------');
+
+      formInpMail.focus();
       comments = [...comment];
+      formText = '';
+    } else {
+      formText = '';
+      comments = [...comment];
+
       postTwice.classList.add('post-twice');
       postTwice.style.display = 'block';
     }
 
+    console.log(comments);
     setComment(comments);
-
-    event.preventDefault();
   };
 
   let delComment = (ind) => {
     newDelArr = comment.filter((el) => comment[ind] !== el);
 
     setComment(newDelArr);
-    formText.current.value = ''; // !!!!
   };
 
   let handleSubmit = (e) => {
     // e.preventDefault();
   };
 
-  let closeForm = () => {
-    form.style.display = 'none';
+  const closeForm = () => {
+    let formTextArea = form.querySelector('textarea');
+    postTwice.style.display = 'none';
+    formTextArea.value = '';
+    form.style.cssText = 'display: none;';
   };
+
+  const formRef = useRef(null);
+
+  const handleClick = (e) => {
+    if (formRef.current && !formRef.current.contains(e.target)) {
+      closeForm();
+    }
+  };
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClick);
+    return () => {
+      document.removeEventListener('mousedown', handleClick);
+    };
+  });
 
   return (
     <>
-      <form action="#" className="form" onSubmit={handleSubmit}>
+      <form action="#" className="form" ref={formRef} onSubmit={handleSubmit}>
         <div className="form__top">
           <h1>Send comment</h1>
           <button className="form__btn-close" onClick={closeForm}>
@@ -121,22 +159,23 @@ export default function FormMain() {
           </button>
         </div>
 
-        <div className="form__block-">
+        <div className="form__block">
           <label htmlFor="main-email">Enter your email:</label>
-
-          {validErrorMesageOutEmail()}
-          <input
-            className="form__inp-mail"
-            id="main-email"
-            type="email"
-            onChange={(e) => {
-              emailValidation.onChange(e);
-              setEmail(e.target.value);
-            }}
-            onBlur={(e) => emailValidation.onBlur(e)}
-            value={emailValidation.value}
-            placeholder="Write email --------"
-          />
+          <div className="form__block-mail">
+            <input
+              className="form__inp-mail"
+              id="main-email"
+              type="email"
+              onChange={(e) => {
+                emailValidation.onChange(e);
+                setEmail(e.target.value);
+              }}
+              onBlur={(e) => emailValidation.onBlur(e)}
+              value={emailValidation.value}
+              placeholder="Write email --------"
+            />
+            {validErrorMesageOutEmail()}
+          </div>
         </div>
 
         <div className="form__block-inp">
@@ -154,11 +193,13 @@ export default function FormMain() {
             />
           </label>
         </div>
+        <div className="validate--textarea-duble-send">
+          <p>You cannot comment on the same post twice</p>
+        </div>
         <div className="form__button">
-          <button disabled={noActivBtn} type="submit" onClick={addComment}>
+          <button type="submit" disabled={noActivBtn} onClick={addComment}>
             Add comment
           </button>
-          <p>You cannot comment on the same post twice</p>
         </div>
       </form>
 

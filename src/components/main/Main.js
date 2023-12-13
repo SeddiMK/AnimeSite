@@ -3,14 +3,19 @@ import React from 'react';
 import FormMain from '../form/FormMain';
 
 export default function Main() {
-  const form = document.querySelector('form.form');
-  let openForm = () => {
-    form.style.display = 'block';
+  const openForm = () => {
+    const form = document.querySelector('form.form');
+    let postTwice = document.querySelector('.validate--textarea-duble-send>p');
+    let formTextArea = form.querySelector('textarea');
+
+    postTwice.style.display = 'none';
+    form.style.cssText = 'display: block;';
+    formTextArea.value = '';
   };
   return (
     <main className="main">
       <button className="main__btn-send-comment" onClick={openForm}>
-        Send comment.
+        Send comment
       </button>
 
       <FormMain />
