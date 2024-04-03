@@ -44,18 +44,18 @@ body {
     &:before {
       content: '0';
       position: absolute;
-      top: 25px;
+      top: 0.65em;
       // bottom: 0;
-      left: 35px;
+      left: 0.87em;
       // right: 0;
       margin: auto;
       text-align: center;
-      // line-height: 105px;
+      line-height: 1em;
       font-size: 2em;
       // color: #2b2b2b;
       color: #e5dbdb;
 
-      transform-origin: 'center center';
+      transform-origin: center;
       transition: all 0.25s ease 0s;
     }
     &:after {
@@ -82,8 +82,8 @@ body {
     display: none;
   }
   label {
-    height: 40px;
-    width: 40px;
+    height: 2em;
+    width: 2em;
     transform-origin: 'center center';
     svg {
       transition: transform 0.4s ease-in-out;
@@ -129,12 +129,16 @@ label:hover ~ .rating__inp:checked ~ label svg {
 
 #rate1:checked ~ .rating-value:before {
   content: '1';
-  font-size: 2.15em;
+  font-size: 2em;
+  // top: 0.5em;
+  // left: 0.75em;
 }
 
 label[for='rate1']:hover ~ .rating-value:before {
   content: '1' !important;
-  font-size: 2.15em !important;
+  font-size: 2.45em !important;
+  top: 0.4em;
+  left: 0.7em;
 }
 
 #rate2:checked ~ .rating-value:before {
@@ -144,32 +148,33 @@ label[for='rate1']:hover ~ .rating-value:before {
 
 label[for='rate2']:hover ~ .rating-value:before {
   content: '2' !important;
-  font-size: 2em !important;
+  font-size: 2.45em !important;
+  top: 0.4em;
+  left: 0.7em;
 }
 
 #rate3:checked ~ .rating-value:before {
   content: '3';
-  font-size: 2.15em;
+  font-size: 2em;
 }
 
 label[for='rate3']:hover ~ .rating-value:before {
   content: '3' !important;
-  font-size: 2.15em !important;
+  font-size: 2.45em !important;
+  top: 0.4em;
+  left: 0.7em;
 }
 
 #rate4:checked ~ .rating-value:before {
   content: '4';
-  font-size: 2.5em;
+  font-size: 2em;
 }
 
 label[for='rate4']:hover ~ .rating-value:before {
   content: '4' !important;
-  font-size: 2.5em !important;
-}
-
-#rate5:checked ~ .rating-value:before {
-  content: '5';
-  font-size: 2.15em;
+  font-size: 2.45em !important;
+  top: 0.4em;
+  left: 0.7em;
 }
 
 @keyframes pulse {
@@ -183,8 +188,8 @@ label[for='rate4']:hover ~ .rating-value:before {
   100% {
     height: 7.5em;
     width: 7.5em;
-    top: -25px;
-    left: -35px;
+    top: -1.3em;
+    left: -1.6em;
     opacity: 0;
   }
 }
@@ -193,7 +198,14 @@ label[for='rate4']:hover ~ .rating-value:before {
   animation: pulse 0.4s ease-out 1;
 }
 
+#rate5:checked ~ .rating-value:before {
+  content: '5';
+  font-size: 2em;
+}
+
 label[for='rate5']:hover ~ .rating-value:before {
   content: '5' !important;
-  font-size: 2.15em !important;
+  font-size: 2.45em !important;
+  top: 0.4em;
+  left: 0.7em;
 }
