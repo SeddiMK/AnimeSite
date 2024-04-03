@@ -1,8 +1,8 @@
-import './FormMain.css';
+import './FormMain.scss';
 import React, { useEffect, useRef, useState } from 'react';
 import { useInput } from '../Validate';
 
-export default function FormMain() {
+const FormMain = () => {
   const form = document.querySelector('form.form');
   // const btnSendComment = document.querySelector(
   //   'button.main__btn-send-comment'
@@ -202,4 +202,6 @@ export default function FormMain() {
       </div>
     </>
   );
-}
+};
+
+export default FormMain;

@@ -1,8 +1,8 @@
-import './Main.css';
+import './Main.scss';
 import React from 'react';
 import FormMain from '../form/FormMain';
 
-export default function Main() {
+const Main = () => {
   const openForm = () => {
     const form = document.querySelector('form.form');
     let postTwice = document.querySelector('.validate--textarea-duble-send>p');
@@ -21,4 +21,5 @@ export default function Main() {
       <FormMain />
     </main>
   );
-}
+};
+export default Main;

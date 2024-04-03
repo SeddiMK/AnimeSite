@@ -1,10 +1,10 @@
-import './Null.css';
-import './App.css';
+import './Null.scss';
+import './App.scss';
 import Header from '../components/header/Header';
 import Main from '../components/main/Main';
 import Footer from '../components/footer/Footer';
 
-export default function App() {
+const App = () => {
   return (
     <div className="container">
       <Header />
@@ -12,4 +12,6 @@ export default function App() {
       <Footer />
     </div>
   );
-}
+};
+
+export default App;

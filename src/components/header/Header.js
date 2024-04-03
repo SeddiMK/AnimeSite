@@ -1,14 +1,14 @@
-import './Header.css';
+import './Header.scss';
 
-export default function Header() {
+const Header = () => {
   return (
     <header className="header">
       <div className="header__container">
-        <a className="header__logo">
+        <a link="/" className="header__logo">
           ME
           {/* <img src="#" alt="Image logo" /> */}
         </a>
-        <nav className="header__nav menu">
+        {/* <nav className="header__nav menu">
           <ul className="menu__list">
             <li className="menu__item">
               <a href="#" className="menu__link">
@@ -47,8 +47,10 @@ export default function Header() {
               </button>
             </li>
           </ul>
-        </nav>
+        </nav> */}
       </div>
     </header>
   );
-}
+};
+
+export default Header;
