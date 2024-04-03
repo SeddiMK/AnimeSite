@@ -4,7 +4,7 @@ const RatingStar = () => {
   return (
     <>
       <fieldset className="rating-container">
-        <input type="radio" name="rating" id="rate5" />
+        <input className="rating__inp" type="radio" name="rating" id="rate5" />
         <label for="rate5">
           <svg
             id="Object"
@@ -27,7 +27,7 @@ const RatingStar = () => {
             />
           </svg>
         </label>
-        <input type="radio" name="rating" id="rate4" />
+        <input className="rating__inp" type="radio" name="rating" id="rate4" />
         <label for="rate4">
           <svg
             id="Object"
@@ -50,7 +50,7 @@ const RatingStar = () => {
             />
           </svg>
         </label>
-        <input type="radio" name="rating" id="rate3" />
+        <input className="rating__inp" type="radio" name="rating" id="rate3" />
         <label for="rate3">
           <svg
             id="Object"
@@ -73,7 +73,7 @@ const RatingStar = () => {
             />
           </svg>
         </label>
-        <input type="radio" name="rating" id="rate2" />
+        <input className="rating__inp" type="radio" name="rating" id="rate2" />
         <label for="rate2">
           <svg
             id="Object"
@@ -96,7 +96,7 @@ const RatingStar = () => {
             />
           </svg>
         </label>
-        <input type="radio" name="rating" id="rate1" />
+        <input className="rating__inp" type="radio" name="rating" id="rate1" />
         <label for="rate1">
           <svg
             id="Object"
