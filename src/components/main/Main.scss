@@ -6,6 +6,19 @@
   margin-bottom: 1.5rem;
 }
 
+.media__left {
+  display: flex;
+}
+.media__left-buttons {
+  display: flex;
+  flex-direction: column;
+  flex: 0 1 25%;
+}
+.rating {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .rating__user-star {
   max-width: 300px;
 }

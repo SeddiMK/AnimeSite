@@ -4,6 +4,9 @@ import FormMain from '../form/FormMain';
 import RatingStar from '../rating/RatingStar';
 
 const Main = () => {
+  let srcImg = undefined;
+  let aliImgMediaLeft;
+
   const openForm = () => {
     const form = document.querySelector('form.form');
     let postTwice = document.querySelector('.validate--textarea-duble-send>p');
@@ -18,7 +21,27 @@ const Main = () => {
       <div className="main__wrap">
         <div className="main__content content">
           <div className="content__media media">
-            <div className="media__left"></div>
+            <div className="media__left">
+              <div className="media__left-image">
+                <img
+                  className="media__left-img img"
+                  src={srcImg}
+                  alt={aliImgMediaLeft}
+                />
+              </div>
+              <div className="media__left-buttons">
+                <button className="media__left-buttons-online">
+                  Смотреть онлайн
+                </button>
+                <button className="media__left-buttons-review">
+                  Написать отзыв
+                </button>
+                <button className="media__left-add-list">
+                  Добавить в список
+                </button>
+              </div>
+              <div className="media__left-add"></div>
+            </div>
             <div className="media__right">
               <div className="media__rating-block rating">
                 <div className="rating__stars">
@@ -49,7 +72,23 @@ const Main = () => {
                 ошибке, некоторые - намеренно (например, юмористические
                 варианты).
               </div>
+              <dl className="media__desc desc-media">
+                <dt className="desc-media__dt">Тип</dt>
+                <dd className="desc-media__dd">Фильм</dd>
+
+                <dt className="desc-media__dt">Жанр</dt>
+                <dd className="desc-media__dd">Комедиа</dd>
+
+                <dt className="desc-media__dt">Год</dt>
+                <dd className="desc-media__dd">2019</dd>
+
+                <dt className="desc-media__dt">Возрастные ограничения</dt>
+                <dd className="desc-media__dd">16+</dd>
+              </dl>
             </div>
+          </div>
+          <div className="content__media description">
+            <div className="description__text"></div>
           </div>
         </div>
         <div className="main__coment">
