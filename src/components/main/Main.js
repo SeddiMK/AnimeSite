@@ -88,10 +88,14 @@ const Main = () => {
               намеренно (например, юмористические варианты).
             </div>
           </div>
-          <div className="content__player">
+          <div className="content__player player-block">
+            <div class="player-block__title">
+              <strong class="">
+                Смотреть аниме «Поднятие уровня в одиночку» онлайн
+              </strong>
+              <span class="player-block__age-rating">18+</span>
+            </div>
             <iframe
-              width="1520"
-              height="579"
               src="https://www.youtube.com/embed/ErgOZ5mZYho"
               title="Поднятие уровня в одиночку | Официальный трейлер"
               frameborder="0"

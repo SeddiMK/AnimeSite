@@ -46,7 +46,6 @@ a:active {
 html,
 body {
   font-size: var(--font-size);
-  height: 100%;
   min-width: var(--min-width);
 }
 
@@ -61,6 +60,13 @@ body {
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Montserrat', sans-serif;
 }
 
 input,
@@ -107,6 +113,7 @@ h6 {
   font-size: inherit;
 }
 
+// button ----------------------------------------------------------
 button {
   background-color: var(--btn-send-com);
   border-radius: 0.4rem;

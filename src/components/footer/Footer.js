@@ -3,14 +3,18 @@ import './Footer.scss';
 const Footer = () => {
   return (
     <footer className="footer">
-      <p>Footer</p>
-      {/* <a
-        className="footer-link"
-        href="https://reactjs.org"
-        target="_blank"
-        rel="noopener noreferrer">
-        Learn React
-      </a> */}
+      <ul className="footer__nav">
+        <li className="footer__nav-link">
+          <a href="/">Соглашение</a>
+        </li>
+        <li className="footer__nav-link">
+          <a href="/">Конфиденциальность</a>
+        </li>
+        <li className="footer__nav-link">
+          <a href="/">Для правообладателей</a>
+        </li>
+      </ul>
+      <div className="footer__copy">&copy; 2024 Copyright Text</div>
     </footer>
   );
 };
