@@ -1,5 +1,7 @@
 import './Main.scss';
 import React from 'react';
+import YouTube, { YouTubeProps } from 'react-youtube';
+
 import FormMain from '../form/FormMain';
 import RatingStar from '../rating/RatingStar';
 
@@ -7,6 +9,33 @@ const Main = () => {
   let srcImg = undefined;
   let aliImgMediaLeft;
 
+  const onPlayerReady = (event) => {
+    // access to player in all event handlers via event.target
+    event.target.pauseVideo();
+  };
+
+  const opts = {
+    height: '390',
+    width: '640',
+    playerVars: {
+      // https://developers.google.com/youtube/player_parameters
+      autoplay: 0,
+    },
+  };
+  // const onPlayerReady: YouTubeProps['onReady'] = (event) => {
+  //   // access to player in all event handlers via event.target
+  //   event.target.pauseVideo();
+  // }
+
+  // const opts: YouTubeProps['opts'] = {
+  //   height: '390',
+  //   width: '640',
+  //   playerVars: {
+  //     // https://developers.google.com/youtube/player_parameters
+  //     autoplay: 1,
+  //   },
+  // };
+  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
   const openForm = () => {
     const form = document.querySelector('form.form');
     let postTwice = document.querySelector('.validate--textarea-duble-send>p');
@@ -16,6 +45,7 @@ const Main = () => {
     form.style.cssText = 'display: block;';
     formTextArea.value = '';
   };
+
   return (
     <main className="main">
       <div className="main__wrap">
@@ -58,16 +88,16 @@ const Main = () => {
 
               <dl className="media__desc desc-media">
                 <dt className="desc-media__dt">Тип</dt>
-                <dd className="desc-media__dd">Фильм</dd>
+                <dd className="desc-media__dd">ТВ Сериал</dd>
 
                 <dt className="desc-media__dt">Жанр</dt>
-                <dd className="desc-media__dd">Комедиа</dd>
+                <dd className="desc-media__dd">Приключения, Фэнтези, Экшен</dd>
 
                 <dt className="desc-media__dt">Год</dt>
-                <dd className="desc-media__dd">2019</dd>
+                <dd className="desc-media__dd">2024</dd>
 
                 <dt className="desc-media__dt">Возрастные ограничения</dt>
-                <dd className="desc-media__dd">16+</dd>
+                <dd className="desc-media__dd">18+</dd>
               </dl>
             </div>
           </div>
@@ -89,20 +119,35 @@ const Main = () => {
             </div>
           </div>
           <div className="content__player player-block">
-            <div class="player-block__title">
-              <strong class="">
+            <div className="player-block__title">
+              <strong className="">
                 Смотреть аниме «Поднятие уровня в одиночку» онлайн
               </strong>
-              <span class="player-block__age-rating">18+</span>
+              <span className="player-block__age-rating">18+</span>
             </div>
+
             <iframe
+              src="//kodik.biz/seria/1027126/5112ddf3e9a881de202f4c424dbda7e8/720p"
+              width="607"
+              height="360"
+              frameBorder="0"
+              allow="autoplay *; fullscreen *"></iframe>
+            {/* 
+            <YouTube
+              videoId="ErgOZ5mZYho"
+              opts={opts}
+              onReady={onPlayerReady}
+            /> */}
+
+            {/* <iframe
               src="https://www.youtube.com/embed/ErgOZ5mZYho"
               title="Поднятие уровня в одиночку | Официальный трейлер"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerpolicy="strict-origin-when-cross-origin"
-              allowfullscreen></iframe>
+              allowfullscreen></iframe> */}
           </div>
+
           <div className="content__coment">
             <button className="content__btn-send-comment" onClick={openForm}>
               Send comment

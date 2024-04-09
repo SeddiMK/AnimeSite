@@ -38,21 +38,27 @@ const Header = () => {
             </li>
             <li className="menu__item">
               <a className="menu__search" id="navbar-search" href="/">
-                <svg class="icon icon-lg icon-search">
-                  <use href="/"></use>
-                </svg>
-                <svg class="icon icon-lg icon-close">
-                  <use href="/"></use>
-                </svg>
-                <span>&nbsp;</span>
+                <span className="material-symbols-outlined">search</span>
+                {/* не рендерить если не нужно -------------------------------- */}
+                {/* <input
+                  className="menu__search form-control-reset"
+                  name="q"
+                  type="text"
+                  placeholder="Поиск аниме, манги, людей и персонажей"
+                  autocomplete="off"
+                  data-search="true"
+                  data-search-id="searchsuggestions"
+                  data-ajax-url="/search/all?type=small"
+                  data-search-min-query-len="3"
+                  data-search-target=".form-control"></input>
+                <span id="close-menu-search" className="material-symbols-outlined">
+                  close
+                </span> */}
               </a>
             </li>
             <li className="menu__item">
-              <a className="meny__link" href="/login">
-                <svg class="icon icon-login ">
-                  <use href="#icon-login"></use>
-                </svg>
-                Войти
+              <a className="meny__link" id="navbar-login" href="/login">
+                <span className="material-symbols-outlined">logout</span> Войти
               </a>
             </li>
           </ul>
