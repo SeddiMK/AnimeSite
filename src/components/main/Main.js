@@ -22,6 +22,7 @@ const Main = () => {
       autoplay: 0,
     },
   };
+  // TypeScript ---------------------------------------------------
   // const onPlayerReady: YouTubeProps['onReady'] = (event) => {
   //   // access to player in all event handlers via event.target
   //   event.target.pauseVideo();
@@ -125,20 +126,21 @@ const Main = () => {
               </strong>
               <span className="player-block__age-rating">18+</span>
             </div>
-
-            <iframe
-              src="//kodik.biz/seria/1027126/5112ddf3e9a881de202f4c424dbda7e8/720p"
-              width="607"
-              height="360"
-              frameBorder="0"
-              allow="autoplay *; fullscreen *"></iframe>
-            {/* 
-            <YouTube
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <h2>VIDEO HIER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</h2>
+            {/* <YouTube
               videoId="ErgOZ5mZYho"
               opts={opts}
               onReady={onPlayerReady}
             /> */}
-
             {/* <iframe
               src="https://www.youtube.com/embed/ErgOZ5mZYho"
               title="Поднятие уровня в одиночку | Официальный трейлер"

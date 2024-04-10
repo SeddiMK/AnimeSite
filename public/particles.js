@@ -9,9 +9,8 @@ particles.forEach((node) => {
     clr = hexToRgbA(color),
     width = window.innerWidth,
     // height = window.innerHeight;
+    // height = document.getElementById('root').offsetHeight;
     height = document.getElementById('root').getBoundingClientRect().height;
-  // height = document.getElementById('root').offsetHeight;
-  console.log(height, '---------------------------height');
 
   node.width = width;
   node.height = height;

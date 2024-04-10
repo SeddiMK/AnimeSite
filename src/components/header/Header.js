@@ -1,6 +1,24 @@
+import { useState, useEffect, useRef } from 'react';
 import './Header.scss';
 
 const Header = () => {
+  const [searchInpBtn, setSearchInpBtn] = useState(false);
+  const [searchInpVal, setSearchInpVal] = useState('');
+  const inputRef = useRef();
+
+  const onChangeInput = () => {
+    if (inputRef.current) {
+      setSearchInpVal(inputRef.current.value);
+    }
+  };
+  // useEffect(() => {
+  //   console.log(searchInpVal, 'searchInpVal');
+  //   console.log(inputRef.current, '-----------inputRef.current.value');
+  //   // if (inputRef.current.value === '') {
+  //   //   setSearchInpVal(inputRef.current.value);
+  //   // }
+  // }, [searchInpVal]);
+
   return (
     <header className="header">
       <div className="header__container">
@@ -37,27 +55,37 @@ const Header = () => {
               </a>
             </li>
             <li className="menu__item">
-              <a className="menu__search" id="navbar-search" href="/">
-                <span className="material-symbols-outlined">search</span>
-                {/* не рендерить если не нужно -------------------------------- */}
-                {/* <input
-                  className="menu__search form-control-reset"
-                  name="q"
-                  type="text"
-                  placeholder="Поиск аниме, манги, людей и персонажей"
-                  autocomplete="off"
-                  data-search="true"
-                  data-search-id="searchsuggestions"
-                  data-ajax-url="/search/all?type=small"
-                  data-search-min-query-len="3"
-                  data-search-target=".form-control"></input>
-                <span id="close-menu-search" className="material-symbols-outlined">
-                  close
-                </span> */}
-              </a>
+              <form className="menu__search" id="navbar-search">
+                {searchInpBtn ? (
+                  <div className="menu__search-inp">
+                    <input
+                      value={searchInpVal}
+                      onChange={onChangeInput}
+                      ref={inputRef}
+                      className="search-inp form-control-reset"
+                      name="searc-heder"
+                      type="text"
+                      placeholder="Поиск аниме, манги, людей и персонажей"
+                    />
+
+                    <button
+                      id="close-menu-search"
+                      className="material-symbols-outlined"
+                      onClick={() => setSearchInpBtn(false)}>
+                      close
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => setSearchInpBtn(true)}
+                    className="material-symbols-outlined">
+                    search
+                  </button>
+                )}
+              </form>
             </li>
             <li className="menu__item">
-              <a className="meny__link" id="navbar-login" href="/login">
+              <a className="menu__link" id="navbar-login" href="/login">
                 <span className="material-symbols-outlined">logout</span> Войти
               </a>
             </li>

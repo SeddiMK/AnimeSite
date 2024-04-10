@@ -1,8 +1,6 @@
-import { useEffect } from 'react';
 import './Null.scss';
 import './App.scss';
 import useScript from '../hooks/useScript';
-import { Helmet } from 'react-helmet';
 
 import Header from '../components/header/Header';
 import Main from '../components/main/Main';

@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 const useScript = (src) => {
   useEffect(() => {
     const script = document.createElement('script');
-    script.src = './particles.js';
+    script.src = src;
 
     document.body.appendChild(script);
 
