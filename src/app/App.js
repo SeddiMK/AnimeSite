@@ -12,8 +12,8 @@ const App = () => {
   return (
     <>
       <canvas className="particles-canv" data-color="#B99970"></canvas>
+      <Header />
       <div className="container">
-        <Header />
         <Main />
         <Footer />
       </div>

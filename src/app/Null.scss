@@ -12,10 +12,12 @@
   --main-color: #9bc53d;
   --background-root-color: #000;
   --background-container-color: #fff;
+  --background-header-color: #d1aee3;
   --secondary-color: #ebfffa;
-  --btn-send-com: #cdde9d;
+  --btn-send-com: #e1579c;
   --form-inp-email: #ffffff;
   --form-border-color: #727272;
+  --border-bottom: rgba(179, 179, 179, 0.5);
 
   font-size: var(--font-size);
 }
@@ -154,6 +156,7 @@ button {
 
 button:hover {
   background-color: var(--btn-send-com);
+  color: #fff;
   box-shadow: -3px -3px 3px #888;
   transform: translate(2px, 2px);
 }

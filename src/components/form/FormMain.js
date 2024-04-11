@@ -2,8 +2,10 @@ import './FormMain.scss';
 import React, { useEffect, useRef, useState } from 'react';
 import { useInput } from '../Validate';
 
-const FormMain = () => {
+const FormMain = ({ openFormComent, setOpenFormComent }) => {
+  const formRef = useRef(null);
   const form = document.querySelector('form.form');
+  let postTwice = document.querySelector('.validate--textarea-duble-send>p');
   // const btnSendComment = document.querySelector(
   //   'button.main__btn-send-comment'
   // );
@@ -19,14 +21,13 @@ const FormMain = () => {
     // repeatMessage: false,
   });
 
-  let postTwice = document.querySelector('.validate--textarea-duble-send>p');
   // ============ errors =================================================
 
   const validErrorMesageOutEmail = () => {
     if (emailValidation.isDirty && emailValidation.isEmpty) {
       return (
         <div className="validate validate--email" style={{ color: 'red' }}>
-          Field cannot be empty
+          Поле не может быть пустым
         </div>
       );
     }
@@ -34,14 +35,14 @@ const FormMain = () => {
     if (emailValidation.isDirty && emailValidation.minLengthError) {
       return (
         <div className="validate validate--email" style={{ color: 'red' }}>
-          Incorrect length
+          Длина email не корректна
         </div>
       );
     }
     if (emailValidation.isDirty && emailValidation.emailError) {
       return (
         <div className="validate validate--email" style={{ color: 'red' }}>
-          Incorrect Email
+          Не корректен Email
         </div>
       );
     }
@@ -54,7 +55,7 @@ const FormMain = () => {
     if (textAreaValidation.isDirty && textAreaValidation.isEmpty) {
       return (
         <div className="validate validate--textarea" style={{ color: 'red' }}>
-          Field cannot be empty
+          Поле не может быть пустым
         </div>
       );
     }
@@ -62,7 +63,7 @@ const FormMain = () => {
     if (textAreaValidation.isDirty && textAreaValidation.minLengthError) {
       return (
         <div className="validate validate--textarea" style={{ color: 'red' }}>
-          Incorrect length message
+          Не корректная длина сообщения
         </div>
       );
     }
@@ -88,8 +89,9 @@ const FormMain = () => {
     let commentValue = formText.current.value;
     if (email && commentValue !== '' && comment.indexOf(commentValue) === -1) {
       comments = [...comment, commentValue];
-      postTwice.classList.remove('post-twice');
-      postTwice.style.display = 'none';
+
+      setOpenFormComent(false);
+
       noActivBtn =
         !emailValidation.inputValid || !textAreaValidation.inputValid;
     } else if (commentValue === '') {
@@ -100,8 +102,7 @@ const FormMain = () => {
       formText = '';
       comments = [...comment];
 
-      postTwice.classList.add('post-twice');
-      postTwice.style.display = 'block';
+      setOpenFormComent(true);
     }
 
     setComment(comments);
@@ -117,18 +118,10 @@ const FormMain = () => {
     // e.preventDefault();
   };
 
-  const closeForm = () => {
-    let formTextArea = form.querySelector('textarea');
-    postTwice.style.display = 'none';
-    formTextArea.value = '';
-    form.style.cssText = 'display: none;';
-  };
-
-  const formRef = useRef(null);
-
+  // close in window
   const handleClick = (e) => {
     if (formRef.current && !formRef.current.contains(e.target)) {
-      closeForm();
+      setOpenFormComent(false);
     }
   };
   useEffect(() => {
@@ -137,66 +130,71 @@ const FormMain = () => {
       document.removeEventListener('mousedown', handleClick);
     };
   });
+  console.log(openFormComent, '----------openFormComent in formMain');
 
   return (
     <>
-      <form action="#" className="form" ref={formRef} onSubmit={handleSubmit}>
-        <div className="form__top">
-          <h1>Send comment</h1>
-          <button className="form__btn-close" onClick={closeForm}>
-            &#10006;
-          </button>
-        </div>
-
-        <div className="form__block">
-          <label htmlFor="main-email">Enter your email:</label>
-          <div className="form__block-mail">
-            <input
-              className="form__inp-mail"
-              id="main-email"
-              type="email"
-              onChange={(e) => {
-                emailValidation.onChange(e);
-                setEmail(e.target.value);
-              }}
-              onBlur={(e) => emailValidation.onBlur(e)}
-              value={emailValidation.value}
-              placeholder="Write email --------"
-            />
-            {validErrorMesageOutEmail()}
+      {openFormComent && (
+        <form action="#" className="form" ref={formRef} onSubmit={handleSubmit}>
+          <div className="form__top">
+            <h1>Отзыв или комментарий</h1>
+            <button
+              className="form__btn-close"
+              onClick={() => setOpenFormComent(false)}>
+              &#10006;
+            </button>
           </div>
-        </div>
 
-        <div className="form__block-inp">
-          <label>
-            <h4>Enter your message:</h4>
-            {validErrorMesageOutTextarea()}
-            <textarea
-              ref={formText}
-              onChange={(e) => textAreaValidation.onChange(e)}
-              onBlur={(e) => textAreaValidation.onBlur(e)}
-              value={textAreaValidation.value}
-              placeholder="Comment text..."
-              rows="3"
-              cols="33"
-            />
-          </label>
-        </div>
-        <div className="validate--textarea-duble-send">
-          <p>You cannot comment on the same post twice</p>
-        </div>
-        <div className="form__button">
-          <button type="submit" disabled={noActivBtn} onClick={addComment}>
-            Add comment
-          </button>
-        </div>
-      </form>
+          <div className="form__block">
+            <label htmlFor="main-email">Ваш email:</label>
+            <div className="form__block-mail">
+              <input
+                className="form__inp-mail"
+                id="main-email"
+                type="email"
+                onChange={(e) => {
+                  emailValidation.onChange(e);
+                  setEmail(e.target.value);
+                }}
+                onBlur={(e) => emailValidation.onBlur(e)}
+                value={emailValidation.value}
+                placeholder="Введите email --------"
+              />
+              {validErrorMesageOutEmail()}
+            </div>
+          </div>
+
+          <div className="form__block-inp">
+            <label>
+              <h4>Текст отзыва или комментария:</h4>
+              {validErrorMesageOutTextarea()}
+              <textarea
+                ref={formText}
+                onChange={(e) => textAreaValidation.onChange(e)}
+                onBlur={(e) => textAreaValidation.onBlur(e)}
+                value={textAreaValidation.value}
+                placeholder="Текст..."
+                rows="3"
+                cols="33"
+              />
+            </label>
+          </div>
+          <div className="validate--textarea-duble-send">
+            <p>Нельзя комментировать одно и то же сообщение дважды</p>
+          </div>
+          <div className="form__button">
+            <button type="submit" disabled={noActivBtn} onClick={addComment}>
+              Опубликовать
+            </button>
+          </div>
+        </form>
+      )}
 
       <div className="main__out">
         {comment.map((el, ind) => (
           <div key={el.toString + ind.toString()} className="main__out-message">
             <div className="main__out-text">{el}</div>
-            <button onClick={() => delComment(ind)}>Delete comment</button>
+            <button onClick={() => delComment(ind)}>Удалить</button>
           </div>
         ))}
       </div>

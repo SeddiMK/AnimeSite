@@ -7,6 +7,7 @@ const Header = () => {
   const inputRef = useRef();
 
   const onChangeInput = () => {
+    console.log(inputRef.current.value, '-----------onChangeInput');
     if (inputRef.current) {
       setSearchInpVal(inputRef.current.value);
     }
@@ -54,39 +55,37 @@ const Header = () => {
                 Контакты
               </a>
             </li>
-            <li className="menu__item">
-              <form className="menu__search" id="navbar-search">
-                {searchInpBtn ? (
-                  <div className="menu__search-inp">
+            <li className="menu__item search">
+              <form className="search__form" id="navbar-search">
+                <button
+                  onClick={() => setSearchInpBtn(true)}
+                  className="menu__btn material-symbols-outlined">
+                  search
+                </button>
+                {searchInpBtn && (
+                  <div className="search__search-inp">
+                    <button
+                      id="close-menu-search"
+                      className="menu__btn material-symbols-outlined"
+                      onClick={() => setSearchInpBtn(false)}>
+                      close
+                    </button>
                     <input
                       value={searchInpVal}
                       onChange={onChangeInput}
                       ref={inputRef}
-                      className="search-inp form-control-reset"
+                      className="search__inp form-control-reset"
                       name="searc-heder"
-                      type="text"
+                      type="search"
                       placeholder="Поиск аниме, манги, людей и персонажей"
                     />
-
-                    <button
-                      id="close-menu-search"
-                      className="material-symbols-outlined"
-                      onClick={() => setSearchInpBtn(false)}>
-                      close
-                    </button>
                   </div>
-                ) : (
-                  <button
-                    onClick={() => setSearchInpBtn(true)}
-                    className="material-symbols-outlined">
-                    search
-                  </button>
                 )}
               </form>
             </li>
-            <li className="menu__item">
+            <li className="menu__item login">
               <a className="menu__link" id="navbar-login" href="/login">
-                <span className="material-symbols-outlined">logout</span> Войти
+                <span className="material-symbols-outlined">login</span> Войти
               </a>
             </li>
           </ul>

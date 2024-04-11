@@ -1,13 +1,16 @@
 import './Main.scss';
-import React from 'react';
-import YouTube, { YouTubeProps } from 'react-youtube';
+import React, { useState } from 'react';
+import { YouTube, YouTubeProps } from 'react-youtube';
+
+import srcImg from '../../assets/image/anime-poster/659f8dd485857721242765.jpg';
 
 import FormMain from '../form/FormMain';
 import RatingStar from '../rating/RatingStar';
 
 const Main = () => {
-  let srcImg = undefined;
-  let aliImgMediaLeft;
+  const [openFormComent, setOpenFormComent] = useState(false);
+  let aliImgMediaLeft =
+    'постер аниме поднятие уровня в одиночку с главным героем'; // данные из бекенда --------------------
 
   const onPlayerReady = (event) => {
     // access to player in all event handlers via event.target
@@ -36,16 +39,17 @@ const Main = () => {
   //     autoplay: 1,
   //   },
   // };
-  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-  const openForm = () => {
-    const form = document.querySelector('form.form');
-    let postTwice = document.querySelector('.validate--textarea-duble-send>p');
-    let formTextArea = form.querySelector('textarea');
 
-    postTwice.style.display = 'none';
-    form.style.cssText = 'display: block;';
-    formTextArea.value = '';
-  };
+  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+  // const openForm = () => {
+  //   const form = document.querySelector('form.form');
+  //   let postTwice = document.querySelector('.validate--textarea-duble-send>p');
+  //   let formTextArea = form.querySelector('textarea');
+
+  //   postTwice.style.display = 'none';
+  //   form.style.cssText = 'display: block;';
+  //   formTextArea.value = '';
+  // };
 
   return (
     <main className="main">
@@ -64,7 +68,9 @@ const Main = () => {
                 <button className="media__left-buttons-online">
                   Смотреть онлайн
                 </button>
-                <button className="media__left-buttons-review">
+                <button
+                  className="media__left-buttons-review"
+                  onClick={() => setOpenFormComent(true)}>
                   Написать отзыв
                 </button>
                 <button className="media__left-add-list">
@@ -77,7 +83,7 @@ const Main = () => {
               <div className="media__rating-block rating">
                 <div className="rating__stars">
                   <span className="rating__num">8,7</span>
-                  <span>/10</span>
+                  <span> / 10</span>
                 </div>
                 <div className="rating__grade-user">
                   <div className="rating__user-star">
@@ -97,8 +103,25 @@ const Main = () => {
                 <dt className="desc-media__dt">Год</dt>
                 <dd className="desc-media__dd">2024</dd>
 
+                <dt className="desc-media__dt">Длительность</dt>
+                <dd className="desc-media__dd">23 мин. ~ серия</dd>
+                <dt className="desc-media__dt">Озвучка</dt>
+                <dd className="desc-media__dd">
+                  AniDUB, AniLibria, SHIZA Project, Студийная Банда, AnimeVost,
+                  AniStar, AniRise, JAM CLUB, Amber, TVShows, Субтитры, Dream
+                  Cast, КОМНАТА ДИДИ, AniDub Online
+                </dd>
+
+                <dt className="desc-media__dt">Главные герои</dt>
+                <dd className="desc-media__dd">Джину Сон</dd>
+
+                <dt className="desc-media__dt">Снят по манге</dt>
+                <dd className="desc-media__dd">Поднятие уровня в одиночку</dd>
+
                 <dt className="desc-media__dt">Возрастные ограничения</dt>
-                <dd className="desc-media__dd">18+</dd>
+                <dd className="desc-media__dd">
+                  <span>18+</span>
+                </dd>
               </dl>
             </div>
           </div>
@@ -121,7 +144,7 @@ const Main = () => {
           </div>
           <div className="content__player player-block">
             <div className="player-block__title">
-              <strong className="">
+              <strong>
                 Смотреть аниме «Поднятие уровня в одиночку» онлайн
               </strong>
               <span className="player-block__age-rating">18+</span>
@@ -151,11 +174,16 @@ const Main = () => {
           </div>
 
           <div className="content__coment">
-            <button className="content__btn-send-comment" onClick={openForm}>
-              Send comment
+            <button
+              className="content__btn-send-comment"
+              onClick={() => setOpenFormComent(true)}>
+              Написать комментарий
             </button>
 
-            <FormMain />
+            <FormMain
+              openFormComent={openFormComent}
+              setOpenFormComent={setOpenFormComent}
+            />
           </div>
         </div>
       </div>
