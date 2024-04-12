@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import './Header.scss';
 
 const Header = () => {
@@ -23,37 +24,37 @@ const Header = () => {
   return (
     <header className="header">
       <div className="header__container">
-        <a href="/" className="header__logo">
+        <Link to="/" className="header__logo">
           ME
           {/* <img src="#" alt="Image logo" /> */}
-        </a>
+        </Link>
         <nav className="header__nav menu">
           <ul className="menu__list">
             <li className="menu__item">
-              <a href="/" className="menu__link">
+              <Link to="/" className="menu__link">
                 Аниме
-              </a>
+              </Link>
             </li>
             <li className="menu__item">
-              <a href="/" className="menu__link">
+              <Link to="/" className="menu__link">
                 Манга
-              </a>
+              </Link>
             </li>
             <li className="menu__item">
-              <a href="/" className="menu__link">
+              <Link to="/" className="menu__link">
                 New!
-              </a>
+              </Link>
             </li>
 
             <li className="menu__item">
-              <a href="/" className="menu__link">
+              <Link to="/" className="menu__link">
                 Случайное аниме
-              </a>
+              </Link>
             </li>
             <li className="menu__item">
-              <a href="/" className="menu__link">
+              <Link to="/contacts" className="menu__link">
                 Контакты
-              </a>
+              </Link>
             </li>
             <li className="menu__item search">
               <form className="search__form" id="navbar-search">

@@ -3,7 +3,7 @@ import './Contacts.scss';
 // import githubLogo from '../../assets/image/icon/gitHub.png';
 // import skypeLogo from '../../assets/image/icon/skype.png';
 
-const Contacts: React.FC = () => {
+const Contacts = () => {
   return (
     <div className="contacts">
       <div className="contact__my-contact">
@@ -61,7 +61,7 @@ const Contacts: React.FC = () => {
             <b>Link to project from github:</b>{' '}
             <a
               className="my-contact__link"
-              href="https://github.com/SeddiMK/React-cart_shop_redux/tree/main/build"
+              href="https://github.com/SeddiMK"
               target="_blank"
               rel="noreferrer">
               <div className="contact__icon icon-wrp">
