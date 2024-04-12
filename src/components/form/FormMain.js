@@ -2,10 +2,27 @@ import './FormMain.scss';
 import React, { useEffect, useRef, useState } from 'react';
 import { useInput } from '../Validate';
 
-const FormMain = ({ openFormComent, setOpenFormComent }) => {
+const FormMain = ({
+  openFormComent,
+  setOpenFormComent,
+  setLengthComment,
+  formStyle,
+}) => {
+  const srcAvatar = null;
+  const [comment, setComment] = useState([]);
+  const [commentRepeat, setCommentRepeat] = useState(false);
+  const [email, setEmail] = useState('');
+  let newDelArr = [];
+  let formText = React.createRef();
+  // =========noActivBtn== disabled={noActivBtn} =========================
+  let noActivBtn = false;
+
   const formRef = useRef(null);
-  const form = document.querySelector('form.form');
-  let postTwice = document.querySelector('.validate--textarea-duble-send>p');
+  const inpMail = useRef(null);
+  // console.log(ref.current, 'formRef in formRef');
+
+  // const form = document.querySelector('form.form');
+  // let postTwice = document.querySelector('.validate--textarea-duble-send>p');
   // const btnSendComment = document.querySelector(
   //   'button.main__btn-send-comment'
   // );
@@ -21,7 +38,7 @@ const FormMain = ({ openFormComent, setOpenFormComent }) => {
     // repeatMessage: false,
   });
 
-  // ============ errors =================================================
+  //  validation =================================================
 
   const validErrorMesageOutEmail = () => {
     if (emailValidation.isDirty && emailValidation.isEmpty) {
@@ -48,7 +65,6 @@ const FormMain = ({ openFormComent, setOpenFormComent }) => {
     }
   };
 
-  //===============================
   //  let searchArrayMessage = comment.indexOf(textAreaValidation.value) !== -1;
 
   let validErrorMesageOutTextarea = (comment) => {
@@ -75,27 +91,31 @@ const FormMain = ({ openFormComent, setOpenFormComent }) => {
     //   );
     // }
   };
-  // ======================================
-  const [comment, setComment] = useState([]);
-  const [email, setEmail] = useState('');
-  let newDelArr = [];
-  let formText = React.createRef();
-  // =========noActivBtn== disabled={noActivBtn} =========================
-  let noActivBtn = false;
 
-  let addComment = (event) => {
-    const formInpMail = document.querySelector('.form__inp-mail');
+  // addComment -------------------------
+  let addComment = (e) => {
+    // const formInpMail = document.querySelector('.form__inp-mail');
+
     let comments = [];
     let commentValue = formText.current.value;
+
+    if (comment.indexOf(commentValue) !== -1) {
+      setCommentRepeat(true);
+      setLengthComment([]);
+    }
+
     if (email && commentValue !== '' && comment.indexOf(commentValue) === -1) {
       comments = [...comment, commentValue];
 
-      setOpenFormComent(false);
-
       noActivBtn =
         !emailValidation.inputValid || !textAreaValidation.inputValid;
+
+      setLengthComment([0]);
+
+      setCommentRepeat(false);
+      setOpenFormComent(false);
     } else if (commentValue === '') {
-      formInpMail.focus();
+      inpMail.current.focus();
       comments = [...comment];
       formText = '';
     } else {
@@ -108,6 +128,7 @@ const FormMain = ({ openFormComent, setOpenFormComent }) => {
     setComment(comments);
   };
 
+  // delComment ---------------------------
   let delComment = (ind) => {
     newDelArr = comment.filter((el) => comment[ind] !== el);
 
@@ -118,24 +139,34 @@ const FormMain = ({ openFormComent, setOpenFormComent }) => {
     // e.preventDefault();
   };
 
-  // close in window
+  // close in window ----------------------------
   const handleClick = (e) => {
     if (formRef.current && !formRef.current.contains(e.target)) {
       setOpenFormComent(false);
+
+      setLengthComment([]);
     }
   };
   useEffect(() => {
     document.addEventListener('mousedown', handleClick);
+
     return () => {
       document.removeEventListener('mousedown', handleClick);
     };
   });
-  console.log(openFormComent, '----------openFormComent in formMain');
+
+  // useEffect(() => {}, []);
 
   return (
     <>
       {openFormComent && (
-        <form action="#" className="form" ref={formRef} onSubmit={handleSubmit}>
+        <form
+          style={formStyle}
+          action="#"
+          className="form"
+          id="form-message-review"
+          ref={formRef}
+          onSubmit={handleSubmit}>
           <div className="form__top">
             <h1>Отзыв или комментарий</h1>
             <button
@@ -149,6 +180,7 @@ const FormMain = ({ openFormComent, setOpenFormComent }) => {
             <label htmlFor="main-email">Ваш email:</label>
             <div className="form__block-mail">
               <input
+                ref={inpMail}
                 className="form__inp-mail"
                 id="main-email"
                 type="email"
@@ -158,7 +190,7 @@ const FormMain = ({ openFormComent, setOpenFormComent }) => {
                 }}
                 onBlur={(e) => emailValidation.onBlur(e)}
                 value={emailValidation.value}
-                placeholder="Введите email --------"
+                placeholder="Введите email"
               />
               {validErrorMesageOutEmail()}
             </div>
@@ -180,26 +212,46 @@ const FormMain = ({ openFormComent, setOpenFormComent }) => {
             </label>
           </div>
           <div className="validate--textarea-duble-send">
-            <p>Нельзя комментировать одно и то же сообщение дважды</p>
+            {commentRepeat && (
+              <p>Нельзя комментировать одно и то же сообщение дважды!</p>
+            )}
           </div>
           <div className="form__button">
-            <button type="submit" disabled={noActivBtn} onClick={addComment}>
+            <button
+              type="button"
+              disabled={noActivBtn}
+              onClick={() => addComment()}>
               Опубликовать
             </button>
           </div>
         </form>
       )}
 
-      <div className="main__out">
+      <div className="comment__out">
         {comment.map((el, ind) => (
-          <div key={el.toString + ind.toString()} className="main__out-message">
-            <div className="main__out-text">{el}</div>
-            <button onClick={() => delComment(ind)}>Удалить</button>
+          <div key={el.toString + ind.toString()} className="comment__message">
+            <div className="comment__avatar">
+              <img
+                className="comment__img-avatar"
+                src={srcAvatar}
+                alt="аватар пользователя"
+              />
+            </div>
+            <div className="comment__block-content">
+              <h3 className="comment__nik-name">
+                UserNikName <span>23 часа назад</span>
+              </h3>
+              <div className="comment__out-text">{el}</div>
+              <button
+                className="comment__btn-del"
+                onClick={() => delComment(ind)}>
+                Удалить
+              </button>
+            </div>
           </div>
         ))}
       </div>
     </>
   );
 };
-
 export default FormMain;

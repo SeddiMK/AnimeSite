@@ -1,0 +1,31 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  max-width: 1080px;
+  margin: 0 auto;
+  background-color: var(--background-header-color);
+  padding: 1rem;
+  &__copy {
+  }
+  &__nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-bottom: 1rem;
+  }
+  &__nav-link {
+    font-size: 1.1rem;
+    transition: color 0.3s ease-in-out;
+
+    &:not(:last-child) {
+      margin-right: 1rem;
+    }
+    &:hover {
+      color: red;
+    }
+  }
+}

@@ -1,9 +1,4 @@
 .main {
-  margin-bottom: 2rem;
-
-  &__btn-send-comment {
-    margin-bottom: 1.5rem;
-  }
   &__left {
     display: flex;
   }
@@ -15,8 +10,12 @@
 }
 
 .player-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   height: 400px;
-
+  margin-bottom: 3rem;
   &__title {
     margin-bottom: 1rem;
   }
@@ -70,14 +69,7 @@
     margin-bottom: 1rem;
   }
 }
-.img {
-}
-.main {
-  &__content {
-  }
-  &__wrap {
-  }
-}
+
 .media {
   display: flex;
   justify-content: space-between;
@@ -170,5 +162,21 @@
   }
   &__user-star {
     margin-bottom: 0.25rem;
+  }
+}
+
+.comment {
+  &__add {
+    border-bottom: 1px solid var(--border-bottom);
+    padding-bottom: 2rem;
+    &__btn-send-comment {
+    }
+  }
+  &__body {
+    padding: 1.5rem 0;
+    & h2 {
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+    }
   }
 }

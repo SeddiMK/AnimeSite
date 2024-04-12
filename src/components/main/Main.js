@@ -1,6 +1,6 @@
 import './Main.scss';
-import React, { useState } from 'react';
-import { YouTube, YouTubeProps } from 'react-youtube';
+import React, { useEffect, useRef, useState } from 'react';
+import YouTube, { YouTubeProps } from 'react-youtube';
 
 import srcImg from '../../assets/image/anime-poster/659f8dd485857721242765.jpg';
 
@@ -9,6 +9,9 @@ import RatingStar from '../rating/RatingStar';
 
 const Main = () => {
   const [openFormComent, setOpenFormComent] = useState(false);
+  const [formStyle, setFormStyle] = useState({});
+  const [lengthComment, setLengthComment] = useState([]); // пока нет ни одного комментария
+
   let aliImgMediaLeft =
     'постер аниме поднятие уровня в одиночку с главным героем'; // данные из бекенда --------------------
 
@@ -40,16 +43,21 @@ const Main = () => {
   //   },
   // };
 
-  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-  // const openForm = () => {
-  //   const form = document.querySelector('form.form');
-  //   let postTwice = document.querySelector('.validate--textarea-duble-send>p');
-  //   let formTextArea = form.querySelector('textarea');
-
-  //   postTwice.style.display = 'none';
-  //   form.style.cssText = 'display: block;';
-  //   formTextArea.value = '';
-  // };
+  // open form напротив кнопки
+  const openForm = () => {
+    setOpenFormComent(true);
+    setFormStyle({
+      left: '38%',
+      top: '24rem',
+    });
+  };
+  const openFormComment = () => {
+    setOpenFormComent(true);
+    setFormStyle({
+      left: '33%',
+      top: '77rem',
+    });
+  };
 
   return (
     <main className="main">
@@ -70,7 +78,7 @@ const Main = () => {
                 </button>
                 <button
                   className="media__left-buttons-review"
-                  onClick={() => setOpenFormComent(true)}>
+                  onClick={() => openForm()}>
                   Написать отзыв
                 </button>
                 <button className="media__left-add-list">
@@ -149,17 +157,8 @@ const Main = () => {
               </strong>
               <span className="player-block__age-rating">18+</span>
             </div>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <h2>VIDEO HIER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</h2>
-            {/* <YouTube
+            {/* 
+            <YouTube
               videoId="ErgOZ5mZYho"
               opts={opts}
               onReady={onPlayerReady}
@@ -173,17 +172,28 @@ const Main = () => {
               allowfullscreen></iframe> */}
           </div>
 
-          <div className="content__coment">
-            <button
-              className="content__btn-send-comment"
-              onClick={() => setOpenFormComent(true)}>
-              Написать комментарий
-            </button>
+          <div className="content__coment comment">
+            <div className="comment__add">
+              <button
+                className="comment__btn-send-comment"
+                onClick={() => openFormComment()}>
+                Написать комментарий
+              </button>
+            </div>
+            <div className="comment__body">
+              <h2>Комментарии</h2>
 
-            <FormMain
-              openFormComent={openFormComent}
-              setOpenFormComent={setOpenFormComent}
-            />
+              <FormMain
+                openFormComent={openFormComent}
+                setOpenFormComent={setOpenFormComent}
+                setLengthComment={setLengthComment}
+                formStyle={formStyle}
+              />
+
+              {lengthComment.length === 0 && (
+                <p>Пока нет ни одного комментария</p>
+              )}
+            </div>
           </div>
         </div>
       </div>
