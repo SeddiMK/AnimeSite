@@ -1,6 +1,6 @@
 import './FormMain.scss';
 import React, { useEffect, useRef, useState } from 'react';
-import { useInput } from '../Validate';
+import { useInput } from '../validateForm/Validate';
 
 const FormMain = ({
   openFormComent,

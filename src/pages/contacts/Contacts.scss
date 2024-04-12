@@ -1,0 +1,27 @@
+.contacts {
+  background-color: #fff;
+
+  padding: 2rem 0;
+}
+.contact {
+  &__my-contact-link {
+    & div:not(:last-child) {
+      margin-bottom: 0.4rem;
+    }
+  }
+}
+
+.my-contact {
+  display: flex;
+  align-items: center;
+
+  & b {
+    margin-right: 0.3rem;
+  }
+  & div {
+    margin-right: 0.3rem;
+  }
+  &__link:hover {
+    color: red;
+  }
+}
