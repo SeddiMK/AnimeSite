@@ -15,12 +15,13 @@
   top: 20%;
   //   transform: translateX(-50%);
 
-  width: 400px;
+  width: 23.5em;
   font-size: clamp(14px, 4vw, 18px);
   padding: 0.5rem;
   background-color: var(--background-form-color);
   border: 0.2rem var(--form-border-color) solid;
   border-radius: 0.4rem;
+
   &__button > p {
     display: none;
     color: red;
@@ -50,13 +51,14 @@
     margin-bottom: 1em;
   }
   &__block-mail {
-    margin-left: 1em;
+    width: 100%;
+    // margin-left: 1em;
   }
   &__inp-mail {
     border: 0.2rem var(--form-border-color) solid;
     border-radius: 0.4rem;
     padding: clamp(0.2rem, 0.6vw, 0.7rem);
-    width: 16.9rem;
+    width: 100%;
     background-color: #fff;
     margin-bottom: 0.2em;
   }
@@ -64,6 +66,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 0.4em;
+    width: 100%;
   }
   &__block-inp {
     & h4 {
@@ -72,7 +75,7 @@
   }
   &__block-inp {
     & textarea {
-      width: 23.6rem;
+      width: 100%;
       height: 10rem;
       resize: none;
       border: 0.2rem var(--form-border-color) solid;

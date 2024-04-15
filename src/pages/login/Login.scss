@@ -1,0 +1,39 @@
+.form-login-registaration {
+}
+.inp-form {
+}
+.login-social-media {
+}
+.lr-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  overflow-y: hidden;
+  padding: 1rem;
+
+  &__social-media {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  &__inp-form {
+  }
+}
+.ls-media {
+  &__block {
+  }
+  &__link {
+  }
+  &__links {
+  }
+  &__text {
+  }
+  &__title {
+  }
+  &__top {
+    text-align: center;
+  }
+}

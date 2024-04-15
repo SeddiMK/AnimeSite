@@ -8,6 +8,7 @@ import Layout from '../pages/layout/Layout';
 import Main from '../components/main/Main';
 import Contacts from '../pages/contacts/Contacts';
 import LoginUserCabinet from '../pages/loginUserCabinet/LoginUserCabinet';
+import Login from '../pages/login/Login';
 import Error from '../pages/error/Error';
 
 const App = () => {
@@ -19,7 +20,7 @@ const App = () => {
         <Route element={<Layout />}>
           <Route path="/" element={<Main />} />
           <Route path="contacts" element={<Contacts />} />
-          <Route path="login/:id" element={<LoginUserCabinet />} />
+          <Route path="login" element={<Login />} />
           <Route path="*" element={<Error />} />
         </Route>
       </Routes>

@@ -164,7 +164,7 @@ const FormMain = ({
         <Form
           style={formStyle}
           action="#"
-          className="form"
+          className="form form-message-review"
           id="form-message-review"
           ref={formRef}
           onSubmit={handleSubmit}>

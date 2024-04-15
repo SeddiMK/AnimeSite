@@ -5,22 +5,20 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 
 import App from './app/App.jsx';
-import { BrowserRouter, createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
+import Error from './pages/error/Error.jsx';
 // router
 // import { router } from './router/router';
 
-// const router = createBrowserRouter([
-//   { path: '*', Component: App, errorElement: <Error /> },
-// ]);
+const router = createBrowserRouter([
+  { path: '*', Component: App, errorElement: <Error /> },
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    {/* <RouterProvider router={router} /> */}
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 

@@ -10,6 +10,8 @@ particles.forEach((node) => {
     width = window.innerWidth,
     // height = window.innerHeight;
     // height = document.getElementById('root').offsetHeight;
+    // height = document.getElementById('root').getElementsByTagName('height'); // применить с containeers/RootWidthHeight
+
     height = document.getElementById('root').getBoundingClientRect().height;
 
   node.width = width;

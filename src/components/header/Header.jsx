@@ -8,7 +8,7 @@ const Header = () => {
   const [searchInpVal, setSearchInpVal] = useState('');
   const inputRef = useRef();
 
-  const id = 2; // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  // const id = 2; //  <Link to={`/login/${id}`} !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
   const onChangeInput = () => {
     console.log(inputRef.current.value, '-----------onChangeInput');
@@ -88,10 +88,7 @@ const Header = () => {
               </form>
             </li>
             <li className="menu__item login">
-              <Link
-                to={`/login/${id}`}
-                className="menu__link"
-                id="navbar-login">
+              <Link to={`/login`} className="menu__link" id="navbar-login">
                 <span className="material-symbols-outlined">login</span> Войти
               </Link>
             </li>
