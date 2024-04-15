@@ -1,11 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import './Header.scss';
+import LoginUserCabinet from '../../pages/loginUserCabinet/LoginUserCabinet';
 
 const Header = () => {
   const [searchInpBtn, setSearchInpBtn] = useState(false);
   const [searchInpVal, setSearchInpVal] = useState('');
   const inputRef = useRef();
+
+  const id = 2; // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
   const onChangeInput = () => {
     console.log(inputRef.current.value, '-----------onChangeInput');
@@ -31,30 +34,30 @@ const Header = () => {
         <nav className="header__nav menu">
           <ul className="menu__list">
             <li className="menu__item">
-              <Link to="/" className="menu__link">
+              <NavLink to="/" className="menu__link">
                 Аниме
-              </Link>
+              </NavLink>
             </li>
             <li className="menu__item">
-              <Link to="/" className="menu__link">
+              <NavLink to="/manga" className="menu__link">
                 Манга
-              </Link>
+              </NavLink>
             </li>
             <li className="menu__item">
-              <Link to="/" className="menu__link">
+              <NavLink to="/new" className="menu__link">
                 New!
-              </Link>
+              </NavLink>
             </li>
 
             <li className="menu__item">
-              <Link to="/" className="menu__link">
+              <NavLink to="/random-anime" className="menu__link">
                 Случайное аниме
-              </Link>
+              </NavLink>
             </li>
             <li className="menu__item">
-              <Link to="/contacts" className="menu__link">
+              <NavLink to="/contacts" className="menu__link">
                 Контакты
-              </Link>
+              </NavLink>
             </li>
             <li className="menu__item search">
               <form className="search__form" id="navbar-search">
@@ -85,9 +88,12 @@ const Header = () => {
               </form>
             </li>
             <li className="menu__item login">
-              <a className="menu__link" id="navbar-login" href="/login">
+              <Link
+                to={`/login/${id}`}
+                className="menu__link"
+                id="navbar-login">
                 <span className="material-symbols-outlined">login</span> Войти
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>

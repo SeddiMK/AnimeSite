@@ -1,6 +1,7 @@
 import './FormMain.scss';
 import React, { useEffect, useRef, useState } from 'react';
 import { useInput } from '../validateForm/Validate';
+import { Form } from 'react-router-dom';
 
 const FormMain = ({
   openFormComent,
@@ -160,7 +161,7 @@ const FormMain = ({
   return (
     <>
       {openFormComent && (
-        <form
+        <Form
           style={formStyle}
           action="#"
           className="form"
@@ -224,7 +225,7 @@ const FormMain = ({
               Опубликовать
             </button>
           </div>
-        </form>
+        </Form>
       )}
 
       <div className="comment__out">

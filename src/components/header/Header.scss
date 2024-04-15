@@ -66,12 +66,18 @@
     &:hover {
       color: #f9f9f9;
     }
+    & active {
+      color: var(--color-active-link);
+    }
   }
+
   &__btn {
     padding: 0.4rem;
   }
 }
-
+a.active {
+  color: var(--color-active-link);
+}
 .login {
   & a {
     padding-left: 1.8rem;
