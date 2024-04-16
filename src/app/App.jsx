@@ -12,7 +12,7 @@ import Login from '../pages/login/Login';
 import Error from '../pages/error/Error';
 
 const App = () => {
-  useScript('./particles.js');
+  // useScript('./particles.js');
 
   return (
     <>

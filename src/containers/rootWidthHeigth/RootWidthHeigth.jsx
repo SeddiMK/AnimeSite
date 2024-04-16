@@ -42,6 +42,7 @@ const RootWidthHeigth = () => {
     // only update the effect if the ref element changed
     [observedDiv.current]
   );
+
   console.log(height, 'height in rootwidth');
   return (
     <div className="main-div" ref={observedDiv}>

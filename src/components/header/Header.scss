@@ -1,7 +1,12 @@
 .header {
   font-size: 1.1rem;
-  max-width: 1080px;
+  max-width: var(--max-width);
   width: 100%;
+
+  position: absolute;
+  top: 0;
+  right: 50%;
+  transform: translateX(50%);
 
   background-color: var(--background-header-color);
   margin: 0 auto;
