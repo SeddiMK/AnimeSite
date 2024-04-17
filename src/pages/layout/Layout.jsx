@@ -13,10 +13,6 @@ import RootWidthHeigth from '../../containers/rootWidthHeigth/RootWidthHeigth';
 const Layout = () => {
   // useScript('./particles.js');
   const wrapperRef = useRef(null);
-  // console.log(
-  //   wrapperRef.current.offsetHeight,
-  //   'wrapperRef.current.offsetHeight'
-  // );
 
   return (
     <>

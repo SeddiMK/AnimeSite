@@ -1,6 +1,7 @@
 import './Login.scss';
 import React from 'react';
-import InputForm from '../../components/inputForm/loginForm';
+import { FaVk, FaGoogle, FaEnvelope } from 'react-icons/fa';
+import InputForm from '../../components/inputForm/LoginForm';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
@@ -15,24 +16,30 @@ const Login = () => {
             </div>
             <div className="ls-media__links">
               <Link
-                className="ls-media__link"
+                className="ls-media__link vk-link"
                 to="https://vk.com"
                 target="blank">
-                <span>IconVK</span>
+                <span>
+                  <FaVk />
+                </span>
                 <span>Вконтакте</span>
               </Link>
               <Link
-                className="ls-media__link"
+                className="ls-media__link google-link"
                 to="https://www.google.com"
                 target="blank">
-                <span>IconGoogle</span>
+                <span>
+                  <FaGoogle />
+                </span>
                 <span>Google</span>
               </Link>
               <Link
-                className="ls-media__link"
+                className="ls-media__link mail-link"
                 to="https://mail.ru"
                 target="blank">
-                <span>IconMail</span>
+                <span>
+                  <FaEnvelope />
+                </span>
                 <span>Mail</span>
               </Link>
             </div>

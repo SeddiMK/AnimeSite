@@ -3,6 +3,9 @@
 .inp-form {
 }
 .login-social-media {
+  & span {
+    // margin-bottom: 1rem;
+  }
 }
 .lr-form {
   display: flex;
@@ -12,6 +15,7 @@
 
   overflow-y: hidden;
   padding: 1rem;
+  font-size: 1.3rem;
 
   &__social-media {
     display: flex;
@@ -24,16 +28,57 @@
 }
 .ls-media {
   &__block {
+    margin-bottom: 1rem;
   }
   &__link {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 0.4rem;
+    opacity: 0.8;
+    padding: 0.4rem;
+    transition: all 0.3s ease-in-out;
+
+    &:not(:last-child) {
+      margin-right: 1rem;
+    }
+    & span {
+      &:first-child {
+        background-color: #fff;
+        border-radius: 0.4rem;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+      }
+      padding: 0.4rem;
+      // margin-right: 0.6rem;
+    }
+    &:hover {
+      opacity: 1;
+      & span:first-child {
+        color: #bf00ff;
+      }
+    }
   }
   &__links {
   }
   &__text {
   }
   &__title {
+    font-weight: 600;
+    margin-bottom: 1rem;
   }
   &__top {
     text-align: center;
+    margin-bottom: 1rem;
   }
+}
+
+.vk-link {
+  background-color: #0077ff;
+}
+.google-link {
+  background-color: #f1f3f4;
+}
+.mail-link {
+  background-color: #168de2;
 }

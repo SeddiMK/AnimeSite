@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
-import RootWidthHeigth from '../rootWidthHeigth/RootWidthHeigth';
+import React, { useEffect, useState } from 'react';
 
 export const Particles = ({ wrapperRef }) => {
   var particles = document.querySelectorAll('.particles-canv'),
@@ -9,15 +8,10 @@ export const Particles = ({ wrapperRef }) => {
   const [width, setWidth] = useState(1920);
   const [height, setHeight] = useState(1080);
 
-  const observedDiv = wrapperRef; // !!!!!!!!!!!!!!!!!!!!! Ref!
+  const observedDiv = wrapperRef;
   // const body = document.querySelector('body');
   // useRef allows us to "store" the div in a constant,
   // and to access it via observedDiv.current
-  // const observedDiv = useRef(null);
-
-  // console.log(body, 'body in Particles');
-  console.log(width, height, 'width, h in Particles');
-  console.log(observedDiv.current, 'observedDiv.current');
 
   useEffect(
     () => {
@@ -66,8 +60,6 @@ export const Particles = ({ wrapperRef }) => {
 
         // height = window.innerHeight;
         // height = document.getElementById('root').offsetHeight;
-        // height = document.getElementById('root').getElementsByTagName('height'); // применить с containeers/RootWidthHeight
-
         // height = document.getElementById('root').getBoundingClientRect().height;
 
         console.log(width, height, 'width, heigth');
@@ -85,6 +77,7 @@ export const Particles = ({ wrapperRef }) => {
           velocity: -0.9,
           array: [],
         };
+        let dot;
 
         function Dot() {
           this.x = Math.random() * width;
@@ -93,8 +86,6 @@ export const Particles = ({ wrapperRef }) => {
           this.vy = dots.velocity + Math.random();
           this.radius = Math.random() * radius;
         }
-
-        let dot;
 
         Dot.prototype = {
           create: function () {
@@ -106,6 +97,7 @@ export const Particles = ({ wrapperRef }) => {
           animate: function () {
             for (let i = 0; i < dots.num; i++) {
               dot = dots.array[i];
+
               if (dot.x < 0 || dot.x > width) {
                 dot.vx = -dot.vx;
                 dot.vy = dot.vy;
