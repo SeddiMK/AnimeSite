@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import useScript from '../../hooks/useScript';
@@ -12,13 +12,21 @@ import RootWidthHeigth from '../../containers/rootWidthHeigth/RootWidthHeigth';
 
 const Layout = () => {
   // useScript('./particles.js');
+  const wrapperRef = useRef(null);
+  // console.log(
+  //   wrapperRef.current.offsetHeight,
+  //   'wrapperRef.current.offsetHeight'
+  // );
+
   return (
     <>
-      <canvas className="particles-canv" data-color="#B99970"></canvas>
-      <Particles />
-      <div className="container">
+      <div className="wrapper" ref={wrapperRef}>
+        <canvas className="particles-canv" data-color="#B99970"></canvas>
+        <Particles wrapperRef={wrapperRef} />
         <Header />
-        <Outlet />
+        <div className="container">
+          <Outlet />
+        </div>
         <Footer />
       </div>
     </>

@@ -16,6 +16,7 @@ const App = () => {
 
   return (
     <>
+      {/* <div className="wrapper"> */}
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Main />} />
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="*" element={<Error />} />
         </Route>
       </Routes>
+      {/* </div> */}
     </>
   );
 };
