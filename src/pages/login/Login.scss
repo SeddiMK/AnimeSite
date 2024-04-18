@@ -3,19 +3,23 @@
 .inp-form {
 }
 .login-social-media {
+  margin-bottom: 1.5rem;
   & span {
-    // margin-bottom: 1rem;
   }
 }
 .lr-form {
+  font-size: 1.3rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
 
+  // max-width: 80%;
+  border-radius: 0.4rem;
+  background-color: #fff;
   overflow-y: hidden;
-  padding: 1rem;
-  font-size: 1.3rem;
+  padding: 2rem 3rem;
+  margin-top: 2rem;
 
   &__social-media {
     display: flex;
@@ -28,7 +32,7 @@
 }
 .ls-media {
   &__block {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
   }
   &__link {
     display: inline-flex;

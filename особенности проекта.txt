@@ -1,0 +1,1 @@
+import { FaVk, FaGoogle, FaEnvelope } from 'react-icons/fa'; иконки react-icons

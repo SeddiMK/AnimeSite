@@ -12,24 +12,59 @@
 }
 .custom-control {
 }
+// .custom-checkbox .custom-control-input:checked ~ .custom-control-indicator {
+//   //   background-image: url();
+// }
+
+// .custom-control-input {
+//   //   position: absolute;
+//   //   z-index: -1;
+//   //   opacity: 0;
+// }
 .custom-control-description {
+  &:hover {
+    color: var(--btn-send-com);
+  }
 }
 .custom-control-indicator {
+  margin-right: 0.5rem;
 }
 .custom-control-input {
 }
 .form-control {
+  border: 0.2px solid #111;
+  border-radius: 0.2rem;
 }
 .form-control-lg {
 }
 .form-group {
+  display: flex;
+  flex-direction: column;
+  //   margin-bottom: 1.3rem;
+  & label {
+    margin-bottom: 0.3rem;
+  }
 }
 .form-login-header {
+  & a {
+    transition: color 0.3s ease-in-out;
+
+    &:hover {
+      color: red;
+    }
+  }
+  & div {
+    &:not(:last-child) {
+      margin-bottom: 1.3rem;
+    }
+  }
 }
 .form {
   &__btn {
   }
   &__btn-block {
+    display: flex;
+    justify-content: center;
   }
   &__input {
   }
@@ -46,9 +81,49 @@
   &__registration-link {
   }
 }
-.main {
-}
-.mr-1 {
+.btn-lg {
+  padding: 0.8rem 2rem;
 }
 .remember-checkbox {
 }
+
+#custom-checkbox-login {
+  cursor: pointer;
+
+  &:hover {
+    svg {
+      transform: none;
+    }
+  }
+}
+// checkbox ------------------------------------
+input[type='checkbox'] {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.checkbox {
+  display: inline-block; // set to `inline-block` as `inline elements ignore `height` and `width`
+  height: 20px;
+  width: 20px;
+  background: #fff;
+  border: 2px #ddd solid;
+  border-radius: 0.3rem;
+}
+
+// .checkbox--active {
+//   border-color: var(--btn-send-com);
+//   background: var(--btn-send-com);
+// }
+
+// .custom-control-input:checked ~ .custom-control-indicator {
+//     color: #fff;
+//     background-color: #ff5c57;
+//     -webkit-box-shadow: none;
+//     box-shadow: none;
+//   }
