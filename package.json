@@ -13,6 +13,7 @@
     "@testing-library/user-event": "^13.5.0",
     "font-awesome": "^4.7.0",
     "helmet": "^7.1.0",
+    "particles-bg": "^2.5.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",

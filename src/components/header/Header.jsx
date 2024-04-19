@@ -2,28 +2,9 @@ import { useState, useEffect, useRef } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import './Header.scss';
 import LoginUserCabinet from '../../pages/loginUserCabinet/LoginUserCabinet';
+import SearchHeader from '../searchHeader/SearchHeader';
 
 const Header = () => {
-  const [searchInpBtn, setSearchInpBtn] = useState(false);
-  const [searchInpVal, setSearchInpVal] = useState('');
-  const inputRef = useRef();
-
-  // const id = 2; //  <Link to={`/login/${id}`} !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-  const onChangeInput = () => {
-    console.log(inputRef.current.value, '-----------onChangeInput');
-    if (inputRef.current) {
-      setSearchInpVal(inputRef.current.value);
-    }
-  };
-  // useEffect(() => {
-  //   console.log(searchInpVal, 'searchInpVal');
-  //   console.log(inputRef.current, '-----------inputRef.current.value');
-  //   // if (inputRef.current.value === '') {
-  //   //   setSearchInpVal(inputRef.current.value);
-  //   // }
-  // }, [searchInpVal]);
-
   return (
     <header className="header">
       <div className="header__container">
@@ -59,33 +40,8 @@ const Header = () => {
                 Контакты
               </NavLink>
             </li>
-            <li className="menu__item search">
-              <form className="search__form" id="navbar-search">
-                <button
-                  onClick={() => setSearchInpBtn(true)}
-                  className="menu__btn material-symbols-outlined">
-                  search
-                </button>
-                {searchInpBtn && (
-                  <div className="search__search-inp">
-                    <button
-                      id="close-menu-search"
-                      className="menu__btn material-symbols-outlined"
-                      onClick={() => setSearchInpBtn(false)}>
-                      close
-                    </button>
-                    <input
-                      value={searchInpVal}
-                      onChange={onChangeInput}
-                      ref={inputRef}
-                      className="search__inp form-control-reset"
-                      name="searc-heder"
-                      type="search"
-                      placeholder="Поиск аниме, манги, людей и персонажей"
-                    />
-                  </div>
-                )}
-              </form>
+            <li className="menu__item search-header">
+              <SearchHeader />
             </li>
             <li className="menu__item login-btn">
               <Link to={`/login`} className="menu__link" id="navbar-login">

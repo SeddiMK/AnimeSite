@@ -11,7 +11,7 @@ const Contacts = () => {
           <p>My contact: click link to bottom &darr;</p>
           <p>Связь со мной: нажмите на ссылку внизу &darr;</p>
           <div className="contact__my-contact-link">
-            <div className="contact__my-contact-mail my-contact">
+            <div className="contact__my-contact-block mail-my-contact">
               <b>Mail:</b>{' '}
               <a
                 className="my-contact__link"
@@ -24,7 +24,7 @@ const Contacts = () => {
                 <span>web.egorovm@gmail.com</span>
               </a>
             </div>
-            <div className="contact__my-contact-git-hub my-contact">
+            <div className="contact__my-contact-block git-hub-my-contact">
               <b>GitHub:</b>{' '}
               <a
                 className="my-contact__link"
@@ -41,7 +41,7 @@ const Contacts = () => {
                 <span>SeddiMK</span>
               </a>
             </div>
-            <div className="contact__my-contact-skype my-contact">
+            <div className="contact__my-contact-block skype-my-contact">
               <b>Skype:</b>{' '}
               <a
                 className="my-contact__link"
@@ -58,7 +58,7 @@ const Contacts = () => {
                 <span>Maksim Egorov</span>
               </a>
             </div>
-            <div className="contact__my-contact-link-project my-contact">
+            <div className="contact__my-contact-block link-project-my-contact">
               <b>Link to project from github:</b>{' '}
               <a
                 className="my-contact__link"

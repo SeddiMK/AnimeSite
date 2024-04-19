@@ -6,7 +6,16 @@
 .contact {
   &__my-contact-link {
     & div:not(:last-child) {
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.7rem;
+    }
+  }
+  &__my-contact-block {
+    display: flex;
+    & b {
+      margin-right: 0.7rem;
+    }
+    &:not(:last-child) {
+      margin-bottom: 0.7rem;
     }
   }
 }
@@ -21,7 +30,11 @@
   & div {
     margin-right: 0.3rem;
   }
-  &__link:hover {
-    color: red;
+  &__link {
+    display: flex;
+    transition: color 0.3s ease-in-out;
+    &:hover {
+      color: red;
+    }
   }
 }

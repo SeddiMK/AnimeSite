@@ -7,6 +7,7 @@ export const Particles = ({ wrapperRef }) => {
 
   const [width, setWidth] = useState(1920);
   const [height, setHeight] = useState(1080);
+  const [isMounted, setIsMounted] = useState(false);
 
   const observedDiv = wrapperRef;
   // const body = document.querySelector('body');
@@ -64,7 +65,8 @@ export const Particles = ({ wrapperRef }) => {
 
         console.log(width, height, 'width, heigth');
 
-        setWidth(window.innerWidth);
+        setWidth(window.innerWidth); //!!!!!!!!!!!!!!!!!!!!!!!!
+        // setWidth(7680);
 
         node.width = width;
         node.height = height;
@@ -131,11 +133,15 @@ export const Particles = ({ wrapperRef }) => {
       };
     },
     // only update the effect if the ref element changed
-    [width, height, observedDiv.current]
+    [width, height]
   );
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setIsMounted(true);
+    // if (isMounted) ResizeObserver.unobserve();
+  }, []);
 
+  console.log(isMounted + 1, 'IsMounted');
   return <>{/* <RootWidthHeigth /> */}</>;
 };
 export default Particles;

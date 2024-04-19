@@ -4,7 +4,7 @@ import YouTube, { YouTubeProps } from 'react-youtube';
 
 import srcImg from '../../assets/image/anime-poster/659f8dd485857721242765.jpg';
 
-import FormMain from '../form/FormMain';
+import FormMain from '../formMain/FormMain';
 import RatingStar from '../rating/RatingStar';
 
 const Main = () => {

@@ -4,7 +4,7 @@ import useScript from '../hooks/useScript';
 import { Route, Routes } from 'react-router-dom';
 
 // pages
-import Layout from '../pages/layout/Layout';
+import Layout from '../containers/layout/Layout';
 import Main from '../components/main/Main';
 import Contacts from '../pages/contacts/Contacts';
 import LoginUserCabinet from '../pages/loginUserCabinet/LoginUserCabinet';
