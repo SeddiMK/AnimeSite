@@ -1,9 +1,19 @@
 .contacts {
+  font-size: 1.2rem;
   background-color: #fff;
 
   padding: 2rem 0;
 }
 .contact {
+  &__text {
+    margin-bottom: 0.9rem;
+  }
+
+  &__my-contact {
+    &:not(:last-child) {
+      margin-bottom: 0.7rem;
+    }
+  }
   &__my-contact-link {
     & div:not(:last-child) {
       margin-bottom: 0.7rem;
@@ -15,8 +25,11 @@
       margin-right: 0.7rem;
     }
     &:not(:last-child) {
-      margin-bottom: 0.7rem;
+      margin-bottom: 1rem;
     }
+  }
+  &__icon {
+    margin-right: 0.7rem;
   }
 }
 
@@ -32,7 +45,7 @@
   }
   &__link {
     display: flex;
-    transition: color 0.3s ease-in-out;
+    transition: color 0.2s ease-in-out;
     &:hover {
       color: red;
     }
