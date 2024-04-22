@@ -7,7 +7,7 @@ export const Particles = ({ wrapperRef }) => {
 
   const [width, setWidth] = useState(1920);
   const [height, setHeight] = useState(1080);
-  const [isMounted, setIsMounted] = useState(false);
+  // const [isMounted, setIsMounted] = useState(false);
 
   const observedDiv = wrapperRef;
   // const body = document.querySelector('body');
@@ -136,12 +136,12 @@ export const Particles = ({ wrapperRef }) => {
     [width, height]
   );
 
-  useEffect(() => {
-    setIsMounted(true);
-    // if (isMounted) ResizeObserver.unobserve();
-  }, []);
+  // useEffect(() => {
+  //   setIsMounted(true);
+  //   // if (isMounted) ResizeObserver.unobserve();
+  // }, []);
 
-  console.log(isMounted + 1, 'IsMounted');
+  // console.log(isMounted + 1, 'IsMounted');
   return <>{/* <RootWidthHeigth /> */}</>;
 };
 export default Particles;

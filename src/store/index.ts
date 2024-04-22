@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 
-import fetchAnimeListSlice from './fetchAnimeListSlice';
+import animeSlice from './animeSlice';
+import userSlice from './userSlice';
 
 export const store = configureStore({
   reducer: {
-    fetchAnimeListSlice,
+    animeSlice,
+    userSlice,
   },
 });
 

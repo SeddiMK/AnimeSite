@@ -64,8 +64,8 @@ const initialState: AnimeSliceState = {
   loading: true,
 };
 
-export const furnitureSlice = createSlice({
-  name: 'furniture',
+export const animeSlice = createSlice({
+  name: 'anime',
   initialState,
   reducers: {
     setItems: (state, action: PayloadAction<[]>) => {
@@ -99,11 +99,10 @@ export const furnitureSlice = createSlice({
   },
 });
 
-export const { setItems } = furnitureSlice.actions;
+export const { setItems } = animeSlice.actions;
 
 export const itemsReindexing = (state: RootState) =>
-  state.fetchAnimeListSlice.itemsReindexing;
-export const itemsFurnutere = (state: RootState) =>
-  state.fetchAnimeListSlice.items;
+  state.animeSlice.itemsReindexing;
+export const itemsFurnutere = (state: RootState) => state.animeSlice.items;
 
-export default furnitureSlice.reducer;
+export default animeSlice.reducer;
