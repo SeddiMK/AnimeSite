@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 
-import animeSlice from './animeSlice';
-import userSlice from './userSlice';
+import animeSlice from './animeSlice.ts';
+import userSlice from './userSlice.ts';
 
 export const store = configureStore({
   reducer: {

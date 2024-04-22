@@ -1,10 +1,27 @@
 import './Login.scss';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useAppDispatch } from '../../store/index.ts';
+
 import { FaVk, FaGoogle, FaEnvelope } from 'react-icons/fa';
 import InputForm from '../../components/inputForm/LoginForm';
 import { Link } from 'react-router-dom';
 
+//state
+import { fetchUserList, itemsUsers } from '../../store/userSlice.ts';
+
 const Login = () => {
+  const dispath = useAppDispatch();
+
+  const usersItems = useSelector(itemsUsers);
+
+  useEffect(() => {
+    // dispath(fetchUserList(email, phonePass));
+    dispath(fetchUserList());
+  }, [dispath]);
+
+  console.log(usersItems, 'itemsUserskjk');
+
   return (
     <main className="main login">
       <div className="form-login-registaration lr-form">

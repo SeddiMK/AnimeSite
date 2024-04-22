@@ -23,24 +23,26 @@ export type Anime = {
 };
 
 export const fetchAnimeListSlice = createAsyncThunk<Anime[], SearchAnime>(
-  'furniture/fetchFurnitureStatus',
-  async (params) => {
+  'anime/fetchAnimeStatus',
+  async (params, { rejectWithValue }) => {
     // (params:Record<string, string>)
-    const {
-      sortBy,
-      order,
-      searchCategoryFilter,
-      searchInpValData,
-      currentPage,
-    } = params;
+    try {
+      // const { id, name, username, email, phone, address } = params;
+      // const { email, phonePass } = params;
+      const resp = await axios.get<Anime[]>(
+        `https://jsonplaceholder.typicode.com/users/`
+      );
 
-    const { data } = await axios.get<Anime[]>(
-      `https://65c21d61f7e6ea59682aa9c7.mockapi.io/data_shop_furniture?limit=9&page=${currentPage}&sortBy=${sortBy}&order=${order}&search=${searchInpValData}&filter=${searchCategoryFilter}`
-    ); //limit=должен давать бэкенд(mockapi.io- не дает всех страниц от количетва товара и массив, объект корзины)limit=6&sortBy=cost&order=asc
-    // console.log(
-    //   `https://65c21d61f7e6ea59682aa9c7.mockapi.io/data_shop_furniture?page=${currentPage}&sortBy=${sortBy}&order=${order}&search=${searchInpValData}&filter=${searchCategoryFilter}`
-    // );
-    return data; // as Anime[];
+      if (resp.status !== 200) {
+        throw new Error('Server Error!');
+      }
+
+      const data = resp.data;
+
+      return data; // as Anime[];
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   }
 );
 
@@ -54,6 +56,7 @@ interface AnimeSliceState {
   items: Anime[];
   itemsReindexing: {};
   status: Status;
+  error: string | unknown;
   loading: boolean;
 }
 
@@ -61,10 +64,12 @@ const initialState: AnimeSliceState = {
   items: [],
   itemsReindexing: {},
   status: Status.LOADING, // loading | success | error
+  error: '',
   loading: true,
 };
 
-export const animeSlice = createSlice({
+// -----------------------------------store
+const animeSlice = createSlice({
   name: 'anime',
   initialState,
   reducers: {
@@ -91,8 +96,9 @@ export const animeSlice = createSlice({
       // }
     });
 
-    builder.addCase(fetchAnimeListSlice.rejected, (state) => {
+    builder.addCase(fetchAnimeListSlice.rejected, (state, action) => {
       state.status = Status.ERROR;
+      state.error = action.payload;
       state.items = [];
       state.loading = false;
     });

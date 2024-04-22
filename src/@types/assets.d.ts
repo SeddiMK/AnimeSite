@@ -1,3 +1,5 @@
+import content from 'lodash.debounce';
+
 // css-modules just extend the declaration like this
 declare module '*.scss' {
   const content: Record<string, string>;
