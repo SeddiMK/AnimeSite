@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import './loginForm.scss';
+import React, { useState, useEffect, useRef } from 'react';
+import './InputFormRegistration.scss';
 import { Form, Link } from 'react-router-dom';
 import {
   animated,
@@ -9,7 +9,7 @@ import {
   useChain,
 } from 'react-spring';
 
-const LoginForm = () => {
+const InputFormRegistration = () => {
   const [valInpLog, setValInpLog] = useState('');
   const [valInpPass, setValInpPass] = useState('');
 
@@ -43,7 +43,7 @@ const LoginForm = () => {
     // console.log(e.current, 'e.current');
   };
   return (
-    <Form className="form-login-header" action="/login_check" method="post">
+    <Form className="form-login-header">
       {/* <input
           type="hidden"
           name="_csrf_token"
@@ -56,8 +56,14 @@ const LoginForm = () => {
           className="form-control form-control-lg"
           id="username"
           name="_username"
+          // ref={userRef}
+          autoComplete="off"
           required="required"
-          onChange={changeInpValLogin()}
+          // onChange={(e) => setUser(e.target.value)}
+          // aria-invalid={validName ? 'false' : 'true'}
+          aria-describedby="unidnote"
+          // onFocus={() => setUserFocus(true)}
+          // onBlur={() => setUserFocus(false)}
         />
       </div>
       <div className="form__pass form-group">
@@ -140,11 +146,11 @@ const LoginForm = () => {
       <div className="form__regisration-account">
         <div className="form__regisration-account-block">
           <div className="form__registration-link">
-            <Link to="/register/">Зарегистрировать Аккаунт</Link>
+            <Link to="/registration">Зарегистрировать Аккаунт</Link>
           </div>
         </div>
       </div>
     </Form>
   );
 };
-export default LoginForm;
+export default InputFormRegistration;

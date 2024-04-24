@@ -10,6 +10,7 @@ import Contacts from '../pages/contacts/Contacts';
 import LoginUserCabinet from '../pages/loginUserCabinet/LoginUserCabinet';
 import Login from '../pages/login/Login';
 import Error from '../pages/error/Error';
+import Registration from '../containers/regisration/Registration.jsx';
 
 const App = () => {
   // useScript('./particles.js');
@@ -21,6 +22,7 @@ const App = () => {
           <Route path="/" element={<Main />} />
           <Route path="contacts" element={<Contacts />} />
           <Route path="login" element={<Login />} />
+          <Route path="registration" element={<Registration />} />
           <Route path="*" element={<Error />} />
         </Route>
       </Routes>

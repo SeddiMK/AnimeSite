@@ -1,0 +1,61 @@
+.errmsg {
+}
+.form-control {
+}
+.form-control-lg {
+}
+.form-group {
+  &__inp {
+  }
+  &__login {
+  }
+  &__pwd {
+  }
+  &__icon {
+  }
+}
+.form-login-registration {
+  max-width: 15rem;
+  label {
+    &:hover {
+      .form-group__icon {
+        & svg {
+          transform: none;
+        }
+      }
+    }
+  }
+}
+.form {
+  &__login {
+  }
+  &__pass {
+  }
+}
+.instructions {
+}
+.registaration-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  font-size: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  // max-width: 80%;
+  border-radius: 0.4rem;
+  background-color: #fff;
+  overflow-y: hidden;
+  padding: 2rem 3rem;
+}
+
+.check {
+  color: var(--main-color);
+}
+.times {
+  color: var(--nik-name-red);
+}
