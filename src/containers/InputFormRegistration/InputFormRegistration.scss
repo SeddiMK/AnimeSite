@@ -41,11 +41,31 @@
   display: flex;
   flex-direction: column;
   //   margin-bottom: 1.3rem;
+
+  &__pwd {
+  }
   & label {
     margin-bottom: 0.3rem;
   }
 }
 .form-login-header {
+  max-width: 16rem;
+
+  margin-bottom: 1.3rem;
+
+  & label.form-group__login,
+  label.form-group__pwd {
+    display: flex;
+    align-items: flex-start;
+    & span {
+      width: 4px;
+      height: 4px;
+      margin-left: 0.3rem;
+    }
+  }
+  & input {
+    padding: 0.3rem 0.4rem;
+  }
   & a {
     transition: color 0.3s ease-in-out;
 
@@ -60,17 +80,22 @@
   }
 }
 .form {
-  &__btn {
-  }
   &__btn-block {
     display: flex;
     justify-content: center;
+  }
+  &__btn {
   }
   &__input {
   }
   &__login {
   }
   &__pass {
+    position: relative;
+    top: 0;
+    left: 0;
+    & input {
+    }
   }
   &__pass-request {
   }
@@ -80,6 +105,12 @@
   }
   &__registration-link {
   }
+  &__eye {
+    position: absolute;
+    right: 0.5em;
+    top: 1.7em;
+    cursor: pointer;
+  }
 }
 .btn-lg {
   padding: 0.8rem 2rem;
@@ -88,14 +119,18 @@
 }
 
 #custom-checkbox-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-
+  line-height: 0;
   &:hover {
     svg {
       transform: none;
     }
   }
 }
+
 // checkbox ------------------------------------
 input[type='checkbox'] {
   clip: rect(0 0 0 0);
@@ -116,14 +151,20 @@ input[type='checkbox'] {
   border-radius: 0.3rem;
 }
 
-// .checkbox--active {
-//   border-color: var(--btn-send-com);
-//   background: var(--btn-send-com);
-// }
+// check, times -------------------------------
+.check {
+  color: var(--main-color);
+}
+.times {
+  color: var(--nik-name-red);
+}
 
-// .custom-control-input:checked ~ .custom-control-indicator {
-//     color: #fff;
-//     background-color: #ff5c57;
-//     -webkit-box-shadow: none;
-//     box-shadow: none;
-//   }
+// instructions -------------------------------
+.instructions {
+  & span {
+    &:first-child {
+      color: var(--nik-name-red);
+      margin-right: 0.3rem;
+    }
+  }
+}

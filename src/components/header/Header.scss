@@ -64,9 +64,8 @@
     }
   }
   &__link {
-    position: relative;
+    // position: relative;
 
-    padding: clamp(7px, 1vw, 10px);
     transition: color 0.3s ease-in-out;
 
     &:hover {
@@ -86,16 +85,24 @@ a.active {
 }
 .login-btn {
   & a {
-    padding-left: 1.8rem;
+    // padding-left: rem;
   }
   & span {
-    position: absolute;
-    left: -2px;
+    // ---------------------------------------------------------------login
+    // position: absolute;
+    // left: -2px;
   }
 }
 
 #navbar-login {
-  line-height: 26px;
+  display: flex;
+  align-items: center;
+  line-height: 0px;
+  & span {
+    &:not(:last-child) {
+      margin-right: 0.1rem;
+    }
+  }
 }
 
 @media (max-width: 500px) {

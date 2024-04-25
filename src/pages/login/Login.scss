@@ -16,7 +16,8 @@
 
   // max-width: 80%;
   border-radius: 0.4rem;
-  background-color: #fff;
+  background-color: var(--background-form-white);
+
   overflow-y: hidden;
   padding: 2rem 3rem;
   margin-top: 2rem;
@@ -28,5 +29,17 @@
     align-items: center;
   }
   &__inp-form {
+    & div {
+      &:not(:last-child) {
+        margin-bottom: 1.1rem;
+      }
+    }
+    & a {
+      transition: color 0.3s ease-in-out;
+
+      &:hover {
+        color: var(--nik-name-red);
+      }
+    }
   }
 }

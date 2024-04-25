@@ -33,6 +33,30 @@ const Login = () => {
         </div>
         <div className="lr-form__inp-form inp-form">
           <InputFormRegistration />
+          <div className="form__input form-group">
+            <div className="form__btn-block">
+              <div className="form__btn btn-inp">
+                <button
+                  type="submit"
+                  className="btn btn-lg"
+                  id="_submit"
+                  name="_submit"
+                  value="Войти">
+                  Войти
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="form__pass-request form-group">
+            <Link to="/resetting/request">Забыли пароль?</Link>
+          </div>
+          <div className="form__regisration-account">
+            <div className="form__regisration-account-block">
+              <div className="form__registration-link">
+                <Link to="/registration">Зарегистрировать Аккаунт</Link>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </main>

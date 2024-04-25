@@ -45,7 +45,8 @@ const Header = () => {
             </li>
             <li className="menu__item login-btn">
               <Link to={`/login`} className="menu__link" id="navbar-login">
-                <span className="material-symbols-outlined">login</span> Войти
+                <span className="material-symbols-outlined">login</span>
+                <span>Войти</span>
               </Link>
             </li>
           </ul>
