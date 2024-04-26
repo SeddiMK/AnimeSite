@@ -60,16 +60,16 @@ export enum Status {
 }
 
 interface UsersSliceState {
-  items: Users[];
-  // itemsReindexing: {}; //!!!!!!!!!!!!!!!
+  itemsUsers: Users[];
+
   status: Status;
   error: string | unknown;
   loading: boolean;
 }
 
 const initialState: UsersSliceState = {
-  items: [],
-  // itemsReindexing: {}, //!!!!!!!!!!!!!!!
+  itemsUsers: [],
+
   status: Status.LOADING, // loading | success | error
   error: '',
   loading: true,
@@ -80,19 +80,22 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setItems: (state, action: PayloadAction<[]>) => {
-      state.items = action.payload;
+    setUser: (state, action: PayloadAction<[]>) => {
+      state.itemsUsers = action.payload;
+    },
+    removeUser: (state) => {
+      // state.items = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchUserList.pending, (state) => {
       state.status = Status.LOADING;
       state.loading = true;
-      state.items = [];
+      state.itemsUsers = [];
     });
     builder.addCase(fetchUserList.fulfilled, (state, action) => {
       state.status = Status.SUCCESS;
-      state.items = action.payload;
+      state.itemsUsers = action.payload;
       state.loading = false;
       // if (state.items.length > 1) {
       //   // setItemsReindexing -----------------------------------
@@ -106,16 +109,16 @@ const userSlice = createSlice({
     builder.addCase(fetchUserList.rejected, (state, action) => {
       state.status = Status.ERROR;
       state.error = action.payload;
-      state.items = [];
+      state.itemsUsers = [];
       state.loading = false;
     });
   },
 });
 
-export const { setItems } = userSlice.actions;
+export const { setUser, removeUser } = userSlice.actions;
 
 // export const itemsReindexing = (state: RootState) =>
 //   state.userSlice.itemsReindexing;
-export const itemsUsers = (state: RootState) => state.userSlice.items;
+export const itemsUsers = (state: RootState) => state.userSlice.itemsUsers;
 
 export default userSlice.reducer;

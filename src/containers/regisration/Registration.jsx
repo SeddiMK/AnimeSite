@@ -2,6 +2,7 @@ import './Registration.scss';
 import React, { useEffect, useRef, useState } from 'react';
 import LinksSocialRegistration from '../../components/linksSocialRegistration/LinksSocialRegistration';
 import InputFormRegistration from '../InputFormRegistration/InputFormRegistration';
+import { Link } from 'react-router-dom';
 
 const Registration = () => {
   // const userRef = useRef(null);
@@ -39,14 +40,15 @@ const Registration = () => {
         </section>
         <div className="form__btn-block">
           <div className="form__btn btn-inp">
-            <button
+            <Link
+              // to={`/user:${idUser}`}
               type="submit"
               className="btn btn-lg"
               id="_submit"
               name="_submit"
               value="Войти">
               Регестрация
-            </button>
+            </Link>
           </div>
         </div>
       </section>
