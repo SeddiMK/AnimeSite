@@ -181,26 +181,25 @@ main.contacts {
   height: 100vh;
 }
 // button ----------------------------------------------------------
-button {
+.btn {
   background-color: var(--btn-send-com);
   border-radius: 0.4rem;
 
   padding: clamp(0.4rem, 1vw, 1rem);
   transition: all 0.25s ease-in-out;
+  &:hover {
+    background-color: var(--btn-send-com);
+    color: var(--color-active-link);
+    box-shadow: -3px -3px 3px #888;
+    transform: translate(2px, 2px);
+  }
+  &:active {
+    background-color: var(--btn-send-com);
+    box-shadow: none;
+    transform: translate(-2px, -2px);
+  }
 }
 
-button:hover {
-  background-color: var(--btn-send-com);
-  color: #fff;
-  box-shadow: -3px -3px 3px #888;
-  transform: translate(2px, 2px);
-}
-
-button:active {
-  background-color: var(--btn-send-com);
-  box-shadow: none;
-  transform: translate(-2px, -2px);
-}
 // ----------------------
 label {
   &:hover {

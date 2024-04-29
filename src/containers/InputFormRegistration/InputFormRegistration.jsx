@@ -100,7 +100,7 @@ const InputFormRegistration = () => {
     <Form className="form-login-header">
       <div className="form__login form-group">
         <label className="form-group__login" htmlFor="username">
-          Логин
+          Логин или email
           {validName && user ? (
             <span className="form-group__icon check">
               <FaCheck />
@@ -113,20 +113,20 @@ const InputFormRegistration = () => {
           ) : null}
         </label>
         <input
+          value={user}
           type="text"
+          // placeholder="логин или email"
           className="form-control form-control-lg"
           id="username"
           name="_username"
-          value={email}
           ref={userRef}
           autoComplete="off"
           required="required"
-          onChange={(e) => setUser(e.target.value)}
           aria-invalid={validName ? 'false' : 'true'}
           aria-describedby="uidnote"
+          onChange={(e) => setUser(e.target.value)}
           onFocus={() => setUserFocus(true)}
           onBlur={() => setUserFocus(false)}
-          onChange={(e) => setEmail(e.target.value)}
         />
         {userFocus && user && !validName ? (
           <p id="uidnote" className="instructions">
@@ -156,6 +156,7 @@ const InputFormRegistration = () => {
         </label>
         <input
           value={pwd}
+          // placeholder="пароль"
           ref={inpPassRef}
           type={showEye ? 'password' : 'text'}
           className=" form-group__inp form-control inp-pass form-control-lg"

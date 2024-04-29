@@ -4,8 +4,8 @@ import YouTube, { YouTubeProps } from 'react-youtube';
 
 import srcImg from '../../assets/image/anime-poster/659f8dd485857721242765.jpg';
 
-import FormMain from '../formMain/FormMain';
-import RatingStar from '../rating/RatingStar';
+import FormMain from '../../components/formMain/FormMain';
+import RatingStar from '../../components/rating/RatingStar';
 
 const Main = () => {
   const [openFormComent, setOpenFormComent] = useState(false);
@@ -73,15 +73,15 @@ const Main = () => {
                 />
               </div>
               <div className="media__left-buttons">
-                <button className="media__left-buttons-online">
+                <button className="media__left-buttons-online btn">
                   Смотреть онлайн
                 </button>
                 <button
-                  className="media__left-buttons-review"
+                  className="media__left-buttons-review btn"
                   onClick={() => openForm()}>
                   Написать отзыв
                 </button>
-                <button className="media__left-add-list">
+                <button className="media__left-add-list btn">
                   Добавить в список
                 </button>
               </div>
@@ -175,7 +175,7 @@ const Main = () => {
           <div className="content__coment comment">
             <div className="comment__add">
               <button
-                className="comment__btn-send-comment"
+                className="comment__btn-send-comment btn"
                 onClick={() => openFormComment()}>
                 Написать комментарий
               </button>

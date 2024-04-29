@@ -171,7 +171,7 @@ const FormMain = ({
           <div className="form__top">
             <h1>Отзыв или комментарий</h1>
             <button
-              className="form__btn-close"
+              className="form__btn-close btn"
               onClick={() => setOpenFormComent(false)}>
               &#10006;
             </button>
@@ -219,6 +219,7 @@ const FormMain = ({
           </div>
           <div className="form__button">
             <button
+              className="btn"
               type="button"
               disabled={noActivBtn}
               onClick={() => addComment()}>
@@ -244,7 +245,7 @@ const FormMain = ({
               </h3>
               <div className="comment__out-text">{el}</div>
               <button
-                className="comment__btn-del"
+                className="comment__btn-del btn"
                 onClick={() => delComment(ind)}>
                 Удалить
               </button>

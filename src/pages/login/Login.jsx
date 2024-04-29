@@ -36,14 +36,15 @@ const Login = () => {
           <div className="form__input form-group">
             <div className="form__btn-block">
               <div className="form__btn btn-inp">
-                <button
+                <Link
+                  // to={}
                   type="submit"
                   className="btn btn-lg"
-                  id="_submit"
+                  id="_submit-login"
                   name="_submit"
                   value="Войти">
                   Войти
-                </button>
+                </Link>
               </div>
             </div>
           </div>
