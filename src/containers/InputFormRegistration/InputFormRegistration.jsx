@@ -57,6 +57,8 @@ const InputFormRegistration = () => {
   const userRef = useRef(null);
   const errRef = useRef(null);
 
+  const [email, setEmail] = useState('');
+
   const [user, setUser] = useState('');
   const [validName, setValidName] = useState(false);
   const [userFocus, setUserFocus] = useState(false);
@@ -115,6 +117,7 @@ const InputFormRegistration = () => {
           className="form-control form-control-lg"
           id="username"
           name="_username"
+          value={email}
           ref={userRef}
           autoComplete="off"
           required="required"
@@ -123,6 +126,7 @@ const InputFormRegistration = () => {
           aria-describedby="uidnote"
           onFocus={() => setUserFocus(true)}
           onBlur={() => setUserFocus(false)}
+          onChange={(e) => setEmail(e.target.value)}
         />
         {userFocus && user && !validName ? (
           <p id="uidnote" className="instructions">
@@ -151,6 +155,7 @@ const InputFormRegistration = () => {
           ) : null}
         </label>
         <input
+          value={pwd}
           ref={inpPassRef}
           type={showEye ? 'password' : 'text'}
           className=" form-group__inp form-control inp-pass form-control-lg"
