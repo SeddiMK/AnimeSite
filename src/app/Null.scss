@@ -185,7 +185,6 @@ main.contacts {
   background-color: var(--btn-send-com);
   border-radius: 0.4rem;
 
-  padding: clamp(0.4rem, 1vw, 1rem);
   transition: all 0.25s ease-in-out;
   &:hover {
     background-color: var(--btn-send-com);

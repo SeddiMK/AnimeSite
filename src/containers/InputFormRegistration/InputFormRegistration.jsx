@@ -8,8 +8,18 @@ import {
   useSpringRef,
   useChain,
 } from 'react-spring';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { FaInfoCircle, FaCheck, FaTimes } from 'react-icons/fa';
+
+// icons
+import {
+  FaEye,
+  FaEyeSlash,
+  FaInfoCircle,
+  FaCheck,
+  FaTimes,
+} from 'react-icons/fa';
+
+// firebase
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 // validation ------------------------------------------------------------
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/; //Имя пользователя (с ограничением 2-20 символов, которыми могут быть буквы и цифры, первый символ обязательно буква):
@@ -17,7 +27,7 @@ const PWD_REGEX =
   /(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/; //Пароль (Строчные и прописные латинские буквы, цифры, спецсимволы. Минимум 8 символов):
 // -----------------------------------------------------------------------
 
-const InputFormRegistration = () => {
+const InputFormRegistration = ({}) => {
   const inpPassRef = useRef(null);
   const [valInpLog, setValInpLog] = useState('');
   const [valInpPass, setValInpPass] = useState('');
@@ -94,13 +104,41 @@ const InputFormRegistration = () => {
   useEffect(() => {
     setErrMsg('');
   }, [user, pwd, matchPwd]);
-  // -----------------------------------------------------------------------
+
+  // handleSubmit проверка введеных данных ------------------------------------------------
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const v1 = USER_REGEX.test(user);
+    const v2 = PWD_REGEX.test(pwd);
+
+    if (!v1 || !v2) {
+      setErrMsg('Не правильный ввод');
+      return;
+    }
+
+    console.log(user, pwd);
+    setSuccess(true);
+  };
+
+  // проверка ввода, если email, то передать в setEmail и store ?????--------------
+
+  // handleLogin -----------------------------------------------------------
+  const handleLogin = (email, password) => {
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+      .then(console.log)
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
+  };
 
   return (
-    <Form className="form-login-header">
+    <Form className="form-login-header" onSubmit={handleSubmit} title="login">
       <div className="form__login form-group">
         <label className="form-group__login" htmlFor="username">
-          Логин или email
+          Логин или email:
           {validName && user ? (
             <span className="form-group__icon check">
               <FaCheck />
@@ -142,7 +180,7 @@ const InputFormRegistration = () => {
       </div>
       <div className="form__pass form-group">
         <label className="form-group__pwd" htmlFor="password">
-          Пароль{' '}
+          Пароль:{' '}
           {validPwd ? (
             <span className="form-group__icon check">
               <FaCheck />
@@ -243,14 +281,6 @@ const InputFormRegistration = () => {
               setIsChecked(!isChecked);
             }}
           />
-          {/* <span
-            // className="custom-control-indicator"
-            className={`custom-control-indicator checkbox ${
-              isChecked ? 'checkbox--active' : ''
-            }`}
-            // we hide it for screen readers
-            aria-hidden="true"></span> */}
-
           <animated.svg
             style={checkboxAnimationStyle}
             className={`custom-control-indicator checkbox ${
@@ -277,6 +307,20 @@ const InputFormRegistration = () => {
           </animated.svg>
           <span className="custom-control-description">Запомнить меня</span>
         </label>
+      </div>
+      <div className="form__btn-block">
+        <div className="form__btn btn-inp">
+          <Link
+            // to={`/user:${idUser}`}
+            type="submit"
+            className="btn btn-lg"
+            id="_submit-login"
+            name="_submit"
+            value="Войти"
+            onClick={handleLogin}>
+            Войти
+          </Link>
+        </div>
       </div>
     </Form>
   );

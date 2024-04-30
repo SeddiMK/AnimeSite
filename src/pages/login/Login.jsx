@@ -34,7 +34,7 @@ const Login = () => {
         <div className="lr-form__inp-form inp-form">
           <InputFormRegistration />
           <div className="form__input form-group">
-            <div className="form__btn-block">
+            {/* <div className="form__btn-block">
               <div className="form__btn btn-inp">
                 <Link
                   // to={}
@@ -46,7 +46,7 @@ const Login = () => {
                   Войти
                 </Link>
               </div>
-            </div>
+            </div> */}
           </div>
           <div className="form__pass-request form-group">
             <Link to="/resetting/request">Забыли пароль?</Link>
