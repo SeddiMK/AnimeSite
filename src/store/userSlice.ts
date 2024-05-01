@@ -60,7 +60,10 @@ export enum Status {
 }
 
 interface UsersSliceState {
-  itemsUsers: Users[];
+  // itemsUsers: Users[];
+  email: string;
+  token: string;
+  id: string;
 
   status: Status;
   error: string | unknown;
@@ -68,7 +71,10 @@ interface UsersSliceState {
 }
 
 const initialState: UsersSliceState = {
-  itemsUsers: [],
+  // itemsUsers: [],
+  email: '',
+  token: '',
+  id: '',
 
   status: Status.LOADING, // loading | success | error
   error: '',
@@ -80,22 +86,28 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<[]>) => {
-      state.itemsUsers = action.payload;
+    setUser: (state, action: PayloadAction<any>) => {
+      // state.itemsUsers = action.payload;
+      state.email = action.payload.email;
+      state.token = action.payload.token;
+      state.id = action.payload.id;
     },
     removeUser: (state) => {
       // state.items = action.payload;
+      state.email = '';
+      state.token = '';
+      state.id = '';
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchUserList.pending, (state) => {
       state.status = Status.LOADING;
       state.loading = true;
-      state.itemsUsers = [];
+      // state.itemsUsers = [];
     });
     builder.addCase(fetchUserList.fulfilled, (state, action) => {
       state.status = Status.SUCCESS;
-      state.itemsUsers = action.payload;
+      // state.itemsUsers = action.payload;
       state.loading = false;
       // if (state.items.length > 1) {
       //   // setItemsReindexing -----------------------------------
@@ -109,7 +121,7 @@ const userSlice = createSlice({
     builder.addCase(fetchUserList.rejected, (state, action) => {
       state.status = Status.ERROR;
       state.error = action.payload;
-      state.itemsUsers = [];
+      // state.itemsUsers = [];
       state.loading = false;
     });
   },
@@ -119,6 +131,6 @@ export const { setUser, removeUser } = userSlice.actions;
 
 // export const itemsReindexing = (state: RootState) =>
 //   state.userSlice.itemsReindexing;
-export const itemsUsers = (state: RootState) => state.userSlice.itemsUsers;
+// export const itemsUsers = (state: RootState) => state.userSlice.itemsUsers;
 
 export default userSlice.reducer;

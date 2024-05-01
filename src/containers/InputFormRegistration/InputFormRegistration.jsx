@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './InputFormRegistration.scss';
-import { Form, Link } from 'react-router-dom';
+import { Form, useNavigate } from 'react-router-dom';
+
 import {
   animated,
   useSpring,
@@ -18,16 +19,20 @@ import {
   FaTimes,
 } from 'react-icons/fa';
 
-// firebase
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-
 // validation ------------------------------------------------------------
-const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/; //Имя пользователя (с ограничением 2-20 символов, которыми могут быть буквы и цифры, первый символ обязательно буква):
-const PWD_REGEX =
-  /(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/; //Пароль (Строчные и прописные латинские буквы, цифры, спецсимволы. Минимум 8 символов):
+import {
+  USER_REGEX,
+  PWD_REGEX,
+  EMAIL_REGEX,
+} from '../validation/Validation.js';
+
+// const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/; //Имя пользователя (с ограничением 2-20 символов, которыми могут быть буквы и цифры, первый символ обязательно буква):
+// const PWD_REGEX =
+//   /(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/; //Пароль (Строчные и прописные латинские буквы, цифры, спецсимволы. Минимум 8 символов):
+// const EMAIL_REGEX = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/; //Email
 // -----------------------------------------------------------------------
 
-const InputFormRegistration = ({}) => {
+const InputFormRegistration = ({ title, handleClick }) => {
   const inpPassRef = useRef(null);
   const [valInpLog, setValInpLog] = useState('');
   const [valInpPass, setValInpPass] = useState('');
@@ -64,14 +69,15 @@ const InputFormRegistration = ({}) => {
   };
 
   // validation ------------------------------------------------------------
-  const userRef = useRef(null);
+  const emailRef = useRef(null);
   const errRef = useRef(null);
 
-  const [email, setEmail] = useState('');
-
   const [user, setUser] = useState('');
-  const [validName, setValidName] = useState(false);
-  const [userFocus, setUserFocus] = useState(false);
+  const [validUser, setValidUser] = useState(false);
+
+  const [email, setEmail] = useState('');
+  const [validEmail, setValidEmail] = useState(false);
+  const [emailFocus, setEmailFocus] = useState(false);
 
   const [pwd, setPwd] = useState('');
   const [validPwd, setValidPwd] = useState(false);
@@ -90,8 +96,9 @@ const InputFormRegistration = ({}) => {
 
   // user name
   useEffect(() => {
-    setValidName(USER_REGEX.test(user));
-  }, [user]);
+    setValidEmail(EMAIL_REGEX.test(email));
+    // setValidUser(USER_REGEX.test(user));
+  }, [email]);
 
   // password
   useEffect(() => {
@@ -103,137 +110,122 @@ const InputFormRegistration = ({}) => {
   // err Mesage
   useEffect(() => {
     setErrMsg('');
-  }, [user, pwd, matchPwd]);
+  }, [email, pwd, matchPwd]);
 
   // handleSubmit проверка введеных данных ------------------------------------------------
   const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const v1 = USER_REGEX.test(user);
-    const v2 = PWD_REGEX.test(pwd);
-
-    if (!v1 || !v2) {
-      setErrMsg('Не правильный ввод');
-      return;
-    }
-
-    console.log(user, pwd);
-    setSuccess(true);
+    // e.preventDefault();
+    // const v1 = EMAIL_REGEX.test(email);
+    // const v2 = PWD_REGEX.test(pwd);
+    // if (!v1 || !v2) {
+    //   setErrMsg('Не правильный ввод');
+    //   return;
+    // }
+    // setSuccess(true);
   };
 
   // проверка ввода, если email, то передать в setEmail и store ?????--------------
 
-  // handleLogin -----------------------------------------------------------
-  const handleLogin = (email, password) => {
-    const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
-      .then(console.log)
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-      });
-  };
-
   return (
-    <Form className="form-login-header" onSubmit={handleSubmit} title="login">
-      <div className="form__login form-group">
-        <label className="form-group__login" htmlFor="username">
-          Логин или email:
-          {validName && user ? (
-            <span className="form-group__icon check">
-              <FaCheck />
-            </span>
+    <>
+      <Form className="form-login-header" onSubmit={handleSubmit} title="login">
+        <div className="form__login form-group">
+          <label className="form-group__login" htmlFor="username">
+            Email: <br />
+            Прим: asdf@gmail.com
+            {validEmail && email ? (
+              <span className="form-group__icon check">
+                <FaCheck />
+              </span>
+            ) : null}
+            {!validEmail && email ? (
+              <span className="form-group__icon times">
+                <FaTimes />
+              </span>
+            ) : null}
+          </label>
+          <input
+            value={email}
+            type="text"
+            // placeholder="логин или email"
+            className="form-control form-control-lg"
+            id="username"
+            name="_username"
+            ref={emailRef}
+            autoComplete="off"
+            required="required"
+            aria-invalid={validEmail ? 'false' : 'true'}
+            aria-describedby="uidnote"
+            onChange={(e) => setEmail(e.target.value)}
+            onFocus={() => setEmailFocus(true)}
+            onBlur={() => setEmailFocus(false)}
+          />
+          {emailFocus && email && !validEmail ? (
+            <p id="uidnote" className="instructions">
+              <span>
+                <FaInfoCircle />
+              </span>
+              <span>Введите корректный email.</span>{' '}
+              {/* 2-20 символов, которыми могут быть буквы и цифры, первый символ
+              обязательно буква. */}
+            </p>
           ) : null}
-          {!validName && user ? (
-            <span className="form-group__icon times">
-              <FaTimes />
-            </span>
+        </div>
+        <div className="form__pass form-group">
+          <label className="form-group__pwd" htmlFor="password">
+            Пароль: Прим: 123123Aa
+            {validPwd ? (
+              <span className="form-group__icon check">
+                <FaCheck />
+              </span>
+            ) : null}
+            {!validPwd && pwd ? (
+              <span className="form-group__icon times">
+                <FaTimes />
+              </span>
+            ) : null}
+          </label>
+          <input
+            value={pwd}
+            // placeholder="пароль"
+            ref={inpPassRef}
+            type={showEye ? 'password' : 'text'}
+            className=" form-group__inp form-control inp-pass form-control-lg"
+            id="password"
+            name="_password"
+            required="required"
+            aria-invalid={validPwd ? 'false' : 'true'}
+            aria-describedby="pwdnote"
+            onChange={(e) => setPwd(e.target.value)}
+            onFocus={() => setPwdFocus(true)}
+            onBlur={() => setPwdFocus(false)}
+          />
+          <span className="form__eye" onClick={() => setShowEye(!showEye)}>
+            {showEye ? <FaEye /> : <FaEyeSlash />}
+          </span>
+          {pwdFocus && !validPwd ? (
+            <p id="pwdnote" className="instructions">
+              <span>
+                <FaInfoCircle />
+              </span>
+              <span>
+                Строчные и прописные латинские буквы(eng), цифры, спецсимволы:{' '}
+              </span>
+              <span aria-label="exclamation mark">!</span>{' '}
+              <span aria-label="at symbol">@</span>{' '}
+              <span aria-label="hashtag">#</span>{' '}
+              <span aria-label="dollar sign">$</span>{' '}
+              <span aria-label="percent">%</span>. Минимум 8 символов.
+            </p>
           ) : null}
-        </label>
-        <input
-          value={user}
-          type="text"
-          // placeholder="логин или email"
-          className="form-control form-control-lg"
-          id="username"
-          name="_username"
-          ref={userRef}
-          autoComplete="off"
-          required="required"
-          aria-invalid={validName ? 'false' : 'true'}
-          aria-describedby="uidnote"
-          onChange={(e) => setUser(e.target.value)}
-          onFocus={() => setUserFocus(true)}
-          onBlur={() => setUserFocus(false)}
-        />
-        {userFocus && user && !validName ? (
-          <p id="uidnote" className="instructions">
-            <span>
-              <FaInfoCircle />
-            </span>
-            <span>
-              2-20 символов, которыми могут быть буквы и цифры, первый символ
-              обязательно буква.
-            </span>
-          </p>
-        ) : null}
-      </div>
-      <div className="form__pass form-group">
-        <label className="form-group__pwd" htmlFor="password">
-          Пароль:{' '}
-          {validPwd ? (
-            <span className="form-group__icon check">
-              <FaCheck />
-            </span>
-          ) : null}
-          {!validPwd && pwd ? (
-            <span className="form-group__icon times">
-              <FaTimes />
-            </span>
-          ) : null}
-        </label>
-        <input
-          value={pwd}
-          // placeholder="пароль"
-          ref={inpPassRef}
-          type={showEye ? 'password' : 'text'}
-          className=" form-group__inp form-control inp-pass form-control-lg"
-          id="password"
-          name="_password"
-          required="required"
-          aria-invalid={validPwd ? 'false' : 'true'}
-          aria-describedby="pwdnote"
-          onChange={(e) => setPwd(e.target.value)}
-          onFocus={() => setPwdFocus(true)}
-          onBlur={() => setPwdFocus(false)}
-        />
-        <span className="form__eye" onClick={() => setShowEye(!showEye)}>
-          {showEye ? <FaEye /> : <FaEyeSlash />}
-        </span>
-        {pwdFocus && !validPwd ? (
-          <p id="pwdnote" className="instructions">
-            <span>
-              <FaInfoCircle />
-            </span>
-            <span>
-              Строчные и прописные латинские буквы(eng), цифры, спецсимволы:{' '}
-            </span>
-            <span aria-label="exclamation mark">!</span>{' '}
-            <span aria-label="at symbol">@</span>{' '}
-            <span aria-label="hashtag">#</span>{' '}
-            <span aria-label="dollar sign">$</span>{' '}
-            <span aria-label="percent">%</span>. Минимум 8 символов.
-          </p>
-        ) : null}
-      </div>
-
-      {/* ------------------------------------------------------------------------- */}
-      {/* <input
+        </div>
+        {/* ------------------------------------------------------------------------- */}
+        {/* <input
           type="hidden"
           name="_csrf_token"
           value="jlcGrcjGHxymASFMVBE0Zx00LG3XA_c5R9V_OCD5hrQ"
         /> */}
-      {/* <div className="form__login form-group">
+        {/* <div className="form__login form-group">
         <label htmlFor="username">Логин</label>
         <input
           type="text"
@@ -264,65 +256,63 @@ const InputFormRegistration = ({}) => {
         <span className="form__eye" onClick={() => setShowEye(!showEye)}>
           {showEye ? <FaEye /> : <FaEyeSlash />}
         </span>
-      </div> */}
-      {/* ------------------------------------------------------------------------- */}
-
-      <div className="remember-checkbox">
-        <label
-          id="custom-checkbox-login"
-          className="custom-control custom-checkbox"
-          htmlFor="remember_me">
-          <input
-            className="custom-control-input"
-            type="checkbox"
-            id="remember_me"
-            name="_remember_me"
-            onChange={() => {
-              setIsChecked(!isChecked);
-            }}
-          />
-          <animated.svg
-            style={checkboxAnimationStyle}
-            className={`custom-control-indicator checkbox ${
-              isChecked ? 'checkbox--active' : ''
-            }`}
-            // This element is purely decorative so
-            // we hide it for screen readers
-            aria-hidden="true"
-            viewBox="0 0 15 11"
-            fill="none">
-            <animated.path
-              d="M1 4.5L5 9L14 1"
-              strokeWidth="2"
-              // stroke={isChecked ? '#fff' : 'none'} // only show the checkmark when `isCheck` is `true`
-              ref={(ref) => {
-                if (ref) {
-                  setCheckmarkLength(ref.getTotalLength());
-                }
+      </div>  */}
+        {/* ------------------------------------------------------------------------- */}{' '}
+        <div className="remember-checkbox">
+          <label
+            id="custom-checkbox-login"
+            className="custom-control custom-checkbox"
+            htmlFor="remember_me">
+            <input
+              className="custom-control-input"
+              type="checkbox"
+              id="remember_me"
+              name="_remember_me"
+              onChange={() => {
+                setIsChecked(!isChecked);
               }}
-              stroke="#fff"
-              strokeDasharray={checkmarkLength}
-              strokeDashoffset={checkmarkAnimationStyle.x}
             />
-          </animated.svg>
-          <span className="custom-control-description">Запомнить меня</span>
-        </label>
-      </div>
-      <div className="form__btn-block">
-        <div className="form__btn btn-inp">
-          <Link
-            // to={`/user:${idUser}`}
-            type="submit"
-            className="btn btn-lg"
-            id="_submit-login"
-            name="_submit"
-            value="Войти"
-            onClick={handleLogin}>
-            Войти
-          </Link>
+            <animated.svg
+              style={checkboxAnimationStyle}
+              className={`custom-control-indicator checkbox ${
+                isChecked ? 'checkbox--active' : ''
+              }`}
+              // This element is purely decorative so
+              // we hide it for screen readers
+              aria-hidden="true"
+              viewBox="0 0 15 11"
+              fill="none">
+              <animated.path
+                d="M1 4.5L5 9L14 1"
+                strokeWidth="2"
+                // stroke={isChecked ? '#fff' : 'none'} // only show the checkmark when `isCheck` is `true`
+                ref={(ref) => {
+                  if (ref) {
+                    setCheckmarkLength(ref.getTotalLength());
+                  }
+                }}
+                stroke="#fff"
+                strokeDasharray={checkmarkLength}
+                strokeDashoffset={checkmarkAnimationStyle.x}
+              />
+            </animated.svg>
+            <span className="custom-control-description">Запомнить меня</span>
+          </label>
+        </div>{' '}
+        <div className="form__btn-block">
+          <div className="form__btn btn-inp">
+            <button
+              className="btn btn-lg"
+              id="_submit-login"
+              name="_submit"
+              value="Войти"
+              onClick={() => handleClick(email, pwd)}>
+              {title}
+            </button>
+          </div>
         </div>
-      </div>
-    </Form>
+      </Form>{' '}
+    </>
   );
 };
 export default InputFormRegistration;

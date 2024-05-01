@@ -113,7 +113,9 @@ input {
   --background-root-color: #000;
   --background-container-color: #e9ebee;
   --background-header-color: #d1aee3;
-  --background-form-color: #d1aee3;
+  --background-vk-link-blue: #0077ff;
+  --background-google-link-grey: #aaaaaa;
+  --background-mail-link-wblue: #168de2;
   --secondary-color: #ebfffa;
   --btn-send-com: #e1579c;
   --form-inp-email: #ffffff;
@@ -184,7 +186,7 @@ main.contacts {
 .btn {
   background-color: var(--btn-send-com);
   border-radius: 0.4rem;
-
+  padding: 1rem;
   transition: all 0.25s ease-in-out;
   &:hover {
     background-color: var(--btn-send-com);
@@ -196,6 +198,13 @@ main.contacts {
     background-color: var(--btn-send-com);
     box-shadow: none;
     transform: translate(-2px, -2px);
+  }
+}
+
+#_submit-login,
+#_submit-registration {
+  &:hover {
+    color: var(--color-active-link);
   }
 }
 

@@ -51,11 +51,11 @@
 }
 
 .vk-link {
-  background-color: #0077ff;
+  background-color: var(--background-vk-link-blue);
 }
 .google-link {
-  background-color: #f1f3f4;
+  background-color: var(--background-google-link-grey);
 }
 .mail-link {
-  background-color: #168de2;
+  background-color: var(--background-mail-link-wblue);
 }

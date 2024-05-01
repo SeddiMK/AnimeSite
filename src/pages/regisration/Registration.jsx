@@ -1,8 +1,12 @@
 import './Registration.scss';
 import React, { useEffect, useRef, useState } from 'react';
-import LinksSocialRegistration from '../../components/linksSocialRegistration/LinksSocialRegistration';
-import InputFormRegistration from '../InputFormRegistration/InputFormRegistration';
-import { Form, Link } from 'react-router-dom';
+import LinksSocialRegistration from '../../components/linksSocialRegistration/LinksSocialRegistration.jsx';
+import InputFormRegistration from '../../containers/InputFormRegistration/InputFormRegistration.jsx';
+import { Form, Link, useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../store/index.ts';
+
+// store
+import { setUser } from '../../store/userSlice.ts';
 
 // icons
 import {
@@ -26,38 +30,22 @@ import {
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
 // validation ------------------------------------------------------------
-const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/; //Имя пользователя (с ограничением 2-20 символов, которыми могут быть буквы и цифры, первый символ обязательно буква):
-const PWD_REGEX =
-  /(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/; //Пароль (Строчные и прописные латинские буквы, цифры, спецсимволы. Минимум 8 символов):
+import {
+  PWD_REGEX,
+  EMAIL_REGEX,
+} from '../../containers/validation/Validation.js';
 // -----------------------------------------------------------------------
 
 const Registration = () => {
-  // const userRef = useRef(null);
-  // const errRef = useRef(null);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-  // const [email, setEmail] = useState('');
-  // const [user, setUser] = useState('');
-  // const [validName, setValidName] = useState(false);
-  // const [userFocus, setUserFocus] = useState(false);
-
-  // const [pwd, setPwd] = useState('');
-  // const [validPwd, setValidPwd] = useState(false);
-  // const [pwdFocus, setPwdFocus] = useState(false);
-
-  // const [matchPwd, setMatchPwd] = useState('');
-  // const [validMatch, setValidMatch] = useState(false);
-  // const [matchFocus, setMatchFocus] = useState(false);
-
-  // const [errMsg, setErrMsg] = useState('');
-  // const [success, setSuccess] = useState(false);
-
-  // ---------------------------------------------------------------------------
   const inpPassRef = useRef(null);
   const [valInpLog, setValInpLog] = useState('');
   const [valInpPass, setValInpPass] = useState('');
   const [showEye, setShowEye] = useState(true);
 
-  // custom checkbox animated
+  // custom checkbox animated ------------------------------------------
   const [isChecked, setIsChecked] = useState(false);
   const checkboxAnimationRef = useSpringRef();
   const checkmarkAnimationRef = useSpringRef();
@@ -80,22 +68,16 @@ const Registration = () => {
     [0, 0.1] // -> delay by 0.1 seconds
   );
 
-  const changeInpValLogin = (e) => {
-    // console.log(e.current, 'e.current');
-  };
-  const changeInpValPass = (e) => {
-    // console.log(e.current, 'e.current');
-  };
-
-  // validation ------------------------------------------------------------
-  const userRef = useRef(null);
+  // validation -------------------перенести в !!!!-----------------------------------------
+  const emailRef = useRef(null);
   const errRef = useRef(null);
 
-  const [user, setUser] = useState('');
+  // const [user, setUser] = useState('');
+  // const [validName, setValidName] = useState(false); //////// validEmail
 
   const [email, setEmail] = useState('');
-  const [validName, setValidName] = useState(false); //////// validEmail
-  const [userFocus, setUserFocus] = useState(false);
+  const [validEmail, setValidEmail] = useState(false);
+  const [emailFocus, setEmailFocus] = useState(false);
 
   const [pwd, setPwd] = useState('');
   const [validPwd, setValidPwd] = useState(false);
@@ -112,10 +94,10 @@ const Registration = () => {
     // userRef.current.focus(); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   }, []);
 
-  // user name
+  // email
   useEffect(() => {
-    setValidName(USER_REGEX.test(user));
-  }, [user]);
+    setValidEmail(EMAIL_REGEX.test(email));
+  }, [email]);
 
   // password
   useEffect(() => {
@@ -127,13 +109,13 @@ const Registration = () => {
   // err Mesage
   useEffect(() => {
     setErrMsg('');
-  }, [user, pwd, matchPwd]);
+  }, [email, pwd, matchPwd]);
 
   // handleSubmit проверка введеных данных ------------------------------------------------
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const v1 = USER_REGEX.test(user);
+    const v1 = EMAIL_REGEX.test(email);
     const v2 = PWD_REGEX.test(pwd);
 
     if (!v1 || !v2) {
@@ -141,7 +123,7 @@ const Registration = () => {
       return;
     }
 
-    console.log(user, pwd);
+    console.log(email, pwd);
     setSuccess(true);
   };
 
@@ -152,11 +134,25 @@ const Registration = () => {
   // handleLogin -----------------------------------------------------------
   const handleRegister = (email, password) => {
     const auth = getAuth();
+
+    console.log(auth);
+
     createUserWithEmailAndPassword(auth, email, password)
-      .then(console.log)
+      .then(({ user }) => {
+        console.log(user);
+        dispatch(
+          setUser({
+            email: user.email,
+            token: user.accessToken,
+            id: user.uid,
+          })
+        );
+        navigate(`/user:${user.uid}`);
+      })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
         // ..
       });
   };
@@ -174,56 +170,61 @@ const Registration = () => {
           ) : null}
         </section>
         <section className="lr-form__inp-form inp-form">
-          {/* <InputFormRegistration /> */}
-          <Form
+          <InputFormRegistration
+            title="Регистрация"
+            handleClick={handleRegister}
+          />
+          {/* <Form
             className="form-login-header"
             // onSubmit={handleSubmit}
             title="register">
             <div className="form__login form-group login">
-              <label className="form-group__login" htmlFor="username">
-                Email:
-                {validName && user ? (
+              <label
+                className="form-group__login"
+                htmlFor="username-registration">
+                Email: <br />
+                Прим: asdf@gmail.com
+                {validEmail && email ? (
                   <span className="form-group__icon check">
                     <FaCheck />
                   </span>
                 ) : null}
-                {!validName && user ? (
+                {!validEmail && email ? (
                   <span className="form-group__icon times">
                     <FaTimes />
                   </span>
                 ) : null}
               </label>
               <input
-                value={user}
+                value={email}
                 type="email"
                 // placeholder="логин или email"
                 className="form-control form-control-lg"
-                id="username"
-                name="_username"
-                ref={userRef}
+                id="username-registration"
+                name="_username-registration"
+                ref={emailRef}
                 autoComplete="off"
                 required="required"
-                aria-invalid={validName ? 'false' : 'true'}
+                aria-invalid={validEmail ? 'false' : 'true'}
                 aria-describedby="uidnote"
-                onChange={(e) => setUser(e.target.value)}
-                onFocus={() => setUserFocus(true)}
-                onBlur={() => setUserFocus(false)}
+                onChange={(e) => setEmail(e.target.value)}
+                onFocus={() => setEmailFocus(true)}
+                onBlur={() => setEmailFocus(false)}
               />
-              {userFocus && user && !validName ? (
+              {emailFocus && email && !validEmail ? (
                 <p id="uidnote" className="instructions">
                   <span>
                     <FaInfoCircle />
                   </span>
-                  <span>
-                    2-20 символов, которыми могут быть буквы и цифры, первый
-                    символ обязательно буква.
-                  </span>
+                  <span>Введите корректный email.</span>
                 </p>
               ) : null}
             </div>
             <div className="form__pass form-group pwd">
-              <label className="form-group__pwd" htmlFor="password">
-                Пароль:{' '}
+              <label
+                className="form-group__pwd"
+                htmlFor="password-registration">
+                Пароль: Прим: 123123Aa
                 {validPwd ? (
                   <span className="form-group__icon check">
                     <FaCheck />
@@ -270,22 +271,19 @@ const Registration = () => {
                 </p>
               ) : null}
             </div>
-
-            <div className="form__btn-block">
-              <div className="form__btn btn-inp">
-                <Link
-                  // to={`/user:${idUser}`}
-                  type="submit"
-                  className="btn btn-lg"
-                  id="_submit"
-                  name="_submit"
-                  value="Войти"
-                  onClick={handleRegister}>
-                  Регистрация
-                </Link>
-              </div>
+          </Form>  */}
+          {/* <div className="form__btn-block">
+            <div className="form__btn btn-inp">
+              <button
+                className="btn btn-lg"
+                id="_submit-registration"
+                name="_submit-registration"
+                value="Войти"
+                onClick={() => handleRegister(email, pwd)}>
+                Регистрация
+              </button>
             </div>
-          </Form>
+          </div>  */}
         </section>
       </section>
     </main>
