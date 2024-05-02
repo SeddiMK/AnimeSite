@@ -153,7 +153,11 @@ const Registration = () => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
-        // ..
+        // if (errorCode === 'auth/missing-password') alert('Введите пароль!');
+        if (errorCode === 'auth/email-already-in-use')
+          alert(
+            'Такой пользователь существует! Зайдите под своим email и пароль или восстановите пароль.'
+          );
       });
   };
 

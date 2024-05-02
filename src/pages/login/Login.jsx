@@ -40,7 +40,7 @@ const Login = () => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
-        alert('Такого пользователя не существует!');
+        if (email && password) alert('Такого пользователя не существует!');
       });
   };
 

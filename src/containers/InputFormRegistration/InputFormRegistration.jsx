@@ -114,14 +114,14 @@ const InputFormRegistration = ({ title, handleClick }) => {
 
   // handleSubmit проверка введеных данных ------------------------------------------------
   const handleSubmit = async (e) => {
-    // e.preventDefault();
-    // const v1 = EMAIL_REGEX.test(email);
-    // const v2 = PWD_REGEX.test(pwd);
-    // if (!v1 || !v2) {
-    //   setErrMsg('Не правильный ввод');
-    //   return;
-    // }
-    // setSuccess(true);
+    e.preventDefault();
+    const v1 = EMAIL_REGEX.test(email);
+    const v2 = PWD_REGEX.test(pwd);
+    if (!v1 || !v2) {
+      setErrMsg('Не правильный ввод');
+      return;
+    }
+    setSuccess(true);
   };
 
   // проверка ввода, если email, то передать в setEmail и store ?????--------------
@@ -215,7 +215,8 @@ const InputFormRegistration = ({ title, handleClick }) => {
               <span aria-label="at symbol">@</span>{' '}
               <span aria-label="hashtag">#</span>{' '}
               <span aria-label="dollar sign">$</span>{' '}
-              <span aria-label="percent">%</span>. Минимум 8 символов.
+              <span aria-label="percent">%</span>. Минимум 8 символов. Пробелы
+              нельзя.
             </p>
           ) : null}
         </div>
