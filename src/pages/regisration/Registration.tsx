@@ -1,12 +1,12 @@
 import './Registration.scss';
 import React, { useEffect, useRef, useState } from 'react';
-import LinksSocialRegistration from '../../components/linksSocialRegistration/LinksSocialRegistration.jsx';
-import InputFormRegistration from '../../containers/InputFormRegistration/InputFormRegistration.jsx';
+import LinksSocialRegistration from '../../components/linksSocialRegistration/LinksSocialRegistration';
+import InputFormRegistration from '../../containers/InputFormRegistration/InputFormRegistration';
 import { Form, Link, useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../store/index.ts';
 
 // store
-import { setUser } from '../../store/userSlice.ts';
+import { useAppDispatch } from '../../store';
+import { setUser } from '../../store/userSlice';
 
 // icons
 import {
@@ -30,10 +30,7 @@ import {
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
 // validation ------------------------------------------------------------
-import {
-  PWD_REGEX,
-  EMAIL_REGEX,
-} from '../../containers/validation/Validation.js';
+import { PWD_REGEX, EMAIL_REGEX } from '../../containers/validation/Validation';
 // -----------------------------------------------------------------------
 
 const Registration = () => {
@@ -132,7 +129,7 @@ const Registration = () => {
   // ---------------------------------------------------------------------------
 
   // handleLogin -----------------------------------------------------------
-  const handleRegister = (email, password) => {
+  const handleRegister = (email: string, password: string) => {
     const auth = getAuth();
 
     console.log(auth);
@@ -143,7 +140,7 @@ const Registration = () => {
         dispatch(
           setUser({
             email: user.email,
-            token: user.accessToken,
+            token: user.refreshToken,
             id: user.uid,
           })
         );

@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5", // Укажите целевую версию ECMAScript
+    "target": "es6", // Укажите целевую версию ECMAScript
 
     "lib": ["dom", "dom.iterable", "esnext"], // Список файлов библиотеки для включения в компиляцию
 
@@ -16,7 +16,15 @@
 
     "forceConsistentCasingInFileNames": true, // Запрещаем ссылки с несогласованным регистром на один и тот же файл.
 
-    "module": "esnext", // Указываем генерацию кода модуля
+    "module": "commonjs", // Указываем генерацию кода модуля /esnext
+
+    "noResolve": false,
+
+    "noImplicitAny": false,
+
+    "removeComments": true,
+
+    "sourceMap": true,
 
     "moduleResolution": "node", // Разрешить модули в стиле Node.js
 
@@ -26,7 +34,8 @@
 
     "noEmit": true, // Не выводить вывод (то есть не компилировать код, а только выполнять проверку типа)
 
-    "jsx": "react-jsx", // Поддержка JSX в файлах .tsx
+    "jsx": "react", // Поддержка JSX в файлах .tsx
+    "baseUrl": "src",
 
     // "sourceMap": true, // Создание соответствующего файла .map
 
@@ -46,6 +55,6 @@
     "src/**/*", // *** Файлы TypeScript должны ввести проверку ***
     "src/@types"
   ],
-
-  "exclude": ["node_modules", "build"] //  *** Файлы, которые не нужно вводить, проверять ***
+  "types": ["react/next", "react-dom/next"],
+  "exclude": ["./node_modules/**/*", "build"] //  *** Файлы, которые не нужно вводить, проверять ***
 }

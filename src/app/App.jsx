@@ -4,13 +4,13 @@ import useScript from '../hooks/useScript';
 import { Route, Routes } from 'react-router-dom';
 
 // pages
-import Layout from '../containers/layout/Layout';
+import Layout from '../containers/layout/Layout.tsx';
 import Main from '../pages/main/Main.jsx';
-import Contacts from '../pages/contacts/Contacts';
-import LoginUserCabinet from '../pages/loginUserCabinet/LoginUserCabinet';
-import Login from '../pages/login/Login';
-import Error from '../pages/error/Error';
-import Registration from '../pages/regisration/Registration.jsx';
+import Contacts from '../pages/contacts/Contacts.jsx';
+import LoginUserCabinet from '../pages/loginUserCabinet/LoginUserCabinet.tsx';
+import Login from '../pages/login/Login.tsx';
+import Error from '../pages/error/Error.tsx';
+import Registration from '../pages/regisration/Registration.tsx';
 
 const App = () => {
   // useScript('./particles.js');

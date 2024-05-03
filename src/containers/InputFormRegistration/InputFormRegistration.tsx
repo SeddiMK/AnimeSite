@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { FC, useState, useEffect, useRef } from 'react';
 import './InputFormRegistration.scss';
 import { Form, useNavigate } from 'react-router-dom';
 
@@ -8,6 +8,7 @@ import {
   config,
   useSpringRef,
   useChain,
+  SpringValue,
 } from 'react-spring';
 
 // icons
@@ -20,19 +21,15 @@ import {
 } from 'react-icons/fa';
 
 // validation ------------------------------------------------------------
-import {
-  USER_REGEX,
-  PWD_REGEX,
-  EMAIL_REGEX,
-} from '../validation/Validation.js';
+import { USER_REGEX, PWD_REGEX, EMAIL_REGEX } from '../validation/Validation';
+import { strict } from 'assert';
 
-// const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/; //Имя пользователя (с ограничением 2-20 символов, которыми могут быть буквы и цифры, первый символ обязательно буква):
-// const PWD_REGEX =
-//   /(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/; //Пароль (Строчные и прописные латинские буквы, цифры, спецсимволы. Минимум 8 символов):
-// const EMAIL_REGEX = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/; //Email
-// -----------------------------------------------------------------------
+interface FormProps {
+  title: string;
+  handleClick: (email: string, password: string) => void;
+}
 
-const InputFormRegistration = ({ title, handleClick }) => {
+const InputFormRegistration: FC<FormProps> = ({ title, handleClick }) => {
   const inpPassRef = useRef(null);
   const [valInpLog, setValInpLog] = useState('');
   const [valInpPass, setValInpPass] = useState('');
@@ -48,8 +45,11 @@ const InputFormRegistration = ({ title, handleClick }) => {
     config: config.gentle,
     ref: checkboxAnimationRef,
   });
-  const [checkmarkLength, setCheckmarkLength] = useState(null);
-  const checkmarkAnimationStyle = useSpring({
+  const [checkmarkLength, setCheckmarkLength] = useState<number | null>(null);
+
+  const checkmarkAnimationStyle: {
+    x: SpringValue<number | null>;
+  } = useSpring({
     x: isChecked ? 0 : checkmarkLength,
     config: config.gentle,
     ref: checkmarkAnimationRef,
@@ -153,7 +153,7 @@ const InputFormRegistration = ({ title, handleClick }) => {
             name="_username"
             ref={emailRef}
             autoComplete="off"
-            required="required"
+            required
             aria-invalid={validEmail ? 'false' : 'true'}
             aria-describedby="uidnote"
             onChange={(e) => setEmail(e.target.value)}
@@ -193,7 +193,7 @@ const InputFormRegistration = ({ title, handleClick }) => {
             className=" form-group__inp form-control inp-pass form-control-lg"
             id="password"
             name="_password"
-            required="required"
+            required
             aria-invalid={validPwd ? 'false' : 'true'}
             aria-describedby="pwdnote"
             onChange={(e) => setPwd(e.target.value)}
@@ -293,8 +293,10 @@ const InputFormRegistration = ({ title, handleClick }) => {
                   }
                 }}
                 stroke="#fff"
-                strokeDasharray={checkmarkLength}
-                strokeDashoffset={checkmarkAnimationStyle.x}
+                strokeDasharray={
+                  checkmarkLength != null ? `${checkmarkLength}` : undefined
+                }
+                strokeDashoffset={checkmarkAnimationStyle.x as any}
               />
             </animated.svg>
             <span className="custom-control-description">Запомнить меня</span>

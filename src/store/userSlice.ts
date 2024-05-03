@@ -98,6 +98,12 @@ const userSlice = createSlice({
       state.token = '';
       state.id = '';
     },
+    loginUser: (state, action: PayloadAction<any>) => {
+      // state.items = action.payload;
+      // state.email = '';
+      // state.token = '';
+      // state.id = '';
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchUserList.pending, (state) => {

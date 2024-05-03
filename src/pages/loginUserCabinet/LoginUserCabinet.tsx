@@ -1,7 +1,8 @@
 import './LoginUserCabinet.scss';
+import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../store';
-import { useAuth } from '../../hooks/useAuth.js';
+import { useAuth } from '../../hooks/useAuth';
 import { removeUser } from '../../store/userSlice';
 
 const LoginUserCabinet = () => {
@@ -12,7 +13,7 @@ const LoginUserCabinet = () => {
 
   const { isAuth, email } = useAuth();
 
-  return (
+  return isAuth ? (
     <div className="login-user-cabinet">
       <h2>КАБИНЕТ sssssssssssssssssssssssssssss </h2>
       <button
@@ -24,6 +25,8 @@ const LoginUserCabinet = () => {
         Выйти из кабинета <b>{email}</b>
       </button>
     </div>
+  ) : (
+    navigate('/')
   );
 };
 
