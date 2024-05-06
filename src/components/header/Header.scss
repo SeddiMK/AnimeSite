@@ -42,6 +42,7 @@
   }
   &__item {
     text-align: center;
+
     &:not(:last-child) {
       margin-right: calc(1vw + 0.1em);
     }
@@ -50,8 +51,8 @@
       position: absolute;
       width: 100%;
       height: 3px;
-      background-color: #f9f9f9;
-      bottom: 0;
+      background-color: var(--color-active-link);
+      bottom: -3px;
       left: 0;
 
       transform-origin: right;
@@ -59,17 +60,19 @@
       transition: transform 0.3s ease-in-out;
     }
     & a:hover::before {
+      bottom: -3px;
       transform-origin: left;
       transform: scaleX(1);
     }
   }
   &__link {
-    // position: relative;
+    position: relative;
+    padding: 0 0.2rem;
 
     transition: color 0.3s ease-in-out;
 
     &:hover {
-      color: #f9f9f9;
+      color: var(--color-active-link);
     }
     & active {
       color: var(--color-active-link);

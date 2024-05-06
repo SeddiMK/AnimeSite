@@ -35,7 +35,7 @@ const InputFormRegistration: FC<FormProps> = ({ title, handleClick }) => {
   const [valInpPass, setValInpPass] = useState('');
   const [showEye, setShowEye] = useState(true);
 
-  // custom checkbox animated
+  // custom checkbox animated ---------------------------------------------
   const [isChecked, setIsChecked] = useState(false);
   const checkboxAnimationRef = useSpringRef();
   const checkmarkAnimationRef = useSpringRef();

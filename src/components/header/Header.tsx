@@ -1,10 +1,25 @@
-import { useState, useEffect, useRef } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import React, { FC, useState, useEffect, useRef } from 'react';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import './Header.scss';
 import LoginUserCabinet from '../../pages/loginUserCabinet/LoginUserCabinet';
 import SearchHeader from '../searchHeader/SearchHeader';
 
-const Header = () => {
+// store -----------------------------------------------------------------
+import { useAppDispatch, RootState } from '../../store';
+import { removeUser } from '../../store/userSlice';
+
+const Header: FC = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const userCabInFlag = useSelector((state: RootState) => state.userSlice.id);
+
+  // const { email, token, id } = useSelector(
+  //   (state: RootState) => state.userSlice
+  // );
+  console.log(userCabInFlag, 'userCabInFlag');
+
   return (
     <header className="header">
       <div className="header__container">
@@ -43,10 +58,16 @@ const Header = () => {
             <li className="menu__item search-header">
               <SearchHeader />
             </li>
-            <li className="menu__item login-btn">
+            <li
+              className="menu__item login-btn"
+              onClick={() => {
+                // if ();
+                // dispatch(removeUser());
+                // navigate('/');
+              }}>
               <Link to={`/login`} className="menu__link" id="navbar-login">
                 <span className="material-symbols-outlined">login</span>
-                <span>Войти</span>
+                <span>{userCabInFlag ? 'Выйти' : 'Войти'}</span>
               </Link>
             </li>
           </ul>

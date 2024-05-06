@@ -1,7 +1,10 @@
 import './Null.scss';
 import './App.scss';
 import useScript from '../hooks/useScript';
-import { Route, Routes } from 'react-router-dom';
+import { RouterProvider, Route, Routes } from 'react-router-dom';
+
+// router
+import { router } from '../router/router';
 
 // pages
 import Layout from '../containers/layout/Layout.tsx';
@@ -17,7 +20,8 @@ const App = () => {
 
   return (
     <>
-      <Routes>
+      <RouterProvider router={router} />
+      {/* <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Main />} />
           <Route path="contacts" element={<Contacts />} />
@@ -26,7 +30,7 @@ const App = () => {
           <Route path=":user" element={<LoginUserCabinet />} />
           <Route path="*" element={<Error />} />
         </Route>
-      </Routes>
+      </Routes> */}
     </>
   );
 };

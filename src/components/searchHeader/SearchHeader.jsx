@@ -39,7 +39,7 @@ const SearchHeader = () => {
       <button
         onClick={() => setSearchInpBtn(!searchInpBtn)}
         type="button"
-        className="menu__btn material-symbols-outlined">
+        className="menu__btn search-header material-symbols-outlined">
         {searchInpBtn ? 'close' : 'search'}
       </button>
       {searchInpBtn && (

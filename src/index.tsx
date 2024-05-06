@@ -6,25 +6,20 @@ import './firebase';
 import reportWebVitals from './reportWebVitals';
 
 import App from './app/App';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { RouterProvider } from 'react-router-dom';
 import store from './store/index';
 
-import Error from './pages/error/Error';
 import { Provider } from 'react-redux';
 
-// router
-// import { router } from './router/router';
-const router = createBrowserRouter([
-  { path: '*', Component: App, errorElement: <Error /> },
-]);
-
 const rootElem = document.getElementById('root');
+
+//  {/* <RouterProvider router={router} /> */}
 
 if (rootElem) {
   const root = createRoot(rootElem);
   root.render(
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <App />
     </Provider>
   );
 }

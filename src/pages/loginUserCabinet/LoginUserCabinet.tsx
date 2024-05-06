@@ -1,9 +1,15 @@
 import './LoginUserCabinet.scss';
-import React from 'react';
+import React, { FC } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../store';
+
 import { useAuth } from '../../hooks/useAuth';
+
+//store -----------------------------------------------------------
 import { removeUser } from '../../store/userSlice';
+import { useAppDispatch, RootState } from '../../store';
+import { useSelector } from 'react-redux';
+
+// type LoginUserCabinet = () => void | React.JSX.Element;
 
 const LoginUserCabinet = () => {
   // const { id } = useParams();
@@ -12,6 +18,8 @@ const LoginUserCabinet = () => {
   const navigate = useNavigate();
 
   const { isAuth, email } = useAuth();
+
+  console.log(isAuth, 'isAuth');
 
   return isAuth ? (
     <div className="login-user-cabinet">
