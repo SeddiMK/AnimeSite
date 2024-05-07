@@ -103,7 +103,7 @@ const Login = () => {
               id: user.uid,
             })
           );
-          navigate(`/user:${user.uid}`);
+          navigate(`user/id:${user.uid}`);
         })
         .catch((error) => {
           const errorCode = error.code;

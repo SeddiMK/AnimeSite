@@ -34,17 +34,24 @@
 }
 
 .menu {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+
   &__list {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     flex-wrap: wrap;
+    flex: 1 1 70%;
+    margin-left: auto;
   }
   &__item {
     text-align: center;
 
     &:not(:last-child) {
-      margin-right: calc(1vw + 0.1em);
+      margin-right: 0.8rem;
     }
     & a::before {
       content: '';
@@ -95,6 +102,31 @@ a.active {
     // position: absolute;
     // left: -2px;
   }
+}
+
+.list-r {
+  display: flex;
+  align-items: center;
+  flex: 0 1 25%;
+  & li {
+    &:not(:last-child) {
+      margin-right: 0.6rem;
+    }
+  }
+}
+.log-user-cab {
+}
+.login-btn {
+  margin-right: 0.8rem;
+}
+.material-symbols-outlined {
+}
+.menu {
+  &__list-block-right {
+  }
+}
+.list-r .search-header {
+  margin-right: 0;
 }
 
 #navbar-login {

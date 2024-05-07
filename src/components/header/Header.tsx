@@ -8,17 +8,20 @@ import SearchHeader from '../searchHeader/SearchHeader';
 // store -----------------------------------------------------------------
 import { useAppDispatch, RootState } from '../../store';
 import { removeUser } from '../../store/userSlice';
+// hooks -----------------------------------------------------------------
+import { useAuth } from '../../hooks/useAuth';
 
 const Header: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const userCabInFlag = useSelector((state: RootState) => state.userSlice.id);
+  const { isAuth, email, id } = useAuth();
 
   // const { email, token, id } = useSelector(
   //   (state: RootState) => state.userSlice
   // );
-  console.log(userCabInFlag, 'userCabInFlag');
+
+  console.log(isAuth, 'isAuth , ');
 
   return (
     <header className="header">
@@ -55,21 +58,37 @@ const Header: FC = () => {
                 Контакты
               </NavLink>
             </li>
+          </ul>
+
+          <ul className="menu__list list-r">
             <li className="menu__item search-header">
               <SearchHeader />
             </li>
             <li
               className="menu__item login-btn"
               onClick={() => {
-                // if ();
-                // dispatch(removeUser());
-                // navigate('/');
+                if (isAuth) {
+                  dispatch(removeUser());
+                  navigate('/');
+                }
               }}>
               <Link to={`/login`} className="menu__link" id="navbar-login">
-                <span className="material-symbols-outlined">login</span>
-                <span>{userCabInFlag ? 'Выйти' : 'Войти'}</span>
+                <span className="material-symbols-outlined">
+                  {isAuth ? 'logout' : 'login'}
+                </span>
+                <span>{isAuth ? 'Выйти' : 'Войти'}</span>
               </Link>
             </li>
+            {isAuth && (
+              <li className="menu__item log-user-cab">
+                <Link
+                  to={`login/user/id:${id}`}
+                  className="menu__link"
+                  id="cabinet">
+                  Кабинет
+                </Link>
+              </li>
+            )}
           </ul>
         </nav>
 
