@@ -26,10 +26,15 @@ import { strict } from 'assert';
 
 interface FormProps {
   title: string;
+  setEmailHadle: React.Dispatch<React.SetStateAction<string>>;
   handleClick: (email: string, password: string) => void;
 }
 
-const InputFormRegistration: FC<FormProps> = ({ title, handleClick }) => {
+const InputFormRegistration: FC<FormProps> = ({
+  title,
+  setEmailHadle,
+  handleClick,
+}) => {
   const inpPassRef = useRef(null);
   const [valInpLog, setValInpLog] = useState('');
   const [valInpPass, setValInpPass] = useState('');
@@ -46,27 +51,6 @@ const InputFormRegistration: FC<FormProps> = ({ title, handleClick }) => {
     ref: checkboxAnimationRef,
   });
   const [checkmarkLength, setCheckmarkLength] = useState<number | null>(null);
-
-  const checkmarkAnimationStyle: {
-    x: SpringValue<number | null>;
-  } = useSpring({
-    x: isChecked ? 0 : checkmarkLength,
-    config: config.gentle,
-    ref: checkmarkAnimationRef,
-  });
-  useChain(
-    isChecked
-      ? [checkboxAnimationRef, checkmarkAnimationRef]
-      : [checkmarkAnimationRef, checkboxAnimationRef],
-    [0, 0.1] // -> delay by 0.1 seconds
-  );
-
-  const changeInpValLogin = (e) => {
-    // console.log(e.current, 'e.current');
-  };
-  const changeInpValPass = (e) => {
-    // console.log(e.current, 'e.current');
-  };
 
   // validation ------------------------------------------------------------
   const emailRef = useRef(null);
@@ -90,15 +74,38 @@ const InputFormRegistration: FC<FormProps> = ({ title, handleClick }) => {
   const [errMsg, setErrMsg] = useState('');
   const [success, setSuccess] = useState(false);
 
+  // check box animation -----------------------------------------
+  const checkmarkAnimationStyle: {
+    x: SpringValue<number | null>;
+  } = useSpring({
+    x: isChecked ? 0 : checkmarkLength,
+    config: config.gentle,
+    ref: checkmarkAnimationRef,
+  });
+  useChain(
+    isChecked
+      ? [checkboxAnimationRef, checkmarkAnimationRef]
+      : [checkmarkAnimationRef, checkboxAnimationRef],
+    [0, 0.1] // -> delay by 0.1 seconds
+  );
+  // ---------------------------------------------------------------
+  const changeInpValLogin = (e) => {
+    // console.log(e.current, 'e.current');
+  };
+  const changeInpValPass = (e) => {
+    // console.log(e.current, 'e.current');
+  };
+
   useEffect(() => {
     // userRef.current.focus(); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   }, []);
 
-  // user name
+  // email
   useEffect(() => {
     setValidEmail(EMAIL_REGEX.test(email));
     // setValidUser(USER_REGEX.test(user));
-  }, [email]);
+    if (validEmail && email) setEmailHadle(email);
+  }, [email, setEmailHadle, validEmail]);
 
   // password
   useEffect(() => {
@@ -133,6 +140,8 @@ const InputFormRegistration: FC<FormProps> = ({ title, handleClick }) => {
           <label className="form-group__login" htmlFor="username">
             Email: <br />
             Прим: asdf@gmail.com
+            <br />
+            mateo.silver84@gmail.com
             {validEmail && email ? (
               <span className="form-group__icon check">
                 <FaCheck />

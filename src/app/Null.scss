@@ -110,6 +110,7 @@ input {
   --font-size: clamp(16px, 1vw, 32px);
   --min-width: auto;
   --main-color: #9bc53d;
+  --background-form-color: #e9ebee;
   --background-root-color: #000;
   --background-container-color: #e9ebee;
   --background-header-color: #d1aee3;
@@ -215,6 +216,18 @@ main.contacts {
   &:hover {
     color: var(--color-active-link);
   }
+}
+
+// img ------------------------
+.wrap-img {
+  width: 4rem;
+  height: 4rem;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
 // ----------------------

@@ -8,7 +8,7 @@ export function useAuth() {
   );
 
   return {
-    isAuth: !!email,
+    isAuth: !!id,
     email,
     token,
     id,

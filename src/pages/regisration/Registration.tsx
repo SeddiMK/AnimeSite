@@ -27,7 +27,11 @@ import {
 } from 'react-spring';
 
 // firebase
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from 'firebase/auth';
 
 // validation ------------------------------------------------------------
 import { PWD_REGEX, EMAIL_REGEX } from '../../containers/validation/Validation';
@@ -36,6 +40,8 @@ import { PWD_REGEX, EMAIL_REGEX } from '../../containers/validation/Validation';
 const Registration = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const [emailHadle, setEmailHadle] = useState('');
 
   const inpPassRef = useRef(null);
   const [valInpLog, setValInpLog] = useState('');
@@ -120,7 +126,6 @@ const Registration = () => {
       return;
     }
 
-    console.log(email, pwd);
     setSuccess(true);
   };
 
@@ -132,11 +137,10 @@ const Registration = () => {
   const handleRegister = (email: string, password: string) => {
     const auth = getAuth();
 
-    console.log(auth);
-
     createUserWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
         console.log(user);
+
         dispatch(
           setUser({
             email: user.email,
@@ -144,7 +148,14 @@ const Registration = () => {
             id: user.uid,
           })
         );
-        navigate(`/user:${user.uid}`);
+        // sendEmailVerification(auth.currentUser).then(() => {
+        //   // Email verification sent!
+        //   // ...
+        // });
+        // userCredential.user.sendEmailVerification();
+        // auth.signOut();
+        // alert('Email отправлен на вашу почту. Письмо может быть в папке спам.');
+        navigate(`../login/user/id:${user.uid}`);
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -172,6 +183,7 @@ const Registration = () => {
         </section>
         <section className="lr-form__inp-form inp-form">
           <InputFormRegistration
+            setEmailHadle={setEmailHadle}
             title="Регистрация"
             handleClick={handleRegister}
           />

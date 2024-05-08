@@ -5,7 +5,6 @@ import {
 } from 'react-router-dom';
 
 // pages
-import App from '../app/App';
 import Layout from '../containers/layout/Layout';
 import Main from '../pages/main/Main';
 import Contacts from '../pages/contacts/Contacts';
@@ -13,6 +12,18 @@ import Login from '../pages/login/Login';
 import Registration from '../pages/regisration/Registration';
 import LoginUserCabinet from '../pages/loginUserCabinet/LoginUserCabinet';
 import Error from '../pages/error/Error';
+
+// declare function createRoutesFromElements(
+//   children: React.ReactNode
+// ): RouteObject[];
+
+// interface RouteObject {
+//   caseSensitive?: boolean;
+//   children?: RouteObject[];
+//   element?: React.ReactNode;
+//   index?: boolean;
+//   path?: string;
+// }
 
 // export const router = createBrowserRouter([
 //   {
@@ -62,15 +73,3 @@ export const router = createBrowserRouter(
     </Route>
   )
 );
-
-// declare function createRoutesFromElements(
-//   children: React.ReactNode
-// ): RouteObject[];
-
-// interface RouteObject {
-//   caseSensitive?: boolean;
-//   children?: RouteObject[];
-//   element?: React.ReactNode;
-//   index?: boolean;
-//   path?: string;
-// }

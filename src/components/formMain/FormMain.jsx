@@ -16,7 +16,7 @@ const FormMain = ({
   let newDelArr = [];
   let formText = React.createRef();
   // =========noActivBtn== disabled={noActivBtn} =========================
-  let noActivBtn = false;
+  let noActivBtn = false; //!!!!!!!!!!!!!!!!!!!!!!!!!!
 
   const formRef = useRef(null);
   const inpMail = useRef(null);
