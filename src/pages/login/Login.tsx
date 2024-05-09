@@ -1,5 +1,5 @@
 import './Login.scss';
-import React, { useEffect, MouseEvent, useState } from 'react';
+import React, { useEffect, MouseEvent, useState, FC } from 'react';
 import { useSelector } from 'react-redux';
 import { Form, Link, useNavigate } from 'react-router-dom';
 
@@ -13,6 +13,7 @@ import {
   sendPasswordResetEmail,
   fetchSignInMethodsForEmail,
   verifyBeforeUpdateEmail,
+  onAuthStateChanged,
 } from 'firebase/auth';
 
 //store
@@ -25,7 +26,14 @@ import LinksSocialRegistration from '../../components/linksSocialRegistration/Li
 
 import { useAuth } from '../../hooks/useAuth';
 
-const Login = () => {
+// TS types
+interface typeUserData {
+  email: string | null;
+  token: string;
+  id: string;
+}
+
+const Login: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const auth = getAuth();
@@ -43,7 +51,6 @@ const Login = () => {
     setPersistence(auth, browserSessionPersistence).then(() => {
       return signInWithEmailAndPassword(auth, email, password)
         .then(({ user }) => {
-          console.log(user);
           dispatch(
             setUser({
               email: user.email,
@@ -51,6 +58,15 @@ const Login = () => {
               id: user.uid,
             })
           );
+
+          // const userData: typeUserData = {
+          //   email: user.email,
+          //   token: user.refreshToken,
+          //   id: user.uid,
+          // };
+
+          // localStorage.setItem('user', JSON.stringify(userData as any));
+          // localStorage.clear();
           navigate(`user/id:${user.uid}`);
         })
 

@@ -2,6 +2,10 @@ import './FormMain.scss';
 import React, { useEffect, useRef, useState } from 'react';
 import { useInput } from '../validateForm/Validate';
 import { Form } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
+// hooks
+import { useAuth } from '../../hooks/useAuth';
 
 const FormMain = ({
   openFormComent,
@@ -9,10 +13,15 @@ const FormMain = ({
   setLengthComment,
   formStyle,
 }) => {
+  const { isAuth, id, photoUrl } = useAuth();
   const srcAvatar = null;
   const [comment, setComment] = useState([]);
   const [commentRepeat, setCommentRepeat] = useState(false);
   const [email, setEmail] = useState('');
+  // const avatarUrl = useSelector((state) => state.userSlice.avatarUrl);
+  const avatarUrl = useSelector((state) => state.userSlice.avatarUrl);
+  console.log(avatarUrl, 'avatarUrl');
+
   let newDelArr = [];
   let formText = React.createRef();
   // =========noActivBtn== disabled={noActivBtn} =========================
@@ -234,8 +243,9 @@ const FormMain = ({
           <div key={el.toString + ind.toString()} className="comment__message">
             <div className="comment__avatar">
               <img
+                id="#avatar"
                 className="comment__img-avatar"
-                src={srcAvatar}
+                src={photoUrl}
                 alt="аватар пользователя"
               />
             </div>

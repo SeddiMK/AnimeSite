@@ -21,8 +21,6 @@ const Header: FC = () => {
   //   (state: RootState) => state.userSlice
   // );
 
-  console.log(isAuth, 'isAuth , ');
-
   return (
     <header className="header">
       <div className="header__container">
@@ -72,7 +70,16 @@ const Header: FC = () => {
                   navigate('/');
                 }
               }}>
-              <Link to={`/login`} className="menu__link" id="navbar-login">
+              <Link
+                to={`/login`}
+                className="menu__link"
+                id="navbar-login"
+                onClick={() =>
+                  localStorage.setItem(
+                    'remeberMe',
+                    JSON.stringify(Boolean(false))
+                  )
+                }>
                 <span className="material-symbols-outlined">
                   {isAuth ? 'logout' : 'login'}
                 </span>

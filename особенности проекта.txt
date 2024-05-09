@@ -6,6 +6,8 @@ search
 login_animate-checkbox
 
 firebase.google
+firebase-storage
+local-storage
 
 // работают стр----------------------
 Аниме

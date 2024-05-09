@@ -4,6 +4,7 @@ import { RootState } from '.';
 
 export interface Users {
   id: number;
+  photoUrl: string;
   name: string;
   username: string;
   email: string;
@@ -64,6 +65,7 @@ interface UsersSliceState {
   email: string;
   token: string;
   id: string;
+  photoUrl: string;
 
   status: Status;
   error: string | unknown;
@@ -75,6 +77,7 @@ const initialState: UsersSliceState = {
   email: '',
   token: '',
   id: '',
+  photoUrl: '',
 
   status: Status.LOADING, // loading | success | error
   error: '',
@@ -91,12 +94,14 @@ const userSlice = createSlice({
       state.email = action.payload.email;
       state.token = action.payload.token;
       state.id = action.payload.id;
+      state.photoUrl = action.payload.photoUrl;
     },
     removeUser: (state) => {
       // state.items = action.payload;
       state.email = '';
       state.token = '';
       state.id = '';
+      state.photoUrl = '';
     },
     loginUser: (state, action: PayloadAction<any>) => {
       // state.items = action.payload;
@@ -104,6 +109,9 @@ const userSlice = createSlice({
       // state.token = '';
       // state.id = '';
     },
+    // setAvatarUrlUser: (state, action: PayloadAction<any>) => {
+    //   state.photoUrl = action.payload;
+    // },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchUserList.pending, (state) => {

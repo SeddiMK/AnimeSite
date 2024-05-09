@@ -41,12 +41,12 @@ const InputFormRegistration: FC<FormProps> = ({
   const [showEye, setShowEye] = useState(true);
 
   // custom checkbox animated ---------------------------------------------
-  const [isChecked, setIsChecked] = useState(false);
+  const [isCheckedRemeberMe, setIsCheckedRemeberMe] = useState(false);
   const checkboxAnimationRef = useSpringRef();
   const checkmarkAnimationRef = useSpringRef();
   const checkboxAnimationStyle = useSpring({
-    backgroundColor: isChecked ? 'var(--btn-send-com)' : '#fff',
-    borderColor: isChecked ? 'var(--btn-send-com)' : '#ddd',
+    backgroundColor: isCheckedRemeberMe ? 'var(--btn-send-com)' : '#fff',
+    borderColor: isCheckedRemeberMe ? 'var(--btn-send-com)' : '#ddd',
     config: config.gentle,
     ref: checkboxAnimationRef,
   });
@@ -78,12 +78,12 @@ const InputFormRegistration: FC<FormProps> = ({
   const checkmarkAnimationStyle: {
     x: SpringValue<number | null>;
   } = useSpring({
-    x: isChecked ? 0 : checkmarkLength,
+    x: isCheckedRemeberMe ? 0 : checkmarkLength,
     config: config.gentle,
     ref: checkmarkAnimationRef,
   });
   useChain(
-    isChecked
+    isCheckedRemeberMe
       ? [checkboxAnimationRef, checkmarkAnimationRef]
       : [checkmarkAnimationRef, checkboxAnimationRef],
     [0, 0.1] // -> delay by 0.1 seconds
@@ -130,6 +130,14 @@ const InputFormRegistration: FC<FormProps> = ({
     }
     setSuccess(true);
   };
+
+  // checkbox remember me
+  useEffect(() => {
+    localStorage.setItem(
+      'remeberMe',
+      JSON.stringify(Boolean(isCheckedRemeberMe))
+    );
+  }, [isCheckedRemeberMe]);
 
   // проверка ввода, если email, то передать в setEmail и store ?????--------------
 
@@ -279,13 +287,13 @@ const InputFormRegistration: FC<FormProps> = ({
               id="remember_me"
               name="_remember_me"
               onChange={() => {
-                setIsChecked(!isChecked);
+                setIsCheckedRemeberMe(!isCheckedRemeberMe);
               }}
             />
             <animated.svg
               style={checkboxAnimationStyle}
               className={`custom-control-indicator checkbox ${
-                isChecked ? 'checkbox--active' : ''
+                isCheckedRemeberMe ? 'checkbox--active' : ''
               }`}
               // This element is purely decorative so
               // we hide it for screen readers
