@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@angular/fire": "^17.0.1",
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-brands-svg-icons": "^6.5.2",
     "@fortawesome/free-regular-svg-icons": "^6.5.2",
@@ -15,7 +16,7 @@
     "@types/node-sass": "^4.11.7",
     "@types/react-dom": "^18.3.0",
     "axios": "^1.6.8",
-    "firebase": "^10.11.1",
+    "firebase": "^9.16.0",
     "font-awesome": "^4.7.0",
     "helmet": "^7.1.0",
     "particles-bg": "^2.5.5",
