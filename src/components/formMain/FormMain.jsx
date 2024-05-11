@@ -18,9 +18,6 @@ const FormMain = ({
   const [comment, setComment] = useState([]);
   const [commentRepeat, setCommentRepeat] = useState(false);
   const [email, setEmail] = useState('');
-  // const avatarUrl = useSelector((state) => state.userSlice.avatarUrl);
-  const avatarUrl = useSelector((state) => state.userSlice.avatarUrl);
-  console.log(avatarUrl, 'avatarUrl');
 
   let newDelArr = [];
   let formText = React.createRef();

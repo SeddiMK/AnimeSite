@@ -7,7 +7,7 @@ import { setUser } from '../store/userSlice';
 
 export function useAuth() {
   // const { itemsUsers } = useSelector((state) => state.itemsUsers);
-  const { email, token, id, photoUrl } = useSelector(
+  const { email, token, id, displayName } = useSelector(
     (state: RootState) => state.userSlice
   );
   const dispatch = useAppDispatch();
@@ -20,7 +20,6 @@ export function useAuth() {
     const checkBoxRememberMe = localStorage.getItem('remeberMe');
 
     if (checkBoxRememberMe === 'true')
-      // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!??????/
       onAuthStateChanged(auth, (user) => {
         if (user) {
           // User is signed in, see docs for a list of available properties
@@ -31,6 +30,7 @@ export function useAuth() {
               email: user.email,
               token: user.refreshToken,
               id: user.uid,
+              displayName: user.displayName,
             })
           );
 
@@ -49,5 +49,6 @@ export function useAuth() {
     email,
     token,
     id,
+    displayName,
   };
 }

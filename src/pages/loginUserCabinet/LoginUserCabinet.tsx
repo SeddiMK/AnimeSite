@@ -29,6 +29,7 @@ import {
 import { removeUser } from '../../store/userSlice';
 import { useAppDispatch, RootState } from '../../store';
 import { useSelector } from 'react-redux';
+import LinksSocialRegistration from '../../components/linksSocialRegistration/LinksSocialRegistration';
 
 // type Props = {
 //   src?: string | null | undefined;
@@ -39,7 +40,7 @@ const LoginUserCabinet: FC = () => {
   // console.log(id);
 
   const [flagRender, setFlagRender] = useState(false);
-  const { isAuth, email, id } = useAuth(); //, photoUrl
+  const { isAuth, email, id, displayName } = useAuth(); //, photoUrl
   const auth = getAuth();
   const user: User | null = auth.currentUser;
   const dispatch = useAppDispatch();
@@ -56,7 +57,7 @@ const LoginUserCabinet: FC = () => {
 
   const [avatarSize, setAvatarSize] = useState('size image');
   const [avatarUrlFlag, setAvatarUrlFlag] = useState(true);
-  // const [updProfile, setUpdProfile] = useState(false);
+  const [updProfile, setUpdProfile] = useState(false);
   const [clickUploadImg, setClickUploadImg] = useState(false);
   // const [avatarLocStor, setAvatarLocStor] = useState(''); ///local store
 
@@ -64,6 +65,11 @@ const LoginUserCabinet: FC = () => {
   const storageFb = getStorage();
   const avatarFbRef = ref(storageFb, `images/avatar/${id}`);
   const [progress, setProgress] = useState(0);
+
+  // change user name
+  // const [userName, setUserName] = useState<string | null>(null);
+  const [changeVal, setChangeVal] = useState('');
+  const inputUserNameRef = useRef<HTMLInputElement>(null);
 
   // загрузить аватар
   const changeHandler = (e: any) => {
@@ -105,7 +111,7 @@ const LoginUserCabinet: FC = () => {
                     .then(() => {
                       console.log('avatar обновлен!');
                       setAvatarUrlFlag(true);
-                      // setUpdProfile(true);
+
                       // dispatch(setAvatarUrlUser(url));
                     })
                     .catch((error: string) => {
@@ -150,40 +156,73 @@ const LoginUserCabinet: FC = () => {
             .catch((error: string) => {
               // An error occurred
               console.log('updateProfile', error);
+              setErrorSt(true);
               // setAvatarUrlFlag(false);
             });
         })
         .catch((error: string) => {
-          console.log(error, 'error deleteAvatar');
-          if (error) setUrl('');
+          console.log('error deleteAvatar', error);
+          if (error) {
+            setUrl('');
+            setErrorSt(true);
+          }
           // setAvatarUrlFlag(false);
         });
     }
   };
 
-  // useEffect(() => {
-  //   if (user?.photoURL) setUrl(user?.photoURL);
-  // }, [user?.photoURL]);
+  // изменить user name
+  const updateDisplayName = async () => {
+    if (user && changeVal) {
+      await updateProfile(user, {
+        displayName: changeVal,
+        // photoURL: null,
+      })
+        .then(() => {
+          console.log('Profile displayName обновлен!');
+          setChangeVal('');
+        })
+        .catch((error: string) => {
+          // An error occurred
+          console.log('updateProfile', error);
+          setErrorSt(true);
+        });
+    }
+  };
+
+  // const onChangeInput = () => {
+  //   if (inputUserNameRef.current) {
+  //     // console.log(inputUserNameRef.current.value, '-----------onChangeInput');
+  //     setChangeVal(inputUserNameRef.current.value);
+  //   }
+  // };
 
   useEffect(() => {
     if (url === null && user?.photoURL) setUrl(user?.photoURL);
-    if (localStorage.getItem('clickUploadImg') === 'false') {
+    if (localStorage.getItem('clickUploadImg') === 'false' && !errorSt) {
       setAvatarUrlFlag(false);
     }
-  }, [url, user?.photoURL]);
-  // , url,
+  }, [url, user?.photoURL, errorSt, updProfile]);
+
+  // useEffect(() => {
+  //   if (updProfile) setChangeVal('');
+  // }, [updProfile]);
+
   console.log('user-----------', user);
-  console.log('user?.photoURL---------', user?.photoURL);
-  console.log('url-----------', url);
-  console.log('!errorSt-----------', !errorSt);
+  // console.log('user?.photoURL---------', user?.photoURL);
+  // console.log('url-----------', url);
+  // console.log('!errorSt-----------', !errorSt);
+  // // console.log('updProfile-----------', updProfile);
+  // console.log('clickUploadImg-----------', clickUploadImg);
+  // // console.log(
+  // //   'url && user?.photoURL && !errorSt-----------',
+  // //   url && user?.photoURL && !errorSt
+  // // );
+  // console.log('avatarUrlFlag-----------', avatarUrlFlag);
+  // console.log('image-----------', image);
+  // console.log('avatarRef-----------', avatarRef);
+  // console.log('changeVal-----------', changeVal);
   // console.log('updProfile-----------', updProfile);
-  console.log('clickUploadImg-----------', clickUploadImg);
-  // console.log(
-  //   'url && user?.photoURL && !errorSt-----------',
-  //   url && user?.photoURL && !errorSt
-  // );
-  console.log('avatarUrlFlag-----------', avatarUrlFlag);
-  console.log('image-----------', image);
 
   return (
     <>
@@ -191,44 +230,97 @@ const LoginUserCabinet: FC = () => {
         <section className="login-user-cabinet user-cab">
           <div className="user-cab__block-top">
             <h2>Кабинет id:{id}</h2>
-            <button
-              className="btn logout-btn"
-              onClick={() => {
-                dispatch(removeUser());
-                navigate('/');
-                localStorage.setItem(
-                  'remeberMe',
-                  JSON.stringify(Boolean(false))
-                );
-              }}>
-              Выйти из кабинета <b>{email}</b>
-            </button>
           </div>
-          <div className="user-cab__block-avatar avatar-block">
-            <div className="avatar-block__image wrap-img">
-              {/* {user && user.photoURL && (    )} */}
-              <img
-                // ref={avatarRef}
-                id="avatar"
-                src={avatarUrlFlag ? url : fallbackUrlImg}
-                alt="изображение автарки пользователя"
-                className="avatar-img img"
-              />
-              <progress value={progress} max="100" />
+          <div className="user-cab__block-right">
+            <div className="user-cab__block-avatar avatar-block">
+              <div className="avatar-block__image wrap-img">
+                {/* {user && user.photoURL && (    )} */}
+                <img
+                  // ref={avatarRef}
+                  id="avatar"
+                  src={!avatarUrlFlag ? fallbackUrlImg : url}
+                  alt="изображение автарки пользователя"
+                  className="avatar-img img"
+                />
+                <div className="wrap-img__progress progress">
+                  <progress
+                    className="progress__elem"
+                    // value={progress}
+                    value="33"
+                    max="100"
+                  />
+                  <div className="progress__value"></div>
+                  <div className="progress__bg">
+                    <div className="progress__bar"></div>
+                  </div>
+                </div>
+              </div>
+              <div className="avatar-block__change-avatar">
+                <label className="change-avatar__lbl btn">
+                  Загрузить аватар
+                  <input
+                    id="change-avatar"
+                    className="change-avatar__upload"
+                    accept="image/*"
+                    type="file"
+                    onChange={(e) => changeHandler(e)}
+                  />
+                </label>
+                <button
+                  className="change-avatar__del"
+                  id="btn-del-avatar"
+                  onClick={() => deleteAvatar()}>
+                  Удалить аватар
+                </button>
+              </div>
             </div>
-            <div className="avatar-block__change-avatar">
+            <div className="user-data">
+              <div className="user-data__name-block name-block">
+                <h2 className="name-block__name">
+                  name:{' '}
+                  <span>
+                    {user?.displayName ? user?.displayName : `user: ${id}`}
+                  </span>
+                </h2>
+                <h2 className="name-block__email">
+                  email: <span>{email}</span>
+                </h2>
+                <button
+                  className="name-block__rename-btn btn"
+                  onClick={() => updateDisplayName()}>
+                  Изменить ник
+                </button>
+                <label>
+                  <input
+                    className="name-block__rename-change"
+                    type="text"
+                    ref={inputUserNameRef}
+                    value={changeVal}
+                    placeholder="Новый никнем"
+                    onChange={(e) => setChangeVal(e.target.value)}
+                  />
+                </label>
+              </div>
+            </div>
+            <div className="user-cab__block-social-out">
+              <section className="user-cab__social-links">
+                <p className="user-cab__social-links-reg-text">
+                  Подключиться к сервисам
+                </p>
+                <LinksSocialRegistration />
+              </section>
               <button
-                className="change-avata__del"
-                onClick={() => deleteAvatar()}>
-                Удалить аватар
+                className="btn logout-btn"
+                onClick={() => {
+                  dispatch(removeUser());
+                  navigate('/');
+                  localStorage.setItem(
+                    'remeberMe',
+                    JSON.stringify(Boolean(false))
+                  );
+                }}>
+                Выйти из кабинета <b>{email}</b>
               </button>
-              <input
-                className="change-avata__download"
-                accept="image/*"
-                type="file"
-                onChange={(e) => changeHandler(e)}
-                placeholder="Загрузить аватар"
-              />
             </div>
           </div>
         </section>

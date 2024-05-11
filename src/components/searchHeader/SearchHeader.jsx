@@ -10,7 +10,7 @@ const SearchHeader = () => {
   // const id = 2; //  <Link to={`/login/${id}`} !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
   const onChangeInput = () => {
-    console.log(inputRef.current.value, '-----------onChangeInput');
+    // console.log(inputRef.current.value, '-----------onChangeInput');
     if (inputRef.current) {
       setSearchInpVal(inputRef.current.value);
     }

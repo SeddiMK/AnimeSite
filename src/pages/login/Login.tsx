@@ -132,6 +132,7 @@ const Login: FC = () => {
       <div className="form-login-registaration lr-form">
         <div className="lr-form__social-media login-social-media">
           <h2 className="ls-media__title">Вход</h2>
+
           <LinksSocialRegistration />
           <span>-ИЛИ-</span>
         </div>

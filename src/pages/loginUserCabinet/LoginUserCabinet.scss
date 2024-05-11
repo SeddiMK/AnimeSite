@@ -1,5 +1,243 @@
-#avatar {
+.btn {
+}
+.change-avatar {
+  &__del {
+  }
+  &__upload {
+    padding-left: 0;
+    margin-top: 0.7rem;
+  }
+}
+#change-avatar {
+  display: none;
+}
+.img {
+}
+.login-user-cabinet {
+}
+.logout-btn {
+}
+.name-block {
+  &__name {
+    margin-bottom: 0.6rem;
+    & span {
+      font-weight: 600;
+    }
+  }
+  &__email {
+    margin-bottom: 1rem;
+
+    & span {
+      font-weight: 600;
+    }
+  }
+  &__rename-btn {
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  & label {
+    // max-width: 5rem;
+  }
+  &__rename-change {
+    max-width: 10rem;
+    border-radius: 0.3rem;
+    padding: 0.4rem;
+  }
+}
+.user-cab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1rem 0;
+
+  & div {
+    &:not(:last-child) {
+      // margin-bottom: 1rem;
+    }
+  }
+  &__block-right {
+    display: flex;
+  }
+  &__block-avatar {
+  }
+  &__block-social-out {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+  }
+  &__block-top {
+    margin-bottom: 1.5rem;
+  }
+  &__social-links {
+  }
+  &__social-links-reg-text {
+    margin-bottom: 1rem;
+  }
+}
+.user-data {
+  flex: 1 0 18%;
+
+  &__name-block {
+  }
+}
+.wrap-img {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   width: 7rem;
-  height: 7rem;
+  height: 8.5rem;
+
+  margin-right: 0.7rem;
+  margin-bottom: 1rem;
+
+  &__progress {
+    width: 100%;
+    border-radius: 20%;
+  }
+}
+#avatar {
+  width: 100%;
+  height: 100%;
   border-radius: 25%;
+  margin-bottom: 0.5rem;
+}
+
+.avatar-block {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  flex: 0 1 10rem;
+
+  &__change-avatar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    & label {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+      padding: 0.7rem;
+      margin-bottom: 0.7rem;
+      cursor: pointer;
+    }
+  }
+  &__image {
+  }
+}
+.avatar-img {
+}
+
+// progress
+.progress {
+  // font: 12px Arial, Tahoma, sans-serif;
+  position: relative;
+  overflow: hidden;
+
+  &__bar {
+    overflow: hidden;
+    background: #ac92ec;
+    width: 0;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    &:after {
+      background-image: -webkit-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.15) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.15) 50%,
+        rgba(255, 255, 255, 0.15) 75%,
+        transparent 75%,
+        transparent
+      );
+      background-image: -o-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.15) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.15) 50%,
+        rgba(255, 255, 255, 0.15) 75%,
+        transparent 75%,
+        transparent
+      );
+      background-image: linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.15) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.15) 50%,
+        rgba(255, 255, 255, 0.15) 75%,
+        transparent 75%,
+        transparent
+      );
+      -webkit-background-size: 40px 40px;
+      background-size: 40px 40px;
+      position: absolute;
+      content: '';
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  &__bg {
+    background: var(--form-inp-email);
+    position: relative;
+    height: 8px;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  &__elem {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    left: -777px;
+  }
+  &__value {
+    color: #333;
+    display: block;
+    line-height: 21px;
+    text-align: center;
+  }
+}
+.wrap-img {
+  &__progress {
+  }
+}
+
+@keyframes progress_bar {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -40px 0;
+  }
+}
+
+.progress-bar {
+  transition: width 1s linear;
+}
+
+.progress-bar:after {
+  animation: progress_bar 0.8s linear infinite;
+}
+
+@for $i from 0 through 100 {
+  .progress progress[value='#{$i}'] {
+    & + .progress-value:before {
+      content: '#{$i}%';
+    }
+    & ~ .progress-bg .progress-bar {
+      width: $i * 1%;
+    }
+  }
 }

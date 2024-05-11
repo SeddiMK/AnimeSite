@@ -183,7 +183,7 @@ main.contacts {
   width: 100%;
   height: 100vh;
 }
-// button ----------------------------------------------------------
+// buttons ----------------------------------------------------------
 .btn {
   background-color: var(--btn-send-com);
   border-radius: 0.4rem;
@@ -215,6 +215,17 @@ main.contacts {
 #_submit-registration {
   &:hover {
     color: var(--color-active-link);
+  }
+}
+#btn-del-avatar {
+  padding: 0.3rem 0.5rem;
+  // background-color: var(--btn-send-com);
+  border: 1px solid #000;
+  border-radius: 0.4rem;
+  transition: color 0.3s ease-in-out;
+
+  &:hover {
+    color: var(--background-form-white);
   }
 }
 
