@@ -197,12 +197,57 @@ const LoginUserCabinet: FC = () => {
   //   }
   // };
 
+  // -----------------------------------------------------------(false);-----------------
+  // const [isLinkIntact, setIsLinkIntact] = useState
+
+  useEffect(() => {
+    const checkLinkIntact = async () => {
+      try {
+        await getDownloadURL(avatarFbRef)
+          .then((url) => {
+            setUrl(url);
+
+            if (user) {
+              updateProfile(user, {
+                // displayName: 'Jane Q. User',
+                photoURL: url,
+              })
+                .then(() => {
+                  console.log('avatar обновлен!');
+                  setAvatarUrlFlag(true);
+
+                  // dispatch(setAvatarUrlUser(url));
+                })
+                .catch((error: string) => {
+                  // An error occurred
+                  console.log('error updateProfile in checkLinkIntact', error);
+                  setErrorSt(true);
+                  setAvatarUrlFlag(false);
+                });
+            }
+          })
+          .catch((error) => {
+            console.log('error getDownloadURL in checkLinkIntact', error);
+            setErrorSt(true);
+            setAvatarUrlFlag(false);
+          });
+        setImage(null);
+      } catch (error) {
+        console.log('error getDownloadURL catch', error);
+        setErrorSt(true);
+        setAvatarUrlFlag(false);
+      }
+    };
+    checkLinkIntact();
+  }, [avatarFbRef, user, user?.photoURL]);
+
+  // localStorage.getItem('clickUploadImg') === 'false' &&
   useEffect(() => {
     if (url === null && user?.photoURL) setUrl(user?.photoURL);
-    if (localStorage.getItem('clickUploadImg') === 'false' && !errorSt) {
-      setAvatarUrlFlag(false);
+    if (!errorSt) {
+      setAvatarUrlFlag(true);
     }
-  }, [url, user?.photoURL, errorSt, updProfile]);
+  }, [url, user?.photoURL, errorSt]);
 
   // useEffect(() => {
   //   if (updProfile) setChangeVal('');
@@ -210,19 +255,7 @@ const LoginUserCabinet: FC = () => {
 
   console.log('user-----------', user);
   // console.log('user?.photoURL---------', user?.photoURL);
-  // console.log('url-----------', url);
-  // console.log('!errorSt-----------', !errorSt);
-  // // console.log('updProfile-----------', updProfile);
-  // console.log('clickUploadImg-----------', clickUploadImg);
-  // // console.log(
-  // //   'url && user?.photoURL && !errorSt-----------',
-  // //   url && user?.photoURL && !errorSt
-  // // );
-  // console.log('avatarUrlFlag-----------', avatarUrlFlag);
-  // console.log('image-----------', image);
-  // console.log('avatarRef-----------', avatarRef);
-  // console.log('changeVal-----------', changeVal);
-  // console.log('updProfile-----------', updProfile);
+  console.log('url-----------', url);
 
   return (
     <>
@@ -234,7 +267,6 @@ const LoginUserCabinet: FC = () => {
           <div className="user-cab__block-right">
             <div className="user-cab__block-avatar avatar-block">
               <div className="avatar-block__image wrap-img">
-                {/* {user && user.photoURL && (    )} */}
                 <img
                   // ref={avatarRef}
                   id="avatar"
@@ -245,8 +277,7 @@ const LoginUserCabinet: FC = () => {
                 <div className="wrap-img__progress progress">
                   <progress
                     className="progress__elem"
-                    // value={progress}
-                    value="33"
+                    value={progress}
                     max="100"
                   />
                   <div className="progress__value"></div>

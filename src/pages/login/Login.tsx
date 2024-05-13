@@ -74,6 +74,8 @@ const Login: FC = () => {
           const errorCode = error.code;
           const errorMessage = error.message;
           console.log(errorCode, errorMessage);
+          if (errorMessage === 'auth/network-request-failed')
+            alert('Что то пошло не так');
           if (email && password) alert('Такого пользователя не существует!');
         });
     });
