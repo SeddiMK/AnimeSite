@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import { Form, Link, useNavigate } from 'react-router-dom';
 
 // firebase
-import firebase from 'firebase/compat/app';
 import {
   getAuth,
   signInWithEmailAndPassword,
@@ -19,7 +18,7 @@ import {
 //store
 import { useAppDispatch } from '../../store';
 import { setUser } from '../../store/userSlice';
-import { fetchUserList } from '../../store/userSlice';
+// import { fetchUserList } from '../../store/userSlice';
 
 import InputFormRegistration from '../../containers/InputFormRegistration/InputFormRegistration';
 import LinksSocialRegistration from '../../components/linksSocialRegistration/LinksSocialRegistration';

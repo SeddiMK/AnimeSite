@@ -73,8 +73,6 @@ const LoginUserCabinet: FC = () => {
 
   // загрузить аватар
   const changeHandler = (e: any) => {
-    setClickUploadImg(true);
-
     const file = e.target.files[0];
     setImage(file);
     // -----------------------------------upload Image------------------------------
@@ -91,7 +89,7 @@ const LoginUserCabinet: FC = () => {
 
             setProgress(progress);
             console.log('Файл загружен');
-            localStorage.setItem('clickUploadImg', 'true');
+            // localStorage.setItem('clickUploadImg', 'true');
           },
           (error) => {
             console.log('error in uploadBytes', error);
@@ -141,7 +139,7 @@ const LoginUserCabinet: FC = () => {
       await deleteObject(avatarFbRef)
         .then(() => {
           console.log('Аватар удален');
-          localStorage.setItem('clickUploadImg', 'false');
+          // localStorage.setItem('clickUploadImg', 'false');
           setAvatarUrlFlag(false);
           // -----------------------------------update profile------------------------------
           updateProfile(user, {
