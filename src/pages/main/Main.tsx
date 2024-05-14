@@ -1,11 +1,13 @@
 import './Main.scss';
 import React, { useEffect, useRef, useState } from 'react';
-import YouTube, { YouTubeProps } from 'react-youtube';
+import ReactPlayer from 'react-player';
 
 import srcImg from '../../assets/image/anime-poster/659f8dd485857721242765.jpg';
 
 import FormMain from '../../components/formMain/FormMain';
 import RatingStar from '../../components/rating/RatingStar';
+
+const videos: string[] = ['https://www.youtube.com/embed/ErgOZ5mZYho'];
 
 const Main = () => {
   const [openFormComent, setOpenFormComent] = useState(false);
@@ -19,29 +21,6 @@ const Main = () => {
     // access to player in all event handlers via event.target
     event.target.pauseVideo();
   };
-
-  const opts = {
-    height: '390',
-    width: '640',
-    playerVars: {
-      // https://developers.google.com/youtube/player_parameters
-      autoplay: 0,
-    },
-  };
-  // TypeScript ---------------------------------------------------
-  // const onPlayerReady: YouTubeProps['onReady'] = (event) => {
-  //   // access to player in all event handlers via event.target
-  //   event.target.pauseVideo();
-  // }
-
-  // const opts: YouTubeProps['opts'] = {
-  //   height: '390',
-  //   width: '640',
-  //   playerVars: {
-  //     // https://developers.google.com/youtube/player_parameters
-  //     autoplay: 1,
-  //   },
-  // };
 
   // open form напротив кнопки
   const openForm = () => {
@@ -58,6 +37,34 @@ const Main = () => {
       top: '77rem',
     });
   };
+
+  useEffect(() => {
+    //     const ass = async () => {
+    //       const graphQLFetcher = await () => {
+    //       const url = 'https://graphql.anilist.co';
+    //       const payload = {
+    //         method: 'post',
+    //         headers: {
+    //           Accept: 'application/json',
+    //           'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify(),
+    //       };
+    //       return fetch(url, payload)
+    //         .then((response) => response.text())
+    //         .then((responseBody) => {
+    //           try {
+    //             return JSON.parse(responseBody);
+    //           } catch (error) {
+    //             return responseBody;
+    //           }
+    //         });
+    // };
+    //   };
+    // const Anidb = require('anidb');
+    // const db = new Anidb('Lu46iJ', '1066048');
+    // console.log(Anidb.request(), ' ---Anidb.request()');
+  }, []);
 
   return (
     <main className="main">
@@ -157,19 +164,15 @@ const Main = () => {
               </strong>
               <span className="player-block__age-rating">18+</span>
             </div>
-            {/* 
-            <YouTube
-              videoId="ErgOZ5mZYho"
-              opts={opts}
-              onReady={onPlayerReady}
-            /> */}
-            {/* <iframe
-              src="https://www.youtube.com/embed/ErgOZ5mZYho"
-              title="Поднятие уровня в одиночку | Официальный трейлер"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin"
-              allowfullscreen></iframe> */}
+            <div className="player-block__player">
+              <ReactPlayer
+                light
+                url={videos}
+                width="100%"
+                height="100%"
+                playing
+              />
+            </div>
           </div>
 
           <div className="content__coment comment">

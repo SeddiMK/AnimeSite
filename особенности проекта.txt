@@ -8,6 +8,12 @@ login_animate-checkbox
 firebase.google
 firebase-storage
 local-storage
+показать пароль
+checkBox remember me
+reactPlayer light- легкая загрузка
+зыбыли пароль. восстановление пароля
+регистрация
+
 // личный кабинет
 1. Загрузить, удалить аватар(при перехаде между страницами и перезагрузке сайта).
 2. Прогресс зарузки.
