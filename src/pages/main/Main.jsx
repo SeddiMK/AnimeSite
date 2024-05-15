@@ -7,12 +7,18 @@ import srcImg from '../../assets/image/anime-poster/659f8dd485857721242765.jpg';
 import FormMain from '../../components/formMain/FormMain';
 import RatingStar from '../../components/rating/RatingStar';
 
-const videos: string[] = ['https://www.youtube.com/embed/ErgOZ5mZYho'];
+// ---------------------------------------------------------------------
+// import { Client, VideoLinks } from 'kodikwrapper';
+// import { API } from 'shikimori'; // ESM
+
+// const videos: string[] = ['https://www.youtube.com/embed/ErgOZ5mZYho'];
 
 const Main = () => {
   const [openFormComent, setOpenFormComent] = useState(false);
   const [formStyle, setFormStyle] = useState({});
   const [lengthComment, setLengthComment] = useState([]); // пока нет ни одного комментария
+
+  const [linkVideo, setlinkVideo] = useState(''); //
 
   let aliImgMediaLeft =
     'постер аниме поднятие уровня в одиночку с главным героем'; // данные из бекенда --------------------
@@ -36,6 +42,26 @@ const Main = () => {
       left: '33%',
       top: '77rem',
     });
+  };
+
+  const getLinksWithActualEndpoint = async (link) => {
+    // const parsedLink = await VideoLinks.parseLink({
+    //   link,
+    //   extended: true,
+    // });
+    // const parsedLink =
+    // if (!parsedLink.ex.playerSingleUrl)
+    //   throw new Error('не могу получить ссылку на чанк с плеером');
+    // const endpoint = await VideoLinks.videoInfoUrl(
+    // const endpoint = await VideoLinks.getActualVideoInfoEndpoint(
+    //   parsedLink.ex.playerSingleUrl
+    // );
+    // console.log(VideoLinks.videoInfoUrl);
+    // const links = await VideoLinks.getLinks({
+    //   link,
+    //   videoInfoEndpoint: endpoint,
+    // });
+    // return links;
   };
 
   useEffect(() => {
@@ -64,6 +90,48 @@ const Main = () => {
     // const Anidb = require('anidb');
     // const db = new Anidb('Lu46iJ', '1066048');
     // console.log(Anidb.request(), ' ---Anidb.request()');
+    // ------------------------------------------------------------------kodik
+    // const client = Client.token('45c53578f11ecfb74e31267b634cc6a8');
+    // const client = new Client({
+    //   token: '45c53578f11ecfb74e31267b634cc6a8',
+    // });
+    // client
+    //   .search({
+    //     limit: 1,
+    //     title: 'ван пис',
+    //   })
+    //   .then((response) => response.results.shift())
+    //   .then(async (material) => {
+    //     if (!material) throw new Error('не найдено');
+    //     // getLinksWithActualEndpoint(material.link).then(console.log);
+    //     const links = await VideoLinks.getLinks({
+    //       link: material.link,
+    //     });
+    //     console.log(links);
+    //     // console.log(
+    //     //   getLinksWithActualEndpoint(material.link).then(console.log)
+    //     // );
+    //     console.log(material);
+    //     // setlinkVideo(links);
+    //   });
+    //----------------------------------------------------------------------shikimori
+    // OR
+    // const { API } = require('shikimori'); // CommonJS
+    // // Create Shikimori API client, without auth
+    //   const shikimori = new API();
+    //   shikimori.animes;
+    //   shikimori.animes
+    //     .get({
+    //       search: 'восхождение в тени',
+    //     })
+    //     .then((animes) => {
+    //       console.log(animes);
+    //       animes.map((anime) => `id: ${anime.id} | name: ${anime.name}`);
+    //     });
+    // ---------------------------------------------------------------------anidb
+    var Anidb = require('anidb');
+    var db = new Anidb('someclientid', 'someclientversion');
+    console.log(db);
   }, []);
 
   return (
@@ -167,7 +235,9 @@ const Main = () => {
             <div className="player-block__player">
               <ReactPlayer
                 light
-                url={videos}
+                // playIcon={}
+                // url={videos}
+                url={linkVideo}
                 width="100%"
                 height="100%"
                 playing
