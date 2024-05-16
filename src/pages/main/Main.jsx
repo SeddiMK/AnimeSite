@@ -6,12 +6,41 @@ import srcImg from '../../assets/image/anime-poster/659f8dd485857721242765.jpg';
 
 import FormMain from '../../components/formMain/FormMain';
 import RatingStar from '../../components/rating/RatingStar';
+import axios from 'axios';
 
 // ---------------------------------------------------------------------
-// import { Client, VideoLinks } from 'kodikwrapper';
+import { Client, VideoLinks } from 'kodikwrapper';
 // import { API } from 'shikimori'; // ESM
+import cors from 'cors';
 
 // const videos: string[] = ['https://www.youtube.com/embed/ErgOZ5mZYho'];
+
+// ---------------------------------------------------------------------
+function generateCodeVerifier() {
+  // Generate a random 32-octet sequence
+  const codeVerifier = crypto.getRandomValues(new Uint8Array(32));
+
+  // Base64URL encode the octet sequence
+  const base64urlEncoded = btoa(String.fromCharCode.apply(null, codeVerifier))
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=/g, '');
+
+  return base64urlEncoded;
+}
+function generateCodeChallenge() {
+  const allowedCharacters =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~';
+  const codeChallenge = Array(43)
+    .fill('')
+    .map(() =>
+      allowedCharacters.charAt(
+        Math.floor(Math.random() * allowedCharacters.length)
+      )
+    )
+    .join('');
+  return codeChallenge;
+}
 
 const Main = () => {
   const [openFormComent, setOpenFormComent] = useState(false);
@@ -45,26 +74,30 @@ const Main = () => {
   };
 
   const getLinksWithActualEndpoint = async (link) => {
-    // const parsedLink = await VideoLinks.parseLink({
-    //   link,
-    //   extended: true,
-    // });
-    // const parsedLink =
-    // if (!parsedLink.ex.playerSingleUrl)
-    //   throw new Error('не могу получить ссылку на чанк с плеером');
-    // const endpoint = await VideoLinks.videoInfoUrl(
-    // const endpoint = await VideoLinks.getActualVideoInfoEndpoint(
-    //   parsedLink.ex.playerSingleUrl
-    // );
-    // console.log(VideoLinks.videoInfoUrl);
-    // const links = await VideoLinks.getLinks({
-    //   link,
-    //   videoInfoEndpoint: endpoint,
-    // });
-    // return links;
+    const parsedLink = await VideoLinks.parseLink({
+      link,
+      extended: true,
+    });
+    console.log('0000000000');
+    if (!parsedLink.ex.playerSingleUrl)
+      throw new Error('не могу получить ссылку на чанк с плеером');
+
+    const endpoint = await VideoLinks.getActualVideoInfoEndpoint(
+      parsedLink.ex.playerSingleUrl
+    );
+
+    const links = await VideoLinks.getLinks({
+      link,
+      videoInfoEndpoint: endpoint,
+    });
+
+    return links;
   };
 
+  // const [animeUrl, setAnimeUrl] = useState([]);
+
   useEffect(() => {
+    // ------------------------------------------------------------------anidb
     //     const ass = async () => {
     //       const graphQLFetcher = await () => {
     //       const url = 'https://graphql.anilist.co';
@@ -92,28 +125,57 @@ const Main = () => {
     // console.log(Anidb.request(), ' ---Anidb.request()');
     // ------------------------------------------------------------------kodik
     // const client = Client.token('45c53578f11ecfb74e31267b634cc6a8');
-    // const client = new Client({
-    //   token: '45c53578f11ecfb74e31267b634cc6a8',
-    // });
-    // client
-    //   .search({
-    //     limit: 1,
-    //     title: 'ван пис',
-    //   })
-    //   .then((response) => response.results.shift())
-    //   .then(async (material) => {
-    //     if (!material) throw new Error('не найдено');
-    //     // getLinksWithActualEndpoint(material.link).then(console.log);
-    //     const links = await VideoLinks.getLinks({
-    //       link: material.link,
-    //     });
-    //     console.log(links);
-    //     // console.log(
-    //     //   getLinksWithActualEndpoint(material.link).then(console.log)
-    //     // );
-    //     console.log(material);
-    //     // setlinkVideo(links);
-    //   });
+    const client = new Client({
+      token: '45c53578f11ecfb74e31267b634cc6a8',
+    });
+    client
+      .search({
+        limit: 3,
+        title: 'ван пис',
+      })
+      .then((response) => response.results.shift())
+      .then(async (material) => {
+        console.log(material, 'material');
+
+        if (!material) throw new Error('не найдено');
+
+        setAnimeUrl(material.link);
+
+        // getLinksWithActualEndpoint(material.link);
+
+        // console.log(
+        //   getLinksWithActualEndpoint(material.link),
+        //   'getLinksWithActualEndpoint(material.link'
+        // );
+
+        // const links = getLinksWithActualEndpoint(material.link).then(
+        //   console.log
+        // );
+
+        // const links = await VideoLinks.getLinks({
+        //   link: material.link,
+        // });
+        // const endpoint = await VideoLinks.getActualVideoInfoEndpoint(
+        //   parsedLink.ex.playerSingleUrl
+        // );
+
+        // const links = await VideoLinks.getLinks({
+        //   link,
+        //   videoInfoEndpoint: endpoint,
+        // });
+        // console.log(links);
+        // console.log(
+        //   getLinksWithActualEndpoint(material.link).then(console.log)
+        // );
+
+        // setlinkVideo(links);
+
+        // const animeapi = require('@justalk/anime-api');
+        // const download = await animeapi.download('naruto shippuden', 387);
+        // const streamsa = await animeapi.stream('naruto shippuden', 387); // options
+        // console.log(streamsa);
+      });
+
     //----------------------------------------------------------------------shikimori
     // OR
     // const { API } = require('shikimori'); // CommonJS
@@ -129,10 +191,83 @@ const Main = () => {
     //       animes.map((anime) => `id: ${anime.id} | name: ${anime.name}`);
     //     });
     // ---------------------------------------------------------------------anidb
-    var Anidb = require('anidb');
-    var db = new Anidb('someclientid', 'someclientversion');
-    console.log(db);
+    // var Anidb = require('anidb');
+    // var db = new Anidb('someclientid', 'someclientversion');
+    // console.log(db);
   }, []);
+  // ----------------------------------------------------------------MyAnimeList
+  //    const code-verifier = 43*128unreserved
+  //  unreserved = ALPHA / DIGIT / "-" / "." / "_" / "~"
+  //  ALPHA = %x41-5A / %x61-7A
+  //  DIGIT = %x30-39
+  const [codeVerifier, setCodeVerifier] = useState('');
+
+  useEffect(() => {
+    const verifier = generateCodeVerifier();
+    setCodeVerifier(verifier);
+  }, []);
+
+  const [codeChallenge, setCodeChallenge] = useState('');
+
+  useEffect(() => {
+    const challenge = generateCodeChallenge();
+    setCodeChallenge(challenge);
+  }, []);
+
+  useEffect(() => {
+    const animeList = async () => {
+      //  const aniData = axios.get()
+    };
+  }, []);
+
+  console.log(codeVerifier, codeChallenge);
+  // ---------------------------------------------------api.jikan.moe
+  const [animeData, setAnimeData] = useState(null);
+  const [animeEpisodes, setAnimeEpisodes] = useState(null);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch('https://api.jikan.moe/v4/top/anime');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      setAnimeData(data.data);
+      console.log(data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+  const fetchEpisodes = async () => {
+    try {
+      const response = await fetch(
+        'https://api.jikan.moe/v4/anime/5114/episodes'
+      );
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      setAnimeEpisodes(data.data);
+      console.log(data.data, 'animeEpisodes');
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+    fetchEpisodes();
+  }, []);
+  //-----------------------------------------
+  // const anime = require('anime-dl');
+
+  // const name = 'one piece';
+  // const chapter = '732';
+
+  // const animeURL = anime
+  //   .getLinksByNameAndChapter(name, chapter)
+  //   .then(console.log);
+  // console.log(animeURL, 'animeURL');
 
   return (
     <main className="main">
@@ -242,6 +377,32 @@ const Main = () => {
                 height="100%"
                 playing
               />
+            </div>
+
+            <div>
+              <h1>Top Anime</h1>
+              {animeEpisodes ? (
+                <ul>
+                  {animeEpisodes.map((episode, index) => (
+                    <li key={index}>
+                      <strong>Episode {episode.mal_id}:</strong> {episode.title}
+                      {episode.video_url && (
+                        <div>
+                          <iframe
+                            width="560"
+                            height="315"
+                            src={episode.video_url}
+                            title={`Episode ${episode.number}`}
+                            frameBorder="0"
+                            allowFullScreen></iframe>
+                        </div>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>Loading...</p>
+              )}
             </div>
           </div>
 
