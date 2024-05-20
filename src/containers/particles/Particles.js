@@ -63,7 +63,7 @@ export const Particles = ({ wrapperRef }) => {
         // height = document.getElementById('root').offsetHeight;
         // height = document.getElementById('root').getBoundingClientRect().height;
 
-        console.log(width, height, 'width, heigth');
+        // console.log(width, height, 'width, heigth');
 
         setWidth(window.innerWidth); //!!!!!!!!!!!!!!!!!!!!!!!!
         // setWidth(7680);
