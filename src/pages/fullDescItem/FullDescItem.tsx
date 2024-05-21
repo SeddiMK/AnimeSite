@@ -1,47 +1,88 @@
 import './FullDescItem.scss';
 import React, { useEffect, useRef, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 
 import srcImg from '../../assets/image/anime-poster/659f8dd485857721242765.jpg';
 
 import FormMain from '../../components/formMain/FormMain';
 import RatingStar from '../../components/rating/RatingStar';
-import VideoLink from 'components/videoLink/VideoLink';
+import VideoLink from '../../components/videoLink/VideoLink';
+import { clientKodik } from '../../kodikcfg';
+import { MaterialObject } from 'kodikwrapper';
+import { useSelector } from 'react-redux';
+import { itemsAnimeSearch } from '../../store/searchSlice';
 
 // ---------------------------------------------------------------------
-
-const FullDescItem = () => {
-  const [openFormComent, setOpenFormComent] = useState(false);
-  const [formStyle, setFormStyle] = useState({});
-  const [lengthComment, setLengthComment] = useState([]); // пока нет ни одного комментария
-
-  let aliImgMediaLeft =
-    'постер аниме поднятие уровня в одиночку с главным героем'; // данные из бекенда --------------------
-
-  const onPlayerReady = (event) => {
-    // access to player in all event handlers via event.target
-    event.target.pauseVideo();
+type FullDescItemProps = {
+  elem: {
+    link: string;
+    title: string;
+    title_orig: string;
   };
+};
 
-  // open form напротив кнопки
-  const openForm = () => {
-    setOpenFormComent(true);
-    setFormStyle({
-      left: '38%',
-      top: '24rem',
-    });
-  };
-  const openFormComment = () => {
-    setOpenFormComent(true);
-    setFormStyle({
-      left: '33%',
-      top: '77rem',
-    });
-  };
+const FullDescItem: React.FC<FullDescItemProps> = () => {
+  const { id } = useParams<{
+    id: string;
+  }>();
 
+  let aliImgMediaLeft = 'постер аниме поднятвным героем'; // данные из бекенда ----------
+
+  // запрос для одного аниме
+  const itemsAnimeSlice = useSelector(itemsAnimeSearch);
+  const [itemAnimeSearchId, setItemAnimeSearchId] = useState<MaterialObject[]>(
+    []
+  );
+  const [itemAnimeLink, setItemAnimeLink] = useState('');
+  const [itemAnimeTitle, setItemAnimeTitle] = useState('');
+  const [itemAnimeTitleOrign, setItemAnimeTitleOrign] = useState('');
+
+  useEffect(() => {
+    const animeItem = async () => {
+      await clientKodik
+        .search({ id })
+        .then((response) => response.results)
+        .then(async (material) => {
+          if (!material) throw new Error('не найдено');
+
+          console.log(material, '---------- ----search id-------------');
+
+          if (itemAnimeSearchId) {
+            setItemAnimeSearchId(material);
+            setItemAnimeLink(material[0].link);
+            setItemAnimeTitle(material[0].title);
+            setItemAnimeTitleOrign(material[0].title_orig);
+          }
+        });
+    };
+
+    animeItem();
+  }, [id]);
+
+  useEffect(() => {}, [itemAnimeSearchId]);
+
+  console.log(itemAnimeSearchId, 'itemAnimeSearchId');
+  console.log(itemsAnimeSlice, 'itemsAnimeSlice');
+
+  if (!itemAnimeSearchId) {
+    return <p>Download...</p>;
+  }
   return (
     <main className="main full-desc-item">
       <div className="full-desc-item__wrap">
-        <div className="main__content content">
+        <VideoLink linkVideo={itemAnimeLink} />
+        <div className="item-anime__title">
+          {itemAnimeTitle + '. ' + itemAnimeTitleOrign}
+        </div>
+
+        <div className="item-anime__rating">{/* {!!!!!!!!!!!!!!! */}</div>
+        <div className="item-anime__rating">{/* {!!!!!!!!!!!!!!! */}</div>
+        <div className="item-anime__translation translation">
+          <ul className="translation__list">
+            {/* <li className="translation__item"> {elem.translation.title}</li> */}
+          </ul>
+        </div>
+        {/* <div className="main__content content">
           <div className="content__media media">
             <div className="media__left">
               <div className="media__left-image">
@@ -155,7 +196,7 @@ const FullDescItem = () => {
               )}
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </main>
   );

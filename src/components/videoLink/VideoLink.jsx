@@ -10,7 +10,7 @@ import { Client, VideoLinks } from 'kodikwrapper';
 
 // const videos: string[] = ['https://www.youtube.com/embed/ErgOZ5mZYho'];
 
-const VideoLink = () => {
+const VideoLink = ({ linkVideo }) => {
   const [animeData, setAnimeData] = useState(null);
   const [animeEpisodes, setAnimeEpisodes] = useState(null);
   const [animeTitle, setAnimeTitle] = useState('');
@@ -19,7 +19,7 @@ const VideoLink = () => {
   const [titles, setTitles] = useState([]);
   const [origTitles, setOrigTitles] = useState([]);
 
-  const [linkVideo, setlinkVideo] = useState(''); //
+  // const [linkVideo, setlinkVideo] = useState('');
 
   useEffect(() => {
     // ------------------------------------------------------------------kodik
@@ -265,10 +265,12 @@ const VideoLink = () => {
     }
   };
 
+  console.log(linkVideo, 'linkVideo');
   useEffect(() => {
+    if (linkVideo) setAnimeUrl(linkVideo);
     // fetchData();
     // fetchEpisodes();
-  }, []);
+  }, [linkVideo]);
   //-----------------------------------------
   //   console.log(relateds, titles, origTitles, 'relateds + title + otherTitle');
   //   console.log(animeData, 'animeData');

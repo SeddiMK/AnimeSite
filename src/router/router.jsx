@@ -8,6 +8,7 @@ import {
 import Layout from '../containers/layout/Layout';
 import Main from '../pages/main/Main';
 import FullDescItem from '../pages/fullDescItem/FullDescItem';
+import SearchHeader from '../components/searchHeader/SearchHeader';
 import Contacts from '../pages/contacts/Contacts';
 import Login from '../pages/login/Login';
 import Registration from '../pages/regisration/Registration';
@@ -65,7 +66,8 @@ export const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />} errorElement={<Error />}>
       <Route index element={<Main />} />
-      <Route path="fullDescItem" element={<FullDescItem />} />
+      <Route path="fullDescItem/:id" element={<FullDescItem />} />
+      <Route path="search/" element={<SearchHeader />} />
       <Route path="contacts" element={<Contacts />} />
       <Route path="login" element={<Login />} />
       <Route path="login/user/:id" element={<LoginUserCabinet />} />

@@ -6,11 +6,11 @@ import { clientKodik } from '../kodikcfg';
 import { Client, MaterialObject, VideoLinks } from 'kodikwrapper';
 
 export type SearchAnimeParams = {
-  limit: number;
-  title: string;
+  titlePar: string;
+  limitPar: number;
 };
 
-export type Anime = {
+export type AnimeSearch = {
   id: string;
   imdb_id: string;
   kinopoisk_id: string;
@@ -32,77 +32,76 @@ export type Anime = {
   year: number;
 };
 
-export const fetchAnimeListSlice = createAsyncThunk<Anime[]>(
-  'anime/fetchAnimeStatus',
-  async (params) => {
-    try {
-      // const { id, name, username, email, phone, address } = params;
-      // const resp = await axios.get<Anime[]>(
-      //   `https://jsonplaceholder.typicode.com/users/`
-      // );
+export const fetchAnimeListSlice = createAsyncThunk<
+  AnimeSearch[],
+  SearchAnimeParams
+>('anime/fetchAnimeStatus', async (params) => {
+  try {
+    const { titlePar, limitPar } = params;
+    const resp = await axios.get<AnimeSearch[]>(
+      `http://kodikapi.com/list?limit=14&with_material_data=true&token=45c53578f11ecfb74e31267b634cc6a8`
+    );
 
-      // if (resp.status !== 200) {
-      //   throw new Error('Server Error!');
-      // }
-      // const data = resp.data;
-
-      let animesItems: MaterialObject[] = [];
-      let titles: string[] = [];
-      let origTitles: string[] = [];
-
-      await clientKodik
-        .search({
-          limit: 20,
-          title: 'клевер',
-        })
-        .then((response) => response.results)
-        .then(async (material) => {
-          if (!material) throw new Error('не найдено');
-
-          console.log(material, '-------------------------materia  search');
-
-          // setAnimeData(material);
-
-          const related: MaterialObject[] = [];
-          const title: string[] = [];
-          const origTitle: string[] = [];
-          let prevTitle: string | null = null;
-
-          if (material) {
-            for (const item of material) {
-              if (
-                (item.type === 'anime' || item.type === 'anime-serial') &&
-                item.title !== prevTitle
-              )
-                related.push(item);
-              if (item.type === 'anime' || item.type === 'anime-serial') {
-                title.push(item.title);
-                origTitle.push(item.title_orig);
-              }
-
-              prevTitle = item.title;
-            }
-          }
-
-          animesItems = [...new Set(related)];
-
-          titles = [...new Set(title)];
-          origTitles = [...new Set(origTitle)];
-
-          // const animeLinkVideo= (material[3].link); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-
-          // const title = (titles[0] + '. ' + origTitles[0]);
-        });
-
-      // console.log(animesItems, 'animesItems in animeSlice');
-      // console.log(data, 'data in animeSlice');
-
-      return animesItems; // as Anime[];
-    } catch (error) {
-      return error.message; //rejectWithValue(
+    if (resp.status !== 200) {
+      throw new Error('Server Error!');
     }
+    const data = resp.data;
+
+    console.log(data, '------------data list------------');
+
+    let animesItems: MaterialObject[] = [];
+    let titles: string[] = [];
+    let origTitles: string[] = [];
+
+    await clientKodik
+      .search({
+        limit: limitPar,
+        title: titlePar,
+      })
+      .then((response) => response.results)
+      .then(async (material) => {
+        if (!material) throw new Error('не найдено');
+
+        console.log(material, '-------------------------materia  ----search');
+
+        // setAnimeData(material);
+        // type
+        const related: MaterialObject[] = [];
+        const title: string[] = [];
+        const origTitle: string[] = [];
+        let prevTitle: string | null = null;
+
+        if (material) {
+          for (const item of material) {
+            if (
+              (item.type === 'anime' || item.type === 'anime-serial') &&
+              item.title !== prevTitle
+            )
+              related.push(item);
+            if (item.type === 'anime' || item.type === 'anime-serial') {
+              title.push(item.title);
+              origTitle.push(item.title_orig);
+            }
+
+            prevTitle = item.title;
+          }
+        }
+
+        animesItems = [...new Set(related)];
+
+        titles = [...new Set(title)];
+        origTitles = [...new Set(origTitle)];
+
+        // const animeLinkVideo= (material[3].link); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+
+        // const title = (titles[0] + '. ' + origTitles[0]);
+      });
+
+    return animesItems; // as Anime[];
+  } catch (error) {
+    return error.message; //rejectWithValue(
   }
-);
+});
 
 export enum Status {
   LOADING = 'loading',
@@ -111,9 +110,9 @@ export enum Status {
 }
 
 interface AnimeSliceState {
-  items: Anime[];
+  items: AnimeSearch[];
 
-  itemsReindexing: {};
+  // itemsReindexing: {};
 
   status: Status;
   error: string | unknown;
@@ -123,7 +122,7 @@ interface AnimeSliceState {
 const initialState: AnimeSliceState = {
   items: [],
 
-  itemsReindexing: {},
+  // itemsReindexing: {},
 
   status: Status.LOADING, // loading | success | error
   error: '',
@@ -139,6 +138,7 @@ const animeSlice = createSlice({
       state.items = action.payload;
     },
   },
+
   extraReducers: (builder) => {
     builder.addCase(fetchAnimeListSlice.pending, (state) => {
       state.status = Status.LOADING;
@@ -170,8 +170,8 @@ const animeSlice = createSlice({
 
 export const { setItems } = animeSlice.actions;
 
-export const itemsReindexing = (state: RootState) =>
-  state.animeSlice.itemsReindexing;
+// export const itemsReindexing = (state: RootState) =>
+//   state.animeSlice.itemsReindexing;
 export const itemsAnime = (state: RootState) => state.animeSlice.items;
 
 export default animeSlice.reducer;
