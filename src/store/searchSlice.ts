@@ -1,15 +1,17 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { RootState } from '.';
+import { RootState, useAppDispatch } from '.';
 // kodik---------------------------------------------------------------------
-import { clientKodik } from '../kodikcfg';
+import { clientKodik, kodikApiKey } from '../kodikcfg';
 import { Client, MaterialObject, VideoLinks } from 'kodikwrapper';
 
 import { Navigate, useNavigate } from 'react-router-dom';
 import { SetStateAction, useState } from 'react';
+import { env } from 'process';
+import { useSelector } from 'react-redux';
 
 export type SearchAnimeParams = {
-  titlePar: string;
+  searchInpValStore: string;
   limitPar: number;
 };
 
@@ -39,160 +41,198 @@ export type AnimeSearch = {
 export const fetchAnimeSearchSlice = createAsyncThunk<
   AnimeSearch[],
   SearchAnimeParams
->('anime/fetchAnimeStatus', async (params) => {
+>('search/fetchAnimeStatus', async (params) => {
   try {
-    const { titlePar, limitPar } = params;
+    const { searchInpValStore, limitPar } = params;
+    // const dispatch = useAppDispatch();
+
     // const navigate = useNavigate();
-    const resp = await axios.get<AnimeSearch[]>(
-      `http://kodikapi.com/search?limit=${limitPar}&title=${titlePar}&with_material_data=true&token=45c53578f11ecfb74e31267b634cc6a8`
+    const resp = await axios.get(
+      `http://kodikapi.com/search?limit=${limitPar}&title=${searchInpValStore}&with_material_data=true&token=${kodikApiKey}`
     );
 
     if (resp.status !== 200) {
       throw new Error('Server Error!');
     }
-    const data = resp.data;
+    const data: AnimeSearch[] = resp.data.results;
 
     console.log(data, '------------data search------------');
+    // -------------------------------------------------------------------------------
+    //     // countries(params?: CountriesParams): Promise<CountriesResponse>;
+    //     // genres(params?: GenresParams): Promise<GenresResponse>;
+    //     // list(params?: ListParams): Promise<ListResponse>;
+    //     // qualities(params?: QualitiesParams): Promise<QualitiesResponse>;
+    //     // qualitiesV2(params?: QualitiesV2Params): Promise<QualitiesV2Response>;
+    //     // search(params?: SearchParams): Promise<SearchResponse>;
+    //     // translations(params?: TranslationsParams): Promise<TranslationsResponse>;
+    //     // translationsV2(params?: TranslationsV2Params): Promise<TranslationsV2Response>;
+    //     // years(params?:
+    // -------------------------------------------------------------------------------
 
-    // const [animesItemsSearch, setAnimesItemsSearch] = useState<any>([]);
-    let animesItemsSearch: MaterialObject[] = [];
-    let animesItemsSearchAll: MaterialObject[] = [];
-    let titles: string[] = [];
-    let origTitles: string[] = [];
+    let animesItemsSearch: AnimeSearch[] = [];
+    let animesItemsSearchNotTest: AnimeSearch[] = [];
+    // let animesItemsSearchAll: AnimeSearch[] = [];
+    let prevTitle: string | null = null;
 
-    await clientKodik
-      .search({ limit: limitPar, title: titlePar })
-      .then((response) => response.results)
-      .then(async (material) => {
-        if (material.length === 0) return new Error('не найдено. нет данных.');
-
-        console.log(material, '---------materia----search--in_slice');
-        animesItemsSearchAll = material;
-        // setAnimeData(material); MaterialObject[]
-        // type
-        const related: MaterialObject[] = [];
-        const title: string[] = [];
-        const origTitle: string[] = [];
-        let prevTitle: string | null = null;
-
-        if (material.length !== 0) {
-          // let prevTitle: string | null = material[0].title;
-          for (const item of material) {
-            // console.log(
-            //   String(item.year) === item.created_at.substring(0, 4),
-            //   'String(item.year) === item.created_at.substring(0, 4)'
-            // );
-            // проверяем год загрузки и год выпуска аниме(исключаем видео-мангу)
-            // if (String(item.year) === item.created_at.substring(0, 4)) {
-            // только аниме и аниме сериалы(исключаем мангу), убираем дубликаты && item.title !== prevTitle
-            // || item.type === 'anime-serial'
-            console.log(
-              item.type === 'anime' || item.type === 'anime-serial',
-              '(item.type === anime || item.type === anime-serial)'
-            );
-            if (
-              (item.type === 'anime' || item.type === 'anime-serial') &&
-              item.title_orig.toLowerCase() !== prevTitle
-            ) {
-              related.push(item);
-            }
-
-            if (item.type === 'anime' || item.type === 'anime-serial') {
-              title.push(item.title);
-              origTitle.push(item.title_orig);
-            }
-
-            prevTitle = item.title_orig.toLowerCase();
-          }
+    if (data.length !== 0) {
+      // let prevTitle: string | null = material[0].title;
+      for (const item of data) {
+        if (
+          (item.type === 'anime' || item.type === 'anime-serial') &&
+          item.title_orig.toLowerCase() !== prevTitle
+        ) {
+          animesItemsSearch.push(item);
+        } else {
+          animesItemsSearchNotTest.push(item);
         }
 
-        // let uniqueTitles = new Set();
-        // // let uniqueTitles = new Set();
-        // let uniqueArr = related.filter((item) => {
-        //   if (!uniqueTitles.has(item.title.toLowerCase())) {
-        //     uniqueTitles.add(item.title.toLowerCase());
-        //     return true;
-        //   }
-        //   return false;
-        // });
-
-        // console.log(uniqueArr, 'uniqueArr');
-        //      [
-        //         {id: 'movie-48997',title: 'Проза бродячих псов: Путешествие в одиночку'}
-
-        //         {id: 'movie-95701',  title: 'Проза бродячих псов: Путешествие в одиночку'}
-
-        //         {id: 'movie-99083', title: 'Проза бродячих псов: Путешествие в одиночку'}
-
-        //         {id: 'movie-76481', title: 'Проза бродячих псов: Путешествие в одиночку'}
-
-        //         {id: 'movie-79385',  title: 'В одиночку'}
-
-        //         {id: 'movie-20516',  title: 'Прятки в одиночку'}
-
-        //         {id: 'serial-2987', title: 'Выпивая в одиночку'}
-
-        //         {id: 'serial-43111',  title: 'Выпивая в одиночку'}
-
-        //         {id: 'movie-9128',  title: 'В людях'}
-
-        //         {id: 'movie-62378',  title: 'В тишине'}
-
-        //         {id: 'serial-34006',  title: 'Жизнь не в одиночку'}
-
-        //         {id: 'serial-56384',  title: 'Поднятие уровня в одиночку'}
-
-        //         {id: 'serial-56386',  title: 'Поднятие уровня в одиночку'}
-
-        //         {id: 'serial-56392', title: 'Поднятие уровня в одиночку'}
-
-        // { id: 'serial-56402',  title: 'Поднятие уровня в одиночку' }]
-
-        // if (related.length !== 0) {
-        //   for (const item of related) {
-        //   }
+        // if (item.type === 'anime' || item.type === 'anime-serial') {
+        //   title.push(item.title);
+        //   origTitle.push(item.title_orig);
         // }
 
-        // -------------------------------------------------------
-        // let pp = arr.filter(
-        //   (el, ind) =>
-        //     ind ===
-        //     arr.findIndex(
-        //       (elem) => elem.jobid === el.jobid && elem.id === el.id
-        //     )
-        // );
+        prevTitle = item.title_orig.toLowerCase();
+      }
+    } else {
+      console.log('нет данных для показа');
+      // dispatch(error('нет данных для показа'));
+      // navigate('/error', { replace: true });
+    }
+    // ----------- clien kodik ----------------------------------------------------
+    // const [animesItemsSearch, setAnimesItemsSearch] = useState<any>([]);
 
-        console.log(related, 'related');
+    // let titles: string[] = [];
+    // let origTitles: string[] = [];
 
-        if (related.length !== 0) {
-          // setAnimesItemsSearch([...new Set(related)]);
-          // setAnimesItemsSearch(related);
-          animesItemsSearch = related;
-        } else {
-          console.log('не данных для показа');
-          // navigate('/error', { replace: true });
-        }
+    // await clientKodik
+    //   .search({ limit: limitPar, title: titlePar })
+    //   .then((response) => response.results)
+    //   .then(async (material) => {
+    //     if (material) return new Error('не найдено. нет данных.');
 
-        titles = [...new Set(title)];
-        origTitles = [...new Set(origTitle)];
+    //     console.log(material, '---------materia----search--in_slice');
+    //     animesItemsSearchAll = material;
+    //     // setAnimeData(material); MaterialObject[]
 
-        // const animeLinkVideo= (material[3].link); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+    //     // type
+    //     const related: MaterialObject[] = [];
+    //     const title: string[] = [];
+    //     const origTitle: string[] = [];
+    //     let prevTitle: string | null = null;
 
-        // const title = (titles[0] + '. ' + origTitles[0]);
+    //     if (material.length !== 0) {
+    //       // let prevTitle: string | null = material[0].title;
+    //       for (const item of material) {
+    //         if (
+    //           (item.type === 'anime' || item.type === 'anime-serial') &&
+    //           item.title_orig.toLowerCase() !== prevTitle
+    //         ) {
+    //           animesItemsSearch.push(item);
+    //         } else {
+    //           console.log('не данных для показа');
+    //           // navigate('/error', { replace: true });
+    //         }
 
-        // countries(params?: CountriesParams): Promise<CountriesResponse>;
-        // genres(params?: GenresParams): Promise<GenresResponse>;
-        // list(params?: ListParams): Promise<ListResponse>;
-        // qualities(params?: QualitiesParams): Promise<QualitiesResponse>;
-        // qualitiesV2(params?: QualitiesV2Params): Promise<QualitiesV2Response>;
-        // search(params?: SearchParams): Promise<SearchResponse>;
-        // translations(params?: TranslationsParams): Promise<TranslationsResponse>;
-        // translationsV2(params?: TranslationsV2Params): Promise<TranslationsV2Response>;
-        // years(params?:
+    //         if (item.type === 'anime' || item.type === 'anime-serial') {
+    //           title.push(item.title);
+    //           origTitle.push(item.title_orig);
+    //         }
 
-        // [animesItemsSearchAll, animesItemsSearch]
-      });
+    //         prevTitle = item.title_orig.toLowerCase();
+    //       }
+    //     }
 
+    //     // let uniqueTitles = new Set();
+    //     // // let uniqueTitles = new Set();
+    //     // let uniqueArr = related.filter((item) => {
+    //     //   if (!uniqueTitles.has(item.title.toLowerCase())) {
+    //     //     uniqueTitles.add(item.title.toLowerCase());
+    //     //     return true;
+    //     //   }
+    //     //   return false;
+    //     // });
+
+    //     // console.log(uniqueArr, 'uniqueArr');
+    //     //      [
+    //     //         {id: 'movie-48997',title: 'Проза бродячих псов: Путешествие в одиночку'}
+
+    //     //         {id: 'movie-95701',  title: 'Проза бродячих псов: Путешествие в одиночку'}
+
+    //     //         {id: 'movie-99083', title: 'Проза бродячих псов: Путешествие в одиночку'}
+
+    //     //         {id: 'movie-76481', title: 'Проза бродячих псов: Путешествие в одиночку'}
+
+    //     //         {id: 'movie-79385',  title: 'В одиночку'}
+
+    //     //         {id: 'movie-20516',  title: 'Прятки в одиночку'}
+
+    //     //         {id: 'serial-2987', title: 'Выпивая в одиночку'}
+
+    //     //         {id: 'serial-43111',  title: 'Выпивая в одиночку'}
+
+    //     //         {id: 'movie-9128',  title: 'В людях'}
+
+    //     //         {id: 'movie-62378',  title: 'В тишине'}
+
+    //     //         {id: 'serial-34006',  title: 'Жизнь не в одиночку'}
+
+    //     //         {id: 'serial-56384',  title: 'Поднятие уровня в одиночку'}
+
+    //     //         {id: 'serial-56386',  title: 'Поднятие уровня в одиночку'}
+
+    //     //         {id: 'serial-56392', title: 'Поднятие уровня в одиночку'}
+
+    //     // { id: 'serial-56402',  title: 'Поднятие уровня в одиночку' }]
+
+    //     // if (related.length !== 0) {
+    //     //   for (const item of related) {
+    //     //   }
+    //     // }
+
+    //     // -------------------------------------------------------
+    //     // let pp = arr.filter(
+    //     //   (el, ind) =>
+    //     //     ind ===
+    //     //     arr.findIndex(
+    //     //       (elem) => elem.jobid === el.jobid && elem.id === el.id
+    //     //     )
+    //     // );
+
+    //     // console.log(related, 'related');
+
+    //     // if (related.length !== 0) {
+    //     //   // setAnimesItemsSearch([...new Set(related)]);
+    //     //   // setAnimesItemsSearch(related);
+    //     //   animesItemsSearch = related;
+    //     // } else {
+    //     //   console.log('не данных для показа');
+    //     //   // navigate('/error', { replace: true });
+    //     // }
+
+    //     titles = [...new Set(title)];
+    //     origTitles = [...new Set(origTitle)];
+
+    //     // const animeLinkVideo= (material[3].link); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+
+    //     // const title = (titles[0] + '. ' + origTitles[0]);
+
+    //     // countries(params?: CountriesParams): Promise<CountriesResponse>;
+    //     // genres(params?: GenresParams): Promise<GenresResponse>;
+    //     // list(params?: ListParams): Promise<ListResponse>;
+    //     // qualities(params?: QualitiesParams): Promise<QualitiesResponse>;
+    //     // qualitiesV2(params?: QualitiesV2Params): Promise<QualitiesV2Response>;
+    //     // search(params?: SearchParams): Promise<SearchResponse>;
+    //     // translations(params?: TranslationsParams): Promise<TranslationsResponse>;
+    //     // translationsV2(params?: TranslationsV2Params): Promise<TranslationsV2Response>;
+    //     // years(params?:
+
+    //     // [animesItemsSearchAll, animesItemsSearch]
+    //   });
+    console.log(animesItemsSearchNotTest, 'animesItemsSearchNotTest');
+    console.log(
+      animesItemsSearch,
+      '----------animesItemsSearch search----------'
+    );
     return animesItemsSearch; // animesItemsSearch; // as Anime[];data.results;
   } catch (error) {
     return error.message; //rejectWithValue(
@@ -207,6 +247,7 @@ export enum Status {
 
 interface AnimeSearchSliceState {
   itemsSearch: AnimeSearch[];
+  searchInpVal: string;
 
   // itemsReindexing: {};
 
@@ -217,6 +258,7 @@ interface AnimeSearchSliceState {
 
 const initialState: AnimeSearchSliceState = {
   itemsSearch: [],
+  searchInpVal: '',
 
   // itemsReindexing: {},
 
@@ -226,12 +268,18 @@ const initialState: AnimeSearchSliceState = {
 };
 
 // -----------------------------------store
-const animeSlice = createSlice({
-  name: 'anime',
+const searchSlice = createSlice({
+  name: 'search',
   initialState,
   reducers: {
     setItemsSearch: (state, action: PayloadAction<[]>) => {
       state.itemsSearch = action.payload;
+    },
+    searchInpHeader: (state, action: PayloadAction<string>) => {
+      state.searchInpVal = action.payload;
+    },
+    error: (state, action: PayloadAction<string>) => {
+      state.error = action.payload;
     },
   },
 
@@ -264,11 +312,11 @@ const animeSlice = createSlice({
   },
 });
 
-export const { setItemsSearch } = animeSlice.actions;
+export const { setItemsSearch, searchInpHeader, error } = searchSlice.actions;
 
 // export const itemsReindexing = (state: RootState) =>
 //   state.animeSlice.itemsReindexing;
 export const itemsAnimeSearch = (state: RootState) =>
   state.searchSlice.itemsSearch;
 
-export default animeSlice.reducer;
+export default searchSlice.reducer;

@@ -2,7 +2,7 @@ import './FullDescItem.scss';
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
-import srcImg from '../../assets/image/anime-poster/659f8dd485857721242765.jpg';
+// import srcImg from '../../assets/image/anime-poster/659f8dd485857721242765.jpg';
 
 import FormMain from '../../components/formMain/FormMain';
 import RatingStar from '../../components/rating/RatingStar';
@@ -10,7 +10,7 @@ import VideoLink from '../../components/videoLink/VideoLink';
 import { clientKodik } from '../../kodikcfg';
 import { MaterialObject } from 'kodikwrapper';
 import { useSelector } from 'react-redux';
-import { itemsAnimeSearch } from '../../store/searchSlice';
+// import { itemsAnimeSearch } from '../../store/searchSlice';
 
 // ---------------------------------------------------------------------
 type FullDescItemProps = {
@@ -29,7 +29,8 @@ const FullDescItem: React.FC<FullDescItemProps> = () => {
   let aliImgMediaLeft = 'постер аниме поднятвным героем'; // данные из бекенда ----------
 
   // запрос для одного аниме
-  const itemsAnimeSlice = useSelector(itemsAnimeSearch);
+  // const itemsAnimeSlice = useSelector(itemsAnimeSearch);
+
   const [itemAnimeSearchId, setItemAnimeSearchId] = useState<MaterialObject[]>(
     []
   );
@@ -62,7 +63,6 @@ const FullDescItem: React.FC<FullDescItemProps> = () => {
   useEffect(() => {}, [itemAnimeSearchId]);
 
   console.log(itemAnimeSearchId, 'itemAnimeSearchId');
-  console.log(itemsAnimeSlice, 'itemsAnimeSlice');
 
   if (!itemAnimeSearchId) {
     return <p>Download...</p>;
