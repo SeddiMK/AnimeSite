@@ -20,6 +20,7 @@ import {
   AnimeSearch,
   fetchAnimeSearchSlice,
   itemsAnimeSearch,
+  setIdFullDesc,
   setItemsSearch,
 } from '../../store/searchSlice';
 
@@ -97,6 +98,13 @@ const VideoListItem: React.FC = () => {
     isMount.current = true;
   }, [isMount]);
 
+  useEffect(() => {
+    // console.log(animeSearchItems, 'animeSearchItems');
+    fthAnimeSlice();
+    if (animeItems.length === 0) {
+    }
+  }, []);
+
   // fthAnimeSearchSlice -------------------------------------------------
   // useEffect(() => {
   //   // console.log(animeSearchItems, 'animeSearchItems');
@@ -158,22 +166,24 @@ const VideoListItem: React.FC = () => {
           ) : (
             animeItems?.map((elem, ind) => (
               <div key={elem.id + ind} className="anime__item item-anime">
-                <Link to={`/fullDescItem/${elem.id}`}>
+                <Link
+                  to={`/fullDescItem/${elem.id}`}
+                  onClick={() => dispatch(setIdFullDesc(elem.id))}>
                   <div className="item-anime__img-wrap wrap-img-anime">
                     <img
-                      src={elem.screenshots[0]}
+                      src={elem.material_data.poster_url}
                       alt={'изображение аниме ' + elem.title}
                       className="item-anime__image img"
                     />
                   </div>
-                  <div className="item-anime__title">
-                    {elem.title + '. ' + elem.title_orig}{' '}
-                  </div>
+                  <div className="item-anime__title">{elem.other_title}</div>
                   <div className="item-anime__rating">
-                    {/* {!!!!!!!!!!!!!!! */}
+                    {elem.material_data?.shikimori_rating}
+                    {'/ '}
+                    {elem.material_data?.shikimori_votes}
                   </div>
-                  <div className="item-anime__rating">
-                    {/* {!!!!!!!!!!!!!!! */}
+                  <div className="item-anime__lkjh">
+                    {/* {shikimori_votes} */}
                   </div>
                 </Link>
               </div>

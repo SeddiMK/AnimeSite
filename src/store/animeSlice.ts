@@ -12,9 +12,36 @@ export type AnimeParams = {
 export type AnimeItems = {
   length: number;
   id: string;
-  imdb_id: string;
-  kinopoisk_id: string;
-  shikimori_id: string;
+
+  material_data: {
+    shikimori_rating: number;
+    shikimori_votes: number;
+
+    all_genres: string;
+    anime_status: string;
+    anime_studios: string[];
+    anime_title: string;
+    description: string;
+    duration: number;
+    episodes_aired: number;
+    episodes_total: number;
+    minimal_age: number;
+    anime_kind: string;
+    title: string;
+    title_en: string;
+    screenshots: string[];
+    poster_url: string;
+    year: number;
+    aired_at: string;
+    all_status: string;
+    anime_description: string;
+    anime_genres: string[];
+    next_episode_at: string;
+    other_titles: string[];
+    other_titles_en: string[];
+    other_titles_jp: string[];
+    rating_mpaa: string;
+  };
   link: string;
   other_title: string;
   quality: string;
@@ -38,7 +65,7 @@ export const fetchAnimeListSlice = createAsyncThunk<AnimeItems[], AnimeParams>(
     try {
       const { limitPar } = params;
       const resp: any = await axios.get<AnimeItems[]>(
-        `http://kodikapi.com/list?limit=${limitPar}&with_material_data=true&token=${kodikApiKey}`
+        `http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'&with_material_data=true&token=${kodikApiKey}`
       );
 
       if (resp.status !== 200) {
@@ -135,36 +162,6 @@ export const fetchAnimeListSlice = createAsyncThunk<AnimeItems[], AnimeParams>(
       //     // });
 
       //     // console.log(uniqueArr, 'uniqueArr');
-      //     //      [
-      //     //         {id: 'movie-48997',title: 'Проза бродячих псов: Путешествие в одиночку'}
-
-      //     //         {id: 'movie-95701',  title: 'Проза бродячих псов: Путешествие в одиночку'}
-
-      //     //         {id: 'movie-99083', title: 'Проза бродячих псов: Путешествие в одиночку'}
-
-      //     //         {id: 'movie-76481', title: 'Проза бродячих псов: Путешествие в одиночку'}
-
-      //     //         {id: 'movie-79385',  title: 'В одиночку'}
-
-      //     //         {id: 'movie-20516',  title: 'Прятки в одиночку'}
-
-      //     //         {id: 'serial-2987', title: 'Выпивая в одиночку'}
-
-      //     //         {id: 'serial-43111',  title: 'Выпивая в одиночку'}
-
-      //     //         {id: 'movie-9128',  title: 'В людях'}
-
-      //     //         {id: 'movie-62378',  title: 'В тишине'}
-
-      //     //         {id: 'serial-34006',  title: 'Жизнь не в одиночку'}
-
-      //     //         {id: 'serial-56384',  title: 'Поднятие уровня в одиночку'}
-
-      //     //         {id: 'serial-56386',  title: 'Поднятие уровня в одиночку'}
-
-      //     //         {id: 'serial-56392', title: 'Поднятие уровня в одиночку'}
-
-      //     // { id: 'serial-56402',  title: 'Поднятие уровня в одиночку' }]
 
       //     // if (related.length !== 0) {
       //     //   for (const item of related) {

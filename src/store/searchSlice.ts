@@ -11,7 +11,8 @@ import { env } from 'process';
 import { useSelector } from 'react-redux';
 
 export type SearchAnimeParams = {
-  searchInpValStore: string;
+  idAnime: string;
+  searchInpVal: string;
   limitPar: number;
 };
 
@@ -22,6 +23,41 @@ export type AnimeSearch = {
   kinopoisk_id: string;
   shikimori_id: string;
   link: string;
+  material_data: {
+    imdb_rating: number;
+    imdb_votes: number;
+    kinopoisk_rating: number;
+    kinopoisk_votes: number;
+    shikimori_rating: number;
+    shikimori_votes: number;
+
+    anime_license_name: string;
+    actors: string[];
+    all_genres: string;
+    anime_status: string;
+    anime_studios: string[];
+    anime_title: string;
+    description: string;
+    duration: 24;
+    episodes_aired: 7;
+    episodes_total: 11;
+    minimal_age: 16;
+    anime_kind: string;
+    title: string;
+    title_en: string;
+    screenshots: string[];
+    poster_url: string;
+    year: number;
+    aired_at: string;
+    all_status: string;
+    anime_description: string;
+    anime_genres: string[];
+    next_episode_at: string;
+    other_titles: string[];
+    other_titles_en: string[];
+    other_titles_jp: string[];
+    rating_mpaa: string;
+  };
   other_title: string;
   quality: string;
   screenshots: [string];
@@ -43,12 +79,27 @@ export const fetchAnimeSearchSlice = createAsyncThunk<
   SearchAnimeParams
 >('search/fetchAnimeStatus', async (params) => {
   try {
-    const { searchInpValStore, limitPar } = params;
+    const { idAnime, searchInpVal, limitPar } = params;
     // const dispatch = useAppDispatch();
-
     // const navigate = useNavigate();
+
+    console.log(
+      searchInpVal,
+      '-----------searchInpVal in search store------------'
+    );
+    console.log(idAnime, '-----------idAnime in search store------------');
+    console.log(limitPar, '-----------limitPar in search store------------');
+
+    // const idSearch = () => {
+    //   console.log(
+    //     Boolean(id),
+    //     '-----------Boolean(id in search store------------'
+    //   );
+
+    //   if (id) return `id=${id}`;
+    // };
     const resp = await axios.get(
-      `http://kodikapi.com/search?limit=${limitPar}&title=${searchInpValStore}&with_material_data=true&token=${kodikApiKey}`
+      `http://kodikapi.com/search?limit=${limitPar}&title=${searchInpVal}&${idAnime}&with_material_data=true&token=${kodikApiKey}`
     );
 
     if (resp.status !== 200) {
@@ -248,6 +299,39 @@ export enum Status {
 interface AnimeSearchSliceState {
   itemsSearch: AnimeSearch[];
   searchInpVal: string;
+  idFullDesc: string;
+
+  materialData: {
+    shikimori_rating: number;
+    shikimori_votes: number;
+
+    anime_license_name: string;
+    actors: string[];
+    all_genres: string;
+    anime_status: string;
+    anime_studios: string[];
+    anime_title: string;
+    description: string;
+    duration: number;
+    episodes_aired: number;
+    episodes_total: number;
+    minimal_age: number;
+    anime_kind: string;
+    title: string;
+    title_en: string;
+    screenshots: string[];
+    poster_url: string;
+    year: number;
+    aired_at: string;
+    all_status: string;
+    anime_description: string;
+    anime_genres: string[];
+    next_episode_at: string;
+    other_titles: string[];
+    other_titles_en: string[];
+    other_titles_jp: string[];
+    rating_mpaa: string;
+  };
 
   // itemsReindexing: {};
 
@@ -259,6 +343,38 @@ interface AnimeSearchSliceState {
 const initialState: AnimeSearchSliceState = {
   itemsSearch: [],
   searchInpVal: '',
+  idFullDesc: '',
+  materialData: {
+    shikimori_rating: 0,
+    shikimori_votes: 0,
+
+    anime_license_name: '',
+    actors: [],
+    all_genres: '',
+    anime_status: '',
+    anime_studios: [],
+    anime_title: '',
+    description: '',
+    duration: 0,
+    episodes_aired: 0,
+    episodes_total: 0,
+    minimal_age: 0,
+    anime_kind: '',
+    title: '',
+    title_en: '',
+    screenshots: [],
+    poster_url: '',
+    year: 0,
+    aired_at: '',
+    all_status: '',
+    anime_description: '',
+    anime_genres: [],
+    next_episode_at: '',
+    other_titles: [],
+    other_titles_en: [],
+    other_titles_jp: [],
+    rating_mpaa: '',
+  },
 
   // itemsReindexing: {},
 
@@ -277,6 +393,9 @@ const searchSlice = createSlice({
     },
     searchInpHeader: (state, action: PayloadAction<string>) => {
       state.searchInpVal = action.payload;
+    },
+    setIdFullDesc: (state, action: PayloadAction<string>) => {
+      state.idFullDesc = action.payload;
     },
     error: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
@@ -312,7 +431,8 @@ const searchSlice = createSlice({
   },
 });
 
-export const { setItemsSearch, searchInpHeader, error } = searchSlice.actions;
+export const { setItemsSearch, searchInpHeader, setIdFullDesc, error } =
+  searchSlice.actions;
 
 // export const itemsReindexing = (state: RootState) =>
 //   state.animeSlice.itemsReindexing;

@@ -6,13 +6,17 @@
     top: 0;
     right: 0;
   }
+
+  &__search {
+    // position: relative;
+  }
   &__search-inp {
     display: flex;
     flex-direction: row-reverse;
     justify-content: flex-start;
     align-items: center;
     position: absolute;
-    top: 0.15em;
+    top: -0.2em;
     left: -20.7em;
   }
   &__inp {
@@ -21,7 +25,109 @@
     border-radius: 0.5rem;
     font-size: 16px;
     width: 360px;
-    padding: 0.37em 0.5em;
+    padding: 0.7em 0.5em;
     margin-right: 0.4rem;
+  }
+  &__popup-result {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: absolute;
+    z-index: 1;
+    left: -22.7rem;
+    top: 2.6rem;
+    width: 22.4rem;
+    height: calc(100vh - 186px);
+    // height: 100vh;
+    // height: 38rem;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    border: 1px solid var(--background-root-color);
+    background-color: var(--background-container-color);
+    // background-color: #ce5454;
+  }
+
+  &__list {
+  }
+  &__item {
+  }
+}
+
+.item-search {
+  // width: 100%;
+  // background-color: #dcc4f7;
+
+  padding: 1rem 0;
+  // padding-bottom: 1rem;
+  margin: 0 1.2rem;
+  // margin-left: 1.2rem;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--border-bottom);
+    // margin-right: 0;
+    // margin-bottom: 1rem;
+  }
+
+  &__link {
+    display: flex;
+
+    &:not(:last-child) {
+      // padding-bottom: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    &::before {
+      display: none;
+    }
+  }
+  &__image {
+  }
+  &__img-wrap {
+    flex: 0 0 30%;
+  }
+
+  &__title-type {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: start;
+    width: 100%;
+
+    border-bottom: 1px solid var(--border-bottom);
+    padding: 0.7rem 1rem;
+
+    // margin: 0.7rem 0;
+  }
+  &__title {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: start;
+
+    padding-bottom: 0.7rem;
+    // margin: 0.7rem 0;
+    transition: all 0.15s ease-in-out;
+
+    & h2 {
+      line-height: 1.3rem;
+    }
+
+    &:hover {
+      color: var(--nik-time-opacity);
+    }
+  }
+  &__title-year {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    padding: 0rem 1.2rem;
+  }
+}
+.search-header {
+  &__item {
   }
 }

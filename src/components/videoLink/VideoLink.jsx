@@ -265,7 +265,6 @@ const VideoLink = ({ linkVideo }) => {
     }
   };
 
-  console.log(linkVideo, 'linkVideo');
   useEffect(() => {
     if (linkVideo) setAnimeUrl(linkVideo);
     // fetchData();
@@ -276,7 +275,7 @@ const VideoLink = ({ linkVideo }) => {
   //   console.log(animeData, 'animeData');
 
   return (
-    <div>
+    <>
       <div className="player-block__title">
         <strong>{animeTitle}</strong>
         <span className="player-block__age-rating">18+</span>
@@ -295,9 +294,9 @@ const VideoLink = ({ linkVideo }) => {
           src={animeUrl}
           width="607"
           height="360"
-          frameBorder="0"
           allowFullScreen
-          allow="autoplay *; fullscreen *"></iframe>
+          allow="autoplay *; fullscreen *"
+        />
 
         {/* <iframe
           src="https://www.funimation.com/shows/steinsgate"
@@ -307,7 +306,7 @@ const VideoLink = ({ linkVideo }) => {
           allowFullScreen
           allow="autoplay *; fullscreen *"></iframe> */}
       </div>
-    </div>
+    </>
   );
 };
 

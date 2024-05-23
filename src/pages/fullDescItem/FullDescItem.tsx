@@ -1,5 +1,5 @@
 import './FullDescItem.scss';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { SetStateAction, useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 // import srcImg from '../../assets/image/anime-poster/659f8dd485857721242765.jpg';
@@ -7,9 +7,16 @@ import { Link, useParams } from 'react-router-dom';
 import FormMain from '../../components/formMain/FormMain';
 import RatingStar from '../../components/rating/RatingStar';
 import VideoLink from '../../components/videoLink/VideoLink';
-import { clientKodik } from '../../kodikcfg';
+import { clientKodik, kodikApiKey } from '../../kodikcfg';
 import { MaterialObject } from 'kodikwrapper';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
+import { AnimeItems } from '../../store/animeSlice';
+import { RootState, useAppDispatch } from '../../store';
+import {
+  fetchAnimeSearchSlice,
+  itemsAnimeSearch,
+} from '../../store/searchSlice';
 // import { itemsAnimeSearch } from '../../store/searchSlice';
 
 // ---------------------------------------------------------------------
@@ -23,9 +30,13 @@ type FullDescItemProps = {
 
 const FullDescItem: React.FC<FullDescItemProps> = () => {
   const { id } = useParams<{
-    id: string;
+    id;
   }>();
+  const dispatch = useAppDispatch();
+  const [limitPar, setLimitPar] = useState(1);
+  const [searchInpVal, setSearchInpVal] = useState<any>(''); //: string | undefined;
 
+  const [idAnime, setIdAnime] = useState('');
   let aliImgMediaLeft = 'постер аниме поднятвным героем'; // данные из бекенда ----------
 
   // запрос для одного аниме
@@ -35,156 +46,242 @@ const FullDescItem: React.FC<FullDescItemProps> = () => {
     []
   );
   const [itemAnimeLink, setItemAnimeLink] = useState('');
+
   const [itemAnimeTitle, setItemAnimeTitle] = useState('');
   const [itemAnimeTitleOrign, setItemAnimeTitleOrign] = useState('');
+  const [itemAnimeOtherTitle, setItemAnimeOtherTitle] = useState('');
+
+  const animeSearchItems = useSelector(itemsAnimeSearch);
+  // const searchInpVal = useSelector(
+  //   (state: RootState) => state.searchSlice.idFullDesc
+  // );
+  const itemAnime = animeSearchItems[0]?.material_data;
+
+  // fthAnimeSearchSlice -----------------------------
+  const fthAnimeSearchSlice = () => {
+    dispatch(fetchAnimeSearchSlice({ searchInpVal, limitPar, idAnime }));
+    document.getElementById('root')?.scrollIntoView(); // при перерисовке скорит на верх стр
+  };
+  // -------------------------------------------------------
+  useEffect(() => {
+    console.log(id, 'id--------------------------');
+
+    // setSearchInpVal(id);
+    setIdAnime(`id=${id}`);
+    if (id) {
+    }
+    fthAnimeSearchSlice();
+    // const animeItem = async () => {
+    //   console.log(id, 'id');
+
+    //   const resp: any = await axios.get<AnimeItems[]>(
+    //     `http://kodikapi.com/search?limit=1&id=${id}&with_material_data=true&token=${kodikApiKey}`
+    //   );
+
+    //   if (resp.status !== 200) {
+    //     throw new Error('Server Error!');
+    //   }
+    //   const data = resp.data.results;
+    //   console.log(data, 'data full-desc');
+
+    //   if (data.length !== 0) {
+    //     // setItemAnimeSearchId(data);
+    //     setItemAnimeLink(data[0].link);
+    //     setItemAnimeTitle(data[0].title);
+    //     setItemAnimeTitleOrign(data[0].title_orig);
+    //     setItemAnimeOtherTitle(data[0].other_title);
+    //     // setItemAnimeOtherRating(data[0].material_data?.shikimori_rating);
+    //     // setItemAnimeOtherVotes(data[0].material_data?.shikimori_votes);
+    //   }
+    //   // -----------------------------------------------------------
+    //   // await clientKodik
+    //   //   .search({ id })
+    //   //   .then((response) => response.results)
+    //   //   .then(async (material) => {
+    //   //     if (!material) throw new Error('не найдено');
+    //   //     console.log(material, '---------- ----search id-------------');
+    //   //     if (itemAnimeSearchId) {
+    //   //       setItemAnimeSearchId(material);
+    //   //       setItemAnimeLink(material[0].link);
+    //   //       setItemAnimeTitle(material[0].title);
+    //   //       setItemAnimeTitleOrign(material[0].title_orig);
+    //   //       setItemAnimeOtherTitle(material[0].other_title);
+    //   //     }
+    //   //   });
+    //   return data;
+    // };
+    // animeItem();
+  }, [id, idAnime]);
 
   useEffect(() => {
-    const animeItem = async () => {
-      await clientKodik
-        .search({ id })
-        .then((response) => response.results)
-        .then(async (material) => {
-          if (!material) throw new Error('не найдено');
+    if (animeSearchItems?.length !== 0) {
+    }
+    // setItemAnimeLink(animeSearchItems[0].link);
+    // setItemAnimeSearchId(animeSearchItems);
+  }, [id, animeSearchItems]);
 
-          console.log(material, '---------- ----search id-------------');
+  console.log(itemAnime, 'itemAnime');
+  console.log(animeSearchItems, 'animeSearchItems');
+  // console.log(itemAnimeSearchId, 'itemAnimeSearchId');
+  // console.log(itemAnimeLink, 'itemAnimeLink');
 
-          if (itemAnimeSearchId) {
-            setItemAnimeSearchId(material);
-            setItemAnimeLink(material[0].link);
-            setItemAnimeTitle(material[0].title);
-            setItemAnimeTitleOrign(material[0].title_orig);
-          }
-        });
-    };
-
-    animeItem();
-  }, [id]);
-
-  useEffect(() => {}, [itemAnimeSearchId]);
-
-  console.log(itemAnimeSearchId, 'itemAnimeSearchId');
-
-  if (!itemAnimeSearchId) {
+  if (!animeSearchItems) {
     return <p>Download...</p>;
   }
   return (
     <main className="main full-desc-item">
-      <div className="full-desc-item__wrap">
-        <VideoLink linkVideo={itemAnimeLink} />
-        <div className="item-anime__title">
-          {itemAnimeTitle + '. ' + itemAnimeTitleOrign}
-        </div>
+      {itemAnime && (
+        <>
+          <div className="full-desc-item__wrap">
+            {/* <VideoLink linkVideo={animeSearchItems[0].link} />
 
-        <div className="item-anime__rating">{/* {!!!!!!!!!!!!!!! */}</div>
-        <div className="item-anime__rating">{/* {!!!!!!!!!!!!!!! */}</div>
-        <div className="item-anime__translation translation">
-          <ul className="translation__list">
-            {/* <li className="translation__item"> {elem.translation.title}</li> */}
-          </ul>
-        </div>
-        {/* <div className="main__content content">
-          <div className="content__media media">
-            <div className="media__left">
-              <div className="media__left-image">
-                <img
-                  className="media__left-img img"
-                  src={srcImg}
-                  alt={aliImgMediaLeft}
-                />
-              </div>
-              <div className="media__left-buttons">
-                <button className="media__left-buttons-online btn">
-                  Смотреть онлайн
-                </button>
-                <button
-                  className="media__left-buttons-review btn"
-                  onClick={() => openForm()}>
-                  Написать отзыв
-                </button>
-                <button className="media__left-add-list btn">
-                  Добавить в список
-                </button>
-              </div>
-              <div className="media__left-add"></div>
+            <div className="item-anime__title">
+              {animeSearchItems[0].other_title}
             </div>
-            <div className="media__right">
-              <div className="media__rating-block rating">
-                <div className="rating__stars">
-                  <span className="rating__num">8,7</span>
-                  <span> / 10</span>
-                </div>
-                <div className="rating__grade-user">
-                  <div className="rating__user-star">
-                    <RatingStar />
+
+            <div className="item-anime__rating">
+              {animeSearchItems[0].material_data.shikimori_rating}
+              {'/ '}
+              {animeSearchItems[0].material_data.shikimori_votes}
+            </div>
+            <div className="item-anime__kljkhkj"></div>
+            <div className="item-anime__translation translation">
+              <ul className="translation__list">
+                {/* <li className="translation__item"> {elem.translation.title}</li>
+              </ul>
+            </div> */}
+
+            <div className="main__content content">
+              <div className="content__media media">
+                <div className="media__left">
+                  <div className="media__left-image">
+                    <img
+                      className="media__left-img img"
+                      src={itemAnime.poster_url}
+                      alt={`изображение ${itemAnime.title}`}
+                    />
                   </div>
-                  <span>Оцените аниме</span>
+                  <div className="media__left-buttons">
+                    <button className="media__left-buttons-online btn">
+                      Смотреть онлайн
+                    </button>
+                    <button
+                      className="media__left-buttons-review btn"
+                      // onClick={() => openForm()}
+                    >
+                      Написать отзыв
+                    </button>
+                    <button className="media__left-add-list btn">
+                      Добавить в список
+                    </button>
+                  </div>
+                  <div className="media__left-add"></div>
+                </div>
+                <div className="media__right">
+                  <div className="media__rating-block rating">
+                    <div className="rating__stars">
+                      <span className="rating__num">
+                        {itemAnime.shikimori_rating}
+                      </span>
+                      <span>
+                        {' /'}
+                        {itemAnime.shikimori_votes}
+                      </span>
+                    </div>
+                    <div className="rating__grade-user">
+                      <div className="rating__user-star">
+                        <RatingStar />
+                      </div>
+                      <span>Оцените аниме</span>
+                    </div>
+                  </div>
+                  <div className="media__title title-top">
+                    <h1 className="title-top__orign">
+                      {animeSearchItems[0].title}
+                    </h1>
+                    <ul className="title-top__other-titles">
+                      <li>
+                        <h4>{itemAnime.other_titles_en}</h4>
+                      </li>
+                      <li>
+                        <h4>{itemAnime.other_titles_jp}</h4>
+                      </li>
+                    </ul>
+                  </div>
+                  <dl className="media__desc desc-media">
+                    <dt className="desc-media__dt">Тип</dt>
+                    <dd className="desc-media__dd">{itemAnime.anime_kind}</dd>
+
+                    <dt className="desc-media__dt">Жанр</dt>
+                    <dd className="desc-media__dd">
+                      {/* itemAnime.anime_genres.length !== 0 && */}
+                      {itemAnime.anime_genres?.map((el, ind) => (
+                        <span key={el + ind}>{el}</span>
+                      ))}
+                    </dd>
+
+                    <dt className="desc-media__dt">Год</dt>
+                    <dd className="desc-media__dd">
+                      {animeSearchItems[0].year}
+                    </dd>
+
+                    <dt className="desc-media__dt">Длительность</dt>
+                    <dd className="desc-media__dd">
+                      {itemAnime.duration} мин. ~ серия
+                    </dd>
+                    <dt className="desc-media__dt">Озвучка</dt>
+                    <dd className="desc-media__dd">
+                      AniDUB, AniLibria, SHIZA Project, Студийная Банда,
+                      AnimeVost, AniStar, AniRise, JAM CLUB, Amber, TVShows,
+                      Субтитры, Dream Cast, КОМНАТА ДИДИ, AniDub Online
+                    </dd>
+
+                    <dt className="desc-media__dt">Актеры</dt>
+                    <dd className="desc-media__dd">
+                      {' '}
+                      {/* itemAnime.actors.length !== 0 && */}
+                      {itemAnime.actors?.map((el, ind) => (
+                        <span key={el + ind}>{el}</span>
+                      ))}
+                    </dd>
+
+                    <dt className="desc-media__dt">Снят по манге</dt>
+                    <dd className="desc-media__dd">
+                      {itemAnime.anime_license_name}
+                    </dd>
+
+                    <dt className="desc-media__dt">Рейтинг MPAA</dt>
+                    <dd className="desc-media__dd">
+                      <span>{itemAnime.rating_mpaa}</span>
+                    </dd>
+                    <dt className="desc-media__dt">Возрастные ограничения</dt>
+                    <dd className="desc-media__dd">
+                      <span>{itemAnime.minimal_age}</span>
+                    </dd>
+                  </dl>
                 </div>
               </div>
+              <div className="content__media description">
+                <div className="description__text">
+                  {itemAnime.anime_description}
+                </div>
+              </div>
+              <div className="content__player player-block">
+                <VideoLink linkVideo={animeSearchItems[0].link} />
+              </div>
+              <div className="content__coment comment">
+                <div className="comment__add">
+                  <button
+                    className="comment__btn-send-comment btn"
+                    // onClick={() => openFormComment()}
+                  >
+                    Написать комментарий
+                  </button>
+                </div>
+                <div className="comment__body">
+                  <h2>Комментарии</h2>
 
-              <dl className="media__desc desc-media">
-                <dt className="desc-media__dt">Тип</dt>
-                <dd className="desc-media__dd">ТВ Сериал</dd>
-
-                <dt className="desc-media__dt">Жанр</dt>
-                <dd className="desc-media__dd">Приключения, Фэнтези, Экшен</dd>
-
-                <dt className="desc-media__dt">Год</dt>
-                <dd className="desc-media__dd">2024</dd>
-
-                <dt className="desc-media__dt">Длительность</dt>
-                <dd className="desc-media__dd">23 мин. ~ серия</dd>
-                <dt className="desc-media__dt">Озвучка</dt>
-                <dd className="desc-media__dd">
-                  AniDUB, AniLibria, SHIZA Project, Студийная Банда, AnimeVost,
-                  AniStar, AniRise, JAM CLUB, Amber, TVShows, Субтитры, Dream
-                  Cast, КОМНАТА ДИДИ, AniDub Online
-                </dd>
-
-                <dt className="desc-media__dt">Главные герои</dt>
-                <dd className="desc-media__dd">Джину Сон</dd>
-
-                <dt className="desc-media__dt">Снят по манге</dt>
-                <dd className="desc-media__dd">Поднятие уровня в одиночку</dd>
-
-                <dt className="desc-media__dt">Возрастные ограничения</dt>
-                <dd className="desc-media__dd">
-                  <span>18+</span>
-                </dd>
-              </dl>
-            </div>
-          </div>
-          <div className="content__media description">
-            <div className="description__title">Здесь заголовок</div>
-            <div className="description__text">
-              Давно выяснено, что при оценке дизайна и композиции читаемый текст
-              мешает сосредоточиться. Lorem Ipsum используют потому, что тот
-              обеспечивает более или менее стандартное заполнение шаблона, а
-              также реальное распределение букв и пробелов в абзацах, которое не
-              получается при простой дубликации "Здесь ваш текст.. Здесь ваш
-              текст.. Здесь ваш текст.." Многие программы электронной вёрстки и
-              редакторы HTML используют Lorem Ipsum в качестве текста по
-              умолчанию, так что поиск по ключевым словам "lorem ipsum" сразу
-              показывает, как много веб-страниц всё ещё дожидаются своего
-              настоящего рождения. За прошедшие годы текст Lorem Ipsum получил
-              много версий. Некоторые версии появились по ошибке, некоторые -
-              намеренно (например, юмористические варианты).
-            </div>
-          </div>
-          <div className="content__player player-block">
-            <VideoLink />
-          </div>
-          <div className="content__coment comment">
-            <div className="comment__add">
-              <button
-                className="comment__btn-send-comment btn"
-                onClick={() => openFormComment()}>
-                Написать комментарий
-              </button>
-            </div>
-            <div className="comment__body">
-              <h2>Комментарии</h2>
-
-              <FormMain
+                  {/* <FormMain
                 openFormComent={openFormComent}
                 setOpenFormComent={setOpenFormComent}
                 setLengthComment={setLengthComment}
@@ -193,11 +290,13 @@ const FullDescItem: React.FC<FullDescItemProps> = () => {
 
               {lengthComment.length === 0 && (
                 <p>Пока нет ни одного комментария</p>
-              )}
+              )}  */}
+                </div>
+              </div>
             </div>
           </div>
-        </div> */}
-      </div>
+        </>
+      )}
     </main>
   );
 };
