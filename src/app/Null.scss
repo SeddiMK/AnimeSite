@@ -200,6 +200,12 @@ main.registaration,
 main.contacts,
 main.full-desc-item {
 }
+main.anime {
+  padding-top: 1.3rem;
+}
+main.full-desc-item {
+  padding-top: 1.3rem;
+}
 // buttons ----------------------------------------------------------
 .btn {
   background-color: var(--btn-send-com);
@@ -248,12 +254,22 @@ main.full-desc-item {
 
 // img ------------------------
 .wrap-img-anime {
-  width: 600px;
-  height: 300px;
+  width: 15rem;
+  height: 21rem;
+}
+.wrap-img-media {
+  // width: 600px;
+  // height: 300px;
+  width: 21rem;
+  height: 31rem;
 }
 .wrap-img-search {
   // width: 8rem;
   height: 8rem;
+}
+.wrap-img-full-desc {
+  // width: 21rem;
+  height: 80%;
 }
 .img {
   width: 100%;

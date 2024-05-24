@@ -276,10 +276,10 @@ const VideoLink = ({ linkVideo }) => {
 
   return (
     <>
-      <div className="player-block__title">
+      {/* <div className="player-block__title">
         <strong>{animeTitle}</strong>
         <span className="player-block__age-rating">18+</span>
-      </div>
+      </div> */}
       <div className="player-block__player">
         {/* <ReactPlayer
           light
@@ -292,8 +292,8 @@ const VideoLink = ({ linkVideo }) => {
         />{' '} */}
         <iframe
           src={animeUrl}
-          width="607"
-          height="360"
+          width="100%"
+          height="100%"
           allowFullScreen
           allow="autoplay *; fullscreen *"
         />

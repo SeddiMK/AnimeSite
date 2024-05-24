@@ -1,0 +1,46 @@
+.anime {
+  &__list-items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    grid-column-gap: 3rem;
+    grid-row-gap: 9rem;
+    justify-content: space-between;
+    justify-items: center;
+  }
+  &__item {
+  }
+}
+.img {
+}
+.item-anime {
+  &__link-full-desc {
+    display: flex;
+    flex-direction: column;
+  }
+  &__image {
+    margin-bottom: 1rem;
+  }
+  &__img-wrap {
+    &:not(:last-child) {
+    }
+  }
+  &__lkjh {
+  }
+  &__rating {
+  }
+  &__title {
+    line-height: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  &__num {
+    font-size: 1.3rem;
+  }
+  &__star {
+    font-size: 1.3rem;
+    color: #ffbb00;
+    margin-right: 0.2rem;
+  }
+  &__votes {
+  }
+}

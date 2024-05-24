@@ -17,6 +17,7 @@ import {
   fetchAnimeSearchSlice,
   itemsAnimeSearch,
 } from '../../store/searchSlice';
+import { addListAnime } from '../../store/userSlice';
 // import { itemsAnimeSearch } from '../../store/searchSlice';
 
 // ---------------------------------------------------------------------
@@ -36,8 +37,31 @@ const FullDescItem: React.FC<FullDescItemProps> = () => {
   const [limitPar, setLimitPar] = useState(1);
   const [searchInpVal, setSearchInpVal] = useState<any>(''); //: string | undefined;
 
+  const playerRef = useRef<null | HTMLDivElement>(null);
+
   const [idAnime, setIdAnime] = useState('');
   let aliImgMediaLeft = 'постер аниме поднятвным героем'; // данные из бекенда ----------
+
+  // openComment ---------------------------------------------------
+  const [openFormComent, setOpenFormComent] = useState(false);
+  const [lengthComment, setLengthComment] = useState([]);
+  const [formStyle, setFormStyle] = useState({});
+
+  // open form напротив кнопки
+  const openForm = () => {
+    setOpenFormComent(true);
+    setFormStyle({
+      left: '38%',
+      top: '24rem',
+    });
+  };
+  const openFormComment = () => {
+    setOpenFormComent(true);
+    setFormStyle({
+      left: '33%',
+      top: '58rem',
+    });
+  };
 
   // запрос для одного аниме
   // const itemsAnimeSlice = useSelector(itemsAnimeSearch);
@@ -46,7 +70,6 @@ const FullDescItem: React.FC<FullDescItemProps> = () => {
     []
   );
   const [itemAnimeLink, setItemAnimeLink] = useState('');
-
   const [itemAnimeTitle, setItemAnimeTitle] = useState('');
   const [itemAnimeTitleOrign, setItemAnimeTitleOrign] = useState('');
   const [itemAnimeOtherTitle, setItemAnimeOtherTitle] = useState('');
@@ -125,12 +148,29 @@ const FullDescItem: React.FC<FullDescItemProps> = () => {
   // console.log(itemAnimeSearchId, 'itemAnimeSearchId');
   // console.log(itemAnimeLink, 'itemAnimeLink');
 
+  // --- format date ------------------------------------------------------
+  // Input date string
+  const dateString = itemAnime?.aired_at;
+
+  // Step 1: Parse the date string into a Date object
+  const date = new Date(dateString);
+
+  // Step 2: Extract the month, day, and year
+  const month = date.toLocaleString('default', { month: 'long' }); // "April"
+  const day = date.getDate().toString().padStart(2, '0'); // "04"
+  const year = date.getFullYear(); // 2024
+
+  // Step 3: Combine the parts into the desired format
+  const formattedDate = `${day} ${month} ${year}`; // Output: "04 April 2024"
+
+  // ---------------------------------------------------------
+
   if (!animeSearchItems) {
     return <p>Download...</p>;
   }
   return (
     <main className="main full-desc-item">
-      {itemAnime && (
+      {animeSearchItems.length !== 0 ? (
         <>
           <div className="full-desc-item__wrap">
             {/* <VideoLink linkVideo={animeSearchItems[0].link} />
@@ -154,24 +194,35 @@ const FullDescItem: React.FC<FullDescItemProps> = () => {
             <div className="main__content content">
               <div className="content__media media">
                 <div className="media__left">
-                  <div className="media__left-image">
+                  <div className="media__left-image wrap-img-media">
                     <img
                       className="media__left-img img"
-                      src={itemAnime.poster_url}
-                      alt={`изображение ${itemAnime.title}`}
+                      src={
+                        itemAnime?.poster_url
+                          ? itemAnime.poster_url
+                          : animeSearchItems[0].screenshots[0]
+                      }
+                      alt={`изображение постера аниме ${animeSearchItems[0].title}`}
                     />
                   </div>
                   <div className="media__left-buttons">
-                    <button className="media__left-buttons-online btn">
+                    <button
+                      className="media__left-buttons-online btn"
+                      onClick={() =>
+                        playerRef.current?.scrollIntoView({
+                          behavior: 'smooth',
+                        })
+                      }>
                       Смотреть онлайн
                     </button>
                     <button
                       className="media__left-buttons-review btn"
-                      // onClick={() => openForm()}
-                    >
+                      onClick={() => openForm()}>
                       Написать отзыв
                     </button>
-                    <button className="media__left-add-list btn">
+                    <button
+                      className="media__left-add-list btn"
+                      onClick={() => dispatch(addListAnime(id))}>
                       Добавить в список
                     </button>
                   </div>
@@ -180,12 +231,13 @@ const FullDescItem: React.FC<FullDescItemProps> = () => {
                 <div className="media__right">
                   <div className="media__rating-block rating">
                     <div className="rating__stars">
+                      <span className="rating__star">&#9733;</span>
                       <span className="rating__num">
-                        {itemAnime.shikimori_rating}
+                        {itemAnime?.shikimori_rating}
                       </span>
-                      <span>
-                        {' /'}
-                        {itemAnime.shikimori_votes}
+                      <span className="rating__votes">
+                        {' / '}
+                        {itemAnime?.shikimori_votes}
                       </span>
                     </div>
                     <div className="rating__grade-user">
@@ -201,22 +253,22 @@ const FullDescItem: React.FC<FullDescItemProps> = () => {
                     </h1>
                     <ul className="title-top__other-titles">
                       <li>
-                        <h4>{itemAnime.other_titles_en}</h4>
+                        <h4>{itemAnime?.other_titles_en}</h4>
                       </li>
                       <li>
-                        <h4>{itemAnime.other_titles_jp}</h4>
+                        <h4>{itemAnime?.other_titles_jp}</h4>
                       </li>
                     </ul>
                   </div>
                   <dl className="media__desc desc-media">
                     <dt className="desc-media__dt">Тип</dt>
-                    <dd className="desc-media__dd">{itemAnime.anime_kind}</dd>
+                    <dd className="desc-media__dd">{itemAnime?.anime_kind}</dd>
 
                     <dt className="desc-media__dt">Жанр</dt>
                     <dd className="desc-media__dd">
                       {/* itemAnime.anime_genres.length !== 0 && */}
-                      {itemAnime.anime_genres?.map((el, ind) => (
-                        <span key={el + ind}>{el}</span>
+                      {itemAnime?.anime_genres?.map((el, ind) => (
+                        <span key={el + ind}>{el} </span>
                       ))}
                     </dd>
 
@@ -225,76 +277,101 @@ const FullDescItem: React.FC<FullDescItemProps> = () => {
                       {animeSearchItems[0].year}
                     </dd>
 
+                    <dt className="desc-media__dt">Выпуск</dt>
+                    <dd className="desc-media__dd">{formattedDate}</dd>
+
                     <dt className="desc-media__dt">Длительность</dt>
                     <dd className="desc-media__dd">
-                      {itemAnime.duration} мин. ~ серия
+                      {itemAnime?.duration ? itemAnime.duration : '23'} мин. ~
+                      серия
                     </dd>
-                    <dt className="desc-media__dt">Озвучка</dt>
+
+                    {/* <dt className="desc-media__dt">Озвучка</dt>
                     <dd className="desc-media__dd">
                       AniDUB, AniLibria, SHIZA Project, Студийная Банда,
                       AnimeVost, AniStar, AniRise, JAM CLUB, Amber, TVShows,
                       Субтитры, Dream Cast, КОМНАТА ДИДИ, AniDub Online
-                    </dd>
+                    </dd> */}
 
                     <dt className="desc-media__dt">Актеры</dt>
                     <dd className="desc-media__dd">
-                      {' '}
-                      {/* itemAnime.actors.length !== 0 && */}
-                      {itemAnime.actors?.map((el, ind) => (
-                        <span key={el + ind}>{el}</span>
+                      {itemAnime?.actors?.map((el, ind) => (
+                        <span key={el + ind}>{el} </span>
                       ))}
                     </dd>
 
                     <dt className="desc-media__dt">Снят по манге</dt>
                     <dd className="desc-media__dd">
-                      {itemAnime.anime_license_name}
+                      {itemAnime?.anime_license_name}
                     </dd>
 
                     <dt className="desc-media__dt">Рейтинг MPAA</dt>
                     <dd className="desc-media__dd">
-                      <span>{itemAnime.rating_mpaa}</span>
+                      <span>{itemAnime?.rating_mpaa}</span>
                     </dd>
                     <dt className="desc-media__dt">Возрастные ограничения</dt>
                     <dd className="desc-media__dd">
-                      <span>{itemAnime.minimal_age}</span>
+                      <span>
+                        {itemAnime?.minimal_age ? itemAnime.minimal_age : 0}+
+                      </span>
                     </dd>
                   </dl>
                 </div>
               </div>
               <div className="content__media description">
                 <div className="description__text">
-                  {itemAnime.anime_description}
+                  {itemAnime?.anime_description}
                 </div>
               </div>
-              <div className="content__player player-block">
+
+              <div className="content__screnshots screnshots-fulldesc">
+                <h3 className="screnshots-fulldesc__title">Кадры</h3>
+                <div className="screnshots-fulldesc__wrp">
+                  {animeSearchItems[0]?.screenshots.map((el, ind) => (
+                    <div
+                      key={el + ind}
+                      className="screnshots-fulldesc__wrap-img wrap-img-full-desc">
+                      <img
+                        className="screnshots-fulldesc img"
+                        src={el}
+                        alt={`картинка кадра из аниме ${animeSearchItems[0].title}`}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div ref={playerRef} className="content__player player-block">
                 <VideoLink linkVideo={animeSearchItems[0].link} />
               </div>
               <div className="content__coment comment">
                 <div className="comment__add">
                   <button
                     className="comment__btn-send-comment btn"
-                    // onClick={() => openFormComment()}
-                  >
+                    onClick={() => openFormComment()}>
                     Написать комментарий
                   </button>
                 </div>
                 <div className="comment__body">
                   <h2>Комментарии</h2>
 
-                  {/* <FormMain
-                openFormComent={openFormComent}
-                setOpenFormComent={setOpenFormComent}
-                setLengthComment={setLengthComment}
-                formStyle={formStyle}
-              />
+                  <FormMain
+                    openFormComent={openFormComent}
+                    setOpenFormComent={setOpenFormComent}
+                    setLengthComment={setLengthComment}
+                    formStyle={formStyle}
+                  />
 
-              {lengthComment.length === 0 && (
-                <p>Пока нет ни одного комментария</p>
-              )}  */}
+                  {/* {lengthComment.length === 0 && (
+                    <p>Пока нет ни одного комментария</p>
+                  )} */}
                 </div>
               </div>
             </div>
           </div>
+        </>
+      ) : (
+        <>
+          <div>Загрузка контента... Попробуйте перезагрузить страницу. </div>
         </>
       )}
     </main>

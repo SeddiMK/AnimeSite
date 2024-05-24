@@ -73,7 +73,7 @@ export const fetchAnimeListSlice = createAsyncThunk<AnimeItems[], AnimeParams>(
       }
       const data = resp.data.results;
 
-      // console.log(data, '------------data list------------');
+      console.log(data, '------------data list------------');
 
       // let animesItems: MaterialObject[] = [];
       let titles: string[] = [];
@@ -82,13 +82,38 @@ export const fetchAnimeListSlice = createAsyncThunk<AnimeItems[], AnimeParams>(
       let animesItemsNotTest: AnimeItems[] = [];
       // let animesItemsSearchAll: AnimeSearch[] = [];
       let prevTitle: string | null = null;
+      let prevId: string | null = null;
+
+      let flags = {};
+      // let newPlaces = data?.filter((item) => {
+      //   if (
+      //     (item.type === 'anime' || item.type === 'anime-serial') &&
+      //     flags[item.title.toLowerCase()]
+      //   ) {
+      //     return false;
+      //   }
+      //   flags[item.title.toLowerCase()] = true;
+      //   return true;
+      // });
+
+      // [ 1, 2, 3, 4, 5, 6 ]
+
+      // const seen = new Set();
+      // const uniqueObjects = objects.filter(obj => {
+      //     if (seen.has(obj.title)) {
+      //         return false;
+      //     } else {
+      //         seen.add(obj.title);
+      //         return true;
+      //     }
+      // });
 
       if (data.length !== 0) {
-        // let prevTitle: string | null = material[0].title;
+        // let prevTitle: string | null = material[0].title; // && item.title.toLowerCase() !==
         for (const item of data) {
           if (
             (item.type === 'anime' || item.type === 'anime-serial') &&
-            item.title_orig.toLowerCase() !== prevTitle
+            item.title.toLowerCase() !== prevTitle
           ) {
             animesItems.push(item);
           } else {
@@ -99,8 +124,10 @@ export const fetchAnimeListSlice = createAsyncThunk<AnimeItems[], AnimeParams>(
           //   title.push(item.title);
           //   origTitle.push(item.title_orig);
           // }
+          // console.log(prevTitle, 'prevTitle');
 
-          prevTitle = item.title_orig.toLowerCase();
+          prevTitle = item.other_title;
+          prevId = item.id;
         }
       } else {
         console.log('нет данных для показа');
@@ -211,7 +238,13 @@ export const fetchAnimeListSlice = createAsyncThunk<AnimeItems[], AnimeParams>(
       // console.log(animesItemsNotTest, 'animesItemsNotTest');
       // console.log(animesItems, '----------animesItems LIST----------');
 
-      return animesItems; // as AnimeItems[];
+      let uniqueAnimesItems = Object.values(
+        animesItems.reduce((acc, obj) => {
+          acc[obj.title] = obj;
+          return acc;
+        }, {})
+      );
+      return uniqueAnimesItems; //animesItems as AnimeItems[];
     } catch (error) {
       return error.message; //rejectWithValue(
     }

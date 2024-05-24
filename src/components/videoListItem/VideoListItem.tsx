@@ -32,17 +32,13 @@ import VideoListPage from './VideoListItem';
 const VideoListItem: React.FC = () => {
   const dispatch = useAppDispatch();
 
-  const [openFormComent, setOpenFormComent] = useState(false);
-  const [formStyle, setFormStyle] = useState({});
-  const [lengthComment, setLengthComment] = useState([]); // пока нет ни одного комментария
-
   const isMount = useRef(false); // флаг первого рендера
   const skeletons = [...new Array(10)].map((_, i) => <Skeleton key={i} />); //!!!!!!!!!!!!!!!!!!!
 
   let { status } = useSelector((state: RootState) => state.animeSlice);
   // search param ----------------------------------------------
   // const [titlePar, setTitlePar] = useState('');
-  const [limitPar, setLimitPar] = useState(10);
+  const [limitPar, setLimitPar] = useState(100);
 
   const [itemsAnimeSlice, setItemsAnimeSlice] = useState<AnimeItems[]>([]);
 
@@ -70,22 +66,6 @@ const VideoListItem: React.FC = () => {
     // access to player in all event handlers via event.target
     event.target.pauseVideo();
   };
-
-  // open form напротив кнопки
-  // const openForm = () => {
-  //   setOpenFormComent(true);
-  //   setFormStyle({
-  //     left: '38%',
-  //     top: '24rem',
-  //   });
-  // };
-  // const openFormComment = () => {
-  //   setOpenFormComent(true);
-  //   setFormStyle({
-  //     left: '33%',
-  //     top: '77rem',
-  //   });
-  // };
 
   //если был первый рендер, то запрашиваем данные
   useEffect(() => {
@@ -156,7 +136,7 @@ const VideoListItem: React.FC = () => {
   // console.log(itemsAnimeSlice, '------itemsAnimeSlice-------');
 
   return (
-    <div>
+    <>
       {status === 'error' ? (
         <Error />
       ) : (
@@ -167,23 +147,32 @@ const VideoListItem: React.FC = () => {
             animeItems?.map((elem, ind) => (
               <div key={elem.id + ind} className="anime__item item-anime">
                 <Link
+                  className="item-anime__link-full-desc"
                   to={`/fullDescItem/${elem.id}`}
                   onClick={() => dispatch(setIdFullDesc(elem.id))}>
                   <div className="item-anime__img-wrap wrap-img-anime">
                     <img
-                      src={elem.material_data.poster_url}
+                      src={
+                        elem.material_data?.poster_url
+                          ? elem.material_data?.poster_url
+                          : elem.screenshots[0]
+                      }
                       alt={'изображение аниме ' + elem.title}
                       className="item-anime__image img"
                     />
-                  </div>
-                  <div className="item-anime__title">{elem.other_title}</div>
-                  <div className="item-anime__rating">
-                    {elem.material_data?.shikimori_rating}
-                    {'/ '}
-                    {elem.material_data?.shikimori_votes}
-                  </div>
-                  <div className="item-anime__lkjh">
-                    {/* {shikimori_votes} */}
+
+                    <div className="item-anime__title">{elem.title}</div>
+                    <div className="item-anime__rating">
+                      <span className="item-anime__star">&#9733;</span>
+                      <span className="item-anime__num">
+                        {elem.material_data?.shikimori_rating}
+                      </span>
+
+                      <span className="item-anime__votes">
+                        {' / '}
+                        {elem.material_data?.shikimori_votes}
+                      </span>
+                    </div>
                   </div>
                 </Link>
               </div>
@@ -191,7 +180,7 @@ const VideoListItem: React.FC = () => {
           )}
         </>
       )}
-    </div>
+    </>
   );
 };
 

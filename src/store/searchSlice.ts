@@ -284,7 +284,15 @@ export const fetchAnimeSearchSlice = createAsyncThunk<
       animesItemsSearch,
       '----------animesItemsSearch search----------'
     );
-    return animesItemsSearch; // animesItemsSearch; // as Anime[];data.results;
+
+    let uniqueAnimesItems = Object.values(
+      animesItemsSearch.reduce((acc, obj) => {
+        acc[obj.title] = obj;
+        return acc;
+      }, {})
+    );
+
+    return uniqueAnimesItems; // animesItemsSearch; // as Anime[];data.results;
   } catch (error) {
     return error.message; //rejectWithValue(
   }

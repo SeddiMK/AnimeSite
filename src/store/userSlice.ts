@@ -66,6 +66,7 @@ interface UsersSliceState {
   token: string;
   id: string;
   displayName: string;
+  userListAnime: string[];
 
   status: Status;
   error: string | unknown;
@@ -78,6 +79,7 @@ const initialState: UsersSliceState = {
   token: '',
   id: '',
   displayName: '',
+  userListAnime: [],
 
   status: Status.LOADING, // loading | success | error
   error: '',
@@ -102,6 +104,10 @@ const userSlice = createSlice({
       state.token = '';
       state.id = '';
       state.displayName = '';
+    },
+    addListAnime: (state, action: PayloadAction<any>) => {
+      if (state.userListAnime.indexOf(action.payload) === -1)
+        state.userListAnime.push(action.payload);
     },
     loginUser: (state, action: PayloadAction<any>) => {
       // state.items = action.payload;
@@ -141,7 +147,7 @@ const userSlice = createSlice({
   },
 });
 
-export const { setUser, removeUser } = userSlice.actions;
+export const { setUser, removeUser, addListAnime } = userSlice.actions;
 
 // export const itemsReindexing = (state: RootState) =>
 //   state.userSlice.itemsReindexing;

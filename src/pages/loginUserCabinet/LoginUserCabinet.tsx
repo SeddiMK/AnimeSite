@@ -8,6 +8,7 @@ import React, {
   useState,
 } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 // hooks
 import { useAuth } from '../../hooks/useAuth';
@@ -28,7 +29,7 @@ import {
 //store -----------------------------------------------------------
 import { removeUser } from '../../store/userSlice';
 import { useAppDispatch, RootState } from '../../store';
-import { useSelector } from 'react-redux';
+
 import LinksSocialRegistration from '../../components/linksSocialRegistration/LinksSocialRegistration';
 
 // type Props = {
