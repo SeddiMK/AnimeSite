@@ -11,17 +11,21 @@ import { clientKodik, kodikApiKey } from '../../kodikcfg';
 import { MaterialObject } from 'kodikwrapper';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import { AnimeItems } from '../../store/animeSlice';
+import { AnimeItems, itemsAnime } from '../../store/animeSlice';
 import { RootState, useAppDispatch } from '../../store';
 import {
   fetchAnimeSearchSlice,
   itemsAnimeSearch,
+  AnimeSearch,
+  setItemsSearch,
 } from '../../store/searchSlice';
 import { addListAnime } from '../../store/userSlice';
+import { Observable } from 'redux';
 // import { itemsAnimeSearch } from '../../store/searchSlice';
 
 // ---------------------------------------------------------------------
 type FullDescItemProps = {
+  flagRandomAnime: boolean;
   elem: {
     link: string;
     title: string;
@@ -29,7 +33,7 @@ type FullDescItemProps = {
   };
 };
 
-const FullDescItem: React.FC<FullDescItemProps> = () => {
+const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
   const { id } = useParams<{
     id;
   }>();
@@ -38,6 +42,9 @@ const FullDescItem: React.FC<FullDescItemProps> = () => {
   const [searchInpVal, setSearchInpVal] = useState<any>(''); //: string | undefined;
 
   const playerRef = useRef<null | HTMLDivElement>(null);
+
+  const animeItems = useSelector(itemsAnime);
+  const [itemRandomAnime, setItemRandomAnime] = useState([]);
 
   const [idAnime, setIdAnime] = useState('');
   let aliImgMediaLeft = 'постер аниме поднятвным героем'; // данные из бекенда ----------
@@ -75,25 +82,35 @@ const FullDescItem: React.FC<FullDescItemProps> = () => {
   const [itemAnimeOtherTitle, setItemAnimeOtherTitle] = useState('');
 
   const animeSearchItems = useSelector(itemsAnimeSearch);
+  // const animeSearchItems = useRef<AnimeSearch[]>(useSelector(itemsAnimeSearch));
+  // const [animeSearchItems, setAnimeSearchItems] = useState<
+  //   AnimeItems[] | never[]
+  // >(useSelector(itemsAnimeSearch));
+  const [itemsAnmSch, setItemsAnmSch] = useState([]);
+
   // const searchInpVal = useSelector(
   //   (state: RootState) => state.searchSlice.idFullDesc
   // );
   const itemAnime = animeSearchItems[0]?.material_data;
 
   // fthAnimeSearchSlice -----------------------------
-  const fthAnimeSearchSlice = () => {
+  const fthAnimeSearchSlice = (idAnime) => {
     dispatch(fetchAnimeSearchSlice({ searchInpVal, limitPar, idAnime }));
     document.getElementById('root')?.scrollIntoView(); // при перерисовке скорит на верх стр
   };
+
   // -------------------------------------------------------
   useEffect(() => {
     console.log(id, 'id--------------------------');
 
-    // setSearchInpVal(id);
-    setIdAnime(`id=${id}`);
+    // // setSearchInpVal(id);
+    // setIdAnime(`id=${id}`);
     if (id) {
+      console.log(id, '----------------------id-----------');
+
+      fthAnimeSearchSlice(`&id=${id}`);
     }
-    fthAnimeSearchSlice();
+
     // const animeItem = async () => {
     //   console.log(id, 'id');
 
@@ -134,16 +151,25 @@ const FullDescItem: React.FC<FullDescItemProps> = () => {
     //   return data;
     // };
     // animeItem();
-  }, [id, idAnime]);
+  }, [id]);
 
   useEffect(() => {
-    if (animeSearchItems?.length !== 0) {
-    }
-    // setItemAnimeLink(animeSearchItems[0].link);
-    // setItemAnimeSearchId(animeSearchItems);
-  }, [id, animeSearchItems]);
+    console.log(flagRandomAnime, '----------flagRandomAnime');
 
-  console.log(itemAnime, 'itemAnime');
+    if (flagRandomAnime) {
+      const randomItem = [
+        ...itemsAnmSch,
+        animeItems[Math.floor(Math.random() * animeItems.length)],
+      ];
+      console.log(randomItem, '----------------------setItemsSearch');
+
+      dispatch(setItemsSearch(randomItem as []));
+    }
+  }, [flagRandomAnime]);
+
+  console.log(itemRandomAnime, 'itemRandomAnime');
+  // console.log(flagRandomAnime, 'flagRandomAnime');
+  console.log(animeItems, 'animeItems');
   console.log(animeSearchItems, 'animeSearchItems');
   // console.log(itemAnimeSearchId, 'itemAnimeSearchId');
   // console.log(itemAnimeLink, 'itemAnimeLink');
@@ -166,7 +192,7 @@ const FullDescItem: React.FC<FullDescItemProps> = () => {
   // ---------------------------------------------------------
 
   if (!animeSearchItems) {
-    return <p>Download...</p>;
+    return <p>Загрузка аниме...</p>;
   }
   return (
     <main className="main full-desc-item">
@@ -371,7 +397,7 @@ const FullDescItem: React.FC<FullDescItemProps> = () => {
         </>
       ) : (
         <>
-          <div>Загрузка контента... Попробуйте перезагрузить страницу. </div>
+          <div>Загрузка контента... Попробуйте обновить страницу. </div>
         </>
       )}
     </main>

@@ -35,11 +35,11 @@ const Header: FC = () => {
                 Аниме
               </NavLink>
             </li>
-            <li className="menu__item">
+            {/* <li className="menu__item">
               <NavLink to="/manga" className="menu__link">
                 Манга
               </NavLink>
-            </li>
+            </li> */}
             <li className="menu__item">
               <NavLink to="/new" className="menu__link">
                 New!
@@ -47,6 +47,7 @@ const Header: FC = () => {
             </li>
 
             <li className="menu__item">
+              {/* to="/random-anime" */}
               <NavLink to="/random-anime" className="menu__link">
                 Случайное аниме
               </NavLink>

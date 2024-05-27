@@ -7,25 +7,36 @@ import { Client, MaterialObject, VideoLinks } from 'kodikwrapper';
 
 export type AnimeParams = {
   limitPar: number;
+  yearNew: string | number;
 };
 
 export type AnimeItems = {
   length: number;
   id: string;
+  imdb_id: string;
+  kinopoisk_id: string;
+  shikimori_id: string;
+  link: string;
 
   material_data: {
+    imdb_rating: number;
+    imdb_votes: number;
+    kinopoisk_rating: number;
+    kinopoisk_votes: number;
     shikimori_rating: number;
     shikimori_votes: number;
 
+    anime_license_name: string;
+    actors: string[];
     all_genres: string;
     anime_status: string;
     anime_studios: string[];
     anime_title: string;
     description: string;
-    duration: number;
-    episodes_aired: number;
-    episodes_total: number;
-    minimal_age: number;
+    duration: 24;
+    episodes_aired: 7;
+    episodes_total: 11;
+    minimal_age: 16;
     anime_kind: string;
     title: string;
     title_en: string;
@@ -42,7 +53,7 @@ export type AnimeItems = {
     other_titles_jp: string[];
     rating_mpaa: string;
   };
-  link: string;
+
   other_title: string;
   quality: string;
   screenshots: [string];
@@ -63,9 +74,14 @@ export const fetchAnimeListSlice = createAsyncThunk<AnimeItems[], AnimeParams>(
   'anime/fetchAnimeStatus',
   async (params) => {
     try {
-      const { limitPar } = params;
+      const { limitPar, yearNew } = params;
+
+      console.log(
+        `http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=kodikApiKey}`
+      );
+
       const resp: any = await axios.get<AnimeItems[]>(
-        `http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'&with_material_data=true&token=${kodikApiKey}`
+        `http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=${kodikApiKey}`
       );
 
       if (resp.status !== 200) {
@@ -84,20 +100,7 @@ export const fetchAnimeListSlice = createAsyncThunk<AnimeItems[], AnimeParams>(
       let prevTitle: string | null = null;
       let prevId: string | null = null;
 
-      let flags = {};
-      // let newPlaces = data?.filter((item) => {
-      //   if (
-      //     (item.type === 'anime' || item.type === 'anime-serial') &&
-      //     flags[item.title.toLowerCase()]
-      //   ) {
-      //     return false;
-      //   }
-      //   flags[item.title.toLowerCase()] = true;
-      //   return true;
-      // });
-
-      // [ 1, 2, 3, 4, 5, 6 ]
-
+      // filter uniq
       // const seen = new Set();
       // const uniqueObjects = objects.filter(obj => {
       //     if (seen.has(obj.title)) {
@@ -221,7 +224,7 @@ export const fetchAnimeListSlice = createAsyncThunk<AnimeItems[], AnimeParams>(
       //     // const animeLinkVideo= (material[3].link); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 
       //     // const title = (titles[0] + '. ' + origTitles[0]);
-
+      console.log();
       //     // countries(params?: CountriesParams): Promise<CountriesResponse>;
       //     // genres(params?: GenresParams): Promise<GenresResponse>;
       //     // list(params?: ListParams): Promise<ListResponse>;

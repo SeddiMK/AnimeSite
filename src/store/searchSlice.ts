@@ -99,7 +99,7 @@ export const fetchAnimeSearchSlice = createAsyncThunk<
     //   if (id) return `id=${id}`;
     // };
     const resp = await axios.get(
-      `http://kodikapi.com/search?limit=${limitPar}&title=${searchInpVal}&${idAnime}&with_material_data=true&token=${kodikApiKey}`
+      `http://kodikapi.com/search?limit=${limitPar}&title=${searchInpVal}${idAnime}&with_material_data=true&token=${kodikApiKey}`
     );
 
     if (resp.status !== 200) {

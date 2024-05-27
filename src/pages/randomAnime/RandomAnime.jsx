@@ -1,19 +1,19 @@
-import './Main.scss';
+import './RandomAnime.scss';
 import React from 'react';
 
-import VideoListItem from '../../components/videoListItem/VideoListItem';
+import FullDescItem from '../fullDescItem/FullDescItem';
 
-const Main = () => {
+const RandomAnime = () => {
   return (
     <main className="main anime">
       <div className="anime__wrap">
         {/* <div className="anime__title"></div>
         <div className="anime__sort"></div> */}
         <div className="anime__list-items">
-          <VideoListItem flagMain={true} />
+          <FullDescItem flagRandomAnime={true} />
         </div>
       </div>
     </main>
   );
 };
-export default Main;
+export default RandomAnime;
