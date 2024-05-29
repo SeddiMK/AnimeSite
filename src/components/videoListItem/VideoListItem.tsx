@@ -185,6 +185,7 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
                   className="item-anime__link-full-desc"
                   to={`/fullDescItem/${elem.id}`}
                   onClick={() => dispatch(setIdFullDesc(elem.id))}>
+                  <div className="item-anime__card"></div>
                   <div className="item-anime__img-wrap wrap-img-anime">
                     <img
                       src={
@@ -195,25 +196,25 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
                       alt={'изображение аниме ' + elem.title}
                       className="item-anime__image img"
                     />
-
+                  </div>
+                  <div className="item-anime__bottom-desc">
                     <div className="item-anime__title">{elem.title}</div>
-                    <div className="item-anime__rating">
-                      <span className="item-anime__star">&#9733;</span>
-                      {elem.material_data?.shikimori_rating !== undefined ? (
-                        <>
-                          <span className="item-anime__num">
-                            {elem.material_data.shikimori_rating}
-                          </span>
+                    <div className="item-anime__rating"></div>
+                    <span className="item-anime__star">&#9733;</span>
+                    {elem.material_data?.shikimori_rating !== undefined ? (
+                      <>
+                        <span className="item-anime__num">
+                          {elem.material_data.shikimori_rating}
+                        </span>
 
-                          <span className="item-anime__votes">
-                            {' / '}
-                            {elem.material_data.shikimori_votes}
-                          </span>
-                        </>
-                      ) : (
-                        <span>нет рейтинга</span>
-                      )}
-                    </div>
+                        <span className="item-anime__votes">
+                          {' / '}
+                          {elem.material_data.shikimori_votes}
+                        </span>
+                      </>
+                    ) : (
+                      <span>нет рейтинга</span>
+                    )}
                   </div>
                 </Link>
               </div>

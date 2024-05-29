@@ -1,6 +1,6 @@
 import './FullDescItem.scss';
 import React, { SetStateAction, useEffect, useRef, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 
 // import srcImg from '../../assets/image/anime-poster/659f8dd485857721242765.jpg';
 
@@ -49,7 +49,7 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
   const playerRef = useRef<null | HTMLDivElement>(null);
 
   const animeItems = useSelector(itemsAnime);
-  const [itemRandomAnime, setItemRandomAnime] = useState([]);
+  const [itemRandomAnime, setItemRandomAnime] = useState('');
 
   const [idAnime, setIdAnime] = useState('');
   let aliImgMediaLeft = 'постер аниме поднятвным героем'; // данные из бекенда ----------
@@ -86,11 +86,12 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
   const [itemAnimeTitleOrign, setItemAnimeTitleOrign] = useState('');
   const [itemAnimeOtherTitle, setItemAnimeOtherTitle] = useState('');
 
-  // const animeSearchItems = useSelector(itemsAnimeSearch);
+  const animeSearchItems = useSelector(itemsAnimeSearch);
   // const animeSearchItems = useRef<AnimeSearch[]>(useSelector(itemsAnimeSearch));
-  const [animeSearchItems, setAnimeSearchItems] = useState(
-    useSelector(itemsAnimeSearch)
-  );
+  // const [animeSearchItems, setAnimeSearchItems] = useState(
+  //   useSelector(itemsAnimeSearch)
+  // );
+
   const [itemsAnmSch, setItemsAnmSch] = useState([]);
 
   // const searchInpVal = useSelector(
@@ -127,20 +128,17 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
 
     // // setSearchInpVal(id);
     // setIdAnime(`id=${id}`);
-    if (id) {
-      fthAnimeSearchSlice(`&id=${id}`);
-    } else {
-      console.log(animeItems, 'undefined ---id- animeItems');
 
-      fthAnimeSlice('');
-      setAnimeSearchItems(animeItems);
-      // fthAnimeSearchSlice(``);
-      // dispatch(setItemsSearch(randomItem as []));
-    }
+    if (id) fthAnimeSearchSlice(`&id=${id}`);
   }, [id]);
 
   useEffect(() => {
-    console.log(flagRandomAnime, '----------flagRandomAnime');
+    // console.log(flagRandomAnime, '----------flagRandomAnime');
+    // console.log(animeItems, '----------animeItems');
+    // console.log(
+    //   flagRandomAnime && animeItems.length !== 0,
+    //   '----------flagRandomAnime && animeItems.length !== 0'
+    // );
 
     if (flagRandomAnime && animeItems.length !== 0) {
       const randomItem = [
@@ -151,7 +149,7 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
 
       dispatch(setItemsSearch(randomItem as []));
     }
-  }, [flagRandomAnime]);
+  }, [flagRandomAnime, animeItems]);
 
   console.log(itemRandomAnime, 'itemRandomAnime');
   // console.log(flagRandomAnime, 'flagRandomAnime');
@@ -164,15 +162,15 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
   // Input date string
   const dateString = itemAnime?.aired_at;
 
-  // Step 1: Parse the date string into a Date object
+  // Parse the date string into a Date object
   const date = new Date(dateString);
 
-  // Step 2: Extract the month, day, and year
+  // Extract the month, day, and year
   const month = date.toLocaleString('default', { month: 'long' }); // "April"
   const day = date.getDate().toString().padStart(2, '0'); // "04"
   const year = date.getFullYear(); // 2024
 
-  // Step 3: Combine the parts into the desired format
+  // Combine the parts into the desired format
   const formattedDate = `${day} ${month} ${year}`; // Output: "04 April 2024"
 
   // ---------------------------------------------------------
@@ -383,7 +381,7 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
         </>
       ) : (
         <>
-          <div>Загрузка контента... Попробуйте обновить страницу. </div>
+          <div>Загрузка контента... Еще минуту. </div>
         </>
       )}
     </main>
