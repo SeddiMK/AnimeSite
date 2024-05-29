@@ -11,7 +11,11 @@ import { clientKodik, kodikApiKey } from '../../kodikcfg';
 import { MaterialObject } from 'kodikwrapper';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import { AnimeItems, itemsAnime } from '../../store/animeSlice';
+import {
+  AnimeItems,
+  fetchAnimeListSlice,
+  itemsAnime,
+} from '../../store/animeSlice';
 import { RootState, useAppDispatch } from '../../store';
 import {
   fetchAnimeSearchSlice,
@@ -37,8 +41,9 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
   const { id } = useParams<{
     id;
   }>();
+
   const dispatch = useAppDispatch();
-  const [limitPar, setLimitPar] = useState(1);
+  const [limitPar, setLimitPar] = useState(100);
   const [searchInpVal, setSearchInpVal] = useState<any>(''); //: string | undefined;
 
   const playerRef = useRef<null | HTMLDivElement>(null);
@@ -81,11 +86,11 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
   const [itemAnimeTitleOrign, setItemAnimeTitleOrign] = useState('');
   const [itemAnimeOtherTitle, setItemAnimeOtherTitle] = useState('');
 
-  const animeSearchItems = useSelector(itemsAnimeSearch);
+  // const animeSearchItems = useSelector(itemsAnimeSearch);
   // const animeSearchItems = useRef<AnimeSearch[]>(useSelector(itemsAnimeSearch));
-  // const [animeSearchItems, setAnimeSearchItems] = useState<
-  //   AnimeItems[] | never[]
-  // >(useSelector(itemsAnimeSearch));
+  const [animeSearchItems, setAnimeSearchItems] = useState(
+    useSelector(itemsAnimeSearch)
+  );
   const [itemsAnmSch, setItemsAnmSch] = useState([]);
 
   // const searchInpVal = useSelector(
@@ -98,70 +103,51 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
     dispatch(fetchAnimeSearchSlice({ searchInpVal, limitPar, idAnime }));
     document.getElementById('root')?.scrollIntoView(); // при перерисовке скорит на верх стр
   };
+  // запрос fetch в redux
+  const fthAnimeSlice = (yearNew) => {
+    dispatch(
+      fetchAnimeListSlice({
+        limitPar,
+        yearNew,
+      })
+    );
+    document.getElementById('root')?.scrollIntoView(); // при перерисовке скорит на верх стр
+  };
 
-  // -------------------------------------------------------
+  // добавляем данные в redux при первом рендере -----------
   useEffect(() => {
-    console.log(id, 'id--------------------------');
+    console.log('11111111111111111111111111 ---------- первый рендер');
+    // fthAnimeSlice('');
+    // fthAnimeSearchSlice('');
+  }, []);
+  // -------------------------------------------------------
+
+  useEffect(() => {
+    console.log(id, '!!!!!!!!!!!     id--------------------------');
 
     // // setSearchInpVal(id);
     // setIdAnime(`id=${id}`);
     if (id) {
-      console.log(id, '----------------------id-----------');
-
       fthAnimeSearchSlice(`&id=${id}`);
+    } else {
+      console.log(animeItems, 'undefined ---id- animeItems');
+
+      fthAnimeSlice('');
+      setAnimeSearchItems(animeItems);
+      // fthAnimeSearchSlice(``);
+      // dispatch(setItemsSearch(randomItem as []));
     }
-
-    // const animeItem = async () => {
-    //   console.log(id, 'id');
-
-    //   const resp: any = await axios.get<AnimeItems[]>(
-    //     `http://kodikapi.com/search?limit=1&id=${id}&with_material_data=true&token=${kodikApiKey}`
-    //   );
-
-    //   if (resp.status !== 200) {
-    //     throw new Error('Server Error!');
-    //   }
-    //   const data = resp.data.results;
-    //   console.log(data, 'data full-desc');
-
-    //   if (data.length !== 0) {
-    //     // setItemAnimeSearchId(data);
-    //     setItemAnimeLink(data[0].link);
-    //     setItemAnimeTitle(data[0].title);
-    //     setItemAnimeTitleOrign(data[0].title_orig);
-    //     setItemAnimeOtherTitle(data[0].other_title);
-    //     // setItemAnimeOtherRating(data[0].material_data?.shikimori_rating);
-    //     // setItemAnimeOtherVotes(data[0].material_data?.shikimori_votes);
-    //   }
-    //   // -----------------------------------------------------------
-    //   // await clientKodik
-    //   //   .search({ id })
-    //   //   .then((response) => response.results)
-    //   //   .then(async (material) => {
-    //   //     if (!material) throw new Error('не найдено');
-    //   //     console.log(material, '---------- ----search id-------------');
-    //   //     if (itemAnimeSearchId) {
-    //   //       setItemAnimeSearchId(material);
-    //   //       setItemAnimeLink(material[0].link);
-    //   //       setItemAnimeTitle(material[0].title);
-    //   //       setItemAnimeTitleOrign(material[0].title_orig);
-    //   //       setItemAnimeOtherTitle(material[0].other_title);
-    //   //     }
-    //   //   });
-    //   return data;
-    // };
-    // animeItem();
   }, [id]);
 
   useEffect(() => {
     console.log(flagRandomAnime, '----------flagRandomAnime');
 
-    if (flagRandomAnime) {
+    if (flagRandomAnime && animeItems.length !== 0) {
       const randomItem = [
         ...itemsAnmSch,
         animeItems[Math.floor(Math.random() * animeItems.length)],
       ];
-      console.log(randomItem, '----------------------setItemsSearch');
+      console.log(randomItem, '----------------------randomItem');
 
       dispatch(setItemsSearch(randomItem as []));
     }
@@ -196,19 +182,19 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
   }
   return (
     <main className="main full-desc-item">
-      {animeSearchItems.length !== 0 ? (
+      {animeSearchItems.length !== 0 && animeSearchItems[0] !== undefined ? (
         <>
           <div className="full-desc-item__wrap">
-            {/* <VideoLink linkVideo={animeSearchItems[0].link} />
+            {/* <VideoLink linkVideo={animeSearchItems[0]?.link} />
 
             <div className="item-anime__title">
-              {animeSearchItems[0].other_title}
+              {animeSearchItems[0]?.other_title}
             </div>
 
             <div className="item-anime__rating">
-              {animeSearchItems[0].material_data.shikimori_rating}
+              {animeSearchItems[0]?.material_data.shikimori_rating}
               {'/ '}
-              {animeSearchItems[0].material_data.shikimori_votes}
+              {animeSearchItems[0]?.material_data.shikimori_votes}
             </div>
             <div className="item-anime__kljkhkj"></div>
             <div className="item-anime__translation translation">
@@ -226,9 +212,9 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
                       src={
                         itemAnime?.poster_url
                           ? itemAnime.poster_url
-                          : animeSearchItems[0].screenshots[0]
+                          : animeSearchItems[0]?.screenshots[0]
                       }
-                      alt={`изображение постера аниме ${animeSearchItems[0].title}`}
+                      alt={`изображение постера аниме ${animeSearchItems[0]?.title}`}
                     />
                   </div>
                   <div className="media__left-buttons">
@@ -275,7 +261,7 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
                   </div>
                   <div className="media__title title-top">
                     <h1 className="title-top__orign">
-                      {animeSearchItems[0].title}
+                      {animeSearchItems[0]?.title}
                     </h1>
                     <ul className="title-top__other-titles">
                       <li>
@@ -300,7 +286,7 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
 
                     <dt className="desc-media__dt">Год</dt>
                     <dd className="desc-media__dd">
-                      {animeSearchItems[0].year}
+                      {animeSearchItems[0]?.year}
                     </dd>
 
                     <dt className="desc-media__dt">Выпуск</dt>
@@ -360,14 +346,14 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
                       <img
                         className="screnshots-fulldesc img"
                         src={el}
-                        alt={`картинка кадра из аниме ${animeSearchItems[0].title}`}
+                        alt={`картинка кадра из аниме ${animeSearchItems[0]?.title}`}
                       />
                     </div>
                   ))}
                 </div>
               </div>
               <div ref={playerRef} className="content__player player-block">
-                <VideoLink linkVideo={animeSearchItems[0].link} />
+                <VideoLink linkVideo={animeSearchItems[0]?.link} />
               </div>
               <div className="content__coment comment">
                 <div className="comment__add">
