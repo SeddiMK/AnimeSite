@@ -40,6 +40,7 @@ body {
 
 body {
   /* color: $mainColor; */
+  background-color: #000;
   line-height: 1;
   font-family: var(--base-font);
   font-size: var(--font-size);
@@ -116,7 +117,7 @@ input {
   --main-color: #9bc53d;
   --background-form-color: #e9ebee;
   --background-root-color: #000;
-  --background-container-color: #e9ebee;
+  --background-container-color: #dddddd;
   --background-header-color: #d1aee3;
   --background-vk-link-blue: #0077ff;
   --background-google-link-grey: #aaaaaa;
@@ -202,6 +203,7 @@ main.full-desc-item {
 }
 main.anime {
   padding-top: 1.3rem;
+  padding-bottom: 1.6rem;
 }
 main.full-desc-item {
   padding-top: 1.3rem;
@@ -277,7 +279,23 @@ main.full-desc-item {
   height: 100%;
   overflow: hidden;
 }
+// ----------------------
+.loading-anime-page {
+  height: 100%;
+}
+// ----------------------
+.skeleton {
+  display: grid;
+  gap: 3rem;
+}
 
+// ----------------------
+.loading {
+  width: 5rem;
+  height: 80%;
+
+  padding: 25rem 0;
+}
 // ----------------------
 label {
   &:hover {

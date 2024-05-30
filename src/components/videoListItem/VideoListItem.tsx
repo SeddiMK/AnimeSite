@@ -39,9 +39,9 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
   flagMain,
 }) => {
   const dispatch = useAppDispatch();
+  const skeletons = [...new Array(10)].map((_, i) => <Skeleton key={i} />);
 
   const isMount = useRef(false); // флаг первого рендера
-  const skeletons = [...new Array(10)].map((_, i) => <Skeleton key={i} />); //!!!!!!!!!!!!!!!!!!!
 
   let { status } = useSelector((state: RootState) => state.animeSlice);
   // search param ----------------------------------------------
@@ -109,16 +109,16 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
     }
   }, [flagMain, flagNewList]);
 
-  useEffect(() => {
-    // if (flagNewList) {
-    //   console.log('fetchAnimeSlice() ---- flagNewList!!!!');
-    //   fthAnimeSlice();
-    // }
-    // console.log(animeSearchItems, 'animeSearchItems');
-    // fthAnimeSlice();
-    // if (animeItems.length === 0) {
-    // }
-  }, [flagNewList]);
+  // useEffect(() => {
+  //   // if (flagNewList) {
+  //   //   console.log('fetchAnimeSlice() ---- flagNewList!!!!');
+  //   //   fthAnimeSlice();
+  //   // }
+  //   // console.log(animeSearchItems, 'animeSearchItems');
+  //   // fthAnimeSlice();
+  //   // if (animeItems.length === 0) {
+  //   // }
+  // }, [flagNewList]);
 
   // fthAnimeSearchSlice -------------------------------------------------
   // useEffect(() => {
@@ -170,36 +170,38 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
   // console.log(animeSearchItems, 'animeSearchItems');
   // console.log(itemsAnimeSlice, '------itemsAnimeSlice-------');
 
+  // if (status === 'loading') {
+  //   return <p className="loading-anime-page">Загрузка аниме...</p>;
+  // }
+  if (status === 'error') {
+    return <Error />;
+  }
+  // && animeItems.length !== 0
   return (
     <>
-      {status === 'error' ? (
-        <Error />
-      ) : (
-        <>
-          {status === 'loading' || animeItems.length === 0 ? (
-            <p className="loading-anime-page">Загрузка...</p>
-          ) : (
-            animeItems?.map((elem, ind) => (
-              <div key={elem.id + ind} className="anime__item item-anime">
-                <Link
-                  className="item-anime__link-full-desc"
-                  to={`/fullDescItem/${elem.id}`}
-                  onClick={() => dispatch(setIdFullDesc(elem.id))}>
-                  <div className="item-anime__card"></div>
-                  <div className="item-anime__img-wrap wrap-img-anime">
-                    <img
-                      src={
-                        elem.material_data?.poster_url
-                          ? elem.material_data?.poster_url
-                          : elem.screenshots[0]
-                      }
-                      alt={'изображение аниме ' + elem.title}
-                      className="item-anime__image img"
-                    />
-                  </div>
-                  <div className="item-anime__bottom-desc">
-                    <div className="item-anime__title">{elem.title}</div>
-                    <div className="item-anime__rating"></div>
+      {status === 'loading'
+        ? skeletons
+        : animeItems?.map((elem, ind) => (
+            <div key={elem.id + ind} className="anime__item item-anime">
+              <Link
+                className="item-anime__link-full-desc"
+                to={`/fullDescItem/${elem.id}`}
+                onClick={() => dispatch(setIdFullDesc(elem.id))}>
+                <div className="item-anime__card"></div>
+                <div className="item-anime__img-wrap wrap-img-anime">
+                  <img
+                    src={
+                      elem.material_data?.poster_url
+                        ? elem.material_data?.poster_url
+                        : elem.screenshots[0]
+                    }
+                    alt={'изображение аниме ' + elem.title}
+                    className="item-anime__image img"
+                  />
+                </div>
+                <div className="item-anime__bottom-desc">
+                  <div className="item-anime__title">{elem.title}</div>
+                  <div className="item-anime__rating">
                     <span className="item-anime__star">&#9733;</span>
                     {elem.material_data?.shikimori_rating !== undefined ? (
                       <>
@@ -216,12 +218,10 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
                       <span>нет рейтинга</span>
                     )}
                   </div>
-                </Link>
-              </div>
-            ))
-          )}
-        </>
-      )}
+                </div>
+              </Link>
+            </div>
+          ))}
     </>
   );
 };

@@ -1,43 +1,66 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+
+import { itemsAnime } from '../../store/animeSlice';
 
 export const Particles = ({ wrapperRef }) => {
   var particles = document.querySelectorAll('.particles-canv'),
     radius = 1.7,
     number = 100;
 
+  const animeItems = useSelector(itemsAnime);
+
   const [width, setWidth] = useState(1920);
   const [height, setHeight] = useState(1080);
-  // const [isMounted, setIsMounted] = useState(false);
 
-  const observedDiv = wrapperRef;
+  const [isMounted, setIsMounted] = useState(false);
+  // const [resizeObserver, setResizeObserver] = useState(0);
+
+  // const wrapperRef = wrapperRef;
   // const body = document.querySelector('body');
   // useRef allows us to "store" the div in a constant,
-  // and to access it via observedDiv.current
+  // and to access it via wrapperRef.current
+
+  useEffect(() => {
+    if (!isMounted) setIsMounted(true);
+  }, []);
 
   useEffect(
     () => {
-      if (!observedDiv.current) {
-        // we do not initialize the observer unless the ref has
-        // been assigned
-        return;
-      }
+      // if (!wrapperRef.current) {
+      //   // we do not initialize the observer unless the ref has
+      //   // been assigned
+      //   return;
+      // }
 
       // we also instantiate the resizeObserver and we pass
       // the event handler to the constructor
 
-      const resizeObserver = new ResizeObserver(() => {
-        // if (observedDiv.current.offsetWidth !== width) {
-        //   setWidth(observedDiv.current.offsetWidth);
-        // }
-        if (observedDiv.current.offsetHeight !== height) {
-          setHeight(observedDiv.current.offsetHeight);
-        }
-      });
+      // const resizeObserver = new ResizeObserver(() => {
+      //   // if (wrapperRef.current.offsetWidth !== width) {
+      //   //   setWidth(wrapperRef.current.offsetWidth);
+      //   // }
+      //   if (wrapperRef.current.offsetHeight !== height) {
+      //     setHeight(wrapperRef.current.offsetHeight);
+      //   }
+      // });
 
       // the code in useEffect will be executed when the component
-      // has mounted, so we are certain observedDiv.current will contain
+      // has mounted, so we are certain wrapperRef.current will contain
       // the div we want to observe
-      resizeObserver.observe(observedDiv.current);
+      const resizeObserver = new ResizeObserver(() => {
+        console.log(isMounted, 'isMounted');
+        // if (isMounted) {
+        //   // if (wrapperRef.current.offsetWidth !== width) {
+        //   //   setWidth(wrapperRef.current.offsetWidth);
+        //   // }
+        if (wrapperRef.current.offsetHeight !== height) {
+          setHeight(wrapperRef.current.offsetHeight);
+        }
+        // }
+      });
+
+      resizeObserver.observe(wrapperRef.current);
 
       particles.forEach((node) => {
         let color = node.dataset.color;
@@ -65,6 +88,7 @@ export const Particles = ({ wrapperRef }) => {
 
         // console.log(width, height, 'width, heigth');
 
+        // setHeight(window.innerHeight); //!!!!!!!!!!!!!!!!!!!!!!!!
         setWidth(window.innerWidth); //!!!!!!!!!!!!!!!!!!!!!!!!
         // setWidth(7680);
 
@@ -128,14 +152,16 @@ export const Particles = ({ wrapperRef }) => {
       // if useEffect returns a function, it is called right before the
       // component unmounts, so it is the right place to stop observing
       // the div
+
       return function cleanup() {
         resizeObserver.disconnect();
       };
     },
     // only update the effect if the ref element changed
-    [width, height]
+    [animeItems, height, width]
   );
-
+  console.log(width, 'w');
+  console.log(height, 'h');
   // useEffect(() => {
   //   setIsMounted(true);
   //   // if (isMounted) ResizeObserver.unobserve();

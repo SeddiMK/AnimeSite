@@ -15,9 +15,13 @@
 }
 .item-anime {
   width: 100%;
+  max-width: 15rem;
   height: 100%;
 
   &__bottom-desc {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 100%;
     min-height: 5.1rem;
     border-right: 1px solid rgba(1, 1, 1, 0.1);

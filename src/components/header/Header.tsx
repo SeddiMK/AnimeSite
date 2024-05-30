@@ -10,12 +10,18 @@ import { useAppDispatch, RootState } from '../../store';
 import { removeUser } from '../../store/userSlice';
 // hooks -----------------------------------------------------------------
 import { useAuth } from '../../hooks/useAuth';
+import { clickRandomHeder } from '../../store/searchSlice';
 
 const Header: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const { isAuth, email, id } = useAuth();
+  const [toggleRandom, setToggleRandom] = useState(true);
+
+  useEffect(() => {
+    dispatch(clickRandomHeder(toggleRandom));
+  }, [toggleRandom]);
 
   // const { email, token, id } = useSelector(
   //   (state: RootState) => state.userSlice
@@ -48,7 +54,10 @@ const Header: FC = () => {
 
             <li className="menu__item">
               {/* to="/random-anime" */}
-              <NavLink to="/random-anime" className="menu__link">
+              <NavLink
+                to="/random-anime"
+                className="menu__link"
+                onClick={() => setToggleRandom(!toggleRandom)}>
                 Случайное аниме
               </NavLink>
             </li>
@@ -115,3 +124,6 @@ const Header: FC = () => {
 };
 
 export default Header;
+function toggler(): any {
+  throw new Error('Function not implemented.');
+}

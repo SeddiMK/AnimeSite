@@ -2,20 +2,26 @@ import React from 'react';
 import ContentLoader from 'react-content-loader';
 // https://skeletonreact.com/
 
-const Skeleton: React.FC = () => (
-  <ContentLoader
-    speed={2}
-    width={323}
-    height={330}
-    viewBox="0 0 323 330"
-    backgroundColor="#f3f3f3"
-    foregroundColor="#ecebeb">
-    <rect x="63" y="161" rx="3" ry="3" width="185" height="18" />
-    <rect x="42" y="1" rx="0" ry="0" width="215" height="146" />
-    <rect x="90" y="190" rx="0" ry="0" width="126" height="20" />
-    <rect x="103" y="222" rx="0" ry="0" width="103" height="19" />
-    <rect x="101" y="250" rx="10" ry="10" width="106" height="40" />
-  </ContentLoader>
+const Skeleton: React.FC = (props) => (
+  <div className="skeleton">
+    <ContentLoader
+      speed={2}
+      width={240}
+      height={437}
+      viewBox="0 0 240 437"
+      backgroundColor="#f3f3f3"
+      foregroundColor="#d6d6d6"
+      {...props}>
+      <circle cx="33" cy="397" r="10" />
+      <rect x="51" y="391" rx="2" ry="2" width="34" height="15" />
+      <rect x="23" y="344" rx="2" ry="2" width="192" height="14" />
+      <rect x="0" y="0" rx="2" ry="2" width="240" height="336" />
+      <rect x="23" y="363" rx="2" ry="2" width="192" height="14" />
+      <rect x="91" y="391" rx="2" ry="2" width="34" height="15" />
+      <rect x="236" y="343" rx="0" ry="0" width="2" height="73" />
+      <rect x="0" y="341" rx="0" ry="0" width="2" height="73" />
+    </ContentLoader>
+  </div>
 );
 
 export default Skeleton;

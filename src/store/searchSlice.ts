@@ -98,6 +98,10 @@ export const fetchAnimeSearchSlice = createAsyncThunk<
 
     //   if (id) return `id=${id}`;
     // };
+    console.log(
+      `http://kodikapi.com/search?limit=${limitPar}&title=${searchInpVal}${idAnime}&with_material_data=true`
+    );
+
     const resp = await axios.get(
       `http://kodikapi.com/search?limit=${limitPar}&title=${searchInpVal}${idAnime}&with_material_data=true&token=${kodikApiKey}`
     );
@@ -308,6 +312,7 @@ interface AnimeSearchSliceState {
   itemsSearch: AnimeSearch[];
   searchInpVal: string;
   idFullDesc: string;
+  randomHederClick: boolean;
 
   materialData: {
     shikimori_rating: number;
@@ -352,6 +357,7 @@ const initialState: AnimeSearchSliceState = {
   itemsSearch: [],
   searchInpVal: '',
   idFullDesc: '',
+  randomHederClick: false,
   materialData: {
     shikimori_rating: 0,
     shikimori_votes: 0,
@@ -402,6 +408,9 @@ const searchSlice = createSlice({
     searchInpHeader: (state, action: PayloadAction<string>) => {
       state.searchInpVal = action.payload;
     },
+    clickRandomHeder: (state, action: PayloadAction<boolean>) => {
+      state.randomHederClick = action.payload;
+    },
     setIdFullDesc: (state, action: PayloadAction<string>) => {
       state.idFullDesc = action.payload;
     },
@@ -439,8 +448,13 @@ const searchSlice = createSlice({
   },
 });
 
-export const { setItemsSearch, searchInpHeader, setIdFullDesc, error } =
-  searchSlice.actions;
+export const {
+  setItemsSearch,
+  searchInpHeader,
+  setIdFullDesc,
+  clickRandomHeder,
+  error,
+} = searchSlice.actions;
 
 // export const itemsReindexing = (state: RootState) =>
 //   state.animeSlice.itemsReindexing;
