@@ -114,8 +114,8 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
   const itemAnime = animeSearchItems[0]?.material_data;
 
   // fthAnimeSearchSlice -----------------------------
-  const fthAnimeSearchSlice = (idAnime) => {
-    dispatch(fetchAnimeSearchSlice({ searchInpVal, limitPar, idAnime }));
+  const fthAnimeSearchSlice = (idAnime, searchInpVal) => {
+    dispatch(fetchAnimeSearchSlice({ idAnime, searchInpVal, limitPar }));
     document.getElementById('root')?.scrollIntoView(); // при перерисовке скорит на верх стр
   };
   // запрос fetch в redux
@@ -131,11 +131,20 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
 
   // добавляем данные в redux при первом рендере -----------
   useEffect(() => {
-    console.log('11111111111111111111111111 ---------- первый рендер');
+    console.log(
+      !isMount,
+      '!isMount ------11111111111111111111111111 ---------- первый рендер'
+    );
     if (!isMount) {
-      setIsMount(true);
       if (id === undefined) fthAnimeSlice('');
+      // if (animeItems.length !== 0)
+      //   dispatch(setItemsSearch(animeItems[3] as unknown as []));
+      console.log(animeItems, 'animeItems --------------------------');
+
+      if (animeItems.length === 0) fthAnimeSearchSlice('', 'solo level');
+      setIsMount(true);
     }
+
     // fthAnimeSlice('');
     // fthAnimeSearchSlice('');
   }, []);
@@ -144,11 +153,13 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
   useEffect(() => {
     console.log(id, '!!!!!!!!!!!     id--------------------------');
 
-    if (id !== undefined) fthAnimeSearchSlice(`&id=${id}`);
-
-    // // setSearchInpVal(id);
-    // setIdAnime(`id=${id}`);
+    if (id !== undefined) fthAnimeSearchSlice(`&id=${id}`, '');
   }, [id]);
+  // --------------------------------------------------------
+  // useEffect(() => {
+
+  //   if (animeItems.length !==0 ) fthAnimeSearchSlice(`&id=${id}`);
+  // }, [animeItems]);
 
   useEffect(() => {
     console.log(flagRandomAnime, '----------flagRandomAnime');
@@ -270,7 +281,9 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
                           </button>
                           <button
                             className="media__left-add-list btn"
-                            onClick={() => dispatch(addListAnime(id))}>
+                            onClick={() =>
+                              dispatch(addListAnime(animeSearchItems[0].id))
+                            }>
                             Добавить в список
                           </button>
                         </div>

@@ -83,11 +83,11 @@ export const fetchAnimeSearchSlice = createAsyncThunk<
     // const dispatch = useAppDispatch();
     // const navigate = useNavigate();
 
+    console.log(idAnime, '-----------idAnime in search store------------');
     console.log(
       searchInpVal,
       '-----------searchInpVal in search store------------'
     );
-    console.log(idAnime, '-----------idAnime in search store------------');
     console.log(limitPar, '-----------limitPar in search store------------');
 
     // const idSearch = () => {

@@ -1,0 +1,29 @@
+.nav-mobile {
+  //   display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+.nav-mobile__wrap {
+}
+.nav-mobile__menu-items {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: fixed;
+  //   left: 0;
+  right: 3rem;
+  top: 7rem;
+  background-color: var(--background-form-color);
+  padding: 2rem;
+  border-radius: 0.5rem;
+  & li {
+    &:not(:last-child) {
+      margin-bottom: 1.5rem;
+    }
+  }
+}
+.hamburger-react {
+  &:hover {
+    color: var(--color-active-link);
+  }
+}

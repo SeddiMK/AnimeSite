@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es6", // Укажите целевую версию ECMAScript
+    "target": "es5", // Укажите целевую версию ECMAScript
 
     "lib": ["dom", "dom.iterable", "esnext"], // Список файлов библиотеки для включения в компиляцию
 

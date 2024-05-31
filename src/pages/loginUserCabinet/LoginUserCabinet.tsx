@@ -261,7 +261,9 @@ const LoginUserCabinet: FC = () => {
       {isAuth && (
         <section className="login-user-cabinet user-cab">
           <div className="user-cab__block-top">
-            <h2>Кабинет id:{id}</h2>
+            <h2>
+              Кабинет <span>id</span>:{id}
+            </h2>
           </div>
           <div className="user-cab__block-right">
             <div className="user-cab__block-avatar avatar-block">
@@ -269,7 +271,7 @@ const LoginUserCabinet: FC = () => {
                 <img
                   // ref={avatarRef}
                   id="avatar"
-                  src={!avatarUrlFlag ? fallbackUrlImg : url}
+                  src={!avatarUrlFlag ? fallbackUrlImg : url!}
                   alt="изображение автарки пользователя"
                   className="avatar-img img"
                 />
@@ -306,20 +308,20 @@ const LoginUserCabinet: FC = () => {
             </div>
             <div className="user-data">
               <div className="user-data__name-block name-block">
-                <h2 className="name-block__name">
+                <h2 className="name-block__name-text">
                   name:{' '}
                   <span>
                     {user?.displayName ? user?.displayName : `user: ${id}`}
                   </span>
-                </h2>
-                <h2 className="name-block__email">
-                  email: <span>{email}</span>
-                </h2>
+                </h2>{' '}
                 <button
                   className="name-block__rename-btn btn"
                   onClick={() => updateDisplayName()}>
                   Изменить ник
                 </button>
+                <h2 className="name-block__email-text">
+                  email: <span>{email}</span>
+                </h2>
                 <label>
                   <input
                     className="name-block__rename-change"
@@ -332,26 +334,26 @@ const LoginUserCabinet: FC = () => {
                 </label>
               </div>
             </div>
-            <div className="user-cab__block-social-out">
-              <section className="user-cab__social-links">
-                <p className="user-cab__social-links-reg-text">
-                  Подключиться к сервисам
-                </p>
-                <LinksSocialRegistration />
-              </section>
-              <button
-                className="btn logout-btn"
-                onClick={() => {
-                  dispatch(removeUser());
-                  navigate('/');
-                  localStorage.setItem(
-                    'remeberMe',
-                    JSON.stringify(Boolean(false))
-                  );
-                }}>
-                Выйти из кабинета <b>{email}</b>
-              </button>
-            </div>
+          </div>
+          <div className="user-cab__block-social-out">
+            <section className="user-cab__social-links">
+              <p className="user-cab__social-links-reg-text">
+                Подключиться к сервисам
+              </p>
+              <LinksSocialRegistration />
+            </section>
+            <button
+              className="btn logout-btn"
+              onClick={() => {
+                dispatch(removeUser());
+                navigate('/');
+                localStorage.setItem(
+                  'remeberMe',
+                  JSON.stringify(Boolean(false))
+                );
+              }}>
+              Выйти из кабинета <b>{email}</b>
+            </button>
           </div>
         </section>
       )}

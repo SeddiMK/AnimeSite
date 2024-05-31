@@ -49,7 +49,7 @@ export const Particles = ({ wrapperRef }) => {
       // has mounted, so we are certain wrapperRef.current will contain
       // the div we want to observe
       const resizeObserver = new ResizeObserver(() => {
-        console.log(isMounted, 'isMounted');
+        // console.log(isMounted, 'isMounted');
         // if (isMounted) {
         //   // if (wrapperRef.current.offsetWidth !== width) {
         //   //   setWidth(wrapperRef.current.offsetWidth);
