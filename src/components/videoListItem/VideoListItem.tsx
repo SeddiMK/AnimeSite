@@ -4,10 +4,15 @@ import { Link, useParams } from 'react-router-dom';
 
 // import srcImg from '../../assets/image/anime-poster/659f8dd485857721242765.jpg';
 
+import Error from '../../pages/error/Error';
+
 import FormMain from '../formMain/FormMain';
 import RatingStar from '../rating/RatingStar';
+
+// skeleton
+// import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import Skeleton from '../../containers/sceleton/Skeleton';
-import Error from '../../pages/error/Error';
 
 // store
 import { RootState, useAppDispatch } from '../../store';
@@ -15,6 +20,9 @@ import {
   AnimeItems,
   fetchAnimeListSlice,
   itemsAnime,
+  sizeCardH,
+  // sizeCard,
+  sizeCardW,
 } from '../../store/animeSlice';
 import {
   AnimeSearch,
@@ -91,12 +99,10 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
   // }, []);
 
   useEffect(() => {
-    console.log(flagMain, 'flagMain ---- flagMain!!!!');
-    console.log(flagNewList, 'flagNewList ---- flagNewList!!!!');
+    //   console.log(flagMain, 'flagMain ---- flagMain!!!!');
+    //  console.log(flagNewList, 'flagNewList ---- flagNewList!!!!');
 
     if (flagMain) {
-      console.log('yearNew fetchAnimeSlice() ---- ANIME');
-
       fthAnimeSlice('');
 
       // dispatch(setItemsSearch([]));
@@ -109,16 +115,52 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
     }
   }, [flagMain, flagNewList]);
 
-  // useEffect(() => {
-  //   // if (flagNewList) {
-  //   //   console.log('fetchAnimeSlice() ---- flagNewList!!!!');
-  //   //   fthAnimeSlice();
-  //   // }
-  //   // console.log(animeSearchItems, 'animeSearchItems');
-  //   // fthAnimeSlice();
-  //   // if (animeItems.length === 0) {
-  //   // }
-  // }, [flagNewList]);
+  const [heightCard, setHeightCard] = useState(0);
+  const [widthCard, setWidthCard] = useState(0);
+  // useRef allows us to "store" the div in a constant,
+  // and to access it via observedDiv.current
+  const refCard = useRef<any>(null);
+
+  useEffect(() => {
+    if (!refCard.current) {
+      // we do not initialize the observer unless the ref has
+      // been assigned
+      return;
+    }
+
+    // we also instantiate the resizeObserver and we pass
+    // the event handler to the constructor
+    const resizeObserver = new ResizeObserver(() => {
+      if (refCard.current?.offsetWidth !== widthCard) {
+        setWidthCard(refCard.current?.offsetWidth);
+      }
+      if (refCard.current?.offsetHeight !== heightCard) {
+        setHeightCard(refCard.current?.offsetHeight);
+      }
+    });
+
+    // the code in useEffect will be executed when the component
+    // has mounted, so we are certain observedDiv.current will contain
+    // the div we want to observe
+    resizeObserver.observe(refCard.current);
+
+    // if useEffect returns a function, it is called right before the
+    // component unmounts, so it is the right place to stop observing
+    // the div
+    return function cleanup() {
+      resizeObserver.disconnect();
+    };
+  }, [animeItems, refCard.current?.clientWidth]);
+
+  useEffect(() => {
+    if (widthCard !== undefined) {
+      dispatch(sizeCardW(widthCard));
+      dispatch(sizeCardH(heightCard));
+    }
+  }, [widthCard, heightCard]);
+
+  console.log(refCard, refCard.current?.clientWidth);
+  console.log(widthCard, heightCard);
 
   // fthAnimeSearchSlice -------------------------------------------------
   // useEffect(() => {
@@ -176,7 +218,8 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
   if (status === 'error') {
     return <Error />;
   }
-  // && animeItems.length !== 0
+  // && animeItems.length !== 0 {status === 'loading' ? skeletons
+
   return (
     <>
       {status === 'loading'
@@ -188,7 +231,20 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
                 to={`/fullDescItem/${elem.id}`}
                 onClick={() => dispatch(setIdFullDesc(elem.id))}>
                 <div className="item-anime__card"></div>
-                <div className="item-anime__img-wrap wrap-img-anime">
+                <div
+                  className="item-anime__img-wrap wrap-img-anime"
+                  ref={refCard}>
+                  {/* {status === 'loading' && (
+                    <Skeleton
+                      // circle
+                      // width="10rem"
+                      // style={{
+                      //   display: 'block',
+                      // }}
+                      // height="206px"
+                      containerClassName="avatar-skeleton img"
+                    />
+                  )} */}
                   <img
                     src={
                       elem.material_data?.poster_url
@@ -197,10 +253,25 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
                     }
                     alt={'изображение аниме ' + elem.title}
                     className="item-anime__image img"
+                    // style={{
+                    //   display: status === 'loading' ? 'none' : undefined,
+                    // }}
                   />
                 </div>
                 <div className="item-anime__bottom-desc">
-                  <div className="item-anime__title">{elem.title}</div>
+                  <div className="item-anime__title">
+                    {
+                      // status === 'loading' ? (
+                      //   <Skeleton
+                      //     width="100%"
+                      //     count={3}
+                      //     containerClassName="avatar-skeleton-text"
+                      //   />
+                      // ) : (
+                      elem.title
+                      // )
+                    }
+                  </div>
                   <div className="item-anime__rating">
                     <span className="item-anime__star">&#9733;</span>
                     {elem.material_data?.shikimori_rating !== undefined ? (

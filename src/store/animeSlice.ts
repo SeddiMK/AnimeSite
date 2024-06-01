@@ -262,7 +262,8 @@ export enum Status {
 
 interface AnimeSliceState {
   itemsList: AnimeItems[];
-
+  sizeCardW: number;
+  sizeCardH: number;
   // itemsReindexing: {};
 
   status: Status;
@@ -272,7 +273,8 @@ interface AnimeSliceState {
 
 const initialState: AnimeSliceState = {
   itemsList: [],
-
+  sizeCardW: 165,
+  sizeCardH: 220,
   // itemsReindexing: {},
 
   status: Status.LOADING, // loading | success | error
@@ -285,6 +287,12 @@ const animeSlice = createSlice({
   name: 'anime',
   initialState,
   reducers: {
+    sizeCardW: (state, action: PayloadAction<number>) => {
+      state.sizeCardW = action.payload;
+    },
+    sizeCardH: (state, action: PayloadAction<number>) => {
+      state.sizeCardH = action.payload;
+    },
     // setItems: (state, action: PayloadAction<[]>) => {
     //   state.itemsList = action.payload;
     // },
@@ -319,7 +327,7 @@ const animeSlice = createSlice({
   },
 });
 
-// export const { setItems } = animeSlice.actions;
+export const { sizeCardW, sizeCardH } = animeSlice.actions;
 
 // export const itemsReindexing = (state: RootState) =>
 //   state.animeSlice.itemsReindexing;

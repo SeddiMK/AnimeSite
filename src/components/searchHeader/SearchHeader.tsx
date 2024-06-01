@@ -142,63 +142,65 @@ const SearchHeader = () => {
       </button>
       {searchInpBtn && (
         <div className="search-header__search">
-          <div className="search-header__search-inp">
-            <input
-              value={searchInpVal}
-              onChange={() => onChangeInput()}
-              ref={inputRef}
-              className="search-header__inp form-control-reset"
-              name="search-header"
-              type="search"
-              placeholder="Поиск аниме, манги, людей и персонажей"
-            />
-          </div>
-          {/* searchInpVal && animeSearchItems.length !== 0 */}
-          {clickLinkAnime && true && (
-            <div className="search-header__popup-result">
-              <div className="item-search__title-type">
-                <h3>Аниме</h3>
-              </div>
-              <ul className="search-header__list">
-                {/* animeSearchItems.length !== 0 && */}
-                {animeSearchItems?.map((elem, ind) => (
-                  <li className="search-header__item item-search">
-                    <Link
-                      key={elem.id + ind}
-                      id="search-link"
-                      className="item-search__link"
-                      onClick={() => setClickLinkAnime(false)}
-                      to={`/fullDescItem/${elem.id}`}>
-                      <div className="item-search__img-wrap wrap-img-search">
-                        <img
-                          src={
-                            elem.material_data?.poster_url
-                              ? elem.material_data?.poster_url
-                              : elem.screenshots[0]
-                          }
-                          alt={'изображение аниме ' + elem.title}
-                          className="item-search__image img"
-                        />
-                      </div>
-                      <div className="item-search__title-year">
-                        <div className="item-search__title">
-                          <h2>
-                            {elem.title} <br /> {elem.title_orig}
-                          </h2>
-                        </div>
-                        <div className="item-search__year-kind">
-                          {elem.year} /{' '}
-                          {elem.material_data?.anime_kind
-                            ? elem.material_data?.anime_kind
-                            : elem.type}
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+          <div className="search-header__search-block">
+            <div className="search-header__search-inp">
+              <input
+                value={searchInpVal}
+                onChange={() => onChangeInput()}
+                ref={inputRef}
+                className="search-header__inp form-control-reset"
+                name="search-header"
+                type="search"
+                placeholder="Поиск аниме, манги, людей и персонажей"
+              />
             </div>
-          )}
+            {/* searchInpVal && animeSearchItems.length !== 0 */}
+            {clickLinkAnime && true && (
+              <div className="search-header__popup-result">
+                <div className="item-search__title-type">
+                  <h3>Аниме</h3>
+                </div>
+                <ul className="search-header__list">
+                  {/* animeSearchItems.length !== 0 && */}
+                  {animeSearchItems?.map((elem, ind) => (
+                    <li className="search-header__item item-search">
+                      <Link
+                        key={elem.id + ind}
+                        id="search-link"
+                        className="item-search__link"
+                        onClick={() => setClickLinkAnime(false)}
+                        to={`/fullDescItem/${elem.id}`}>
+                        <div className="item-search__img-wrap wrap-img-search">
+                          <img
+                            src={
+                              elem.material_data?.poster_url
+                                ? elem.material_data?.poster_url
+                                : elem.screenshots[0]
+                            }
+                            alt={'изображение аниме ' + elem.title}
+                            className="item-search__image img"
+                          />
+                        </div>
+                        <div className="item-search__title-year">
+                          <div className="item-search__title">
+                            <h2>
+                              {elem.title} <br /> {elem.title_orig}
+                            </h2>
+                          </div>
+                          <div className="item-search__year-kind">
+                            {elem.year} /{' '}
+                            {elem.material_data?.anime_kind
+                              ? elem.material_data?.anime_kind
+                              : elem.type}
+                          </div>
+                        </div>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
         </div>
       )}
     </form>

@@ -54,9 +54,9 @@ export const Particles = ({ wrapperRef }) => {
         //   // if (wrapperRef.current.offsetWidth !== width) {
         //   //   setWidth(wrapperRef.current.offsetWidth);
         //   // }
-        if (wrapperRef.current.offsetHeight !== height) {
-          setHeight(wrapperRef.current.offsetHeight);
-        }
+        // if (wrapperRef.current.offsetHeight !== height) {
+        //   setTimeout(() => setHeight(wrapperRef.current.offsetHeight), 1300);
+        // }
         // }
       });
 
@@ -89,7 +89,7 @@ export const Particles = ({ wrapperRef }) => {
         // console.log(width, height, 'width, heigth');
 
         // setHeight(window.innerHeight); //!!!!!!!!!!!!!!!!!!!!!!!!
-        setWidth(window.innerWidth); //!!!!!!!!!!!!!!!!!!!!!!!!
+        // setTimeout(() => setWidth(window.innerWidth), 1300); //!!!!!!!!!!!!!!!!!!!!!!!!
         // setWidth(7680);
 
         node.width = width;
@@ -160,6 +160,24 @@ export const Particles = ({ wrapperRef }) => {
     // only update the effect if the ref element changed
     [animeItems, height, width]
   );
+
+  useEffect(() => {
+    // console.log(
+    //   wrapperRef?.current.offsetHeight,
+    //   'wrapperRef?.current.offsetHeight'
+    // );
+    if (
+      wrapperRef?.current?.clientHeight !== height ||
+      window.innerWidth !== width
+    ) {
+      setTimeout(() => {
+        setHeight(wrapperRef?.current?.clientHeight);
+        setWidth(window.innerWidth);
+      }, 1300);
+    }
+    // setTimeout(() => setWidth(window.innerWidth), 1300); //!!!!!!!!!!!!!!!!!!!!!!!!
+  }, [window.innerWidth, wrapperRef?.current?.clientHeight]);
+
   console.log(width, 'w');
   console.log(height, 'h');
   // useEffect(() => {

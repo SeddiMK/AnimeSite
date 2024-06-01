@@ -167,9 +167,7 @@ input {
 .container {
   max-width: var(--max-width);
   width: 90vw;
-
-  overflow: hidden;
-
+  height: auto;
   background-color: var(--background-container-color);
   margin: 0 auto;
   padding: 0 1rem;
@@ -178,8 +176,10 @@ input {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
+  text-align: center;
   margin: 0 auto;
+
   flex-grow: 1;
   // min-width: var(--max-width);
   width: 100%;
@@ -195,23 +195,25 @@ main.contacts {
   height: calc(100vh - 186px); //!!
   // height: 100vh;
 }
-main.error,
-main.login,
-main.registaration,
-main.contacts,
-main.full-desc-item {
-}
 main.anime {
+  // height: 100vh;
   padding-top: 1.3rem;
   padding-bottom: 1.6rem;
 }
 main.full-desc-item {
   padding-top: 1.3rem;
 }
-
-main.anime {
-  height: 100wh;
+main.error,
+main.login,
+main.registaration,
+main.contacts,
+main.anime,
+main.new-list,
+main.full-desc-item,
+.login-user-cabinet {
+  padding-top: 133px;
 }
+
 // buttons ----------------------------------------------------------
 .btn {
   background-color: var(--btn-send-com);
@@ -262,7 +264,7 @@ main.anime {
 .wrap-img-anime {
   // width: 15rem;
   width: 100%;
-  height: 21rem;
+  height: auto;
 }
 .wrap-img-media {
   // width: 600px;
@@ -290,8 +292,11 @@ main.anime {
 }
 // ----------------------
 .skeleton {
-  display: grid;
-  gap: 3rem;
+  // display: grid;
+  // width: 100%;
+  // max-width: 15rem;
+  // height: 100%;
+  // gap: 3rem;
 }
 // ----------------------
 .skeleton-full-desc {
@@ -299,6 +304,26 @@ main.anime {
   align-items: center;
   justify-content: center;
   height: 75vh;
+}
+.avatar-skeleton {
+}
+.avatar-skeleton .react-loading-skeleton {
+  display: block;
+  // width: 154px;
+  // height: 218px;
+  width: 12.8rem;
+  height: 18rem;
+}
+.react-loading-skeleton {
+  // height: 206px;
+}
+.avatar-skeleton-text {
+}
+@media (max-width: 600px) {
+  .avatar-skeleton .react-loading-skeleton {
+    width: 9rem;
+    height: 13rem;
+  }
 }
 
 // ----------------------

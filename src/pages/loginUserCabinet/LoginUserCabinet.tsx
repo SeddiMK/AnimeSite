@@ -307,31 +307,33 @@ const LoginUserCabinet: FC = () => {
               </div>
             </div>
             <div className="user-data">
+              <h2 className="name-block__email-text">
+                email: <span>{email}</span>
+              </h2>
               <div className="user-data__name-block name-block">
                 <h2 className="name-block__name-text">
                   name:{' '}
                   <span>
                     {user?.displayName ? user?.displayName : `user: ${id}`}
                   </span>
-                </h2>{' '}
-                <button
-                  className="name-block__rename-btn btn"
-                  onClick={() => updateDisplayName()}>
-                  Изменить ник
-                </button>
-                <h2 className="name-block__email-text">
-                  email: <span>{email}</span>
                 </h2>
-                <label>
-                  <input
-                    className="name-block__rename-change"
-                    type="text"
-                    ref={inputUserNameRef}
-                    value={changeVal}
-                    placeholder="Новый никнем"
-                    onChange={(e) => setChangeVal(e.target.value)}
-                  />
-                </label>
+                <div className="name-block__rename-change">
+                  <button
+                    className="name-block__rename-btn btn"
+                    onClick={() => updateDisplayName()}>
+                    Изменить ник
+                  </button>
+                  <label>
+                    <input
+                      className="name-block__inp-rename"
+                      type="text"
+                      ref={inputUserNameRef}
+                      value={changeVal}
+                      placeholder="Новый никнем"
+                      onChange={(e) => setChangeVal(e.target.value)}
+                    />
+                  </label>
+                </div>
               </div>
             </div>
           </div>
