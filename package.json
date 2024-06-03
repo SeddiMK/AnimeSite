@@ -24,6 +24,7 @@
     "aws41": "^1.6.0",
     "axios": "^1.6.8",
     "chownr": "^1.1.4",
+    "console-browserify": "^1.2.0",
     "cors": "^2.8.5",
     "extract-zip": "^2.0.1",
     "fd-slicer": "^1.1.0",

@@ -3,9 +3,15 @@ import ContentLoader from 'react-content-loader';
 import { useSelector } from 'react-redux';
 // https://skeletonreact.com/ 240 437 : React.FC
 
-// let width = useSelector((state) => state.animeSlice.sizeCardW);
+import { sizeCardWidth, sizeCardHigth } from '../../store/animeSlice';
+import { log } from 'console';
+
+// let width = getState((state) => state.animeSlice.sizeCardW);
 // let height = useSelector((state) => state.animeSlice.sizeCardH);
-// console.log(width, height, 'jhjhkjkhjkhjkh');
+// console.log(sizeCardWidth(), sizeCardHigth(), 'jhjhkjkhjkhjkh');
+// console.log(width, 'jhjhkjkhjkhjkh');
+
+// console.log(getState(), 'пуеЫефеу'); // console.log(props, 'propssss');
 // return (
 const Skeleton = (props) => (
   <div className="skeleton">

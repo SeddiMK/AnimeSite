@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { itemsAnime } from '../../store/animeSlice';
 
-export const Particles = ({ wrapperRef }) => {
+const Particles = ({ wrapperRef }) => {
   var particles = document.querySelectorAll('.particles-canv'),
     radius = 1.7,
     number = 100;
@@ -188,4 +188,5 @@ export const Particles = ({ wrapperRef }) => {
   // console.log(isMounted + 1, 'IsMounted');
   return <>{/* <RootWidthHeigth /> */}</>;
 };
+
 export default Particles;

@@ -222,7 +222,7 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
 
   return (
     <>
-      {status === 'loading'
+      {false
         ? skeletons
         : animeItems?.map((elem, ind) => (
             <div key={elem.id + ind} className="anime__item item-anime">

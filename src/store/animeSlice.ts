@@ -332,5 +332,7 @@ export const { sizeCardW, sizeCardH } = animeSlice.actions;
 // export const itemsReindexing = (state: RootState) =>
 //   state.animeSlice.itemsReindexing;
 export const itemsAnime = (state: RootState) => state.animeSlice.itemsList;
+export const sizeCardWidth = (state: RootState) => state.animeSlice.sizeCardW;
+export const sizeCardHigth = (state: RootState) => state.animeSlice.sizeCardH;
 
 export default animeSlice.reducer;
