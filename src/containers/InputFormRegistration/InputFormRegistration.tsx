@@ -149,7 +149,7 @@ const InputFormRegistration: FC<FormProps> = ({
             Email: <br />
             Прим: asdf@gmail.com
             <br />
-            mateo.silver84@gmail.com
+            qwer@gmail.com
             {validEmail && email ? (
               <span className="form-group__icon check">
                 <FaCheck />

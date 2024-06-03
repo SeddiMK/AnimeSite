@@ -20,9 +20,9 @@ import {
   AnimeItems,
   fetchAnimeListSlice,
   itemsAnime,
-  sizeCardH,
+  // sizeCardH,
   // sizeCard,
-  sizeCardW,
+  // sizeCardW,
 } from '../../store/animeSlice';
 import {
   AnimeSearch,
@@ -47,7 +47,6 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
   flagMain,
 }) => {
   const dispatch = useAppDispatch();
-  const skeletons = [...new Array(10)].map((_, i) => <Skeleton key={i} />);
 
   const isMount = useRef(false); // флаг первого рендера
 
@@ -152,12 +151,16 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
     };
   }, [animeItems, refCard.current?.clientWidth]);
 
-  useEffect(() => {
-    if (widthCard !== undefined) {
-      dispatch(sizeCardW(widthCard));
-      dispatch(sizeCardH(heightCard));
-    }
-  }, [widthCard, heightCard]);
+  // useEffect(() => {
+  //   if (widthCard !== undefined) {
+  //     // dispatch(sizeCardW(widthCard));
+  //     // dispatch(sizeCardH(heightCard));
+  //   }
+  // }, [widthCard, heightCard]);
+
+  const skeletons = [...new Array(10)].map((_, i) => (
+    <Skeleton key={i} widthCard={widthCard} heightCard={heightCard} />
+  ));
 
   console.log(refCard, refCard.current?.clientWidth);
   console.log(widthCard, heightCard);
@@ -222,7 +225,7 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
 
   return (
     <>
-      {false
+      {status === 'loading'
         ? skeletons
         : animeItems?.map((elem, ind) => (
             <div key={elem.id + ind} className="anime__item item-anime">

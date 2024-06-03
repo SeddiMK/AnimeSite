@@ -262,8 +262,8 @@ export enum Status {
 
 interface AnimeSliceState {
   itemsList: AnimeItems[];
-  sizeCardW: number;
-  sizeCardH: number;
+  // sizeCardW: number;
+  // sizeCardH: number;
   // itemsReindexing: {};
 
   status: Status;
@@ -273,8 +273,8 @@ interface AnimeSliceState {
 
 const initialState: AnimeSliceState = {
   itemsList: [],
-  sizeCardW: 165,
-  sizeCardH: 220,
+  // sizeCardW: 165,
+  // sizeCardH: 220,
   // itemsReindexing: {},
 
   status: Status.LOADING, // loading | success | error
@@ -287,12 +287,12 @@ const animeSlice = createSlice({
   name: 'anime',
   initialState,
   reducers: {
-    sizeCardW: (state, action: PayloadAction<number>) => {
-      state.sizeCardW = action.payload;
-    },
-    sizeCardH: (state, action: PayloadAction<number>) => {
-      state.sizeCardH = action.payload;
-    },
+    // sizeCardW: (state, action: PayloadAction<number>) => {
+    //   state.sizeCardW = action.payload;
+    // },
+    // sizeCardH: (state, action: PayloadAction<number>) => {
+    //   state.sizeCardH = action.payload;
+    // },
     // setItems: (state, action: PayloadAction<[]>) => {
     //   state.itemsList = action.payload;
     // },
@@ -327,12 +327,12 @@ const animeSlice = createSlice({
   },
 });
 
-export const { sizeCardW, sizeCardH } = animeSlice.actions;
+// export const {} = animeSlice.actions;
 
 // export const itemsReindexing = (state: RootState) =>
 //   state.animeSlice.itemsReindexing;
 export const itemsAnime = (state: RootState) => state.animeSlice.itemsList;
-export const sizeCardWidth = (state: RootState) => state.animeSlice.sizeCardW;
-export const sizeCardHigth = (state: RootState) => state.animeSlice.sizeCardH;
+// export const sizeCardWidth = (state: RootState) => state.animeSlice.sizeCardW;
+// export const sizeCardHigth = (state: RootState) => state.animeSlice.sizeCardH;
 
 export default animeSlice.reducer;
