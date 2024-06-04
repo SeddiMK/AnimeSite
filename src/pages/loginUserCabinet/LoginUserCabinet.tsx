@@ -10,12 +10,12 @@ import React, {
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-// hooks
+// hooks ----------------------------------------------------------------
 import { useAuth } from '../../hooks/useAuth';
 
 import fallbackUrlImg from '../../assets/image/avatar/notAvatar.jpg';
 
-// firebase
+// firebase -------------------------------------------------------------
 import { User, getAuth, updateProfile } from 'firebase/auth';
 import {
   deleteObject,
@@ -26,7 +26,7 @@ import {
   uploadBytesResumable,
 } from 'firebase/storage';
 
-//store -----------------------------------------------------------
+//store ----------------------------------------------------------------
 import { removeUser } from '../../store/userSlice';
 import { useAppDispatch, RootState } from '../../store';
 
@@ -41,7 +41,8 @@ const LoginUserCabinet: FC = () => {
   // console.log(id);
 
   const [flagRender, setFlagRender] = useState(false);
-  const { isAuth, email, id, displayName } = useAuth(); //, photoUrl
+
+  const { isAuth, email, id, displayName } = useAuth();
   const auth = getAuth();
   const user: User | null = auth.currentUser;
   const dispatch = useAppDispatch();
@@ -62,18 +63,18 @@ const LoginUserCabinet: FC = () => {
   const [clickUploadImg, setClickUploadImg] = useState(false);
   // const [avatarLocStor, setAvatarLocStor] = useState(''); ///local store
 
-  // storage fairebase
+  // storage fairebase ------------------------------------------------------------
   const storageFb = getStorage();
   const avatarFbRef = ref(storageFb, `images/avatar/${id}`);
   const [progress, setProgress] = useState(0);
 
-  // change user name
+  // change user name -------------------------------------------------------------
   // const [userName, setUserName] = useState<string | null>(null);
   const [changeVal, setChangeVal] = useState('');
   const inputUserNameRef = useRef<HTMLInputElement>(null);
 
-  // загрузить аватар
-  const changeHandler = (e: any) => {
+  // загрузить аватар -------------------------------------------------------------
+  const uploadAvatar = (e: any) => {
     const file = e.target.files[0];
     setImage(file);
     // -----------------------------------upload Image------------------------------
@@ -170,7 +171,7 @@ const LoginUserCabinet: FC = () => {
     }
   };
 
-  // изменить user name
+  // изменить user name -----------------------------------------------------------
   const updateDisplayName = async () => {
     if (user && changeVal) {
       await updateProfile(user, {
@@ -295,7 +296,7 @@ const LoginUserCabinet: FC = () => {
                     className="change-avatar__upload"
                     accept="image/*"
                     type="file"
-                    onChange={(e) => changeHandler(e)}
+                    onChange={(e) => uploadAvatar(e)}
                   />
                 </label>
                 <button

@@ -166,17 +166,21 @@ input {
 }
 .container {
   max-width: var(--max-width);
+  max-height: 100%;
+  overflow-y: hidden;
   width: 90vw;
   height: auto;
   background-color: var(--background-container-color);
   margin: 0 auto;
   padding: 0 1rem;
+
+  // overflow: hidden;
 }
 .main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   text-align: center;
   margin: 0 auto;
 
@@ -192,8 +196,9 @@ main.registaration,
 main.contacts {
   box-sizing: border-box;
   width: 100%;
-  height: calc(100vh - 186px); //!!
-  // height: 100vh;
+  // height: calc(100vh - 186px); //!!
+  height: 90vh;
+  overflow: hidden;
 
   // margin-bottom: 186px;
 }
@@ -216,6 +221,18 @@ main.full-desc-item,
   padding-top: 133px;
 }
 
+.container.main.login,
+main.registaration {
+  padding-top: 110px;
+  padding-bottom: 30px;
+}
+
+.container {
+  &.login {
+    overflow: hidden;
+  }
+}
+
 // buttons ----------------------------------------------------------
 .btn {
   background-color: var(--btn-send-com);
@@ -235,7 +252,12 @@ main.full-desc-item,
     transform: translate(-2px, -2px);
   }
 }
-
+.btn-reset-pwd {
+  transition: color 0.3s ease-in-out;
+  &:hover {
+    color: red;
+  }
+}
 #search-header-btn {
   transition: all 0.15s ease-in-out;
 

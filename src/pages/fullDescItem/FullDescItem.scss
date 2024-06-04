@@ -39,30 +39,34 @@
   }
 }
 .desc-media {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: start;
+
   line-height: 1.5rem;
-
+  text-align: left;
   &__dd {
-    flex: 1 1 80%;
-
+    // flex: 1 1 80%;
+    width: 100%;
     margin-bottom: 1rem;
-    &:last-child {
-      span {
-        display: inline-block;
-        width: 2.1rem;
-        height: 2.1rem;
-        line-height: 34px;
-        border-radius: 50%;
-        background-color: #df87c8;
-        padding-left: 3px;
-      }
-    }
+    // &:last-child {
+    //   span {
+    //   }
+    // }
   }
   &__dt {
-    flex: 0 1 20%;
+    // flex: 0 1 20%;
     // padding-right: 2rem;
     margin-bottom: 0.7rem;
+  }
+  &__age-restrictions {
+    display: inline-block;
+    width: 2.1rem;
+    height: 2.1rem;
+    line-height: 27px;
+    border-radius: 50%;
+    background-color: #df87c8;
+    padding-left: 3px;
   }
 }
 .description {
@@ -75,6 +79,15 @@
   &__title {
     font-size: 1.5rem;
     margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 710px) {
+  .desc-media {
+    &__dd {
+      // flex: 1 1 80%;
+      // max-width: 10rem;
+    }
   }
 }
 
@@ -100,7 +113,16 @@
     border: 1px solid var(--border-bottom);
     background-color: #fff;
   }
+  &__left-add-list-popup {
+    position: absolute;
+    top: 11.5rem;
+
+    color: red;
+  }
   &__left-buttons {
+    position: relative;
+    top: 0;
+    left: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -130,6 +152,13 @@
     flex: 1 1 65%;
   }
 }
+
+@media (max-width: 650px) {
+  .media {
+    flex-wrap: wrap;
+  }
+}
+
 .player-block {
   &__age-rating {
   }
@@ -178,6 +207,9 @@
   }
 }
 .title-top {
+  text-align: left;
+  margin-bottom: 2rem;
+
   &__orign {
     font-size: 2.3rem;
     font-weight: 500;
@@ -224,4 +256,29 @@
       margin-right: 1.5rem;
     }
   }
+}
+
+// css transition popup -------------------------------
+.alert {
+  position: absolute;
+  top: 11.5rem;
+
+  color: red;
+}
+.alert-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+.alert-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 1s, transform 1s ease-in-out;
+}
+.alert-exit {
+  opacity: 1;
+}
+.alert-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 1s, transform 1s ease-in-out;
 }

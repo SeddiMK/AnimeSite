@@ -5,6 +5,10 @@ import './Header.scss';
 import LoginUserCabinet from '../../pages/loginUserCabinet/LoginUserCabinet';
 import SearchHeader from '../searchHeader/SearchHeader';
 
+//
+import { animateScroll as scroll } from 'react-scroll';
+import { ScrollRestoration } from 'react-router-dom';
+
 // store -----------------------------------------------------------------
 import { useAppDispatch, RootState } from '../../store';
 import { removeUser } from '../../store/userSlice';
@@ -59,14 +63,17 @@ const Header: FC = () => {
               }}>
               <Link
                 to={`/login`}
+                preventScrollReset={true}
                 className="menu__link"
                 id="navbar-login"
-                onClick={() =>
+                onClick={() => {
                   localStorage.setItem(
                     'remeberMe',
                     JSON.stringify(Boolean(false))
-                  )
-                }>
+                  );
+
+                  // scroll.scrollToTop();
+                }}>
                 <span className="material-symbols-outlined">
                   {isAuth ? 'logout' : 'login'}
                 </span>

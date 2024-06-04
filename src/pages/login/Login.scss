@@ -17,10 +17,9 @@
   // max-width: 80%;
   border-radius: 0.4rem;
   background-color: var(--background-form-white);
-
   overflow-y: hidden;
   padding: 2rem 3rem;
-  margin-top: 2rem;
+  // margin-top: 2rem;
 
   &__social-media {
     display: flex;
@@ -42,4 +41,8 @@
       }
     }
   }
+}
+
+.poopup-reset-pwd {
+  max-width: 200px;
 }

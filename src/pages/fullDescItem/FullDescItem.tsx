@@ -2,6 +2,8 @@ import './FullDescItem.scss';
 import React, { SetStateAction, useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
 
+import { CSSTransition } from 'react-transition-group';
+
 // import srcImg from '../../assets/image/anime-poster/659f8dd485857721242765.jpg';
 
 import FormMain from '../../components/formMain/FormMain';
@@ -59,9 +61,12 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
   const [searchInpVal, setSearchInpVal] = useState<any>(''); //: string | undefined;
 
   const playerRef = useRef<null | HTMLDivElement>(null);
+  const popupAddRef = useRef<null | HTMLDivElement>(null);
 
   const animeItems = useSelector(itemsAnime);
   const [itemRandomAnime, setItemRandomAnime] = useState('');
+
+  const [popupAddList, setPopupAddList] = useState(false);
 
   const [isMount, setIsMount] = useState(false);
 
@@ -222,6 +227,13 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
   //       ? skeletons
   //       :
 
+  const softOpeningPopup = () => {
+    setPopupAddList(true);
+    setTimeout(() => {
+      setPopupAddList(false);
+    }, 2000);
+  };
+
   return (
     <main className="main full-desc-item">
       {animeSearchItems.length === 0 ? (
@@ -281,11 +293,26 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
                           </button>
                           <button
                             className="media__left-add-list btn"
-                            onClick={() =>
-                              dispatch(addListAnime(animeSearchItems[0].id))
-                            }>
+                            onClick={() => {
+                              dispatch(addListAnime(animeSearchItems[0].id));
+                              softOpeningPopup();
+                              // setPopupAddList(!popupAddList);
+                            }}>
                             Добавить в список
                           </button>
+                          <CSSTransition
+                            nodeRef={popupAddRef}
+                            className="alert"
+                            in={popupAddList}
+                            unmountOnExit
+                            timeout={300}>
+                            {/* {popupAddList && (   )} */}
+                            <p
+                              ref={popupAddRef}
+                              className="media__left-add-list-popup">
+                              Аниме добавлено в список.
+                            </p>
+                          </CSSTransition>
                         </div>
                         <div className="media__left-add"></div>
                       </div>
@@ -376,7 +403,7 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
                             Возрастные ограничения
                           </dt>
                           <dd className="desc-media__dd">
-                            <span>
+                            <span className="desc-media__age-restrictions">
                               {itemAnime?.minimal_age
                                 ? itemAnime.minimal_age
                                 : 0}

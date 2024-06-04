@@ -59,3 +59,9 @@
 .mail-link {
   background-color: var(--background-mail-link-wblue);
 }
+
+@media (max-width: 345px) {
+  .mail-link {
+    margin-top: 1rem;
+  }
+}
