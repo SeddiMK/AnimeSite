@@ -33,6 +33,8 @@ import {
   sendEmailVerification,
 } from 'firebase/auth';
 
+import Particles from '../../containers/particles/Particles';
+
 // validation ------------------------------------------------------------
 import { PWD_REGEX, EMAIL_REGEX } from '../../containers/validation/Validation';
 // -----------------------------------------------------------------------
@@ -70,6 +72,7 @@ const Registration = () => {
       : [checkmarkAnimationRef, checkboxAnimationRef],
     [0, 0.1] // -> delay by 0.1 seconds
   );
+  const wrapperRef = useRef(null);
 
   // validation -------------------перенести в !!!!-----------------------------------------
   const emailRef = useRef(null);
@@ -170,7 +173,12 @@ const Registration = () => {
   };
 
   return (
-    <main className="main registaration">
+    <main ref={wrapperRef} className="main registaration">
+      <canvas className="particles-canv" data-color="#B99970"></canvas>
+      <Particles wrapperRef={wrapperRef} />
+      {/* import Particles from '../../containers/particles/Particles';
+const wrapperRef = useRef(null); */}
+
       <section className="registaration-block">
         <h2 className="ls-media__title">Регистрация</h2>
         <section className="lr-form__social-reg-icon">

@@ -11,16 +11,19 @@
   display: block;
 
   position: absolute;
+  z-index: 5;
   left: 38%;
   top: 20%;
   //   transform: translateX(-50%);
 
-  width: 23.5em;
-  font-size: clamp(14px, 4vw, 18px);
+  max-width: 23.5em;
+  font-size: clamp(14px, 2.2vw, 18px);
   padding: 0.5rem;
   background-color: var(--background-form-color);
   border: 0.2rem var(--form-border-color) solid;
   border-radius: 0.4rem;
+
+  margin-right: 1.7rem;
 
   &__button > p {
     display: none;
@@ -40,7 +43,7 @@
   }
   &__top {
     & h1 {
-      font-size: clamp(18px, 4vw, 24px);
+      font-size: clamp(18px, 2.2vw, 20px);
       margin-bottom: 1em;
     }
   }

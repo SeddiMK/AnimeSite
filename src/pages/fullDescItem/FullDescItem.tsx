@@ -5,6 +5,7 @@ import { Link, useLocation, useParams } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 
 // import srcImg from '../../assets/image/anime-poster/659f8dd485857721242765.jpg';
+import useResizeObserver from 'use-resize-observer';
 
 import FormMain from '../../components/formMain/FormMain';
 import RatingStar from '../../components/rating/RatingStar';
@@ -32,6 +33,8 @@ import Skeleton from '../../containers/sceleton/Skeleton';
 import SkeletonsFullDesc from '../../containers/SkeletonsFullDesc/SkeletonsFullDesc';
 // import { itemsAnimeSearch } from '../../store/searchSlice';
 
+import Particles from '../../containers/particles/Particles';
+
 // ---------------------------------------------------------------------
 type FullDescItemProps = {
   flagRandomAnime: boolean;
@@ -57,11 +60,25 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
     <SkeletonsFullDesc key={i} />
   ));
 
+  // open form adaptiv
+  const [leftOpenForm, setLeftOpenForm] = useState('37%');
+  const [topOpenForm, setTopOpenForm] = useState('31rem');
+  const [leftOpenFormComment, setLeftOpenFormComment] = useState('37%');
+  const [topOpenFormComment, setTopOpenFormComment] = useState('87rem');
+
+  // openComment ---------------------------------------------------
+  const [openFormComent, setOpenFormComent] = useState(false);
+
+  const [lengthComment, setLengthComment] = useState([]);
+
+  const [formStyle, setFormStyle] = useState({});
   const [limitPar, setLimitPar] = useState(100);
   const [searchInpVal, setSearchInpVal] = useState<any>(''); //: string | undefined;
 
   const playerRef = useRef<null | HTMLDivElement>(null);
   const popupAddRef = useRef<null | HTMLDivElement>(null);
+  const wrapperRef = useRef<null | HTMLDivElement>(null);
+  // const fullDescItemWrapRef = useRef<null | HTMLDivElement>(null);
 
   const animeItems = useSelector(itemsAnime);
   const [itemRandomAnime, setItemRandomAnime] = useState('');
@@ -73,27 +90,47 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
   const [idAnime, setIdAnime] = useState('');
   let aliImgMediaLeft = 'постер аниме поднятвным героем'; // данные из бекенда ----------
 
-  // openComment ---------------------------------------------------
-  const [openFormComent, setOpenFormComent] = useState(false);
-  const [lengthComment, setLengthComment] = useState([]);
-  const [formStyle, setFormStyle] = useState({});
+  // adaptiv form comment -----------------------------------------------------
+  const { ref, width, height } = useResizeObserver<HTMLDivElement>({
+    box: 'border-box',
+  });
+  useEffect(() => {
+    // 750
+    if (ref !== null && width !== undefined && width <= 750) {
+      setLeftOpenForm('14%');
+      setTopOpenForm('58rem');
+      setLeftOpenFormComment('5%');
+      setTopOpenFormComment('79rem');
+    }
+    // 550
+    if (ref !== null && width !== undefined && width <= 550) {
+      setTopOpenFormComment('119rem');
+      setTopOpenFormComment('119rem');
+    }
 
-  // open form напротив кнопки
+    if (ref !== null && width !== undefined && width <= 430)
+      setTopOpenFormComment('123rem');
+    if (ref !== null && width !== undefined && width <= 515)
+      setLeftOpenForm('7%');
+  }, [width]);
+
   const openForm = () => {
     setOpenFormComent(true);
+    console.log(width, height, '999999999999999');
+    console.log(leftOpenForm, topOpenForm, '8888888888');
+
     setFormStyle({
-      left: '38%',
-      top: '24rem',
+      left: leftOpenForm,
+      top: topOpenForm,
     });
   };
   const openFormComment = () => {
     setOpenFormComent(true);
     setFormStyle({
-      left: '33%',
-      top: '58rem',
+      left: leftOpenFormComment,
+      top: topOpenFormComment,
     });
   };
-
   // запрос для одного аниме
   // const itemsAnimeSlice = useSelector(itemsAnimeSearch);
 
@@ -146,7 +183,8 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
       //   dispatch(setItemsSearch(animeItems[3] as unknown as []));
       console.log(animeItems, 'animeItems --------------------------');
 
-      if (animeItems.length === 0) fthAnimeSearchSlice('', 'solo level');
+      if (animeItems.length === 0 && id === undefined)
+        fthAnimeSearchSlice('', 'solo level');
       setIsMount(true);
     }
 
@@ -156,19 +194,13 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
   // -------------------------------------------------------
 
   useEffect(() => {
-    console.log(id, '!!!!!!!!!!!     id--------------------------');
-
     if (id !== undefined) fthAnimeSearchSlice(`&id=${id}`, '');
   }, [id]);
   // --------------------------------------------------------
-  // useEffect(() => {
-
-  //   if (animeItems.length !==0 ) fthAnimeSearchSlice(`&id=${id}`);
-  // }, [animeItems]);
 
   useEffect(() => {
-    console.log(flagRandomAnime, '----------flagRandomAnime');
-    console.log(randomHederClick, '----------randomHederClick');
+    // console.log(flagRandomAnime, '----------flagRandomAnime');
+    // console.log(randomHederClick, '----------randomHederClick');
     // console.log(animeItems, '----------animeItems');
     // console.log(
     //   flagRandomAnime && animeItems.length !== 0,
@@ -180,7 +212,7 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
         ...itemsAnmSch,
         animeItems[Math.floor(Math.random() * animeItems.length)],
       ];
-      console.log(randomItem, '----------------------randomItem');
+      // console.log(randomItem, '----------------------randomItem');
 
       dispatch(setItemsSearch(randomItem as []));
     }
@@ -210,22 +242,7 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
 
   // ---------------------------------------------------------
 
-  // if (!animeSearchItems) {
-  //   return <p className="loading-anime-page">Загрузка...</p>;
-  // }
-
-  // if (status === 'loading') {
-  //   return <p className="loading-anime-page">Загрузка аниме...</p>;
-  // }
-  //   : (
-  //     <>
-  //     <div>Загрузка контента... Еще минуту. &#9749 </div>
-  //   </>
-  // )
-
   // {status === 'loading'
-  //       ? skeletons
-  //       :
 
   const softOpeningPopup = () => {
     setPopupAddList(true);
@@ -235,7 +252,10 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
   };
 
   return (
-    <main className="main full-desc-item">
+    <main ref={wrapperRef} className="main full-desc-item">
+      <canvas className="particles-canv" data-color="#B99970"></canvas>
+      <Particles wrapperRef={wrapperRef} />
+
       {animeSearchItems.length === 0 ? (
         <SkeletonsFullDesc />
       ) : (
@@ -243,7 +263,7 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
           {animeSearchItems.length !== 0 &&
             animeSearchItems[0] !== undefined && (
               <>
-                <div className="full-desc-item__wrap">
+                <div ref={ref} className="full-desc-item__wrap">
                   {/* <VideoLink linkVideo={animeSearchItems[0]?.link} />
 
             <div className="item-anime__title">
@@ -438,7 +458,11 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
                     <div
                       ref={playerRef}
                       className="content__player player-block">
-                      <VideoLink linkVideo={animeSearchItems[0]?.link} />
+                      {animeSearchItems[0].length !== 0 ? (
+                        <VideoLink linkVideo={animeSearchItems[0]?.link} />
+                      ) : (
+                        <SkeletonsFullDesc />
+                      )}
                     </div>
                     <div className="content__coment comment">
                       <div className="comment__add">

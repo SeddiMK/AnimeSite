@@ -73,6 +73,7 @@
     "scss": "^0.2.4",
     "shikimori": "^1.1.0",
     "stream": "^0.0.2",
+    "use-resize-observer": "^9.1.0",
     "use-sync-external-store": "^1.2.2",
     "util": "^0.12.5",
     "v": "^0.3.0",

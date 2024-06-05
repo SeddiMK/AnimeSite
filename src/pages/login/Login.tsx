@@ -1,5 +1,5 @@
 import './Login.scss';
-import React, { useEffect, MouseEvent, useState, FC } from 'react';
+import React, { useEffect, MouseEvent, useState, FC, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { Form, Link, useNavigate } from 'react-router-dom';
 
@@ -25,6 +25,8 @@ import LinksSocialRegistration from '../../components/linksSocialRegistration/Li
 
 import { useAuth } from '../../hooks/useAuth';
 
+import Particles from '../../containers/particles/Particles';
+
 // TS types
 interface typeUserData {
   email: string | null;
@@ -37,6 +39,8 @@ const Login: FC = () => {
   const navigate = useNavigate();
   const auth = getAuth();
   auth.useDeviceLanguage(); // определение языка девайса
+
+  const wrapperRef = useRef(null);
 
   const [emailHadle, setEmailHadle] = useState('');
   const [sendEmailReset, setSendEmailReset] = useState(false);
@@ -129,7 +133,12 @@ const Login: FC = () => {
   };
 
   return (
-    <main className="main login">
+    <main ref={wrapperRef} className="main login">
+      <canvas className="particles-canv" data-color="#B99970"></canvas>
+      <Particles wrapperRef={wrapperRef} />
+      {/* import Particles from '../../containers/particles/Particles';
+const wrapperRef = useRef(null); */}
+
       <div className="form-login-registaration lr-form">
         <div className="lr-form__social-media login-social-media">
           <h2 className="ls-media__title">Вход</h2>

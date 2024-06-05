@@ -1,18 +1,19 @@
-import React, { useRef } from 'react';
-import { Outlet } from 'react-router-dom';
+import React from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
 
 // import useScript from '../../hooks/useScript';
 
 // components
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
+
 // script
 import Particles from '../particles/Particles';
 // import ParticlesBg from 'particles-bg';
 
 const Layout = () => {
   // useScript('./particles.js');
-  const wrapperRef = useRef(null);
+  const location = useLocation(); // react-router-dom
   // let config = {
   //   num: [4, 7],
   //   rps: 0.1,
@@ -45,9 +46,7 @@ const Layout = () => {
   // }; //config={config}color="#d1aee3" num={200}type="cobweb"
   return (
     <>
-      <div className="wrapper" ref={wrapperRef}>
-        <canvas className="particles-canv" data-color="#B99970"></canvas>
-        <Particles wrapperRef={wrapperRef} />
+      <div className="wrapper">
         {/* <ParticlesBg color="#d1aee3" num={50} type="cobweb" bg={true} /> */}
         <Header />
         <div className="container">

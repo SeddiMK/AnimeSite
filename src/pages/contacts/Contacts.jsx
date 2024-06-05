@@ -1,13 +1,22 @@
 import './Contacts.scss';
+import React, { useRef } from 'react';
 import { FaSkype, FaGithub, FaEnvelope, FaLink } from 'react-icons/fa';
+
+import Particles from '../../containers/particles/Particles';
 
 // import mailLogo from '../../assets/image/icon/gmail.png';
 // import githubLogo from '../../assets/image/icon/gitHub.png';
 // import skypeLogo from '../../assets/image/icon/skype.png';
 
 const Contacts = () => {
+  const wrapperRef = useRef(null);
   return (
-    <main className="main contacts">
+    <main ref={wrapperRef} className="main contacts">
+      <canvas className="particles-canv" data-color="#B99970"></canvas>
+      <Particles wrapperRef={wrapperRef} />
+      {/* import Particles from '../../containers/particles/Particles';
+const wrapperRef = useRef(null); */}
+
       <div className="description-contacts">
         <div className="description">
           <p className="description__skils"></p>

@@ -224,6 +224,8 @@
 }
 
 .comment {
+  text-align: left;
+
   &__add {
     border-bottom: 1px solid var(--border-bottom);
     padding-bottom: 2rem;

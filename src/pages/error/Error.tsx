@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import style from './Error.module.scss';
 
+import Particles from '../../containers/particles/Particles';
+
 const Error: React.FC = () => {
+  const wrapperRef = useRef(null);
   return (
-    <main className="main error">
+    <main ref={wrapperRef} className="main error">
+      <canvas className="particles-canv" data-color="#B99970"></canvas>
+      <Particles wrapperRef={wrapperRef} />
+      {/* import Particles from '../../containers/particles/Particles';
+const wrapperRef = useRef(null); */}
+
       <section className={style.error}>
         <div className={style.root}>
           <h1>Ой... 404 такой страницы не существует. </h1>

@@ -5,7 +5,10 @@ declare module '*.scss' {
   const content: Record<string, string>;
   export default content;
 }
-
+declare module 'url:*' {
+  const content: Record<string, string>;
+  export default content;
+}
 // types-images
 declare module '*.jpg';
 declare module '*.jpeg';
@@ -13,26 +16,26 @@ declare module '*.png';
 declare module '*.svg';
 declare module '*.webp';
 
-// declare module '*.jpg' {
-//   const value: any;
-//   export = value;
-// }
-// declare module '*.jpeg' {
-//   const value: any;
-//   export = value;
-// }
-// declare module '*.png' {
-//   const value: any;
-//   export = value;
-// }
-// declare module '*.svg' {
-//   const value: any;
-//   export = value;
-// }
-// declare module '*.webp' {
-//   const value: any;
-//   export = value;
-// }
+declare module '*.jpg' {
+  const value: any;
+  export = value;
+}
+declare module '*.jpeg' {
+  const value: any;
+  export = value;
+}
+declare module '*.png' {
+  const value: any;
+  export = value;
+}
+declare module '*.svg' {
+  const value: any;
+  export = value;
+}
+declare module '*.webp' {
+  const value: any;
+  export = value;
+}
 
 declare module 'some-module' {
   namespace SomeClass {

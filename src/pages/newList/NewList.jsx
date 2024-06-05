@@ -1,11 +1,19 @@
 import './NewList.scss';
-import React from 'react';
+import React, { useRef } from 'react';
 
 import VideoListItem from '../../components/videoListItem/VideoListItem';
 
+import Particles from '../../containers/particles/Particles';
+
 const NewList = () => {
+  const wrapperRef = useRef(null);
   return (
-    <main className="main new-list">
+    <main ref={wrapperRef} className="main new-list">
+      <canvas className="particles-canv" data-color="#B99970"></canvas>
+      <Particles wrapperRef={wrapperRef} />
+      {/* import Particles from '../../containers/particles/Particles';
+const wrapperRef = useRef(null); */}
+
       <div className="new-list__wrap">
         <div className="new-list__title">
           Аниме {new Date().getFullYear()} года

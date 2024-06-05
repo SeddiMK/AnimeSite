@@ -10,6 +10,8 @@ import React, {
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
+import Particles from '../../containers/particles/Particles';
+
 // hooks ----------------------------------------------------------------
 import { useAuth } from '../../hooks/useAuth';
 
@@ -51,6 +53,7 @@ const LoginUserCabinet: FC = () => {
   // avatar image profile
   const avatarRef = useRef(null);
 
+  const wrapperRef = useRef(null);
   // const storageFbRef = ref(storageFb);
   // const imagesRef = ref(storageFb, 'images');
   const [image, setImage] = useState(null);
@@ -260,7 +263,12 @@ const LoginUserCabinet: FC = () => {
   return (
     <>
       {isAuth && (
-        <section className="login-user-cabinet user-cab">
+        <section ref={wrapperRef} className="login-user-cabinet user-cab">
+          <canvas className="particles-canv" data-color="#B99970"></canvas>
+          <Particles wrapperRef={wrapperRef} />
+          {/* import Particles from '../../containers/particles/Particles';
+const wrapperRef = useRef(null); */}
+
           <div className="user-cab__block-top">
             <h2>
               Кабинет <span>id</span>:{id}

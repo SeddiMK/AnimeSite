@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux';
 
 import { itemsAnime } from '../../store/animeSlice';
 
+import useResizeObserver from 'use-resize-observer';
+
 const Particles = ({ wrapperRef }) => {
   var particles = document.querySelectorAll('.particles-canv'),
     radius = 1.7,
@@ -19,11 +21,89 @@ const Particles = ({ wrapperRef }) => {
   // const wrapperRef = wrapperRef;
   // const body = document.querySelector('body');
   // useRef allows us to "store" the div in a constant,
-  // and to access it via wrapperRef.current
+  // and to access it via wrapperRef.current   //< HTMLDivElement >
+
+  // -----------------------------------------------------------------------
+  // console.log(wrapperRef);
+
+  // const { wrapperRef, width, height } =
+  //   useResizeObserver
+  //   {
+  //     box: 'border-box',
+  //   };
+
+  const [size, setSize] = React.useState({});
+
+  const resizeHandler = () => {
+    console.log(wrapperRef, 'wrapperRef.current');
+    const { clientHeight, clientWidth } = wrapperRef.current || {};
+    if (wrapperRef.current.clientHeight !== null) {
+      setSize({ clientHeight, clientWidth });
+      setHeight(clientHeight);
+      // setWidth(clientWidth);
+    }
+  };
 
   useEffect(() => {
-    if (!isMounted) setIsMounted(true);
+    // window.addEventListener('resize', resizeHandler);
+    if (wrapperRef.current.clientHeight !== null) resizeHandler();
+    if (
+      wrapperRef?.current?.clientHeight !== height ||
+      window.innerWidth !== width
+    ) {
+      console.log(window.innerWidth, 'window.innerWidth');
+      console.log(
+        wrapperRef?.current?.clientHeight,
+        'wrapperRef?.current?.clientHeight'
+      );
+      setTimeout(() => {
+        // setHeight(wrapperRef?.current?.clientHeight);
+        setWidth(window.innerWidth);
+      }, 300);
+    }
+    return () => {
+      // window.removeEventListener('resize', resizeHandler);
+    };
   }, []);
+
+  console.log(size, 'size----');
+  // useEffect(() => {
+  //   const resizeObserver = new ResizeObserver(() => {
+  //     // console.log(isMounted, 'isMounted');
+  //     // if (isMounted) {
+  //     //   // if (wrapperRef.current.offsetWidth !== width) {
+  //     //   //   setWidth(wrapperRef.current.offsetWidth);
+  //     //   // }
+  //     // if (wrapperRef.current.offsetHeight !== height) {
+  //     //   setTimeout(() => setHeight(wrapperRef.current.offsetHeight), 1300);
+  //     // }
+  //     // }
+  //   });
+  //   console.log(
+  //     resizeObserver.observe(wrapperRef.current),
+  //     ' resizeObserver.observe(wrapperRef.current);'
+  //   );
+
+  //   // console.log(
+  //   //   wrapperRef?.current.offsetHeight,
+  //   //   'wrapperRef?.current.offsetHeight'
+  //   // );
+  //   // if (
+  //   //   wrapperRef?.current?.clientHeight !== height ||
+  //   //   window.innerWidth !== width
+  //   // ) {
+  //   //   setTimeout(() => {
+  //   //     setHeight(wrapperRef?.current?.clientHeight);
+  //   //     setWidth(window.innerWidth);
+  //   //   }, 1300);
+  //   // }
+  //   // setTimeout(() => setWidth(window.innerWidth), 1300); //!!!!!!!!!!!!!!!!!!!!!!!!
+  // }, []);
+  // -----------------------------------------------------------------------
+
+  // useEffect(() => {
+  //   if (!isMounted) setIsMounted(true);
+  // }, []);
 
   useEffect(
     () => {
@@ -48,19 +128,6 @@ const Particles = ({ wrapperRef }) => {
       // the code in useEffect will be executed when the component
       // has mounted, so we are certain wrapperRef.current will contain
       // the div we want to observe
-      const resizeObserver = new ResizeObserver(() => {
-        // console.log(isMounted, 'isMounted');
-        // if (isMounted) {
-        //   // if (wrapperRef.current.offsetWidth !== width) {
-        //   //   setWidth(wrapperRef.current.offsetWidth);
-        //   // }
-        // if (wrapperRef.current.offsetHeight !== height) {
-        //   setTimeout(() => setHeight(wrapperRef.current.offsetHeight), 1300);
-        // }
-        // }
-      });
-
-      resizeObserver.observe(wrapperRef.current);
 
       particles.forEach((node) => {
         let color = node.dataset.color;
@@ -154,29 +221,12 @@ const Particles = ({ wrapperRef }) => {
       // the div
 
       return function cleanup() {
-        resizeObserver.disconnect();
+        // resizeObserver.disconnect();
       };
     },
     // only update the effect if the ref element changed
     [animeItems, height, width]
   );
-
-  useEffect(() => {
-    // console.log(
-    //   wrapperRef?.current.offsetHeight,
-    //   'wrapperRef?.current.offsetHeight'
-    // );
-    if (
-      wrapperRef?.current?.clientHeight !== height ||
-      window.innerWidth !== width
-    ) {
-      setTimeout(() => {
-        setHeight(wrapperRef?.current?.clientHeight);
-        setWidth(window.innerWidth);
-      }, 1300);
-    }
-    // setTimeout(() => setWidth(window.innerWidth), 1300); //!!!!!!!!!!!!!!!!!!!!!!!!
-  }, [window.innerWidth, wrapperRef?.current?.clientHeight]);
 
   console.log(width, 'w');
   console.log(height, 'h');

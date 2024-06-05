@@ -162,8 +162,8 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
     <Skeleton key={i} widthCard={widthCard} heightCard={heightCard} />
   ));
 
-  console.log(refCard, refCard.current?.clientWidth);
-  console.log(widthCard, heightCard);
+  // console.log(refCard, refCard.current?.clientWidth);
+  // console.log(widthCard, heightCard);
 
   // fthAnimeSearchSlice -------------------------------------------------
   // useEffect(() => {
@@ -211,7 +211,7 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
   //   // }
   // }, [animeItems]);
 
-  console.log(animeItems, 'animeItems');
+  // console.log(animeItems, 'animeItems');
   // console.log(animeSearchItems, 'animeSearchItems');
   // console.log(itemsAnimeSlice, '------itemsAnimeSlice-------');
 
