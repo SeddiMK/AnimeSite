@@ -80,6 +80,13 @@
     "web-vitals": "^2.1.4"
   },
   "overrides": {},
+  "pnpm": {
+    "peerDependencyRules": {
+      "allowedVersions": {
+        "react": "18"
+      }
+    }
+  },
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
