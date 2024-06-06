@@ -79,9 +79,7 @@
     "version": "^0.1.2",
     "web-vitals": "^2.1.4"
   },
-  "overrides": {
-    "typescript": "^5.4.5"
-  },
+  "overrides": {},
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
