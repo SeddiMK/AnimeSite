@@ -2,8 +2,8 @@ import './Null.scss';
 import './App.scss';
 import React, { useLayoutEffect } from 'react';
 import {
-  RouterProvider,
-  BrowserRouter as Router,
+  // RouterProvider,
+  // BrowserRouter as Router,
   Route,
   Routes,
   Outlet,
@@ -29,19 +29,21 @@ import NewList from '../pages/newList/NewList';
 // router
 import { router } from '../router/router';
 
+//{/* <Outlet /> */}
+
 const App = () => {
   const location = useLocation();
   // Scroll to top if path changes
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
+
   return (
     <div className="wrapper">
       {/* <ParticlesBg color="#d1aee3" num={50} type="cobweb" bg={true} /> */}
 
       <Header />
       <div className="container">
-        {/* <Outlet /> */}
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="fullDescItem/:id" element={<FullDescItem />} />
