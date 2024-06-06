@@ -45,7 +45,7 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
         yearNew,
       })
     );
-    document.getElementById('root')?.scrollIntoView(); // при перерисовке скорит на верх стр
+    // document.getElementById('root')?.scrollIntoView(); // при перерисовке скорит на верх стр
   };
 
   //--------------------------------------------------------------

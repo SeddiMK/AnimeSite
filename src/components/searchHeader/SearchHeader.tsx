@@ -55,7 +55,7 @@ const SearchHeader = () => {
   // fthAnimeSearchSlice -----------------------------
   const fthAnimeSearchSlice = () => {
     dispatch(fetchAnimeSearchSlice({ searchInpVal, limitPar, idAnime }));
-    document.getElementById('root')?.scrollIntoView(); // при перерисовке скорит на верх стр
+    // document.getElementById('root')?.scrollIntoView(); // при перерисовке скорит на верх стр
   };
 
   // onChangeInput ----e: React.ChangeEvent<HTMLInputElement>------------------

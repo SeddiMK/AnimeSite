@@ -27,7 +27,35 @@ import LoginUserCabinet from '../pages/loginUserCabinet/LoginUserCabinet';
 import Error from '../pages/error/Error';
 
 // router
-import { router } from '../router/router';
+// import { router } from '../router/router';
+// -------------------------------------------------------
+// "scripts": {
+// "start": "react-app-rewired start",
+// "build": "react-app-rewired build",
+// "test": "react-app-rewired test",
+// "eject": "react-scripts eject"},
+// "devDependencies": {
+//   "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+//   "@eslint/js": "^8.57.0",
+//   "@types/react": "^18.3.3",
+//   "@typescript-eslint/parser": "^7.7.1",
+//   "assert": "^2.1.0",
+//   "buffer": "^6.0.3",
+//   "crypto-browserify": "^3.12.0",
+//   "dotenv-webpack": "^8.1.0",
+//   "eslint": "^8.57.0",
+//   "eslint-plugin-react": "^7.34.1",
+//   "globals": "^11.12.0",
+//   "https-browserify": "^1.0.0",
+//   "os-browserify": "^0.3.0",
+//   "process": "^0.11.10",
+//   "react-app-rewired": "^2.2.1",
+//   "sass": "^1.72.0",
+//   "stream-browserify": "^3.0.0",
+//   "stream-http": "^3.2.0",
+//   "url": "^0.11.3"
+// }
+// -------------------------------------------------------
 
 //{/* <Outlet /> */}
 

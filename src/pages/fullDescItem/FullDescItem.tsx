@@ -11,9 +11,6 @@ import FormMain from '../../components/formMain/FormMain';
 import RatingStar from '../../components/rating/RatingStar';
 import VideoLink from '../../components/videoLink/VideoLink';
 
-// kodik
-import { MaterialObject } from 'kodikwrapper';
-
 // store -----------------------
 import { RootState, useAppDispatch } from '../../store';
 import { fetchAnimeListSlice, itemsAnime } from '../../store/animeSlice';

@@ -64,19 +64,19 @@ import NewList from '../pages/newList/NewList';
 //   },
 // ]);
 
-export const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/" element={<Layout />} errorElement={<Error />}>
-      <Route index element={<Main />} />
-      <Route path="fullDescItem/:id" element={<FullDescItem />} />
-      <Route path="new/" element={<NewList />} />
-      <Route path="random-anime/" element={<RandomAnime />} />
-      <Route path="search/" element={<SearchHeader />} />
-      <Route path="contacts" element={<Contacts />} />
-      <Route path="login" element={<Login />} />
-      <Route path="login/user/:id" element={<LoginUserCabinet />} />
-      <Route path="registration" element={<Registration />} />
-      <Route path="*" element={<Error />} />
-    </Route>
-  )
-);
+// export const router = createBrowserRouter(
+//   createRoutesFromElements(
+//     <Route path="/" element={<Layout />} errorElement={<Error />}>
+//       <Route index element={<Main />} />
+//       <Route path="fullDescItem/:id" element={<FullDescItem />} />
+//       <Route path="new/" element={<NewList />} />
+//       <Route path="random-anime/" element={<RandomAnime />} />
+//       <Route path="search/" element={<SearchHeader />} />
+//       <Route path="contacts" element={<Contacts />} />
+//       <Route path="login" element={<Login />} />
+//       <Route path="login/user/:id" element={<LoginUserCabinet />} />
+//       <Route path="registration" element={<Registration />} />
+//       <Route path="*" element={<Error />} />
+//     </Route>
+//   )
+// );

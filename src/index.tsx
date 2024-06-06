@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { createRoot } from 'react-dom/client';
+// import { createRoot } from 'react-dom/client';
 import * as ReactDOMClient from 'react-dom/client';
 import './index.css';
 import './firebase';

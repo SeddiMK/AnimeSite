@@ -19,7 +19,7 @@ import { setUser } from '../../store/userSlice';
 import InputFormRegistration from '../../containers/InputFormRegistration/InputFormRegistration';
 import LinksSocialRegistration from '../../components/linksSocialRegistration/LinksSocialRegistration';
 
-import { useAuth } from '../../hooks/useAuth';
+// import { useAuth } from '../../hooks/useAuth';
 
 import Particles from '../../containers/particles/Particles';
 

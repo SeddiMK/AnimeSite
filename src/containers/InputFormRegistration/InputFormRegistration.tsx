@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect, useRef } from 'react';
 import './InputFormRegistration.scss';
-import { Form } from 'react-router-dom';
+// import { Form } from 'react-router-dom';
 
 import {
   animated,
@@ -121,7 +121,7 @@ const InputFormRegistration: FC<FormProps> = ({
 
   return (
     <>
-      <Form className="form-login-header" onSubmit={handleSubmit} title="login">
+      <form className="form-login-header" onSubmit={handleSubmit} title="login">
         <div className="form__login form-group">
           <label className="form-group__login" htmlFor="username">
             Email: <br />
@@ -314,7 +314,7 @@ const InputFormRegistration: FC<FormProps> = ({
             </button>
           </div>
         </div>
-      </Form>{' '}
+      </form>
     </>
   );
 };
