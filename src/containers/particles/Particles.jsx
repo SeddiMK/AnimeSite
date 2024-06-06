@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
+// store
 import { itemsAnime } from '../../store/animeSlice';
-
-import useResizeObserver from 'use-resize-observer';
 
 const Particles = ({ wrapperRef }) => {
   var particles = document.querySelectorAll('.particles-canv'),
@@ -15,27 +14,12 @@ const Particles = ({ wrapperRef }) => {
   const [width, setWidth] = useState(1920);
   const [height, setHeight] = useState(1080);
 
-  const [isMounted, setIsMounted] = useState(false);
-  // const [resizeObserver, setResizeObserver] = useState(0);
-
-  // const wrapperRef = wrapperRef;
-  // const body = document.querySelector('body');
-  // useRef allows us to "store" the div in a constant,
-  // and to access it via wrapperRef.current   //< HTMLDivElement >
-
-  // -----------------------------------------------------------------------
-  // console.log(wrapperRef);
-
-  // const { wrapperRef, width, height } =
-  //   useResizeObserver
-  //   {
-  //     box: 'border-box',
-  //   };
+  // const [isMounted, setIsMounted] = useState(false);
 
   const [size, setSize] = React.useState({});
 
   const resizeHandler = () => {
-    console.log(wrapperRef, 'wrapperRef.current');
+    // console.log(wrapperRef, 'wrapperRef.current');
     const { clientHeight, clientWidth } = wrapperRef.current || {};
     if (wrapperRef.current.clientHeight !== null) {
       setSize({ clientHeight, clientWidth });
@@ -51,11 +35,11 @@ const Particles = ({ wrapperRef }) => {
       wrapperRef?.current?.clientHeight !== height ||
       window.innerWidth !== width
     ) {
-      console.log(window.innerWidth, 'window.innerWidth');
-      console.log(
-        wrapperRef?.current?.clientHeight,
-        'wrapperRef?.current?.clientHeight'
-      );
+      // console.log(window.innerWidth, 'window.innerWidth');
+      // console.log(
+      //   wrapperRef?.current?.clientHeight,
+      //   'wrapperRef?.current?.clientHeight'
+      // );
       setTimeout(() => {
         // setHeight(wrapperRef?.current?.clientHeight);
         setWidth(window.innerWidth);
@@ -66,7 +50,7 @@ const Particles = ({ wrapperRef }) => {
     };
   }, []);
 
-  console.log(size, 'size----');
+  // console.log(size, 'size----');
   // useEffect(() => {
   //   const resizeObserver = new ResizeObserver(() => {
   //     // console.log(isMounted, 'isMounted');
@@ -228,14 +212,8 @@ const Particles = ({ wrapperRef }) => {
     [animeItems, height, width]
   );
 
-  console.log(width, 'w');
-  console.log(height, 'h');
-  // useEffect(() => {
-  //   setIsMounted(true);
-  //   // if (isMounted) ResizeObserver.unobserve();
-  // }, []);
+  console.log(width, height, 'w , h');
 
-  // console.log(isMounted + 1, 'IsMounted');
   return <>{/* <RootWidthHeigth /> */}</>;
 };
 

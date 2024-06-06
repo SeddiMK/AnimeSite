@@ -11,8 +11,6 @@ const NewList = () => {
     <main ref={wrapperRef} className="main new-list">
       <canvas className="particles-canv" data-color="#B99970"></canvas>
       <Particles wrapperRef={wrapperRef} />
-      {/* import Particles from '../../containers/particles/Particles';
-const wrapperRef = useRef(null); */}
 
       <div className="new-list__wrap">
         <div className="new-list__title">

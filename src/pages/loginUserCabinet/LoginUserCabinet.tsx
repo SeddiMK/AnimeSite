@@ -1,14 +1,6 @@
 import './LoginUserCabinet.scss';
-import React, {
-  FC,
-  SetStateAction,
-  useEffect,
-  useReducer,
-  useRef,
-  useState,
-} from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import React, { FC, useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Particles from '../../containers/particles/Particles';
 
@@ -24,13 +16,12 @@ import {
   getDownloadURL,
   getStorage,
   ref,
-  uploadBytes,
   uploadBytesResumable,
 } from 'firebase/storage';
 
 //store ----------------------------------------------------------------
 import { removeUser } from '../../store/userSlice';
-import { useAppDispatch, RootState } from '../../store';
+import { useAppDispatch } from '../../store';
 
 import LinksSocialRegistration from '../../components/linksSocialRegistration/LinksSocialRegistration';
 
@@ -39,10 +30,7 @@ import LinksSocialRegistration from '../../components/linksSocialRegistration/Li
 // };
 
 const LoginUserCabinet: FC = () => {
-  // const { id } = useParams();
-  // console.log(id);
-
-  const [flagRender, setFlagRender] = useState(false);
+  // const [flagRender, setFlagRender] = useState(false);
 
   const { isAuth, email, id, displayName } = useAuth();
   const auth = getAuth();
@@ -51,7 +39,7 @@ const LoginUserCabinet: FC = () => {
   const navigate = useNavigate();
 
   // avatar image profile
-  const avatarRef = useRef(null);
+  // const avatarRef = useRef(null);
 
   const wrapperRef = useRef(null);
   // const storageFbRef = ref(storageFb);
@@ -60,10 +48,11 @@ const LoginUserCabinet: FC = () => {
   const [url, setUrl] = useState<string | null>(null);
   const [errorSt, setErrorSt] = useState(false);
 
-  const [avatarSize, setAvatarSize] = useState('size image');
   const [avatarUrlFlag, setAvatarUrlFlag] = useState(true);
-  const [updProfile, setUpdProfile] = useState(false);
-  const [clickUploadImg, setClickUploadImg] = useState(false);
+
+  // const [avatarSize, setAvatarSize] = useState('size image');
+  // const [updProfile, setUpdProfile] = useState(false);
+  // const [clickUploadImg, setClickUploadImg] = useState(false);
   // const [avatarLocStor, setAvatarLocStor] = useState(''); ///local store
 
   // storage fairebase ------------------------------------------------------------
@@ -102,7 +91,7 @@ const LoginUserCabinet: FC = () => {
             setAvatarUrlFlag(false);
           },
           async () => {
-            const imgUrl = getDownloadURL(avatarFbRef)
+            await getDownloadURL(avatarFbRef)
               .then((url) => {
                 setUrl(url);
 
@@ -193,16 +182,6 @@ const LoginUserCabinet: FC = () => {
     }
   };
 
-  // const onChangeInput = () => {
-  //   if (inputUserNameRef.current) {
-  //     // console.log(inputUserNameRef.current.value, '-----------onChangeInput');
-  //     setChangeVal(inputUserNameRef.current.value);
-  //   }
-  // };
-
-  // -----------------------------------------------------------(false);-----------------
-  // const [isLinkIntact, setIsLinkIntact] = useState
-
   useEffect(() => {
     const checkLinkIntact = async () => {
       try {
@@ -244,7 +223,6 @@ const LoginUserCabinet: FC = () => {
     checkLinkIntact();
   }, [avatarFbRef, user, user?.photoURL]);
 
-  // localStorage.getItem('clickUploadImg') === 'false' &&
   useEffect(() => {
     if (url === null && user?.photoURL) setUrl(user?.photoURL);
     if (!errorSt) {
@@ -252,13 +230,9 @@ const LoginUserCabinet: FC = () => {
     }
   }, [url, user?.photoURL, errorSt]);
 
-  // useEffect(() => {
-  //   if (updProfile) setChangeVal('');
-  // }, [updProfile]);
-
-  console.log('user-----------', user);
+  // console.log('user-----------', user);
   // console.log('user?.photoURL---------', user?.photoURL);
-  console.log('url-----------', url);
+  // console.log('url-----------', url);
 
   return (
     <>
@@ -266,8 +240,6 @@ const LoginUserCabinet: FC = () => {
         <section ref={wrapperRef} className="login-user-cabinet user-cab">
           <canvas className="particles-canv" data-color="#B99970"></canvas>
           <Particles wrapperRef={wrapperRef} />
-          {/* import Particles from '../../containers/particles/Particles';
-const wrapperRef = useRef(null); */}
 
           <div className="user-cab__block-top">
             <h2>

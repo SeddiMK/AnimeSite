@@ -1,33 +1,3 @@
-.btn {
-}
-.btn-inp {
-}
-.btn-lg {
-}
-.errmsg {
-}
-.form {
-  &__btn {
-  }
-  &__btn-block {
-  }
-}
-.inp-form {
-}
-.lr-form {
-  &__inp-form {
-  }
-  &__social-reg-icon {
-  }
-}
-.ls-media {
-  &__title {
-  }
-}
-.main {
-}
-.registaration {
-}
 .registaration-block {
   display: flex;
   flex-direction: column;
@@ -38,5 +8,6 @@
   border-radius: 0.4rem;
   padding: 2rem 3rem;
   margin-top: 2rem;
+  font-size: 1.2rem;
   text-align: left;
 }

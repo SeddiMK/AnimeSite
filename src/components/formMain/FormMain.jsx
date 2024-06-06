@@ -1,8 +1,9 @@
 import './FormMain.scss';
-import React, { useEffect, useRef, useState } from 'react';
-import { useInput } from '../validateForm/Validate';
+import React, { useEffect, useRef, createRef, useState } from 'react';
 import { Form } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+
+// validate
+import { useInput } from '../validateForm/Validate';
 
 // hooks
 import { useAuth } from '../../hooks/useAuth';
@@ -13,26 +14,19 @@ const FormMain = ({
   setLengthComment,
   formStyle,
 }) => {
-  const { isAuth, id, photoUrl } = useAuth();
-  const srcAvatar = null;
+  const { displayName, photoUrl } = useAuth();
   const [comment, setComment] = useState([]);
   const [commentRepeat, setCommentRepeat] = useState(false);
   const [email, setEmail] = useState('');
 
-  let newDelArr = [];
-  let formText = React.createRef();
+  let newDelArr = useRef([]);
+  let formText = createRef();
+
   // =========noActivBtn== disabled={noActivBtn} =========================
   let noActivBtn = false; //!!!!!!!!!!!!!!!!!!!!!!!!!!
 
   const formRef = useRef(null);
   const inpMail = useRef(null);
-  // console.log(ref.current, 'formRef in formRef');
-
-  // const form = document.querySelector('form.form');
-  // let postTwice = document.querySelector('.validate--textarea-duble-send>p');
-  // const btnSendComment = document.querySelector(
-  //   'button.main__btn-send-comment'
-  // );
 
   const emailValidation = useInput('', {
     isEmpty: true,
@@ -46,7 +40,6 @@ const FormMain = ({
   });
 
   //  validation =================================================
-
   const validErrorMesageOutEmail = () => {
     if (emailValidation.isDirty && emailValidation.isEmpty) {
       return (
@@ -90,19 +83,10 @@ const FormMain = ({
         </div>
       );
     }
-    // if (searchArrayMessage) {
-    //   return (
-    //     <div className="validate validate--textarea" style={{ color: 'red' }}>
-    //       You cannot comment on the same post twice
-    //     </div>
-    //   );
-    // }
   };
 
   // addComment -------------------------
   let addComment = (e) => {
-    // const formInpMail = document.querySelector('.form__inp-mail');
-
     let comments = [];
     let commentValue = formText.current.value;
 
@@ -150,7 +134,6 @@ const FormMain = ({
   const handleClick = (e) => {
     if (formRef.current && !formRef.current.contains(e.target)) {
       setOpenFormComent(false);
-
       setLengthComment([]);
     }
   };
@@ -161,8 +144,6 @@ const FormMain = ({
       document.removeEventListener('mousedown', handleClick);
     };
   });
-
-  // useEffect(() => {}, []);
 
   return (
     <>
@@ -248,7 +229,8 @@ const FormMain = ({
             </div>
             <div className="comment__block-content">
               <h3 className="comment__nik-name">
-                UserNikName <span>23 часа назад</span>
+                {displayName !== '' ? displayName : 'UserNikName'}
+                <span>18 часа назад</span>
               </h3>
               <div className="comment__out-text">{el}</div>
               <button

@@ -1,37 +1,32 @@
 import './FullDescItem.scss';
-import React, { SetStateAction, useEffect, useRef, useState } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import { CSSTransition } from 'react-transition-group';
 
-// import srcImg from '../../assets/image/anime-poster/659f8dd485857721242765.jpg';
 import useResizeObserver from 'use-resize-observer';
 
 import FormMain from '../../components/formMain/FormMain';
 import RatingStar from '../../components/rating/RatingStar';
 import VideoLink from '../../components/videoLink/VideoLink';
-import { clientKodik, kodikApiKey } from '../../kodikcfg';
+
+// kodik
 import { MaterialObject } from 'kodikwrapper';
-import { useSelector } from 'react-redux';
-import axios from 'axios';
-import {
-  AnimeItems,
-  fetchAnimeListSlice,
-  itemsAnime,
-} from '../../store/animeSlice';
+
+// store -----------------------
 import { RootState, useAppDispatch } from '../../store';
+import { fetchAnimeListSlice, itemsAnime } from '../../store/animeSlice';
+import { addListAnime } from '../../store/userSlice';
 import {
   fetchAnimeSearchSlice,
   itemsAnimeSearch,
-  AnimeSearch,
   setItemsSearch,
-  clickRandomHeder,
 } from '../../store/searchSlice';
-import { addListAnime } from '../../store/userSlice';
-import { Observable } from 'redux';
-import Skeleton from '../../containers/sceleton/Skeleton';
+
+// skeleton
+// import Skeleton from '../../containers/sceleton/Skeleton';
 import SkeletonsFullDesc from '../../containers/SkeletonsFullDesc/SkeletonsFullDesc';
-// import { itemsAnimeSearch } from '../../store/searchSlice';
 
 import Particles from '../../containers/particles/Particles';
 
@@ -73,7 +68,7 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
 
   const [formStyle, setFormStyle] = useState({});
   const [limitPar, setLimitPar] = useState(100);
-  const [searchInpVal, setSearchInpVal] = useState<any>(''); //: string | undefined;
+  // const [searchInpVal, setSearchInpVal] = useState<any>(''); //: string | undefined;
 
   const playerRef = useRef<null | HTMLDivElement>(null);
   const popupAddRef = useRef<null | HTMLDivElement>(null);
@@ -81,14 +76,14 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
   // const fullDescItemWrapRef = useRef<null | HTMLDivElement>(null);
 
   const animeItems = useSelector(itemsAnime);
-  const [itemRandomAnime, setItemRandomAnime] = useState('');
+  // const [itemRandomAnime, setItemRandomAnime] = useState('');
 
   const [popupAddList, setPopupAddList] = useState(false);
 
   const [isMount, setIsMount] = useState(false);
 
-  const [idAnime, setIdAnime] = useState('');
-  let aliImgMediaLeft = 'постер аниме поднятвным героем'; // данные из бекенда ----------
+  // const [idAnime, setIdAnime] = useState('');
+  // let aliImgMediaLeft = 'постер аниме поднятвным героем'; // данные из бекенда ----------
 
   // adaptiv form comment -----------------------------------------------------
   const { ref, width, height } = useResizeObserver<HTMLDivElement>({
@@ -134,13 +129,13 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
   // запрос для одного аниме
   // const itemsAnimeSlice = useSelector(itemsAnimeSearch);
 
-  const [itemAnimeSearchId, setItemAnimeSearchId] = useState<MaterialObject[]>(
-    []
-  );
-  const [itemAnimeLink, setItemAnimeLink] = useState('');
-  const [itemAnimeTitle, setItemAnimeTitle] = useState('');
-  const [itemAnimeTitleOrign, setItemAnimeTitleOrign] = useState('');
-  const [itemAnimeOtherTitle, setItemAnimeOtherTitle] = useState('');
+  // const [itemAnimeSearchId, setItemAnimeSearchId] = useState<MaterialObject[]>(
+  //   []
+  // );
+  // const [itemAnimeLink, setItemAnimeLink] = useState('');
+  // const [itemAnimeTitle, setItemAnimeTitle] = useState('');
+  // const [itemAnimeTitleOrign, setItemAnimeTitleOrign] = useState('');
+  // const [itemAnimeOtherTitle, setItemAnimeOtherTitle] = useState('');
 
   const animeSearchItems = useSelector(itemsAnimeSearch);
   // const animeSearchItems = useRef<AnimeSearch[]>(useSelector(itemsAnimeSearch));
@@ -220,8 +215,8 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
 
   // console.log(itemRandomAnime, 'itemRandomAnime');
   // console.log(flagRandomAnime, 'flagRandomAnime');
-  console.log(animeItems, 'animeItems');
-  console.log(animeSearchItems, 'animeSearchItems');
+  // console.log(animeItems, 'animeItems');
+  // console.log(animeSearchItems, 'animeSearchItems');
   // console.log(itemAnimeSearchId, 'itemAnimeSearchId');
   // console.log(itemAnimeLink, 'itemAnimeLink');
 
@@ -340,13 +335,19 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
                         <div className="media__rating-block rating">
                           <div className="rating__stars">
                             <span className="rating__star">&#9733;</span>
-                            <span className="rating__num">
-                              {itemAnime?.shikimori_rating}
-                            </span>
-                            <span className="rating__votes">
-                              {' / '}
-                              {itemAnime?.shikimori_votes}
-                            </span>
+                            {itemAnime?.shikimori_rating ? (
+                              <>
+                                <span className="rating__num">
+                                  {itemAnime?.shikimori_rating}
+                                </span>
+                                <span className="rating__votes">
+                                  {' / '}
+                                  {itemAnime?.shikimori_votes}
+                                </span>
+                              </>
+                            ) : (
+                              'нет рейтинга'
+                            )}
                           </div>
                           <div className="rating__grade-user">
                             <div className="rating__user-star">

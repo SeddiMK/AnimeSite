@@ -1,14 +1,9 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { RootState, useAppDispatch } from '.';
+import { RootState } from '.';
 // kodik---------------------------------------------------------------------
-import { clientKodik, kodikApiKey } from '../kodikcfg';
-import { Client, MaterialObject, VideoLinks } from 'kodikwrapper';
-
-import { Navigate, useNavigate } from 'react-router-dom';
-import { SetStateAction, useState } from 'react';
-import { env } from 'process';
-import { useSelector } from 'react-redux';
+import { kodikApiKey } from '../kodikcfg';
+// import { Client, MaterialObject, VideoLinks } from 'kodikwrapper';
 
 export type SearchAnimeParams = {
   idAnime: string;
@@ -80,27 +75,10 @@ export const fetchAnimeSearchSlice = createAsyncThunk<
 >('search/fetchAnimeStatus', async (params) => {
   try {
     const { idAnime, searchInpVal, limitPar } = params;
-    // const dispatch = useAppDispatch();
-    // const navigate = useNavigate();
 
-    console.log(idAnime, '-----------idAnime in search store------------');
-    console.log(
-      searchInpVal,
-      '-----------searchInpVal in search store------------'
-    );
-    console.log(limitPar, '-----------limitPar in search store------------');
-
-    // const idSearch = () => {
-    //   console.log(
-    //     Boolean(id),
-    //     '-----------Boolean(id in search store------------'
-    //   );
-
-    //   if (id) return `id=${id}`;
-    // };
-    console.log(
-      `http://kodikapi.com/search?limit=${limitPar}&title=${searchInpVal}${idAnime}&with_material_data=true`
-    );
+    //  console.log(
+    //   `http://kodikapi.com/search?limit=${limitPar}&title=${searchInpVal}${idAnime}&with_material_data=true`
+    // );
 
     const resp = await axios.get(
       `http://kodikapi.com/search?limit=${limitPar}&title=${searchInpVal}${idAnime}&with_material_data=true&token=${kodikApiKey}`
@@ -111,7 +89,7 @@ export const fetchAnimeSearchSlice = createAsyncThunk<
     }
     const data: AnimeSearch[] = resp.data.results;
 
-    console.log(data, '------------data search------------');
+    // console.log(data, '------------data search------------');
     // -------------------------------------------------------------------------------
     //     // countries(params?: CountriesParams): Promise<CountriesResponse>;
     //     // genres(params?: GenresParams): Promise<GenresResponse>;
@@ -150,8 +128,6 @@ export const fetchAnimeSearchSlice = createAsyncThunk<
       }
     } else {
       console.log('нет данных для показа');
-      // dispatch(error('нет данных для показа'));
-      // navigate('/error', { replace: true });
     }
     // ----------- clien kodik ----------------------------------------------------
     // const [animesItemsSearch, setAnimesItemsSearch] = useState<any>([]);
@@ -283,11 +259,6 @@ export const fetchAnimeSearchSlice = createAsyncThunk<
 
     //     // [animesItemsSearchAll, animesItemsSearch]
     //   });
-    console.log(animesItemsSearchNotTest, 'animesItemsSearchNotTest');
-    console.log(
-      animesItemsSearch,
-      '----------animesItemsSearch search----------'
-    );
 
     let uniqueAnimesItems = Object.values(
       animesItemsSearch.reduce((acc, obj) => {
@@ -456,8 +427,6 @@ export const {
   error,
 } = searchSlice.actions;
 
-// export const itemsReindexing = (state: RootState) =>
-//   state.animeSlice.itemsReindexing;
 export const itemsAnimeSearch = (state: RootState) =>
   state.searchSlice.itemsSearch;
 

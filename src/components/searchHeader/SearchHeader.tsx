@@ -1,21 +1,12 @@
 import './SearchHeader.scss';
-import React, {
-  LegacyRef,
-  MutableRefObject,
-  RefObject,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 import debounce from 'lodash.debounce';
-import { useDispatch, useSelector } from 'react-redux';
 
 // store
 import { RootState, useAppDispatch } from '../../store';
-
-// import { searchInpHeader, setCurrentPage } from '../../store/filterSlice';
 
 import {
   fetchAnimeSearchSlice,
@@ -29,7 +20,7 @@ import {
 
 const SearchHeader = () => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   // const { id } = useParams();
   const [searchInpBtn, setSearchInpBtn] = useState(false);
   const [searchInpVal, setSearchInpVal] = useState('');
@@ -38,7 +29,7 @@ const SearchHeader = () => {
   const [limitPar, setLimitPar] = useState(10);
   const [idAnime, setIdAnime] = useState('');
 
-  const [valueSt, setValueSt] = useState('');
+  // const [valueSt, setValueSt] = useState('');
   const [searchValue, setSearchValue] = useState('');
   const [clickLinkAnime, setClickLinkAnime] = useState(true);
 
@@ -66,13 +57,6 @@ const SearchHeader = () => {
     dispatch(fetchAnimeSearchSlice({ searchInpVal, limitPar, idAnime }));
     document.getElementById('root')?.scrollIntoView(); // при перерисовке скорит на верх стр
   };
-  // const handlerSearchBtn = (e: React.MouseEvent<HTMLButtonElement>) => {
-  //   e.preventDefault();
-  //   // отправить данные в store для поиска
-  //   dispatch(searchInpHeader(searchValue));
-  // };.length === 0
-  // console.log(id);
-  // console.log(Boolean(id));
 
   // onChangeInput ----e: React.ChangeEvent<HTMLInputElement>------------------
   const onChangeInput = () => {
@@ -80,9 +64,6 @@ const SearchHeader = () => {
       updateInpSearchValue(inputRef.current.value);
       setSearchInpVal(inputRef.current.value);
     }
-    // if (id && inputRef.current) navigate('/');
-
-    // dispatch(setCurrentPage(1));
   };
 
   // close in window ----------------------------
@@ -114,20 +95,15 @@ const SearchHeader = () => {
       fthAnimeSearchSlice();
       setClickLinkAnime(true);
     }
-    // else if (inputRef.current) {
-    //   updateInpSearchValue(inputRef.current.value);
-    //   setSearchInpVal(inputRef.current.value);
-    // }
   }, [searchInpVal]);
+
+  // console.log(searchInpBtn, 'searchInpBtn');
+  // console.log(animeSearchItems, 'animeSearchItems-----');
+  // console.log(!searchInpVal, '!searchInpVal');
 
   // if (searchInpValStore && animeItems.length === 0) {
   //   return <p> Ничего не нашли... &#128524; Пожалуйста измените запрос.</p>;
   // }
-
-  // console.log(searchInpBtn, 'searchInpBtn');
-  console.log(animeSearchItems, 'animeSearchItems-----');
-  // console.log(!searchInpVal, '!searchInpVal');
-
   return (
     <form
       className="search-header__form"
@@ -154,14 +130,12 @@ const SearchHeader = () => {
                 placeholder="Поиск аниме, манги, людей и персонажей"
               />
             </div>
-            {/* searchInpVal && animeSearchItems.length !== 0 */}
             {clickLinkAnime && true && (
               <div className="search-header__popup-result">
                 <div className="item-search__title-type">
                   <h3>Аниме</h3>
                 </div>
                 <ul className="search-header__list">
-                  {/* animeSearchItems.length !== 0 && */}
                   {animeSearchItems?.map((elem, ind) => (
                     <li className="search-header__item item-search">
                       <Link

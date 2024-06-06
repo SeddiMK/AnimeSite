@@ -1,28 +1,24 @@
-import React, { FC, useState, useEffect, useRef } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import './Header.scss';
-import LoginUserCabinet from '../../pages/loginUserCabinet/LoginUserCabinet';
+import React, { FC, useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+
 import SearchHeader from '../searchHeader/SearchHeader';
-
-//
-import { animateScroll as scroll } from 'react-scroll';
-import { ScrollRestoration } from 'react-router-dom';
-
-// store -----------------------------------------------------------------
-import { useAppDispatch, RootState } from '../../store';
-import { removeUser } from '../../store/userSlice';
-// hooks -----------------------------------------------------------------
-import { useAuth } from '../../hooks/useAuth';
-import { clickRandomHeder } from '../../store/searchSlice';
 import MenuList from '../menuList/MenuList';
 import NavMobile from '../navMobile/NavMobile';
+
+// store -----------------------------------------------------------------
+import { useAppDispatch } from '../../store';
+import { removeUser } from '../../store/userSlice';
+import { clickRandomHeder } from '../../store/searchSlice';
+
+// hooks -----------------------------------------------------------------
+import { useAuth } from '../../hooks/useAuth';
 
 const Header: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const { isAuth, email, id } = useAuth();
+  const { isAuth, id } = useAuth();
   const [toggleRandom, setToggleRandom] = useState(true);
 
   useEffect(() => {
@@ -32,7 +28,7 @@ const Header: FC = () => {
   // const { email, token, id } = useSelector(
   //   (state: RootState) => state.userSlice
   // );
-  const [burgerClick, setBurgerClick] = useState<boolean>(true);
+  // const [burgerClick, setBurgerClick] = useState<boolean>(true);
 
   return (
     <header className="header">
@@ -45,7 +41,6 @@ const Header: FC = () => {
           <ul className="nav-mobile">
             <NavMobile />
           </ul>
-          {/* {false ? <MenuList /> : <NavMobile />} */}
           <ul className="menu__list active">
             <MenuList />
           </ul>
@@ -66,14 +61,12 @@ const Header: FC = () => {
                 preventScrollReset={true}
                 className="menu__link"
                 id="navbar-login"
-                onClick={() => {
+                onClick={() =>
                   localStorage.setItem(
                     'remeberMe',
                     JSON.stringify(Boolean(false))
-                  );
-
-                  // scroll.scrollToTop();
-                }}>
+                  )
+                }>
                 <span className="material-symbols-outlined">
                   {isAuth ? 'logout' : 'login'}
                 </span>
@@ -92,22 +85,9 @@ const Header: FC = () => {
             )}
           </ul>
         </nav>
-
-        {/* <div className="menu__authentication">
-      
-          <button href="#" className="menu__btn">
-            Войти
-          </button>
-          <button href="#" className="menu__btn">
-            Регистрация
-          </button>
-        </div> */}
       </div>
     </header>
   );
 };
 
 export default Header;
-function toggler(): any {
-  throw new Error('Function not implemented.');
-}

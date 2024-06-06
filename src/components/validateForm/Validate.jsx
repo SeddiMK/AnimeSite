@@ -7,10 +7,6 @@ export const useValidation = (value, validations) => {
   const [maxLengthError, setMaxLengthError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [inputValid, setInputValid] = useState(false);
-  //   const [repeatMessage, setRepeatMessage] = useState(false);
-
-  //   console.log(value);
-  //   console.log(validations);
 
   useEffect(() => {
     for (const validation in validations) {
@@ -60,7 +56,6 @@ export const useValidation = (value, validations) => {
     maxLengthError,
     emailError,
     inputValid,
-    // repeatMessage,
   };
 };
 // ======= useValidation end =========================================

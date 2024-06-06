@@ -1,14 +1,15 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import './MenuList.scss';
 
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-import { useAppDispatch, RootState } from '../../store';
+// store
+import { useAppDispatch } from '../../store';
 import { clickRandomHeder } from '../../store/searchSlice';
 
 const MenuList = () => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [toggleRandom, setToggleRandom] = useState(true);
 
@@ -35,7 +36,6 @@ const MenuList = () => {
       </li>
 
       <li className="menu__item">
-        {/* to="/random-anime" */}
         <NavLink
           to="/random-anime"
           className="menu__link"

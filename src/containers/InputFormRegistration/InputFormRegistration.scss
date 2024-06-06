@@ -1,26 +1,3 @@
-.btn {
-}
-.btn-block {
-}
-.btn-inp {
-}
-.btn-lg {
-}
-.btn-primary {
-}
-.custom-checkbox {
-}
-.custom-control {
-}
-// .custom-checkbox .custom-control-input:checked ~ .custom-control-indicator {
-//   //   background-image: url();
-// }
-
-// .custom-control-input {
-//   //   position: absolute;
-//   //   z-index: -1;
-//   //   opacity: 0;
-// }
 .custom-control-description {
   &:hover {
     color: var(--btn-send-com);
@@ -89,6 +66,7 @@
   &__input {
   }
   &__login {
+    text-align: start;
   }
   &__pass {
     position: relative;
@@ -114,8 +92,6 @@
 }
 .btn-lg {
   padding: 0.8rem 2rem;
-}
-.remember-checkbox {
 }
 
 #custom-checkbox-login {

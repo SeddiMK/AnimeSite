@@ -28,16 +28,6 @@
   }
 }
 
-.content {
-  &__btn-send-comment {
-  }
-  &__coment {
-  }
-  &__media {
-  }
-  &__player {
-  }
-}
 .desc-media {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -49,14 +39,8 @@
     // flex: 1 1 80%;
     width: 100%;
     margin-bottom: 1rem;
-    // &:last-child {
-    //   span {
-    //   }
-    // }
   }
   &__dt {
-    // flex: 0 1 20%;
-    // padding-right: 2rem;
     margin-bottom: 0.7rem;
   }
   &__age-restrictions {
@@ -83,12 +67,6 @@
 }
 
 @media (max-width: 710px) {
-  .desc-media {
-    &__dd {
-      // flex: 1 1 80%;
-      // max-width: 10rem;
-    }
-  }
 }
 
 .media {
@@ -99,8 +77,6 @@
   height: 100%;
   padding: 1.5rem 0;
 
-  &__desc {
-  }
   &__left {
     flex: 1 1 35%;
     display: flex;
@@ -159,12 +135,6 @@
   }
 }
 
-.player-block {
-  &__age-rating {
-  }
-  &__title {
-  }
-}
 .rating {
   display: flex;
   justify-content: flex-start;
@@ -202,10 +172,6 @@
   }
 }
 
-.media {
-  &__title {
-  }
-}
 .title-top {
   text-align: left;
   margin-bottom: 2rem;

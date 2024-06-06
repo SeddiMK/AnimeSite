@@ -3,8 +3,7 @@
   justify-content: flex-end;
   width: 100%;
 }
-.nav-mobile__wrap {
-}
+
 .nav-mobile__menu-items {
   display: flex;
   flex-direction: column;
@@ -12,7 +11,7 @@
   position: fixed;
   z-index: 10;
   //   left: 0;
-  right: 3rem;
+  right: 9%;
   top: 7rem;
   background-color: var(--background-form-color);
   padding: 2rem;

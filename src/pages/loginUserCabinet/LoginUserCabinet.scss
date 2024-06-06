@@ -1,5 +1,3 @@
-.btn {
-}
 .change-avatar {
   &__del {
   }
@@ -11,12 +9,7 @@
 #change-avatar {
   display: none;
 }
-.img {
-}
-.login-user-cabinet {
-}
-.logout-btn {
-}
+
 .name-block {
   display: grid;
   grid-template-columns: 40% 60%;
@@ -49,15 +42,6 @@
   }
 
   &__email {
-    // display: flex;
-    // justify-content: flex-start;
-    // align-items: center;
-
-    // margin-bottom: 1rem;
-
-    // & span {
-    //   // font-weight: 600;
-    // }
   }
   &__email-text {
     padding: 1.5rem 0;
@@ -163,16 +147,6 @@
   }
 }
 #avatar {
-  // width: 100%;
-  // height: 100%;
-
-  // position: absolute;
-  // // z-index: 20;
-  // left: 0;
-  // top: 0;
-  // width: 100%;
-  // height: 100%;
-
   height: 9rem;
 
   border-radius: 25%;
@@ -207,10 +181,8 @@
   &__image {
   }
 }
-.avatar-img {
-}
 
-// progress ------------------------
+// progress --------------------------------------------------------
 .progress {
   // font: 12px Arial, Tahoma, sans-serif;
   position: relative;

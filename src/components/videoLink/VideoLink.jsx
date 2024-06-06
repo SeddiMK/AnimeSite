@@ -1,78 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './VideoLink.scss';
-import ReactPlayer from 'react-player';
-
-import axios from 'axios';
-
-// kodik---------------------------------------------------------------------
-import { clientKodik } from '../../kodikcfg';
-import { Client, VideoLinks } from 'kodikwrapper';
-
-// const videos: string[] = ['https://www.youtube.com/embed/ErgOZ5mZYho'];
 
 const VideoLink = ({ linkVideo }) => {
   const [animeData, setAnimeData] = useState(null);
   const [animeEpisodes, setAnimeEpisodes] = useState(null);
-  const [animeTitle, setAnimeTitle] = useState('');
   const [animeUrl, setAnimeUrl] = useState([]);
-  const [relateds, setRelateds] = useState([]);
-  const [titles, setTitles] = useState([]);
-  const [origTitles, setOrigTitles] = useState([]);
-
-  // const [linkVideo, setlinkVideo] = useState('');
-
-  useEffect(() => {
-    // ------------------------------------------------------------------kodik
-    // clientKodik
-    //   .search({
-    //     limit: 4,
-    //     // type: 'anime',
-    //     // type: 'anime-serial',
-    //     title: 'клевер',
-    //     // id: 'serial-52991',
-    //     // kinopoisk_id: '52991',
-    //   })
-    //   .then((response) => response.results)
-    //   .then(async (material) => {
-    //     if (!material) throw new Error('не найдено');
-    //     console.log(material, '-------------------------materia  search');
-    //     setAnimeData(material);
-    //     const related = [],
-    //       title = [],
-    //       origTitle = [];
-    //     if (material) {
-    //       let f = [];
-    //       for (let item of material) {
-    //         if (
-    //           f !== item.title &&
-    //           (item.type === 'anime' || item.type === 'anime-serial')
-    //         )
-    //           related.push(item);
-    //         if (item.type === 'anime' || item.type === 'anime-serial') {
-    //           title.push(item.title);
-    //           origTitle.push(item.title_orig);
-    //         }
-    //         f = item.title;
-    //       }
-    //     }
-    //     setRelateds([...new Set(related)]);
-    //     setTitles([...new Set(title)]);
-    //     setOrigTitles([...new Set(origTitle)]);
-    //     setAnimeUrl(material[3].link); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-    //     setAnimeTitle(titles[0] + '. ' + origTitles[0]);
-    //   });
-    // clientKodik
-    //   .list({
-    //     limit: 7,
-    //     // title: 'клевер',
-    //     // types: 'anime',
-    //     types: 'anime-serial',
-    //   })
-    //   .then((response) => response.results)
-    //   .then(async (material) => {
-    //     console.log(material, 'material list-----------');
-    //   });
-  }, []);
 
   //----------------------------------------------------------------------shikimori
   // OR
@@ -250,7 +182,7 @@ const VideoLink = ({ linkVideo }) => {
   };
 
   const fetchEpisodes = async () => {
-    //   /episodes
+    // episodes
     try {
       const response = await fetch('https://api.jikan.moe/v4/anime');
       if (!response.ok) {
@@ -267,19 +199,14 @@ const VideoLink = ({ linkVideo }) => {
 
   useEffect(() => {
     if (linkVideo) setAnimeUrl(linkVideo);
-    // fetchData();
-    // fetchEpisodes();
   }, [linkVideo]);
+
   //-----------------------------------------
   //   console.log(relateds, titles, origTitles, 'relateds + title + otherTitle');
   //   console.log(animeData, 'animeData');
 
   return (
     <>
-      {/* <div className="player-block__title">
-        <strong>{animeTitle}</strong>
-        <span className="player-block__age-rating">18+</span>
-      </div> */}
       <div className="player-block__player">
         {/* <ReactPlayer
           light

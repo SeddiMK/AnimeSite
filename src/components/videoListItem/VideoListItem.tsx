@@ -1,13 +1,8 @@
 import './VideoListItem.scss';
-import React, { SetStateAction, useEffect, useRef, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-
-// import srcImg from '../../assets/image/anime-poster/659f8dd485857721242765.jpg';
+import React, { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import Error from '../../pages/error/Error';
-
-import FormMain from '../formMain/FormMain';
-import RatingStar from '../rating/RatingStar';
 
 // skeleton
 // import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
@@ -16,24 +11,10 @@ import Skeleton from '../../containers/sceleton/Skeleton';
 
 // store
 import { RootState, useAppDispatch } from '../../store';
-import {
-  AnimeItems,
-  fetchAnimeListSlice,
-  itemsAnime,
-  // sizeCardH,
-  // sizeCard,
-  // sizeCardW,
-} from '../../store/animeSlice';
-import {
-  AnimeSearch,
-  fetchAnimeSearchSlice,
-  itemsAnimeSearch,
-  setIdFullDesc,
-  setItemsSearch,
-} from '../../store/searchSlice';
+import { fetchAnimeListSlice, itemsAnime } from '../../store/animeSlice';
+import { setIdFullDesc } from '../../store/searchSlice';
 
 import { useSelector } from 'react-redux';
-import VideoListPage from './VideoListItem';
 
 // ---------------------------------------------------------------------
 
@@ -52,15 +33,7 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
 
   let { status } = useSelector((state: RootState) => state.animeSlice);
   // search param ----------------------------------------------
-  // const [titlePar, setTitlePar] = useState('');
   const [limitPar, setLimitPar] = useState(100);
-  // const [yearNew, setYearNew] = useState<any>(``);
-
-  const [itemsAnimeSlice, setItemsAnimeSlice] = useState<AnimeItems[]>([]);
-
-  const animeSearchItems = useSelector(itemsAnimeSearch);
-
-  // console.log(animeSearchItems, '+++++++++++++++++++animeSearchItems');
 
   const animeItems = useSelector(itemsAnime);
 
@@ -77,13 +50,6 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
 
   //--------------------------------------------------------------
 
-  // let aliImgMediaLeft = 'постер аниме поднятс главным героем'; // данные из бекенда ------------
-
-  // const onPlayerReady = (event) => {
-  //   // access to player in all event handlers via event.target
-  //   event.target.pauseVideo();
-  // };
-
   //если был первый рендер, то запрашиваем данные
   // useEffect(() => {
   //   // console.log(!isMount.current, '!isMount.current');
@@ -98,9 +64,6 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
   // }, []);
 
   useEffect(() => {
-    //   console.log(flagMain, 'flagMain ---- flagMain!!!!');
-    //  console.log(flagNewList, 'flagNewList ---- flagNewList!!!!');
-
     if (flagMain) {
       fthAnimeSlice('');
 
@@ -108,14 +71,12 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
     }
 
     if (flagNewList) {
-      console.log('fetchAnimeSlice() ---- flagNewList!!!!');
-
       fthAnimeSlice(`&year=${new Date().getFullYear()}`);
     }
   }, [flagMain, flagNewList]);
 
-  const [heightCard, setHeightCard] = useState(0);
-  const [widthCard, setWidthCard] = useState(0);
+  const [heightcard, setheightcard] = useState(0);
+  const [widthcard, setwidthcard] = useState(0);
   // useRef allows us to "store" the div in a constant,
   // and to access it via observedDiv.current
   const refCard = useRef<any>(null);
@@ -130,11 +91,11 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
     // we also instantiate the resizeObserver and we pass
     // the event handler to the constructor
     const resizeObserver = new ResizeObserver(() => {
-      if (refCard.current?.offsetWidth !== widthCard) {
-        setWidthCard(refCard.current?.offsetWidth);
+      if (refCard.current?.offsetWidth !== widthcard) {
+        setwidthcard(refCard.current?.offsetWidth);
       }
-      if (refCard.current?.offsetHeight !== heightCard) {
-        setHeightCard(refCard.current?.offsetHeight);
+      if (refCard.current?.offsetHeight !== heightcard) {
+        setheightcard(refCard.current?.offsetHeight);
       }
     });
 
@@ -152,18 +113,18 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
   }, [animeItems, refCard.current?.clientWidth]);
 
   // useEffect(() => {
-  //   if (widthCard !== undefined) {
-  //     // dispatch(sizeCardW(widthCard));
-  //     // dispatch(sizeCardH(heightCard));
+  //   if (widthcard !== undefined) {
+  //     // dispatch(sizeCardW(widthcard));
+  //     // dispatch(sizeCardH(heightcard));
   //   }
-  // }, [widthCard, heightCard]);
+  // }, [widthcard, heightcard]);
 
   const skeletons = [...new Array(10)].map((_, i) => (
-    <Skeleton key={i} widthCard={widthCard} heightCard={heightCard} />
+    <Skeleton key={i} widthcard={widthcard} heightcard={heightcard} />
   ));
 
   // console.log(refCard, refCard.current?.clientWidth);
-  // console.log(widthCard, heightCard);
+  // console.log(widthcard, heightcard);
 
   // fthAnimeSearchSlice -------------------------------------------------
   // useEffect(() => {
@@ -215,14 +176,9 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
   // console.log(animeSearchItems, 'animeSearchItems');
   // console.log(itemsAnimeSlice, '------itemsAnimeSlice-------');
 
-  // if (status === 'loading') {
-  //   return <p className="loading-anime-page">Загрузка аниме...</p>;
-  // }
   if (status === 'error') {
     return <Error />;
   }
-  // && animeItems.length !== 0 {status === 'loading' ? skeletons
-
   return (
     <>
       {status === 'loading'

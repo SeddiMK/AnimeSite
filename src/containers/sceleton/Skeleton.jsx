@@ -1,16 +1,14 @@
 import React from 'react';
 import ContentLoader from 'react-content-loader';
-import { useSelector } from 'react-redux';
 // https://skeletonreact.com/ 240 437 : React.FC
 
 const Skeleton = (props) => {
-  console.log(props, 'propssss');
   return (
     <div className="skeleton">
       <ContentLoader
         speed={2}
-        width={props?.widthCard === 0 ? 220 : 200}
-        height={props?.heightCard === 0 ? 300 : 437}
+        width={props?.widthcard === 0 ? 220 : 200}
+        height={props?.heightcard === 0 ? 300 : 437}
         viewBox="0 0 240 437"
         backgroundColor="#f3f3f3"
         foregroundColor="#d6d6d6"

@@ -1,6 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { RootState } from '.';
 
 export interface Users {
   id: number;
@@ -66,6 +65,8 @@ interface UsersSliceState {
   token: string;
   id: string;
   displayName: string;
+  photoUrl: string;
+
   userListAnime: string[];
 
   status: Status;
@@ -79,6 +80,7 @@ const initialState: UsersSliceState = {
   token: '',
   id: '',
   displayName: '',
+  photoUrl: '',
   userListAnime: [],
 
   status: Status.LOADING, // loading | success | error
@@ -97,6 +99,7 @@ const userSlice = createSlice({
       state.token = action.payload.token;
       state.id = action.payload.id;
       state.displayName = action.payload.displayName;
+      state.photoUrl = action.payload.photoUrl;
     },
     removeUser: (state) => {
       // state.items = action.payload;
@@ -115,9 +118,6 @@ const userSlice = createSlice({
       // state.token = '';
       // state.id = '';
     },
-    // setAvatarUrlUser: (state, action: PayloadAction<any>) => {
-    //   state.photoUrl = action.payload;
-    // },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchUserList.pending, (state) => {
@@ -149,8 +149,6 @@ const userSlice = createSlice({
 
 export const { setUser, removeUser, addListAnime } = userSlice.actions;
 
-// export const itemsReindexing = (state: RootState) =>
-//   state.userSlice.itemsReindexing;
 // export const itemsUsers = (state: RootState) => state.userSlice.itemsUsers;
 
 export default userSlice.reducer;

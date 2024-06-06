@@ -10,8 +10,6 @@ const Error: React.FC = () => {
     <main ref={wrapperRef} className="main error">
       <canvas className="particles-canv" data-color="#B99970"></canvas>
       <Particles wrapperRef={wrapperRef} />
-      {/* import Particles from '../../containers/particles/Particles';
-const wrapperRef = useRef(null); */}
 
       <section className={style.error}>
         <div className={style.root}>

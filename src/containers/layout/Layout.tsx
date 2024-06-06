@@ -1,19 +1,14 @@
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-
-// import useScript from '../../hooks/useScript';
 
 // components
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
 
 // script
-import Particles from '../particles/Particles';
 // import ParticlesBg from 'particles-bg';
 
 const Layout = () => {
-  // useScript('./particles.js');
-  const location = useLocation(); // react-router-dom
   // let config = {
   //   num: [4, 7],
   //   rps: 0.1,
@@ -44,10 +39,18 @@ const Layout = () => {
   //     ctx.closePath();
   //   },
   // }; //config={config}color="#d1aee3" num={200}type="cobweb"
+
+  const location = useLocation();
+  // Scroll to top if path changes
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   return (
     <>
       <div className="wrapper">
         {/* <ParticlesBg color="#d1aee3" num={50} type="cobweb" bg={true} /> */}
+
         <Header />
         <div className="container">
           <Outlet />

@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect, useRef } from 'react';
 import './InputFormRegistration.scss';
-import { Form, useNavigate } from 'react-router-dom';
+import { Form } from 'react-router-dom';
 
 import {
   animated,
@@ -22,7 +22,6 @@ import {
 
 // validation ------------------------------------------------------------
 import { USER_REGEX, PWD_REGEX, EMAIL_REGEX } from '../validation/Validation';
-import { strict } from 'assert';
 
 interface FormProps {
   title: string;
@@ -32,12 +31,10 @@ interface FormProps {
 
 const InputFormRegistration: FC<FormProps> = ({
   title,
-  setEmailHadle,
   handleClick,
+  setEmailHadle,
 }) => {
   const inpPassRef = useRef(null);
-  const [valInpLog, setValInpLog] = useState('');
-  const [valInpPass, setValInpPass] = useState('');
   const [showEye, setShowEye] = useState(true);
 
   // custom checkbox animated ---------------------------------------------
@@ -54,10 +51,6 @@ const InputFormRegistration: FC<FormProps> = ({
 
   // validation ------------------------------------------------------------
   const emailRef = useRef(null);
-  const errRef = useRef(null);
-
-  const [user, setUser] = useState('');
-  const [validUser, setValidUser] = useState(false);
 
   const [email, setEmail] = useState('');
   const [validEmail, setValidEmail] = useState(false);
@@ -69,12 +62,10 @@ const InputFormRegistration: FC<FormProps> = ({
 
   const [matchPwd, setMatchPwd] = useState('');
   const [validMatch, setValidMatch] = useState(false);
-  const [matchFocus, setMatchFocus] = useState(false);
 
   const [errMsg, setErrMsg] = useState('');
-  const [success, setSuccess] = useState(false);
 
-  // check box animation -----------------------------------------
+  // check box animation ----------------------------------------------------------------
   const checkmarkAnimationStyle: {
     x: SpringValue<number | null>;
   } = useSpring({
@@ -88,24 +79,13 @@ const InputFormRegistration: FC<FormProps> = ({
       : [checkmarkAnimationRef, checkboxAnimationRef],
     [0, 0.1] // -> delay by 0.1 seconds
   );
-  // ---------------------------------------------------------------
-  const changeInpValLogin = (e) => {
-    // console.log(e.current, 'e.current');
-  };
-  const changeInpValPass = (e) => {
-    // console.log(e.current, 'e.current');
-  };
 
-  useEffect(() => {
-    // userRef.current.focus(); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  }, []);
-
-  // email
+  // email -------------------------------------------------------------------------------
   useEffect(() => {
     setValidEmail(EMAIL_REGEX.test(email));
     // setValidUser(USER_REGEX.test(user));
-    if (validEmail && email) setEmailHadle(email);
-  }, [email, setEmailHadle, validEmail]);
+    if (validEmail && email) setEmailHadle(email); // setEmailHadle,
+  }, [email, validEmail]);
 
   // password
   useEffect(() => {
@@ -128,7 +108,7 @@ const InputFormRegistration: FC<FormProps> = ({
       setErrMsg('Не правильный ввод');
       return;
     }
-    setSuccess(true);
+    // setSuccess(true);
   };
 
   // checkbox remember me
@@ -139,17 +119,14 @@ const InputFormRegistration: FC<FormProps> = ({
     );
   }, [isCheckedRemeberMe]);
 
-  // проверка ввода, если email, то передать в setEmail и store ?????--------------
-
   return (
     <>
       <Form className="form-login-header" onSubmit={handleSubmit} title="login">
         <div className="form__login form-group">
           <label className="form-group__login" htmlFor="username">
             Email: <br />
-            Прим: asdf@gmail.com
+            Прим: asdf@gmail.com {'   '} qwer@gmail.com
             <br />
-            qwer@gmail.com
             {validEmail && email ? (
               <span className="form-group__icon check">
                 <FaCheck />
@@ -169,6 +146,7 @@ const InputFormRegistration: FC<FormProps> = ({
             id="username"
             name="_username"
             ref={emailRef}
+            autoFocus
             autoComplete="off"
             required
             aria-invalid={validEmail ? 'false' : 'true'}
@@ -185,7 +163,7 @@ const InputFormRegistration: FC<FormProps> = ({
               <span>
                 Введите корректный email. В начале и конце пароля, без пробелов
                 .
-              </span>{' '}
+              </span>
               {/* 2-20 символов, которыми могут быть буквы и цифры, первый символ
               обязательно буква. */}
             </p>

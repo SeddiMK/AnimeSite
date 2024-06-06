@@ -1,9 +1,9 @@
-import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { RootState } from '.';
 // kodik---------------------------------------------------------------------
-import { clientKodik, kodikApiKey } from '../kodikcfg';
-import { Client, MaterialObject, VideoLinks } from 'kodikwrapper';
+import { kodikApiKey } from '../kodikcfg';
+// import { Client, MaterialObject, VideoLinks } from 'kodikwrapper';
 
 export type AnimeParams = {
   limitPar: number;
@@ -76,9 +76,9 @@ export const fetchAnimeListSlice = createAsyncThunk<AnimeItems[], AnimeParams>(
     try {
       const { limitPar, yearNew } = params;
 
-      console.log(
-        `http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=kodikApiKey}`
-      );
+      // console.log(
+      //   `http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=kodikApiKey}`
+      // );
 
       const resp: any = await axios.get<AnimeItems[]>(
         `http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=${kodikApiKey}`
@@ -89,7 +89,7 @@ export const fetchAnimeListSlice = createAsyncThunk<AnimeItems[], AnimeParams>(
       }
       const data = resp.data.results;
 
-      console.log(data, '------------data list------------');
+      // console.log(data, '------------data list------------');
 
       // let animesItems: MaterialObject[] = [];
       let titles: string[] = [];
@@ -123,19 +123,11 @@ export const fetchAnimeListSlice = createAsyncThunk<AnimeItems[], AnimeParams>(
             animesItemsNotTest.push(item);
           }
 
-          // if (item.type === 'anime' || item.type === 'anime-serial') {
-          //   title.push(item.title);
-          //   origTitle.push(item.title_orig);
-          // }
-          // console.log(prevTitle, 'prevTitle');
-
           prevTitle = item.other_title;
           prevId = item.id;
         }
       } else {
         console.log('нет данных для показа');
-        // dispatch(error('нет данных для показа'));
-        // navigate('/error', { replace: true });
       }
       // ----------- clien kodik ----------------------------------------------------
       // const [animesItemsSearch, setAnimesItemsSearch] = useState<any>([]);
@@ -225,6 +217,7 @@ export const fetchAnimeListSlice = createAsyncThunk<AnimeItems[], AnimeParams>(
 
       //     // const title = (titles[0] + '. ' + origTitles[0]);
       console.log();
+      // -----------------------------------------------------------------------------------------------
       //     // countries(params?: CountriesParams): Promise<CountriesResponse>;
       //     // genres(params?: GenresParams): Promise<GenresResponse>;
       //     // list(params?: ListParams): Promise<ListResponse>;
@@ -237,9 +230,7 @@ export const fetchAnimeListSlice = createAsyncThunk<AnimeItems[], AnimeParams>(
 
       //     // [animesItemsSearchAll, animesItemsSearch]
       //   });
-
-      // console.log(animesItemsNotTest, 'animesItemsNotTest');
-      // console.log(animesItems, '----------animesItems LIST----------');
+      // -----------------------------------------------------------------------------------------------
 
       let uniqueAnimesItems = Object.values(
         animesItems.reduce((acc, obj) => {
@@ -262,9 +253,6 @@ export enum Status {
 
 interface AnimeSliceState {
   itemsList: AnimeItems[];
-  // sizeCardW: number;
-  // sizeCardH: number;
-  // itemsReindexing: {};
 
   status: Status;
   error: string | unknown;
@@ -273,9 +261,6 @@ interface AnimeSliceState {
 
 const initialState: AnimeSliceState = {
   itemsList: [],
-  // sizeCardW: 165,
-  // sizeCardH: 220,
-  // itemsReindexing: {},
 
   status: Status.LOADING, // loading | success | error
   error: '',
@@ -287,12 +272,6 @@ const animeSlice = createSlice({
   name: 'anime',
   initialState,
   reducers: {
-    // sizeCardW: (state, action: PayloadAction<number>) => {
-    //   state.sizeCardW = action.payload;
-    // },
-    // sizeCardH: (state, action: PayloadAction<number>) => {
-    //   state.sizeCardH = action.payload;
-    // },
     // setItems: (state, action: PayloadAction<[]>) => {
     //   state.itemsList = action.payload;
     // },
@@ -327,12 +306,6 @@ const animeSlice = createSlice({
   },
 });
 
-// export const {} = animeSlice.actions;
-
-// export const itemsReindexing = (state: RootState) =>
-//   state.animeSlice.itemsReindexing;
 export const itemsAnime = (state: RootState) => state.animeSlice.itemsList;
-// export const sizeCardWidth = (state: RootState) => state.animeSlice.sizeCardW;
-// export const sizeCardHigth = (state: RootState) => state.animeSlice.sizeCardH;
 
 export default animeSlice.reducer;

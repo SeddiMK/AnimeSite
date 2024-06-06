@@ -1,7 +1,6 @@
 import './Login.scss';
-import React, { useEffect, MouseEvent, useState, FC, useRef } from 'react';
-import { useSelector } from 'react-redux';
-import { Form, Link, useNavigate } from 'react-router-dom';
+import React, { useState, FC, useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 // firebase
 import {
@@ -10,9 +9,6 @@ import {
   setPersistence,
   browserSessionPersistence,
   sendPasswordResetEmail,
-  fetchSignInMethodsForEmail,
-  verifyBeforeUpdateEmail,
-  onAuthStateChanged,
 } from 'firebase/auth';
 
 //store
@@ -46,7 +42,7 @@ const Login: FC = () => {
   const [sendEmailReset, setSendEmailReset] = useState(false);
   const [notFaundEmail, setNotFaundEmail] = useState(false);
 
-  const { isAuth, email, id } = useAuth();
+  // const { isAuth, email, id } = useAuth();
   // handleLogin -----------------------------------------------------------
   const handleLogin = (email: string, password: string) => {
     setEmailHadle(email);
@@ -136,15 +132,13 @@ const Login: FC = () => {
     <main ref={wrapperRef} className="main login">
       <canvas className="particles-canv" data-color="#B99970"></canvas>
       <Particles wrapperRef={wrapperRef} />
-      {/* import Particles from '../../containers/particles/Particles';
-const wrapperRef = useRef(null); */}
 
       <div className="form-login-registaration lr-form">
         <div className="lr-form__social-media login-social-media">
           <h2 className="ls-media__title">Вход</h2>
 
           <LinksSocialRegistration />
-          <span>-ИЛИ-</span>
+          <span>- ИЛИ -</span>
         </div>
         <div className="lr-form__inp-form inp-form">
           <InputFormRegistration

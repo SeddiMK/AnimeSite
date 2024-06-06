@@ -10,9 +10,6 @@ const Main = () => {
     <main ref={wrapperRef} className="main anime">
       <canvas className="particles-canv" data-color="#B99970"></canvas>
       <Particles wrapperRef={wrapperRef} />
-      {/* import Particles from '../../containers/particles/Particles';
-const wrapperRef = useRef<null | HTMLDivElement>(null); */}
-
       <div className="anime__wrap">
         {/* <div className="anime__title"></div>
         <div className="anime__sort"></div> */}
