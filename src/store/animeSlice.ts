@@ -129,7 +129,7 @@ export const fetchAnimeListSlice = createAsyncThunk<AnimeItems[], AnimeParams>(
       } else {
         console.log('нет данных для показа');
       }
-      // ----------- clien kodik ----------------------------------------------------
+      // ----------- client kodik ----------------------------------------------------
       // const [animesItemsSearch, setAnimesItemsSearch] = useState<any>([]);
 
       // let titles: string[] = [];

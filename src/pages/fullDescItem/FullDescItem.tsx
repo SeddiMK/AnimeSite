@@ -168,23 +168,19 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
 
   // добавляем данные в redux при первом рендере -----------
   useEffect(() => {
-    console.log(
-      !isMount,
-      '!isMount ------11111111111111111111111111 ---------- первый рендер'
-    );
+    // console.log(
+    //   !isMount,
+    //   '!isMount ------11111111111111111111111111 ---------- первый рендер'
+    // );
     if (!isMount) {
       if (id === undefined) fthAnimeSlice('');
-      // if (animeItems.length !== 0)
-      //   dispatch(setItemsSearch(animeItems[3] as unknown as []));
-      console.log(animeItems, 'animeItems --------------------------');
 
+      const array = ['q', 'w', 'x', 'a', 's', 'd', 'f', 'g', 't', 'i'];
+      const randomElement = array[Math.floor(Math.random() * array.length)];
       if (animeItems.length === 0 && id === undefined)
-        fthAnimeSearchSlice('', 'solo level');
+        fthAnimeSearchSlice('', randomElement);
       setIsMount(true);
     }
-
-    // fthAnimeSlice('');
-    // fthAnimeSearchSlice('');
   }, []);
   // -------------------------------------------------------
 
@@ -194,14 +190,6 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
   // --------------------------------------------------------
 
   useEffect(() => {
-    // console.log(flagRandomAnime, '----------flagRandomAnime');
-    // console.log(randomHederClick, '----------randomHederClick');
-    // console.log(animeItems, '----------animeItems');
-    // console.log(
-    //   flagRandomAnime && animeItems.length !== 0,
-    //   '----------flagRandomAnime && animeItems.length !== 0'
-    // );
-
     if (flagRandomAnime && animeItems.length !== 0) {
       const randomItem = [
         ...itemsAnmSch,

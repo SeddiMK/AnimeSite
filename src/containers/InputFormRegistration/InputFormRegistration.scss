@@ -17,9 +17,16 @@
 .form-group {
   display: flex;
   flex-direction: column;
+
+  text-align: left;
   //   margin-bottom: 1.3rem;
 
   &__pwd {
+  }
+  &__inp {
+    // position: relative;
+    // top: 0;
+    // left: 0;
   }
   & label {
     margin-bottom: 0.3rem;
@@ -86,7 +93,7 @@
   &__eye {
     position: absolute;
     right: 0.5em;
-    top: 1.7em;
+    top: 2.6em;
     cursor: pointer;
   }
 }

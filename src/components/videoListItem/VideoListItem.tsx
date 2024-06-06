@@ -50,19 +50,6 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
 
   //--------------------------------------------------------------
 
-  //если был первый рендер, то запрашиваем данные
-  // useEffect(() => {
-  //   // console.log(!isMount.current, '!isMount.current');
-  //   if (!isMount.current) {
-  //     console.log('yearNew fetchAnimeSlice() ---- ANIME');
-  //     setYearNew(new Date().getFullYear());
-  //     fthAnimeSlice();
-
-  //     // dispatch(setItemsSearch([]));
-  //   }
-  //   isMount.current = true; //isMount
-  // }, []);
-
   useEffect(() => {
     if (flagMain) {
       fthAnimeSlice('');
@@ -77,6 +64,9 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
 
   const [heightcard, setheightcard] = useState(0);
   const [widthcard, setwidthcard] = useState(0);
+  const skeletons = [...new Array(10)].map((_, i) => (
+    <Skeleton key={i} widthcard={widthcard} heightcard={heightcard} />
+  ));
   // useRef allows us to "store" the div in a constant,
   // and to access it via observedDiv.current
   const refCard = useRef<any>(null);
@@ -111,70 +101,6 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
       resizeObserver.disconnect();
     };
   }, [animeItems, refCard.current?.clientWidth]);
-
-  // useEffect(() => {
-  //   if (widthcard !== undefined) {
-  //     // dispatch(sizeCardW(widthcard));
-  //     // dispatch(sizeCardH(heightcard));
-  //   }
-  // }, [widthcard, heightcard]);
-
-  const skeletons = [...new Array(10)].map((_, i) => (
-    <Skeleton key={i} widthcard={widthcard} heightcard={heightcard} />
-  ));
-
-  // console.log(refCard, refCard.current?.clientWidth);
-  // console.log(widthcard, heightcard);
-
-  // fthAnimeSearchSlice -------------------------------------------------
-  // useEffect(() => {
-  //   // console.log(animeSearchItems, 'animeSearchItems');
-
-  //   if (searchInpValStore) {
-  //     console.log(
-  //       searchInpValStore,
-  //       'searchInpValStore in useEffect---------0000000000000000000000'
-  //     ); // && animeSearchItems.length === 0
-  //     // setTitlePar(searchInpValStore);
-  //     fthAnimeSearchSlice();
-  //   }
-  // }, [searchInpValStore]);
-
-  // useEffect(() => {
-  //   // console.log(animeSearchItems, 'animeSearchItems');
-
-  //   if (searchInpValStore) {
-  //     console.log(
-  //       searchInpValStore,
-  //       'searchInpValStore in useEffect---------1111111111111111111111111'
-  //     ); // && animeSearchItems.length === 0
-  //     // setTitlePar(searchInpValStore);
-  //     setItemsAnimeSlice(animeSearchItems);
-  //   }
-  // }, [searchInpValStore]);
-
-  // fthAnimeSlice -------------------------------------------------
-  // useEffect(() => {
-  //   console.log(animeItems, 'animeItems шт useEffect');
-
-  //   if (itemsAnimeSlice.length === 0) {
-  //     console.log('setItemsAnimeSlice(animeItems);');
-
-  //     // fthAnimeSlice();
-  //     setItemsAnimeSlice(animeItems);
-  //   }
-
-  //   // if (searchInpValStore && animeSearchItems.length === 0) {
-  //   //   console.log('setItemsAnimeSlice(animeItems)');
-
-  //   //   fthAnimeSearchSlice();
-  //   //   setItemsAnimeSlice(animeSearchItems);
-  //   // }
-  // }, [animeItems]);
-
-  // console.log(animeItems, 'animeItems');
-  // console.log(animeSearchItems, 'animeSearchItems');
-  // console.log(itemsAnimeSlice, '------itemsAnimeSlice-------');
 
   if (status === 'error') {
     return <Error />;

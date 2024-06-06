@@ -193,8 +193,7 @@ input {
 
 main.error,
 main.login,
-main.registaration,
-main.contacts {
+main.registaration {
   box-sizing: border-box;
   width: 100%;
   // height: calc(100vh - 186px); //!!
@@ -214,7 +213,6 @@ main.full-desc-item {
 main.error,
 main.login,
 main.registaration,
-main.contacts,
 main.anime,
 main.full-desc-item,
 .login-user-cabinet {
@@ -222,6 +220,9 @@ main.full-desc-item,
 }
 .main.new-list {
   padding-top: 87px;
+}
+.main.contacts {
+  padding-top: 98px;
 }
 .container.main.login,
 main.registaration {

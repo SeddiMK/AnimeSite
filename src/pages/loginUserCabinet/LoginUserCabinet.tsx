@@ -195,7 +195,7 @@ const LoginUserCabinet: FC = () => {
                 photoURL: url,
               })
                 .then(() => {
-                  console.log('avatar обновлен!');
+                  console.log('avatar загружен!');
                   setAvatarUrlFlag(true);
 
                   // dispatch(setAvatarUrlUser(url));
@@ -209,7 +209,10 @@ const LoginUserCabinet: FC = () => {
             }
           })
           .catch((error) => {
-            console.log('error getDownloadURL in checkLinkIntact', error);
+            console.log(
+              'error Нет аватара. Нет ссылки на аватар. getDownloadURL in checkLinkIntact',
+              error
+            );
             setErrorSt(true);
             setAvatarUrlFlag(false);
           });

@@ -125,7 +125,7 @@ const InputFormRegistration: FC<FormProps> = ({
         <div className="form__login form-group">
           <label className="form-group__login" htmlFor="username">
             Email: <br />
-            Прим: asdf@gmail.com {'   '} qwer@gmail.com
+            Пример: asdf@gmail.com {'   '} qwer@gmail.com
             <br />
             {validEmail && email ? (
               <span className="form-group__icon check">
@@ -171,7 +171,9 @@ const InputFormRegistration: FC<FormProps> = ({
         </div>
         <div className="form__pass form-group">
           <label className="form-group__pwd" htmlFor="password">
-            Пароль: Прим: 123123Aa
+            Пароль:
+            <br />
+            Пример: 123123Aa
             {validPwd ? (
               <span className="form-group__icon check">
                 <FaCheck />

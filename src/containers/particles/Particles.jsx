@@ -35,11 +35,6 @@ const Particles = ({ wrapperRef }) => {
       wrapperRef?.current?.clientHeight !== height ||
       window.innerWidth !== width
     ) {
-      // console.log(window.innerWidth, 'window.innerWidth');
-      // console.log(
-      //   wrapperRef?.current?.clientHeight,
-      //   'wrapperRef?.current?.clientHeight'
-      // );
       setTimeout(() => {
         // setHeight(wrapperRef?.current?.clientHeight);
         setWidth(window.innerWidth);
@@ -50,53 +45,13 @@ const Particles = ({ wrapperRef }) => {
     };
   }, []);
 
-  // console.log(size, 'size----');
-  // useEffect(() => {
-  //   const resizeObserver = new ResizeObserver(() => {
-  //     // console.log(isMounted, 'isMounted');
-  //     // if (isMounted) {
-  //     //   // if (wrapperRef.current.offsetWidth !== width) {
-  //     //   //   setWidth(wrapperRef.current.offsetWidth);
-  //     //   // }
-  //     // if (wrapperRef.current.offsetHeight !== height) {
-  //     //   setTimeout(() => setHeight(wrapperRef.current.offsetHeight), 1300);
-  //     // }
-  //     // }
-  //   });
-  //   console.log(
-  //     resizeObserver.observe(wrapperRef.current),
-  //     ' resizeObserver.observe(wrapperRef.current);'
-  //   );
-
-  //   // console.log(
-  //   //   wrapperRef?.current.offsetHeight,
-  //   //   'wrapperRef?.current.offsetHeight'
-  //   // );
-  //   // if (
-  //   //   wrapperRef?.current?.clientHeight !== height ||
-  //   //   window.innerWidth !== width
-  //   // ) {
-  //   //   setTimeout(() => {
-  //   //     setHeight(wrapperRef?.current?.clientHeight);
-  //   //     setWidth(window.innerWidth);
-  //   //   }, 1300);
-  //   // }
-  //   // setTimeout(() => setWidth(window.innerWidth), 1300); //!!!!!!!!!!!!!!!!!!!!!!!!
-  // }, []);
-  // -----------------------------------------------------------------------
-
-  // useEffect(() => {
-  //   if (!isMounted) setIsMounted(true);
-  // }, []);
-
   useEffect(
     () => {
-      // if (!wrapperRef.current) {
-      //   // we do not initialize the observer unless the ref has
-      //   // been assigned
-      //   return;
-      // }
-
+      if (!wrapperRef.current) {
+        // we do not initialize the observer unless the ref has
+        // been assigned
+        return;
+      }
       // we also instantiate the resizeObserver and we pass
       // the event handler to the constructor
 
@@ -212,7 +167,7 @@ const Particles = ({ wrapperRef }) => {
     [animeItems, height, width]
   );
 
-  console.log(width, height, 'w , h');
+  // console.log(width, height, 'w , h');
 
   return <>{/* <RootWidthHeigth /> */}</>;
 };
