@@ -2,7 +2,7 @@
   "name": "app-1",
   "version": "0.1.0",
   "private": true,
-  "homepage": ".",
+  "homepage": "https://react-anime-6ato1ve2m-maxs-projects-4db4b9f2.vercel.app/",
   "dependencies": {
     "@angular/fire": "^17.0.1",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
@@ -125,22 +125,11 @@
       ">0.2%",
       "not dead",
       "not op_mini all"
-    ],
+    ]
+  },
   "development": [
     "last 1 chrome version",
     "last 1 firefox version",
     "last 1 safari version"
-  ],
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+  ]
 }
