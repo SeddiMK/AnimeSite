@@ -79,16 +79,6 @@
     "version": "^0.1.2",
     "web-vitals": "^2.1.4"
   },
-  "overrides": {
-    "typescript": "^5.4.5"
-  },
-  "pnpm": {
-    "peerDependencyRules": {
-      "allowedVersions": {
-        "react": "18"
-      }
-    }
-  },
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
@@ -135,5 +125,8 @@
     "typescript": "^5.4.5",
     "typescript-eslint": "^7.9.0",
     "url": "^0.11.3"
+  },
+  "overrides": {
+    "typescript": "^5.4.5"
   }
 }
