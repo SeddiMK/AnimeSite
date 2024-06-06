@@ -28,6 +28,7 @@
     "cors": "^2.8.5",
     "extract-zip": "^2.0.1",
     "fd-slicer": "^1.1.0",
+    "firebase": "^10.12.2",
     "firebase-functions": "^5.0.1",
     "firebase-tools": "^10.9.2",
     "font-awesome": "^4.7.0",
