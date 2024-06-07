@@ -80,6 +80,24 @@ export const fetchAnimeListSlice = createAsyncThunk<AnimeItems[], AnimeParams>(
       //   `http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=kodikApiKey}`
       // );
 
+      // "version": 2,
+      // "builds": [
+      //   {
+      //     "src": "./index.js",
+      //     "use": "@vercel/node"
+      //   }
+      // ],
+      // "routes": [
+      //   {
+      //     "src": "/(.*)",
+      //     "dest": "./index.js",
+      //     "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+      //     "headers": {
+      //       "Access-Control-Allow-Origin": "*"
+      //     }
+      //   }
+      // ]
+
       // "headers": [
       //   {
       //     "source": "/manifest.webmanifest",
