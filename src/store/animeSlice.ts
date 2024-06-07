@@ -94,7 +94,6 @@ export const fetchAnimeListSlice = createAsyncThunk<AnimeItems[], AnimeParams>(
       // ${apiProxy}
       // app.listen('.vercel.app');
 
-      const whitelist = ['http://kodikapi.com'];
       // const corsOptions = {
       //   origin: function (origin, callback) {
       //     if (!origin || whitelist.indexOf(origin) !== -1) {
@@ -114,8 +113,6 @@ export const fetchAnimeListSlice = createAsyncThunk<AnimeItems[], AnimeParams>(
       const resp: any = await axios.get<AnimeItems[]>(
         `https://cors-anywhere.herokuapp.com/http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=${kodikApiKey}`
       );
-
-      // const url = `http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=${kodikApiKey}`;
 
       // const conf: any = {
       //   method: 'GET',
