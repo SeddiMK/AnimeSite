@@ -15,19 +15,5 @@
         "Access-Control-Allow-Origin": "*"
       }
     }
-  ],
-
-  "headers": [
-    {
-      "source": "/manifest.webmanifest",
-      "headers": [{ "key": "Access-Control-Allow-Origin", "value": "*" }]
-    }
-  ],
-
-  "rewrites": [
-    {
-      "source": "http://kodikapi.com",
-      "destination": "https://react-anime-ev7sno3d8-maxs-projects-4db4b9f2.vercel.app"
-    }
   ]
 }
