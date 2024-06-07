@@ -99,28 +99,26 @@ const App = () => {
   //  {/* <RouterProvider router={router} />{' '} */}
   //  </BrowserRouter>
   //  {/* <ParticlesBg color="#d1aee3" num={50} type="cobweb" bg={true} /> */}
-  //  <div className="container"></div>
+  //  <div className="container"></div>    <div className="wrapper">
   return (
     <BrowserRouter>
       <Provider store={store}>
-        <div className="wrapper">
-          <Header />
+        <Header />
 
-          <Routes>
-            <Route index element={<Main />} />
-            <Route path="fullDescItem/:id" element={<FullDescItem />} />
-            <Route path="new/" element={<NewList />} />
-            <Route path="random-anime/" element={<RandomAnime />} />
-            <Route path="search/" element={<SearchHeader />} />
-            <Route path="contacts" element={<Contacts />} />
-            <Route path="login" element={<Login />} />
-            <Route path="login/user/:id" element={<LoginUserCabinet />} />
-            <Route path="registration" element={<Registration />} />
-            <Route path="*" element={<Error />} />
-          </Routes>
+        <Routes>
+          <Route index element={<Main />} />
+          <Route path="fullDescItem/:id" element={<FullDescItem />} />
+          <Route path="new/" element={<NewList />} />
+          <Route path="random-anime/" element={<RandomAnime />} />
+          <Route path="search/" element={<SearchHeader />} />
+          <Route path="contacts" element={<Contacts />} />
+          <Route path="login" element={<Login />} />
+          <Route path="login/user/:id" element={<LoginUserCabinet />} />
+          <Route path="registration" element={<Registration />} />
+          <Route path="*" element={<Error />} />
+        </Routes>
 
-          <Footer />
-        </div>
+        <Footer />
       </Provider>
     </BrowserRouter>
   );
