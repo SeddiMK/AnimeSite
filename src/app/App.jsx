@@ -102,7 +102,6 @@ const App = () => {
   //  <div className="container"></div>    <div className="wrapper">
   return (
     <Provider store={store}>
-      <Header />
       <BrowserRouter>
         <Routes>
           <Route index element={<Main />} />
