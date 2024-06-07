@@ -80,12 +80,15 @@ export const fetchAnimeListSlice = createAsyncThunk<AnimeItems[], AnimeParams>(
       //   `http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=kodikApiKey}`
       // );
 
+      // "rewrites": [{ "source": "/(.*)", "destination": "/" }],
+      // {
+
       // Listen on a specific host via the HOST environment variable
       var host = process.env.HOST || 'http://kodikapi.com';
       // Listen on a specific port via the PORT environment variable
       var port =
         process.env.PORT ||
-        'https://react-anime-ev7sno3d8-maxs-projects-4db4b9f2.vercel.app/';
+        'https://react-anime-ev7sno3d8-maxs-projects-4db4b9f2.vercel.app';
 
       var cors_proxy = require('cors-anywhere');
       cors_proxy
