@@ -81,14 +81,38 @@ export const fetchAnimeListSlice = createAsyncThunk<AnimeItems[], AnimeParams>(
       // );
 
       // const axios = require('axios');
+      // const { createProxyMiddleware } = require('http-proxy-middleware');
 
       // const express = require('express');
-      // const cors = require('cors');
       // const app = express();
-      // app.use(cors());
+      // const cors = require('cors');
+      // // app.use(cors());
+      // const apiProxy = createProxyMiddleware({
+      //   target: 'http://kodikapi.com',
+      //   changeOrigin: true,
+      // });
+      // ${apiProxy}
+      // app.listen('.vercel.app');
+
+      const whitelist = ['http://kodikapi.com'];
+      // const corsOptions = {
+      //   origin: function (origin, callback) {
+      //     if (!origin || whitelist.indexOf(origin) !== -1) {
+      //       callback(null, true);
+      //     } else {
+      //       callback(new Error('Not allowed by CORS'));
+      //     }
+      //   },
+      //   credentials: true,
+      // };
+      // app.use(cors(corsOptions));
+
+      // app.get('/', (req, res) => {
+      //   res.send({ message: 'Hello World!' });
+      // });
 
       const resp: any = await axios.get<AnimeItems[]>(
-        `http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=${kodikApiKey}`
+        `https://cors-anywhere.herokuapp.com/http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=${kodikApiKey}`
       );
 
       // const url = `http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=${kodikApiKey}`;
