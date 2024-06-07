@@ -103,18 +103,28 @@ const App = () => {
     <Provider store={store}>
       {/* <RouterProvider router={router} />{' '} */}
       <BrowserRouter>
-        <Routes>
-          <Route index element={<Main />} />
-          <Route path="fullDescItem/:id" element={<FullDescItem />} />
-          <Route path="new/" element={<NewList />} />
-          <Route path="random-anime/" element={<RandomAnime />} />
-          <Route path="search/" element={<SearchHeader />} />
-          <Route path="contacts" element={<Contacts />} />
-          <Route path="login" element={<Login />} />
-          <Route path="login/user/:id" element={<LoginUserCabinet />} />
-          <Route path="registration" element={<Registration />} />
-          <Route path="*" element={<Error />} />
-        </Routes>
+        <>
+          <div className="wrapper">
+            {/* <ParticlesBg color="#d1aee3" num={50} type="cobweb" bg={true} /> */}
+
+            <Header />
+            <div className="container">
+              <Routes>
+                <Route index element={<Main />} />
+                <Route path="fullDescItem/:id" element={<FullDescItem />} />
+                <Route path="new/" element={<NewList />} />
+                <Route path="random-anime/" element={<RandomAnime />} />
+                <Route path="search/" element={<SearchHeader />} />
+                <Route path="contacts" element={<Contacts />} />
+                <Route path="login" element={<Login />} />
+                <Route path="login/user/:id" element={<LoginUserCabinet />} />
+                <Route path="registration" element={<Registration />} />
+                <Route path="*" element={<Error />} />
+              </Routes>
+            </div>
+            <Footer />
+          </div>
+        </>
       </BrowserRouter>
     </Provider>
   );
