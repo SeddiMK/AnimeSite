@@ -102,6 +102,9 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
     };
   }, [animeItems, refCard.current?.clientWidth]);
 
+  // if (animeItems.length === 0) {
+  //   return <Error />;
+  // }
   if (status === 'error') {
     return <Error />;
   }

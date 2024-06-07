@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+import axios, { Axios } from 'axios';
 import { RootState } from '.';
 // kodik---------------------------------------------------------------------
 import { kodikApiKey } from '../kodikcfg';
@@ -80,15 +80,65 @@ export const fetchAnimeListSlice = createAsyncThunk<AnimeItems[], AnimeParams>(
       //   `http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=kodikApiKey}`
       // );
 
+      // const axios = require('axios');
+
+      // const express = require('express');
+      // const cors = require('cors');
+      // const app = express();
+      // app.use(cors());
+
+      // const options = {
+      //   method: 'GET',
+      //   url: `http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=${kodikApiKey}`,
+      //   headers: {
+      //     'X-CMC_PRO_API_KEY': process.env.REACT_APP_MARKET_CAP_KEY,
+      //   },
+      //   params: {
+      //     slug: 'bitcoin,ethereum,band-protocol,tezos',
+      //   },
+      // };
+
+      // const resp: any = await Axios.request(options);
+      // axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+
       const resp: any = await axios.get<AnimeItems[]>(
-        `http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=${kodikApiKey}&mode:'no-cors'`
+        `http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=${kodikApiKey}`
       );
 
-      if (resp.status !== 200) {
-        throw new Error('Server Error!');
-      }
-      const data = resp.data.results;
+      // const url = `http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=${kodikApiKey}`;
 
+      // const conf: any = {
+      //   method: 'GET',
+      //   // mode: 'no-cors',
+      //   headers: {
+      //     // 'Access-Control-Allow-Origin': '*',
+      //     // Accept: 'application/json',
+      //     // 'Content-Type': 'application/json',
+      //     'sec-fetch-mode': 'no-cors',
+      //   },
+      // };
+
+      // const myRequest = new Request(url, conf);
+      // let data;
+      // const resp: any = fetch(url, conf)
+      //   .then((response) => {
+      //     return response.json();
+      //   })
+      //   .then((data) => {
+      //     console.log(data);
+      //     console.log(data.results);
+      //     data = data.results;
+      //   })
+      //   .catch((e) => {
+      //     console.log(e);
+      //   });
+
+      // if (resp.status !== 200) {
+      //   throw new Error('Server Error!');
+      // }
+      const data = resp.data.results;
+      console.log(resp);
+      console.log(data);
       // console.log(data, '------------data list------------');
 
       // let animesItems: MaterialObject[] = [];
