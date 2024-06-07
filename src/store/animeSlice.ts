@@ -80,38 +80,26 @@ export const fetchAnimeListSlice = createAsyncThunk<AnimeItems[], AnimeParams>(
       //   `http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=kodikApiKey}`
       // );
 
-      // const axios = require('axios');
-      // const { createProxyMiddleware } = require('http-proxy-middleware');
+      // Listen on a specific host via the HOST environment variable
+      var host = process.env.HOST || 'http://kodikapi.com';
+      // Listen on a specific port via the PORT environment variable
+      var port =
+        process.env.PORT ||
+        'https://react-anime-ev7sno3d8-maxs-projects-4db4b9f2.vercel.app/';
 
-      // const express = require('express');
-      // const app = express();
-      // const cors = require('cors');
-      // // app.use(cors());
-      // const apiProxy = createProxyMiddleware({
-      //   target: 'http://kodikapi.com',
-      //   changeOrigin: true,
-      // });
-      // ${apiProxy}
-      // app.listen('.vercel.app');
-
-      // const corsOptions = {
-      //   origin: function (origin, callback) {
-      //     if (!origin || whitelist.indexOf(origin) !== -1) {
-      //       callback(null, true);
-      //     } else {
-      //       callback(new Error('Not allowed by CORS'));
-      //     }
-      //   },
-      //   credentials: true,
-      // };
-      // app.use(cors(corsOptions));
-
-      // app.get('/', (req, res) => {
-      //   res.send({ message: 'Hello World!' });
-      // });
-
+      var cors_proxy = require('cors-anywhere');
+      cors_proxy
+        .createServer({
+          originWhitelist: [], // Allow all origins
+          requireHeader: ['origin', 'x-requested-with'],
+          removeHeaders: ['cookie', 'cookie2'],
+        })
+        .listen(port, host, function () {
+          console.log('Running CORS Anywhere on ' + host + ':' + port);
+        });
+      // https://cors-anywhere.herokuapp.com/
       const resp: any = await axios.get<AnimeItems[]>(
-        `https://cors-anywhere.herokuapp.com/http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=${kodikApiKey}`
+        `http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=${kodikApiKey}`
       );
 
       // const conf: any = {
