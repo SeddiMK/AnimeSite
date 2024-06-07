@@ -3,9 +3,7 @@
   "headers": [
     {
       "source": "/manifest.webmanifest",
-      "headers": [
-        { "key": "Access-Control-Allow-Origin", "value": "*" } // Adjust if needed
-      ]
+      "headers": [{ "key": "Access-Control-Allow-Origin", "value": "*" }]
     }
   ]
 }
