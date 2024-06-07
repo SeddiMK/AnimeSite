@@ -97,6 +97,7 @@ export const fetchAnimeListSlice = createAsyncThunk<AnimeItems[], AnimeParams>(
         .listen(port, host, function () {
           console.log('Running CORS Anywhere on ' + host + ':' + port);
         });
+
       // https://cors-anywhere.herokuapp.com/
       const resp: any = await axios.get<AnimeItems[]>(
         `http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=${kodikApiKey}`
