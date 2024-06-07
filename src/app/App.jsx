@@ -100,9 +100,10 @@ const App = () => {
   //  </BrowserRouter>
 
   return (
-    <Provider store={store}>
-      {/* <RouterProvider router={router} />{' '} */}
-      <BrowserRouter>
+    <BrowserRouter>
+      <Provider store={store}>
+        {/* <RouterProvider router={router} />{' '} */}
+
         <>
           <div className="wrapper">
             {/* <ParticlesBg color="#d1aee3" num={50} type="cobweb" bg={true} /> */}
@@ -125,8 +126,8 @@ const App = () => {
             <Footer />
           </div>
         </>
-      </BrowserRouter>
-    </Provider>
+      </Provider>
+    </BrowserRouter>
   );
 };
 
