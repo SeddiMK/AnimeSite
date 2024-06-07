@@ -23,7 +23,7 @@ if (rootElem) {
     // <BrowserRouter>
     <Provider store={store}>
       <App />
-    </Provider>,
+    </Provider>
     //  </BrowserRouter>
   );
 }

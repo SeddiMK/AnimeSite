@@ -1,4 +1,8 @@
-import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+} from 'react-router-dom';
 
 // pages
 import Layout from '../containers/layout/Layout';
@@ -73,6 +77,6 @@ export const router = createBrowserRouter(
       <Route path="login/user/:id" element={<LoginUserCabinet />} />
       <Route path="registration" element={<Registration />} />
       <Route path="*" element={<Error />} />
-    </Route>,
-  ),
+    </Route>
+  )
 );

@@ -12,7 +12,7 @@ const Error: React.FC = () => {
       <Particles wrapperRef={wrapperRef} />
 
       <section className={style.error}>
-        <div className={style.root}>
+        <div className={style.text}>
           <h1>Ой... 404 такой страницы не существует. </h1>
           <p>Либо вы ввели недопустимое значение в строку поиска.</p>
           {/* <h3>На данный момент есть страницы: Home, About us, Contacts </h3> */}
