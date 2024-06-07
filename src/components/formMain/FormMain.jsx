@@ -222,7 +222,7 @@ const FormMain = ({
             <div className="comment__avatar">
               <img
                 id="#avatar"
-                className="comment__img-avatar"
+                className="comment__img-avatar img"
                 src={photoUrl}
                 alt="аватар пользователя"
               />
