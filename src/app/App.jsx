@@ -1,9 +1,11 @@
 import './Null.scss';
 import './App.scss';
 import React, { useLayoutEffect } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+
 import {
   RouterProvider,
-  BrowserRouter as Router,
+  // BrowserRouter as Router,
   Route,
   Routes,
   Outlet,
@@ -99,7 +101,21 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <RouterProvider router={router} />{' '}
+      {/* <RouterProvider router={router} />{' '} */}
+      <BrowserRouter>
+        <Routes>
+          <Route index element={<Main />} />
+          <Route path="fullDescItem/:id" element={<FullDescItem />} />
+          <Route path="new/" element={<NewList />} />
+          <Route path="random-anime/" element={<RandomAnime />} />
+          <Route path="search/" element={<SearchHeader />} />
+          <Route path="contacts" element={<Contacts />} />
+          <Route path="login" element={<Login />} />
+          <Route path="login/user/:id" element={<LoginUserCabinet />} />
+          <Route path="registration" element={<Registration />} />
+          <Route path="*" element={<Error />} />
+        </Routes>
+      </BrowserRouter>
     </Provider>
   );
 };
