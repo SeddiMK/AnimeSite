@@ -94,6 +94,10 @@ const App = () => {
   //   </div>
   // );
 
+  // {
+  //   "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+  // }
+
   // useScript('./particles.js');
   // <BrowserRouter>
   //  {/* <RouterProvider router={router} />{' '} */}
@@ -116,7 +120,6 @@ const App = () => {
           <Route path="*" element={<Error />} />
         </Routes>
       </BrowserRouter>
-      <Footer />
     </Provider>
   );
 };
