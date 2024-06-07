@@ -3,12 +3,13 @@ import './App.scss';
 import React, { useLayoutEffect } from 'react';
 import {
   RouterProvider,
-  // BrowserRouter as Router,
+  BrowserRouter as Router,
   Route,
   Routes,
   Outlet,
   useLocation,
 } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
 // components
 import Header from '../components/header/Header';
@@ -59,6 +60,8 @@ import { router } from '../router/router';
 
 //{/* <Outlet /> */}
 
+import store from '../store/index';
+
 const App = () => {
   // const location = useLocation();
   // // Scroll to top if path changes
@@ -90,7 +93,15 @@ const App = () => {
   // );
 
   // useScript('./particles.js');
-  return <RouterProvider router={router} />;
+  // <BrowserRouter>
+
+  //  </BrowserRouter>
+
+  return (
+    <Provider store={store}>
+      <RouterProvider router={router} />{' '}
+    </Provider>
+  );
 };
 
 export default App;
