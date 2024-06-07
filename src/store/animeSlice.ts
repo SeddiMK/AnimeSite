@@ -87,20 +87,6 @@ export const fetchAnimeListSlice = createAsyncThunk<AnimeItems[], AnimeParams>(
       // const app = express();
       // app.use(cors());
 
-      // const options = {
-      //   method: 'GET',
-      //   url: `http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=${kodikApiKey}`,
-      //   headers: {
-      //     'X-CMC_PRO_API_KEY': process.env.REACT_APP_MARKET_CAP_KEY,
-      //   },
-      //   params: {
-      //     slug: 'bitcoin,ethereum,band-protocol,tezos',
-      //   },
-      // };
-
-      // const resp: any = await Axios.request(options);
-      // axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-
       const resp: any = await axios.get<AnimeItems[]>(
         `http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=${kodikApiKey}`
       );
