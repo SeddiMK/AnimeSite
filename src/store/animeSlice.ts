@@ -86,20 +86,18 @@ export const fetchAnimeListSlice = createAsyncThunk<AnimeItems[], AnimeParams>(
       // Listen on a specific host via the HOST environment variable
       var host = process.env.HOST || 'http://kodikapi.com';
       // Listen on a specific port via the PORT environment variable
-      var port =
-        process.env.PORT ||
-        'https://react-anime-ev7sno3d8-maxs-projects-4db4b9f2.vercel.app';
+      var port = process.env.PORT || 3000;
 
-      var cors_proxy = require('cors-anywhere');
-      cors_proxy
-        .createServer({
-          originWhitelist: [], // Allow all origins
-          requireHeader: ['origin', 'x-requested-with'],
-          removeHeaders: ['cookie', 'cookie2'],
-        })
-        .listen(port, host, function () {
-          console.log('Running CORS Anywhere on ' + host + ':' + port);
-        });
+      // var cors_proxy = require('cors-anywhere');
+      // cors_proxy
+      //   .createServer({
+      //     originWhitelist: [], // Allow all origins
+      //     requireHeader: ['origin', 'x-requested-with'],
+      //     removeHeaders: ['cookie', 'cookie2'],
+      //   })
+      //   .listen(port, host, function () {
+      //     console.log('Running CORS Anywhere on ' + host + ':' + port);
+      //   });
 
       // https://cors-anywhere.herokuapp.com/
       const resp: any = await axios.get<AnimeItems[]>(
