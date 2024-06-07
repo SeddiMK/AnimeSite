@@ -101,10 +101,9 @@ const App = () => {
   //  {/* <ParticlesBg color="#d1aee3" num={50} type="cobweb" bg={true} /> */}
   //  <div className="container"></div>    <div className="wrapper">
   return (
-    <BrowserRouter>
-      <Provider store={store}>
-        <Header />
-
+    <Provider store={store}>
+      <Header />
+      <BrowserRouter>
         <Routes>
           <Route index element={<Main />} />
           <Route path="fullDescItem/:id" element={<FullDescItem />} />
@@ -117,10 +116,9 @@ const App = () => {
           <Route path="registration" element={<Registration />} />
           <Route path="*" element={<Error />} />
         </Routes>
-
-        <Footer />
-      </Provider>
-    </BrowserRouter>
+      </BrowserRouter>
+      <Footer />
+    </Provider>
   );
 };
 
