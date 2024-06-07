@@ -8,7 +8,7 @@ import './firebase';
 import reportWebVitals from './reportWebVitals';
 
 import App from './app/App';
-// import { RouterProvider } from 'react-router-dom';
+import { RouterProvider } from 'react-router-dom';
 import store from './store/index';
 
 import { Provider } from 'react-redux';
@@ -20,11 +20,11 @@ const rootElem = document.getElementById('root');
 if (rootElem) {
   const root = ReactDOMClient.createRoot(rootElem);
   root.render(
-    <BrowserRouter>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </BrowserRouter>
+    // <BrowserRouter>
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    //  </BrowserRouter>
   );
 }
 

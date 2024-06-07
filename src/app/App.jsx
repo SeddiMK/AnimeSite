@@ -2,7 +2,7 @@ import './Null.scss';
 import './App.scss';
 import React, { useLayoutEffect } from 'react';
 import {
-  // RouterProvider,
+  RouterProvider,
   // BrowserRouter as Router,
   Route,
   Routes,
@@ -27,7 +27,7 @@ import LoginUserCabinet from '../pages/loginUserCabinet/LoginUserCabinet';
 import Error from '../pages/error/Error';
 
 // router
-// import { router } from '../router/router';
+import { router } from '../router/router';
 // -------------------------------------------------------
 // "scripts": {
 // "start": "react-app-rewired start",
@@ -60,37 +60,37 @@ import Error from '../pages/error/Error';
 //{/* <Outlet /> */}
 
 const App = () => {
-  const location = useLocation();
-  // Scroll to top if path changes
-  useLayoutEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location.pathname]);
+  // const location = useLocation();
+  // // Scroll to top if path changes
+  // useLayoutEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, [location.pathname]);
 
-  return (
-    <div className="wrapper">
-      {/* <ParticlesBg color="#d1aee3" num={50} type="cobweb" bg={true} /> */}
+  // return (
+  //   <div className="wrapper">
+  //     {/* <ParticlesBg color="#d1aee3" num={50} type="cobweb" bg={true} /> */}
 
-      <Header />
-      <div className="container">
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="fullDescItem/:id" element={<FullDescItem />} />
-          <Route path="new/" element={<NewList />} />
-          <Route path="random-anime/" element={<RandomAnime />} />
-          <Route path="search/" element={<SearchHeader />} />
-          <Route path="contacts" element={<Contacts />} />
-          <Route path="login" element={<Login />} />
-          <Route path="login/user/:id" element={<LoginUserCabinet />} />
-          <Route path="registration" element={<Registration />} />
-          <Route path="*" element={<Error />} />
-        </Routes>
-      </div>
-      <Footer />
-    </div>
-  );
+  //     <Header />
+  //     <div className="container">
+  //       <Routes>
+  //         <Route path="/" element={<Main />} />
+  //         <Route path="fullDescItem/:id" element={<FullDescItem />} />
+  //         <Route path="new/" element={<NewList />} />
+  //         <Route path="random-anime/" element={<RandomAnime />} />
+  //         <Route path="search/" element={<SearchHeader />} />
+  //         <Route path="contacts" element={<Contacts />} />
+  //         <Route path="login" element={<Login />} />
+  //         <Route path="login/user/:id" element={<LoginUserCabinet />} />
+  //         <Route path="registration" element={<Registration />} />
+  //         <Route path="*" element={<Error />} />
+  //       </Routes>
+  //     </div>
+  //     <Footer />
+  //   </div>
+  // );
 
   // useScript('./particles.js');
-  // return <RouterProvider router={router} />;
+  return <RouterProvider router={router} />;
 };
 
 export default App;
