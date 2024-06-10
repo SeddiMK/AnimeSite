@@ -128,81 +128,78 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
   // status === 'loading'   animeItems.length === 0
   return (
     <>
-      <div>ddddddddddddddddddddddddddddddd</div>
-    </>
-    // <>
-    //   {animeItems.length === 0
-    //     ? skeletons
-    //     : animeItems?.map((elem, ind) => (
-    //         <div key={elem.id + ind} className="anime__item item-anime">
-    //           <Link
-    //             className="item-anime__link-full-desc"
-    //             to={`/fullDescItem/${elem.id}`}
-    //             onClick={() => dispatch(setIdFullDesc(elem.id))}>
-    //             <div className="item-anime__card"></div>
-    //             <div
-    //               className="item-anime__img-wrap wrap-img-anime"
-    //               ref={refCard}>
-    //               {/* {status === 'loading' && (
-    //                 <Skeleton
-    //                   // circle
-    //                   // width="10rem"
-    //                   // style={{
-    //                   //   display: 'block',
-    //                   // }}
-    //                   // height="206px"
-    //                   containerClassName="avatar-skeleton img"
-    //                 />
-    //               )} */}
-    //               <img
-    //                 src={
-    //                   elem.material_data?.poster_url
-    //                     ? elem.material_data?.poster_url
-    //                     : elem.screenshots[0]
-    //                 }
-    //                 alt={'изображение аниме ' + elem.title}
-    //                 className="item-anime__image img"
-    //                 // style={{
-    //                 //   display: status === 'loading' ? 'none' : undefined,
-    //                 // }}
-    //               />
-    //             </div>
-    //             <div className="item-anime__bottom-desc">
-    //               <div className="item-anime__title">
-    //                 {
-    //                   // status === 'loading' ? (
-    //                   //   <Skeleton
-    //                   //     width="100%"
-    //                   //     count={3}
-    //                   //     containerClassName="avatar-skeleton-text"
-    //                   //   />
-    //                   // ) : (
-    //                   elem.title
-    //                   // )
-    //                 }
-    //               </div>
-    //               <div className="item-anime__rating">
-    //                 <span className="item-anime__star">&#9733;</span>
-    //                 {elem.material_data?.shikimori_rating !== undefined ? (
-    //                   <>
-    //                     <span className="item-anime__num">
-    //                       {elem.material_data.shikimori_rating}
-    //                     </span>
+      {animeItems.length === 0
+        ? skeletons
+        : animeItems?.map((elem, ind) => (
+            <div key={elem.id + ind} className="anime__item item-anime">
+              <Link
+                className="item-anime__link-full-desc"
+                to={`/fullDescItem/${elem.id}`}
+                onClick={() => dispatch(setIdFullDesc(elem.id))}>
+                <div className="item-anime__card"></div>
+                <div
+                  className="item-anime__img-wrap wrap-img-anime"
+                  ref={refCard}>
+                  {/* {status === 'loading' && (
+                    <Skeleton
+                      // circle
+                      // width="10rem"
+                      // style={{
+                      //   display: 'block',
+                      // }}
+                      // height="206px"
+                      containerClassName="avatar-skeleton img"
+                    />
+                  )} */}
+                  <img
+                    src={
+                      elem.material_data?.poster_url
+                        ? elem.material_data?.poster_url
+                        : elem.screenshots[0]
+                    }
+                    alt={'изображение аниме ' + elem.title}
+                    className="item-anime__image img"
+                    // style={{
+                    //   display: status === 'loading' ? 'none' : undefined,
+                    // }}
+                  />
+                </div>
+                <div className="item-anime__bottom-desc">
+                  <div className="item-anime__title">
+                    {
+                      // status === 'loading' ? (
+                      //   <Skeleton
+                      //     width="100%"
+                      //     count={3}
+                      //     containerClassName="avatar-skeleton-text"
+                      //   />
+                      // ) : (
+                      elem.title
+                      // )
+                    }
+                  </div>
+                  <div className="item-anime__rating">
+                    <span className="item-anime__star">&#9733;</span>
+                    {elem.material_data?.shikimori_rating !== undefined ? (
+                      <>
+                        <span className="item-anime__num">
+                          {elem.material_data.shikimori_rating}
+                        </span>
 
-    //                     <span className="item-anime__votes">
-    //                       {' / '}
-    //                       {elem.material_data.shikimori_votes}
-    //                     </span>
-    //                   </>
-    //                 ) : (
-    //                   <span>нет рейтинга</span>
-    //                 )}
-    //               </div>
-    //             </div>
-    //           </Link>
-    //         </div>
-    //       ))}
-    // </>
+                        <span className="item-anime__votes">
+                          {' / '}
+                          {elem.material_data.shikimori_votes}
+                        </span>
+                      </>
+                    ) : (
+                      <span>нет рейтинга</span>
+                    )}
+                  </div>
+                </div>
+              </Link>
+            </div>
+          ))}
+    </>
   );
 };
 
