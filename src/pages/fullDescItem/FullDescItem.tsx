@@ -137,6 +137,7 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
   // const [itemAnimeTitleOrign, setItemAnimeTitleOrign] = useState('');
   // const [itemAnimeOtherTitle, setItemAnimeOtherTitle] = useState('');
 
+  const [animeSearchItems, setAnimeSearchItems] = useState([]);
   // const animeSearchItems = useSelector(itemsAnimeSearch); // -----------------------------
   // const animeSearchItems = useRef<AnimeSearch[]>(useSelector(itemsAnimeSearch));
   // const [animeSearchItems, setAnimeSearchItems] = useState(
@@ -148,7 +149,12 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
   // const searchInpVal = useSelector(
   //   (state: RootState) => state.searchSlice.idFullDesc
   // );
-  const itemAnime = animeSearchItems[0]?.material_data;
+  const itemAnime = () => {
+    console.log(animeSearchItems[0].material_data);
+
+    if (animeSearchItems[0].material_data !== undefined)
+      return animeSearchItems[0]?.material_data;
+  };
 
   // fthAnimeSearchSlice -----------------------------
   const fthAnimeSearchSlice = (idAnime, searchInpVal) => {
@@ -156,7 +162,6 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
     document.getElementById('root')?.scrollIntoView(); // при перерисовке скорит на верх стр
   };
   // запрос fetch в redux
-  const [animeSearchItems, setAnimeSearchItems] = useState([]);
   const fthAnimeSlice = async (yearNew) => {
     const resp: any = await axios.get(
       `http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=${kodikApiKey}`
