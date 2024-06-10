@@ -14,10 +14,10 @@ import { clickRandomHeder } from '../../store/searchSlice';
 
 // hooks -----------------------------------------------------------------
 import { useAuth } from '../../hooks/useAuth';
-// : FC
-const Header = () => {
+
+const Header: FC = () => {
   const dispatch = useAppDispatch();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const { isAuth, id } = useAuth();
   const [toggleRandom, setToggleRandom] = useState(true);
@@ -56,7 +56,7 @@ const Header = () => {
               onClick={() => {
                 if (isAuth) {
                   dispatch(removeUser());
-                  // navigate('/');
+                  navigate('/');
                 }
               }}>
               <Link

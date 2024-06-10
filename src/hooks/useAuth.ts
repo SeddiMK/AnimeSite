@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { setUser } from '../store/userSlice';
 
-export function useAuth() {
+export const useAuth = () => {
   // const { itemsUsers } = useSelector((state) => state.itemsUsers);
   const { email, token, id, displayName, photoUrl } = useSelector(
     (state: RootState) => state.userSlice
@@ -53,4 +53,4 @@ export function useAuth() {
     displayName,
     photoUrl,
   };
-}
+};
