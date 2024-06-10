@@ -32,7 +32,7 @@ const Header: React.FC = () => {
   // const [burgerClick, setBurgerClick] = useState<boolean>(true);
 
   return (
-    <header className="header">
+    <div className="header">
       {/* <ErrorBoundary fallback={<p>Something went wrong</p>}> */}{' '}
       {/* </ErrorBoundary> */}
       {/* <div className="header__container">
@@ -89,7 +89,7 @@ const Header: React.FC = () => {
           </ul>
         </nav>
       </div> */}
-    </header>
+    </div>
   );
 };
 
