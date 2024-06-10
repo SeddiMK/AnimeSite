@@ -40,7 +40,10 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
 
   // const animeItems = useSelector(itemsAnime);//---------------------------
 
-  const [animeItems, setAnimeItems] = useState([]);
+  const [animeItems, setAnimeItems] = useState([
+    { xzxzx: 'xzx' },
+    { xzxzx: 'xzx' },
+  ]);
 
   // запрос fetch в redux
   const fthAnimeSlice = async (yearNew) => {
@@ -128,7 +131,7 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
   // status === 'loading'
   return (
     <>
-      {true
+      {false
         ? skeletons
         : animeItems?.map((elem, ind) => (
             <div key={elem.id + ind} className="anime__item item-anime">
