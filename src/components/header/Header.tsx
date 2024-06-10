@@ -19,7 +19,7 @@ const Header: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const { isAuth, id } = useAuth();
+  // const { isAuth, id } = useAuth();
   const [toggleRandom, setToggleRandom] = useState(true);
 
   useEffect(() => {
@@ -32,13 +32,13 @@ const Header: React.FC = () => {
   // const [burgerClick, setBurgerClick] = useState<boolean>(true);
 
   return (
-    <div className="header">
+    <header className="header">
       {/* <ErrorBoundary fallback={<p>Something went wrong</p>}> */}{' '}
       {/* </ErrorBoundary> */}
-      {/* <div className="header__container">
+      <div className="header__container">
         <Link to="/" className="header__logo">
           ME
-          {/* <img src="#" alt="Image logo" />  
+          {/* <img src="#" alt="Image logo" />  */}
         </Link>
         <nav className="header__nav menu">
           <ul className="nav-mobile">
@@ -54,7 +54,8 @@ const Header: React.FC = () => {
             <li
               className="menu__list-r login-btn"
               onClick={() => {
-                if (isAuth) {
+                // isAuth
+                if (true) {
                   dispatch(removeUser());
                   navigate('/');
                 }
@@ -70,13 +71,14 @@ const Header: React.FC = () => {
                   )
                 }
                 id="navbar-login">
-                <span className="material-symbols-outlined">
+                {/* <span className="material-symbols-outlined">
                   {isAuth ? 'logout' : 'login'}
                 </span>
-                <span>{isAuth ? 'Выйти' : 'Войти'}</span>
+                <span>{isAuth ? 'Выйти' : 'Войти'}</span> */}
               </Link>
             </li>
-            {isAuth && (
+
+            {/*     {isAuth && (
               <li className="menu__list-r log-user-cab">
                 <Link
                   to={`login/user/id:${id}`}
@@ -84,12 +86,13 @@ const Header: React.FC = () => {
                   id="cabinet">
                   Кабинет
                 </Link>
-              </li>
-            )}
+              </li> 
+             
+            )}*/}
           </ul>
         </nav>
-      </div> */}
-    </div>
+      </div>
+    </header>
   );
 };
 
