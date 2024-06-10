@@ -41,7 +41,9 @@ const Header: React.FC = () => {
           </Link>
           <nav className="header__nav menu">
             <ul className="nav-mobile">{/* <NavMobile /> */}</ul>
-            <ul className="menu__list active">{/* <MenuList /> */}</ul>
+            <ul className="menu__list active">
+              <MenuList />
+            </ul>
             <ul className="menu__list-r">
               <li className="menu__list-r search-header">
                 <SearchHeader />

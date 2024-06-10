@@ -43,12 +43,24 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
 
   // запрос fetch в redux
   const fthAnimeSlice = async (yearNew) => {
-    const resp: any = await axios.get(
-      `http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=${kodikApiKey}`
-    );
-    console.log(resp?.data);
-
-    setAnimeItems(resp?.data.results);
+    const resp: any = await fetch(
+      `http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=${kodikApiKey}`,
+      {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+        },
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setAnimeItems(data.results);
+        // console.log(data.results);
+        // data = data.results;
+      })
+      .catch((e) => {
+        console.log(e);
+      });
 
     // dispatch(
     //   fetchAnimeListSlice({
