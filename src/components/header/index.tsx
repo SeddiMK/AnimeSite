@@ -23,7 +23,7 @@ const Header: React.FC = () => {
   const [toggleRandom, setToggleRandom] = useState(true);
 
   useEffect(() => {
-    // dispatch(clickRandomHeder(toggleRandom));
+    dispatch(clickRandomHeder(toggleRandom));
   }, [toggleRandom]);
 
   // const { email, token, id } = useSelector(

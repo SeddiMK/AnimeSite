@@ -14,7 +14,7 @@ import {
 import { Provider } from 'react-redux';
 
 // components
-import Header from '../components/header/Header';
+import Header from '../components/header';
 import Footer from '../components/footer/Footer';
 
 // pages

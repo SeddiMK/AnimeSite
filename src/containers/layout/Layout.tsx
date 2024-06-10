@@ -2,7 +2,7 @@ import React, { useLayoutEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 
 // components
-import Header from '../../components/header/Header';
+import Header from '../../components/header';
 import Footer from '../../components/footer/Footer';
 
 // script
