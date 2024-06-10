@@ -4,6 +4,8 @@
 
     "lib": ["dom", "dom.iterable", "esnext"], // Список файлов библиотеки для включения в компиляцию
 
+    "types": ["node", "jest", "express"],
+
     "allowJs": true, // Разрешить компиляцию файлов JavaScript
 
     "skipLibCheck": true, // Пропустить проверку типов всех файлов объявлений

@@ -17,7 +17,7 @@ import { useAuth } from '../../hooks/useAuth';
 // : FC
 const Header = () => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const { isAuth, id } = useAuth();
   const [toggleRandom, setToggleRandom] = useState(true);
@@ -56,7 +56,7 @@ const Header = () => {
               onClick={() => {
                 if (isAuth) {
                   dispatch(removeUser());
-                  navigate('/');
+                  // navigate('/');
                 }
               }}>
               <Link
