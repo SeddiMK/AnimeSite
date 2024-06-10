@@ -35,11 +35,11 @@ const Header: React.FC = () => {
     <header className="header">
       {/* <ErrorBoundary fallback={<p>Something went wrong</p>}> */}
       <div className="header__container">
-        <Link to="/" className="header__logo">
+        {/* <Link to="/" className="header__logo">
           ME
-          {/* <img src="#" alt="Image logo" />  */}
-        </Link>
-        {/* <nav className="header__nav menu">
+          {/* <img src="#" alt="Image logo" />  
+        </Link> */}
+        <nav className="header__nav menu">
           <ul className="nav-mobile">
             <NavMobile />
           </ul>
@@ -86,7 +86,7 @@ const Header: React.FC = () => {
               </li>
             )}
           </ul>
-        </nav> */}
+        </nav>
       </div>
       {/* </ErrorBoundary> */}
     </header>
