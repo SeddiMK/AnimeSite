@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import './Header.scss';
-// import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-// import SearchHeader from '../searchHeader/SearchHeader';
-// import MenuList from '../menuList/MenuList';
-// import NavMobile from '../navMobile/NavMobile';
-// import ErrorBoundary from '../../pages/ErrorBoundary/ErrorBoundary';
+import SearchHeader from '../searchHeader/SearchHeader';
+import MenuList from '../menuList/MenuList';
+import NavMobile from '../navMobile/NavMobile';
+import ErrorBoundary from '../../pages/ErrorBoundary/ErrorBoundary';
 
-// // store -----------------------------------------------------------------
-// import { useAppDispatch } from '../../store';
-// import { removeUser } from '../../store/userSlice';
-// import { clickRandomHeder } from '../../store/searchSlice';
+// store -----------------------------------------------------------------
+import { useAppDispatch } from '../../store';
+import { removeUser } from '../../store/userSlice';
+import { clickRandomHeder } from '../../store/searchSlice';
 
-// // hooks -----------------------------------------------------------------
-// import { useAuth } from '../../hooks/useAuth';
+// hooks -----------------------------------------------------------------
+import { useAuth } from '../../hooks/useAuth';
 
 const Header: React.FC = () => {
   // const dispatch = useAppDispatch();
