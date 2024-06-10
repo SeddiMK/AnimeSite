@@ -19,7 +19,7 @@ const Header: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  // const { isAuth, id } = useAuth();
+  const { isAuth, id } = useAuth();
   const [toggleRandom, setToggleRandom] = useState(true);
 
   useEffect(() => {
@@ -69,10 +69,10 @@ const Header: React.FC = () => {
                       JSON.stringify(Boolean(false))
                     )
                   }>
-                  {/* <span className="material-symbols-outlined">
+                  <span className="material-symbols-outlined">
                     {isAuth ? 'logout' : 'login'}
                   </span>
-                  <span>{isAuth ? 'Выйти' : 'Войти'}</span> */}
+                  <span>{isAuth ? 'Выйти' : 'Войти'}</span>
                 </Link>
               </li>
               {/* {isAuth && (
