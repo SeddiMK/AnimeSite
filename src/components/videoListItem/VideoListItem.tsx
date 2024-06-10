@@ -39,11 +39,7 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
   const [limitPar, setLimitPar] = useState(100);
 
   // const animeItems = useSelector(itemsAnime);//---------------------------
-
-  const [animeItems, setAnimeItems] = useState([
-    { xzxzx: 'xzx' },
-    { xzxzx: 'xzx' },
-  ]);
+  const [animeItems, setAnimeItems] = useState([]);
 
   // запрос fetch в redux
   const fthAnimeSlice = async (yearNew) => {
