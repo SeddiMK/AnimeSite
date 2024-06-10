@@ -62,12 +62,12 @@ const Header: React.FC = () => {
                   to={`/login`}
                   preventScrollReset={true}
                   className="menu__link"
-                  onClick={() =>
-                    // localStorage.setItem(
-                    //   'remeberMe',
-                    //   JSON.stringify(Boolean(false))
-                    // )
-                  }
+                  // onClick={() =>
+                  //   localStorage.setItem(
+                  //     'remeberMe',
+                  //     JSON.stringify(Boolean(false))
+                  //   )
+                  // }
                   id="navbar-login">
                   <span className="material-symbols-outlined">
                     {isAuth ? 'logout' : 'login'}
