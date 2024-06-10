@@ -19,8 +19,8 @@ const Header: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  // const { isAuth, id } = useAuth();
-  // const [toggleRandom, setToggleRandom] = useState(true);
+  const { isAuth, id } = useAuth();
+  const [toggleRandom, setToggleRandom] = useState(true);
 
   // useEffect(() => {
   //   dispatch(clickRandomHeder(toggleRandom));
