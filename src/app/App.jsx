@@ -106,20 +106,22 @@ const App = () => {
   //  <div className="container"></div>    <div className="wrapper">
   return (
     <Provider store={store}>
-      <BrowserRouter>
-        <Routes>
-          <Route index element={<Main />} />
-          <Route path="fullDescItem/:id" element={<FullDescItem />} />
-          <Route path="new/" element={<NewList />} />
-          <Route path="random-anime/" element={<RandomAnime />} />
-          <Route path="search/" element={<SearchHeader />} />
-          <Route path="contacts" element={<Contacts />} />
-          <Route path="login" element={<Login />} />
-          <Route path="login/user/:id" element={<LoginUserCabinet />} />
-          <Route path="registration" element={<Registration />} />
-          <Route path="*" element={<Error />} />
-        </Routes>
-      </BrowserRouter>
+      <div className="container">
+        <BrowserRouter>
+          <Routes>
+            <Route index element={<Main />} />
+            <Route path="fullDescItem/:id" element={<FullDescItem />} />
+            <Route path="new/" element={<NewList />} />
+            <Route path="random-anime/" element={<RandomAnime />} />
+            <Route path="search/" element={<SearchHeader />} />
+            <Route path="contacts" element={<Contacts />} />
+            <Route path="login" element={<Login />} />
+            <Route path="login/user/:id" element={<LoginUserCabinet />} />
+            <Route path="registration" element={<Registration />} />
+            <Route path="*" element={<Error />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
     </Provider>
   );
 };
