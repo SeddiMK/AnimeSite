@@ -16,8 +16,8 @@ import { clickRandomHeder } from '../../store/searchSlice';
 import { useAuth } from '../../hooks/useAuth';
 
 const Header: React.FC = () => {
-  // const dispatch = useAppDispatch();
-  // const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   // const { isAuth, id } = useAuth();
   // const [toggleRandom, setToggleRandom] = useState(true);
