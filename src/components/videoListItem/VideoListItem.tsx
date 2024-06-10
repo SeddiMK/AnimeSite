@@ -16,9 +16,6 @@ import { setIdFullDesc } from '../../store/searchSlice';
 
 import { useSelector } from 'react-redux';
 
-import axios from 'axios';
-import { kodikApiKey } from '../../kodikcfg';
-
 // ---------------------------------------------------------------------
 
 type VideoListItemProps = {
@@ -38,42 +35,25 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
   // search param ----------------------------------------------
   const [limitPar, setLimitPar] = useState(100);
 
-  // const animeItems = useSelector(itemsAnime);//---------------------------
+  const animeItemsRedux = useSelector(itemsAnime); //---------------------------
   const [animeItems, setAnimeItems] = useState<any[]>([]);
 
   // запрос fetch в redux
   const fthAnimeSlice = async (yearNew) => {
-    const resp: any = await fetch(
-      `http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=${kodikApiKey}`,
-      {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-        },
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setAnimeItems(data.results);
-        // console.log(data.results);
-        // data = data.results;
+    dispatch(
+      fetchAnimeListSlice({
+        limitPar,
+        yearNew,
       })
-      .catch((e) => {
-        console.log(e);
-      });
-    resp();
-    // dispatch(
-    //   fetchAnimeListSlice({
-    //     limitPar,
-    //     yearNew,
-    //   })
-    // );
-    // document.getElementById('root')?.scrollIntoView(); // при перерисовке скорит на верх стр
+    );
+    document.getElementById('root')?.scrollIntoView(); // при перерисовке скорит на верх стр
   };
 
   useEffect(() => {
-    console.log(animeItems);
-  }, [animeItems]);
+    console.log(animeItemsRedux);
+    console.log(status === 'loading'); // && status === 'loading'
+    if (animeItemsRedux.length !== 0) setAnimeItems(animeItemsRedux);
+  }, [animeItemsRedux]);
 
   //--------------------------------------------------------------
 
@@ -135,7 +115,7 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
   if (status === 'error') {
     return <Error />;
   }
-  console.log(animeItems.length);
+  console.log(animeItems);
 
   // status === 'loading'   animeItems.length === 0
   return (

@@ -129,9 +129,9 @@ export const fetchAnimeListSlice = createAsyncThunk<AnimeItems[], AnimeParams>(
       //   });
 
       // https://cors-anywhere.herokuapp.com/
-      // const resp: any = await axios.get<AnimeItems[]>(
-      //   `http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=${kodikApiKey}`
-      // );
+      const resp: any = await axios.get<AnimeItems[]>(
+        `https://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=${kodikApiKey}`
+      );
 
       // const myRequest = new Request(url, conf);
       // let data;
@@ -153,12 +153,12 @@ export const fetchAnimeListSlice = createAsyncThunk<AnimeItems[], AnimeParams>(
       //     console.log(e);
       //   });
 
-      // if (resp.status !== 200) {
-      //   throw new Error('Server Error!');
-      // }
-      // const data = resp.data.results;
+      if (resp.status !== 200) {
+        throw new Error('Server Error!');
+      }
+      const data = resp.data.results;
       // console.log(resp);
-      // console.log(data);
+      console.log(data);
       // console.log(data, '------------data list------------');
 
       // let animesItems: MaterialObject[] = [];
@@ -181,24 +181,24 @@ export const fetchAnimeListSlice = createAsyncThunk<AnimeItems[], AnimeParams>(
       //     }
       // });
       // ----------------------------------------------------------------
-      // if (data.length !== 0) {
-      //   // let prevTitle: string | null = material[0].title; // && item.title.toLowerCase() !==
-      //   for (const item of data) {
-      //     if (
-      //       (item.type === 'anime' || item.type === 'anime-serial') &&
-      //       item.title.toLowerCase() !== prevTitle
-      //     ) {
-      //       animesItems.push(item);
-      //     } else {
-      //       animesItemsNotTest.push(item);
-      //     }
+      if (data.length !== 0) {
+        // let prevTitle: string | null = material[0].title; // && item.title.toLowerCase() !==
+        for (const item of data) {
+          if (
+            (item.type === 'anime' || item.type === 'anime-serial') &&
+            item.title.toLowerCase() !== prevTitle
+          ) {
+            animesItems.push(item);
+          } else {
+            animesItemsNotTest.push(item);
+          }
 
-      //     prevTitle = item.other_title;
-      //     prevId = item.id;
-      //   }
-      // } else {
-      //   console.log('нет данных для показа');
-      // }
+          prevTitle = item.other_title;
+          prevId = item.id;
+        }
+      } else {
+        console.log('нет данных для показа');
+      }
       // ----------- client kodik ----------------------------------------------------
       // const [animesItemsSearch, setAnimesItemsSearch] = useState<any>([]);
 
