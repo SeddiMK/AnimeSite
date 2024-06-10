@@ -109,7 +109,7 @@ const App = () => {
       <BrowserRouter>
         <div className="wrapper">
           {/* <Header /> */}
-          <div>kklkljkljkljkljkljkljkljkljkl</div>
+          <Footer />
           <div>kklkljkljkljkljkljkljkljkljkl</div>
           <div>kklkljkljkljkljkljkljkljkljkl</div>
           <div>kklkljkljkljkljkljkljkljkljkl</div>
