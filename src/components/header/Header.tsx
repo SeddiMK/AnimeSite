@@ -40,7 +40,9 @@ const Header: React.FC = () => {
             {/* <img src="#" alt="Image logo" /> */}
           </Link>
           <nav className="header__nav menu">
-            <ul className="nav-mobile">{/* <NavMobile /> */}</ul>
+            <ul className="nav-mobile">
+              <NavMobile />
+            </ul>
             <ul className="menu__list active">
               <MenuList />
             </ul>

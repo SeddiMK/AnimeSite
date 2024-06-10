@@ -18,7 +18,7 @@ const NavMobile = () => {
   return (
     <div ref={refNavMobile} className="nav-mobile__wrap ">
       <Hamburger toggled={isOpen} size={20} toggle={setOpen} />
-      <AnimatePresence>
+      {/* <AnimatePresence>
         {isOpen && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -29,7 +29,7 @@ const NavMobile = () => {
             <MenuList />
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
     </div>
   );
 };
