@@ -129,9 +129,9 @@ export const fetchAnimeListSlice = createAsyncThunk<AnimeItems[], AnimeParams>(
       //   });
 
       // https://cors-anywhere.herokuapp.com/
-      // const resp: any = await axios.get<AnimeItems[]>(
-      //   `http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=${kodikApiKey}`
-      // );
+      const resp: any = await axios.get<AnimeItems[]>(
+        `http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=${kodikApiKey}`
+      );
 
       // const myRequest = new Request(url, conf);
       // let data;

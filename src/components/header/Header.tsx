@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import SearchHeader from '../searchHeader/SearchHeader';
 import MenuList from '../menuList/MenuList';
 import NavMobile from '../navMobile/NavMobile';
+import ErrorBoundary from '../../pages/ErrorBoundary/ErrorBoundary';
 
 // store -----------------------------------------------------------------
 import { useAppDispatch } from '../../store';
@@ -32,6 +33,8 @@ const Header: FC = () => {
 
   return (
     <header className="header">
+      <ErrorBoundary fallback={<p>Something went wrong</p>}></ErrorBoundary>
+
       <div className="header__container">
         <Link to="/" className="header__logo">
           ME
