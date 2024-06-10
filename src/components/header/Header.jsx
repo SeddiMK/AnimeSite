@@ -14,8 +14,8 @@ import { clickRandomHeder } from '../../store/searchSlice';
 
 // hooks -----------------------------------------------------------------
 import { useAuth } from '../../hooks/useAuth';
-
-const Header: FC = () => {
+// : FC
+const Header = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
