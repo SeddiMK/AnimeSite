@@ -44,7 +44,7 @@ const Header: React.FC = () => {
             <ul className="menu__list active">{/* <MenuList /> */}</ul>
             <ul className="menu__list-r">
               <li className="menu__list-r search-header">
-                {/* <SearchHeader /> */}
+                <SearchHeader />
               </li>
               <li
                 className="menu__list-r login-btn"
