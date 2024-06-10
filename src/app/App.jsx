@@ -106,10 +106,10 @@ const App = () => {
   //  <div className="container"></div>    <div className="wrapper">
   return (
     <Provider store={store}>
-      <div className="wrapper">
-        <Header />
-        <div className="container">
-          <BrowserRouter>
+      <BrowserRouter>
+        <div className="wrapper">
+          <Header />
+          <div className="container">
             <Routes>
               <Route index element={<Main />} />
               <Route path="fullDescItem/:id" element={<FullDescItem />} />
@@ -122,10 +122,10 @@ const App = () => {
               <Route path="registration" element={<Registration />} />
               <Route path="*" element={<Error />} />
             </Routes>
-          </BrowserRouter>
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
+      </BrowserRouter>
     </Provider>
   );
 };
