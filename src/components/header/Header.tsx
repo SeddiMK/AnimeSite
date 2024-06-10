@@ -69,10 +69,10 @@ const Header: React.FC = () => {
                   )
                 }
                 id="navbar-login">
-                <span className="material-symbols-outlined">
+                {/* <span className="material-symbols-outlined">
                   {isAuth ? 'logout' : 'login'}
                 </span>
-                <span>{isAuth ? 'Выйти' : 'Войти'}</span>
+                <span>{isAuth ? 'Выйти' : 'Войти'}</span> */}
               </Link>
             </li>
             {isAuth && (
