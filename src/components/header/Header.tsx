@@ -32,16 +32,13 @@ const Header: React.FC = () => {
   // const [burgerClick, setBurgerClick] = useState<boolean>(true);
 
   return (
-    <>
-      {/*  
-      <header className="header">
-    
-      {/* <ErrorBoundary fallback={<p>Something went wrong</p>}> 
-      {/* </ErrorBoundary> 
+    <header className="header">
+      {/* <ErrorBoundary fallback={<p>Something went wrong</p>}>  */}
+      {/* </ErrorBoundary>  */}
       <div className="header__container">
         <Link to="/" className="header__logo">
           ME
-          {/* <img src="#" alt="Image logo" />  
+          {/* <img src="#" alt="Image logo" />   */}
         </Link>
         <nav className="header__nav menu">
           <ul className="nav-mobile">
@@ -92,9 +89,7 @@ const Header: React.FC = () => {
           </ul>
         </nav>
       </div>
-    </header >
-     */}
-    </>
+    </header>
   );
 };
 
