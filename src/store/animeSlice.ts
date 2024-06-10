@@ -180,25 +180,25 @@ export const fetchAnimeListSlice = createAsyncThunk<AnimeItems[], AnimeParams>(
       //         return true;
       //     }
       // });
+      // ----------------------------------------------------------------
+      // if (data.length !== 0) {
+      //   // let prevTitle: string | null = material[0].title; // && item.title.toLowerCase() !==
+      //   for (const item of data) {
+      //     if (
+      //       (item.type === 'anime' || item.type === 'anime-serial') &&
+      //       item.title.toLowerCase() !== prevTitle
+      //     ) {
+      //       animesItems.push(item);
+      //     } else {
+      //       animesItemsNotTest.push(item);
+      //     }
 
-      if (data.length !== 0) {
-        // let prevTitle: string | null = material[0].title; // && item.title.toLowerCase() !==
-        for (const item of data) {
-          if (
-            (item.type === 'anime' || item.type === 'anime-serial') &&
-            item.title.toLowerCase() !== prevTitle
-          ) {
-            animesItems.push(item);
-          } else {
-            animesItemsNotTest.push(item);
-          }
-
-          prevTitle = item.other_title;
-          prevId = item.id;
-        }
-      } else {
-        console.log('нет данных для показа');
-      }
+      //     prevTitle = item.other_title;
+      //     prevId = item.id;
+      //   }
+      // } else {
+      //   console.log('нет данных для показа');
+      // }
       // ----------- client kodik ----------------------------------------------------
       // const [animesItemsSearch, setAnimesItemsSearch] = useState<any>([]);
 
