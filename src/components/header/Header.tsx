@@ -1,5 +1,5 @@
 import './Header.scss';
-import React, { FC, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import SearchHeader from '../searchHeader/SearchHeader';
@@ -19,11 +19,11 @@ const Header: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  // const { isAuth, id } = useAuth();
+  const { isAuth, id } = useAuth();
   const [toggleRandom, setToggleRandom] = useState(true);
 
   useEffect(() => {
-    dispatch(clickRandomHeder(toggleRandom));
+    // dispatch(clickRandomHeder(toggleRandom));
   }, [toggleRandom]);
 
   // const { email, token, id } = useSelector(
@@ -71,14 +71,13 @@ const Header: React.FC = () => {
                   )
                 }
                 id="navbar-login">
-                {/* <span className="material-symbols-outlined">
+                <span className="material-symbols-outlined">
                   {isAuth ? 'logout' : 'login'}
                 </span>
-                <span>{isAuth ? 'Выйти' : 'Войти'}</span> */}
+                <span>{isAuth ? 'Выйти' : 'Войти'}</span>
               </Link>
             </li>
-
-            {/*     {isAuth && (
+            {isAuth && (
               <li className="menu__list-r log-user-cab">
                 <Link
                   to={`login/user/id:${id}`}
@@ -86,9 +85,8 @@ const Header: React.FC = () => {
                   id="cabinet">
                   Кабинет
                 </Link>
-              </li> 
-             
-            )}*/}
+              </li>
+            )}
           </ul>
         </nav>
       </div>
