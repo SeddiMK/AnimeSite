@@ -54,8 +54,7 @@ const Header: React.FC = () => {
             <li
               className="menu__list-r login-btn"
               onClick={() => {
-                // isAuth
-                if (true) {
+                if (isAuth) {
                   dispatch(removeUser());
                   navigate('/');
                 }

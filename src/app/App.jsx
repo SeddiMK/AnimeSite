@@ -14,7 +14,7 @@ import {
 import { Provider } from 'react-redux';
 
 // components
-import Header from '../components/header';
+import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
 
 // pages
@@ -108,8 +108,6 @@ const App = () => {
     <Provider store={store}>
       <BrowserRouter>
         <div className="wrapper">
-          <Header />
-
           <div className="container">
             <Routes>
               <Route index element={<Main />} />
@@ -124,6 +122,7 @@ const App = () => {
               <Route path="*" element={<Error />} />
             </Routes>
           </div>
+          <Header />
           <Footer />
         </div>
       </BrowserRouter>
