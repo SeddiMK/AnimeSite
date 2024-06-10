@@ -3,6 +3,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
+import { kodikApiKey } from '../../kodikcfg';
+
 import { CSSTransition } from 'react-transition-group';
 
 import useResizeObserver from 'use-resize-observer';
@@ -26,6 +28,7 @@ import {
 import SkeletonsFullDesc from '../../containers/SkeletonsFullDesc/SkeletonsFullDesc';
 
 import Particles from '../../containers/particles/Particles';
+import axios from 'axios';
 
 // ---------------------------------------------------------------------
 type FullDescItemProps = {
@@ -134,7 +137,7 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
   // const [itemAnimeTitleOrign, setItemAnimeTitleOrign] = useState('');
   // const [itemAnimeOtherTitle, setItemAnimeOtherTitle] = useState('');
 
-  const animeSearchItems = useSelector(itemsAnimeSearch);
+  // const animeSearchItems = useSelector(itemsAnimeSearch); // -----------------------------
   // const animeSearchItems = useRef<AnimeSearch[]>(useSelector(itemsAnimeSearch));
   // const [animeSearchItems, setAnimeSearchItems] = useState(
   //   useSelector(itemsAnimeSearch)
@@ -153,13 +156,19 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
     document.getElementById('root')?.scrollIntoView(); // при перерисовке скорит на верх стр
   };
   // запрос fetch в redux
-  const fthAnimeSlice = (yearNew) => {
-    dispatch(
-      fetchAnimeListSlice({
-        limitPar,
-        yearNew,
-      })
+  const [animeSearchItems, setAnimeSearchItems] = useState([]);
+  const fthAnimeSlice = async (yearNew) => {
+    const resp: any = await axios.get(
+      `http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=${kodikApiKey}`
     );
+    setAnimeSearchItems(resp.data.results);
+
+    // dispatch(
+    //   fetchAnimeListSlice({
+    //     limitPar,
+    //     yearNew,
+    //   })
+    // );
     document.getElementById('root')?.scrollIntoView(); // при перерисовке скорит на верх стр
   };
 
