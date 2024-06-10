@@ -76,6 +76,7 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
   // const fullDescItemWrapRef = useRef<null | HTMLDivElement>(null);
 
   const animeItems = useSelector(itemsAnime);
+  // const [animeItems, setAnimeItems] = useState();
   // const [itemRandomAnime, setItemRandomAnime] = useState('');
 
   const [popupAddList, setPopupAddList] = useState(false);
@@ -137,8 +138,7 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
   // const [itemAnimeTitleOrign, setItemAnimeTitleOrign] = useState('');
   // const [itemAnimeOtherTitle, setItemAnimeOtherTitle] = useState('');
 
-  const [animeSearchItems, setAnimeSearchItems] = useState([]);
-  // const animeSearchItems = useSelector(itemsAnimeSearch); // -----------------------------
+  const animeSearchItems = useSelector(itemsAnimeSearch); // -----------------------------
   // const animeSearchItems = useRef<AnimeSearch[]>(useSelector(itemsAnimeSearch));
   // const [animeSearchItems, setAnimeSearchItems] = useState(
   //   useSelector(itemsAnimeSearch)
@@ -149,12 +149,8 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
   // const searchInpVal = useSelector(
   //   (state: RootState) => state.searchSlice.idFullDesc
   // );
-  const itemAnime = () => {
-    console.log(animeSearchItems[0].material_data);
 
-    if (animeSearchItems[0].material_data !== undefined)
-      return animeSearchItems[0]?.material_data;
-  };
+  const itemAnime = animeSearchItems[0]?.material_data;
 
   // fthAnimeSearchSlice -----------------------------
   const fthAnimeSearchSlice = (idAnime, searchInpVal) => {
@@ -163,19 +159,18 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
   };
   // запрос fetch в redux
   const fthAnimeSlice = async (yearNew) => {
-    const resp: any = await axios.get(
-      `http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=${kodikApiKey}`
+    dispatch(
+      fetchAnimeListSlice({
+        limitPar,
+        yearNew,
+      })
     );
-    setAnimeSearchItems(resp.data.results);
-
-    // dispatch(
-    //   fetchAnimeListSlice({
-    //     limitPar,
-    //     yearNew,
-    //   })
-    // );
     document.getElementById('root')?.scrollIntoView(); // при перерисовке скорит на верх стр
   };
+
+  useEffect(() => {
+    // setAnimeItems();
+  }, []);
 
   // добавляем данные в redux при первом рендере -----------
   useEffect(() => {
@@ -214,7 +209,7 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
 
   // console.log(itemRandomAnime, 'itemRandomAnime');
   // console.log(flagRandomAnime, 'flagRandomAnime');
-  // console.log(animeItems, 'animeItems');
+  console.log(animeItems, 'animeItems');
   // console.log(animeSearchItems, 'animeSearchItems');
   // console.log(itemAnimeSearchId, 'itemAnimeSearchId');
   // console.log(itemAnimeLink, 'itemAnimeLink');

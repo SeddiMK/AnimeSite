@@ -129,31 +129,36 @@ export const fetchAnimeListSlice = createAsyncThunk<AnimeItems[], AnimeParams>(
       //   });
 
       // https://cors-anywhere.herokuapp.com/
-      const resp: any = await axios.get<AnimeItems[]>(
-        `http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=${kodikApiKey}`
-      );
+      // const resp: any = await axios.get<AnimeItems[]>(
+      //   `http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=${kodikApiKey}`
+      // );
 
       // const myRequest = new Request(url, conf);
       // let data;
-      // const resp: any = fetch(url, conf)
-      //   .then((response) => {
-      //     return response.json();
-      //   })
-      //   .then((data) => {
-      //     console.log(data);
-      //     console.log(data.results);
-      //     data = data.results;
-      //   })
-      //   .catch((e) => {
-      //     console.log(e);
-      //   });
+      const resp: any = await fetch(
+        `http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=${kodikApiKey}`,
+        {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+          },
+        }
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          // console.log(data.results);
+          // data = data.results;
+        })
+        .catch((e) => {
+          console.log(e);
+        });
 
       // if (resp.status !== 200) {
       //   throw new Error('Server Error!');
       // }
-      const data = resp.data.results;
-      console.log(resp);
-      console.log(data);
+      // const data = resp.data.results;
+      // console.log(resp);
+      // console.log(data);
       // console.log(data, '------------data list------------');
 
       // let animesItems: MaterialObject[] = [];

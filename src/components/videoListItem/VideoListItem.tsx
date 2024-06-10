@@ -16,6 +16,9 @@ import { setIdFullDesc } from '../../store/searchSlice';
 
 import { useSelector } from 'react-redux';
 
+import axios from 'axios';
+import { kodikApiKey } from '../../kodikcfg';
+
 // ---------------------------------------------------------------------
 
 type VideoListItemProps = {
@@ -35,18 +38,31 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
   // search param ----------------------------------------------
   const [limitPar, setLimitPar] = useState(100);
 
-  const animeItems = useSelector(itemsAnime);
+  // const animeItems = useSelector(itemsAnime);//---------------------------
+
+  const [animeItems, setAnimeItems] = useState([]);
 
   // запрос fetch в redux
-  const fthAnimeSlice = (yearNew) => {
-    dispatch(
-      fetchAnimeListSlice({
-        limitPar,
-        yearNew,
-      })
+  const fthAnimeSlice = async (yearNew) => {
+    const resp: any = await axios.get(
+      `http://kodikapi.com/list?limit=${limitPar}&type='anime-serial'${yearNew}&with_material_data=true&token=${kodikApiKey}`
     );
+    console.log(resp?.data);
+
+    setAnimeItems(resp?.data.results);
+
+    // dispatch(
+    //   fetchAnimeListSlice({
+    //     limitPar,
+    //     yearNew,
+    //   })
+    // );
     // document.getElementById('root')?.scrollIntoView(); // при перерисовке скорит на верх стр
   };
+
+  useEffect(() => {
+    console.log(animeItems);
+  }, [animeItems]);
 
   //--------------------------------------------------------------
 
@@ -108,9 +124,11 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
   if (status === 'error') {
     return <Error />;
   }
+
+  // status === 'loading'
   return (
     <>
-      {status === 'loading'
+      {false
         ? skeletons
         : animeItems?.map((elem, ind) => (
             <div key={elem.id + ind} className="anime__item item-anime">
