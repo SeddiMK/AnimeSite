@@ -32,9 +32,9 @@ module.exports = {
     './src/index.tsx',
   ],
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname),
     publicPath: 'http://localhost:8080/',
-    filename: 'dist/bundle.js',
+    filename: 'bundle.js',
   },
   devtool: 'source-map',
   resolve: {
