@@ -35,12 +35,10 @@ const Header: React.FC = () => {
     <header className="header">
       <ErrorBoundary fallback={<p>Something went wrong</p>}>
         <div className="header__container">
-          {/* <Link to="/" className="header__logo">
+          <Link to="/" className="header__logo">
             ME
-            {/* <img src="#" alt="Image logo" /> 
-          
-        </Link> 
-          */}
+            {/* <img src="#" alt="Image logo" /> */}
+          </Link>
           <nav className="header__nav menu">
             <ul className="nav-mobile">
               <NavMobile />
@@ -60,31 +58,31 @@ const Header: React.FC = () => {
                     navigate('/');
                   }
                 }}>
-                {/* <Link
+                <Link
                   to={`/login`}
                   preventScrollReset={true}
                   className="menu__link"
-                  id="navbar-login"
                   onClick={() =>
-                    localStorage.setItem(
-                      'remeberMe',
-                      JSON.stringify(Boolean(false))
-                    )
-                  }>
+                    // localStorage.setItem(
+                    //   'remeberMe',
+                    //   JSON.stringify(Boolean(false))
+                    // )
+                  }
+                  id="navbar-login">
                   <span className="material-symbols-outlined">
                     {isAuth ? 'logout' : 'login'}
                   </span>
                   <span>{isAuth ? 'Выйти' : 'Войти'}</span>
-                </Link> */}
+                </Link>
               </li>
               {isAuth && (
                 <li className="menu__list-r log-user-cab">
-                  {/* <Link
+                  <Link
                     to={`login/user/id:${id}`}
                     className="menu__link"
                     id="cabinet">
                     Кабинет
-                  </Link> */}
+                  </Link>
                 </li>
               )}
             </ul>
