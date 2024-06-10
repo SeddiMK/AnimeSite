@@ -108,8 +108,8 @@ const App = () => {
     <Provider store={store}>
       <BrowserRouter>
         <div className="wrapper">
-          {/* <Header /> */}
-          <Footer />
+          <Header />
+
           <div>kklkljkljkljkljkljkljkljkljkl</div>
           <div>kklkljkljkljkljkljkljkljkljkl</div>
           <div>kklkljkljkljkljkljkljkljkljkl</div>
