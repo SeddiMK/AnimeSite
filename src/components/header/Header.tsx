@@ -39,7 +39,7 @@ const Header: React.FC = () => {
           ME
           {/* <img src="#" alt="Image logo" />  
         </Link> */}
-        <nav className="header__nav menu">
+        {/* <nav className="header__nav menu">
           <ul className="nav-mobile">
             <NavMobile />
           </ul>
@@ -86,7 +86,7 @@ const Header: React.FC = () => {
               </li>
             )}
           </ul>
-        </nav>
+        </nav> */}
       </div>
       {/* </ErrorBoundary> */}
     </header>
