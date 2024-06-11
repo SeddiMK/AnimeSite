@@ -50,8 +50,6 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
   };
 
   useEffect(() => {
-    console.log(animeItemsRedux);
-    console.log(status === 'loading'); // && status === 'loading'
     if (animeItemsRedux.length !== 0) setAnimeItems(animeItemsRedux);
   }, [animeItemsRedux]);
 
@@ -115,7 +113,7 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
   if (status === 'error') {
     return <Error />;
   }
-  console.log(animeItems);
+  // console.log(animeItems);
 
   // status === 'loading'   animeItems.length === 0
   return (

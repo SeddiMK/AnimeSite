@@ -112,8 +112,8 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
 
   const openForm = () => {
     setOpenFormComent(true);
-    console.log(width, height, '999999999999999');
-    console.log(leftOpenForm, topOpenForm, '8888888888');
+    // console.log(width, height, '999999999999999');
+    // console.log(leftOpenForm, topOpenForm, '8888888888');
 
     setFormStyle({
       left: leftOpenForm,
@@ -209,7 +209,7 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
 
   // console.log(itemRandomAnime, 'itemRandomAnime');
   // console.log(flagRandomAnime, 'flagRandomAnime');
-  console.log(animeItems, 'animeItems');
+  // console.log(animeItems, 'animeItems');
   // console.log(animeSearchItems, 'animeSearchItems');
   // console.log(itemAnimeSearchId, 'itemAnimeSearchId');
   // console.log(itemAnimeLink, 'itemAnimeLink');
