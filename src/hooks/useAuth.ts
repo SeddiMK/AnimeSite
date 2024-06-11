@@ -4,16 +4,7 @@ import { useEffect } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { setUser } from '../store/userSlice';
 import { useNavigate } from 'react-router-dom';
-import auth from '../firebase';
-
-// {
-//   "rewrites": [
-//     {
-//       "source": "/login/(.*)",
-//       "destination": "https://console.firebase.google.com/project/anime-site-auth/authentication/users"
-//     }
-//   ]
-// }
+// import auth from '../firebase';
 
 export const useAuth = () => {
   // const { itemsUsers } = useSelector((state) => state.itemsUsers);
