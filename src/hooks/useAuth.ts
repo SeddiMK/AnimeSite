@@ -4,6 +4,16 @@ import { useEffect } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { setUser } from '../store/userSlice';
 import { useNavigate } from 'react-router-dom';
+import auth from '../firebase';
+
+// {
+//   "rewrites": [
+//     {
+//       "source": "/login/(.*)",
+//       "destination": "https://console.firebase.google.com/project/anime-site-auth/authentication/users"
+//     }
+//   ]
+// }
 
 export const useAuth = () => {
   // const { itemsUsers } = useSelector((state) => state.itemsUsers);
@@ -13,7 +23,7 @@ export const useAuth = () => {
 
   const dispatch = useAppDispatch();
   // const navigate = useNavigate();
-  const auth = getAuth(); // !!!!!!!!!!!--------------------------------------------------
+  // const auth = getAuth(); // !!!!!!!!!!!--------------------------------------------------
   auth.useDeviceLanguage(); // определение языка девайса ---------------------------
   // const user: User | null = auth.currentUser;
   // // остаться в сисеме без повторной аутентификации remeberMe
