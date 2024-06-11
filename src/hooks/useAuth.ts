@@ -12,7 +12,7 @@ export const useAuth = () => {
   );
 
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const auth = getAuth(); // !!!!!!!!!!!--------------------------------------------------
   auth.useDeviceLanguage(); // определение языка девайса ---------------------------
   // const user: User | null = auth.currentUser;
