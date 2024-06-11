@@ -27,8 +27,9 @@ export const useAuth = () => {
   auth.useDeviceLanguage(); // определение языка девайса ---------------------------
   // const user: User | null = auth.currentUser;
   // // остаться в сисеме без повторной аутентификации remeberMe
+  //   //------------------------------------------------------------
+
   useEffect(() => {
-    //------------------------------------------------------------
     const checkBoxRememberMe = localStorage.getItem('remeberMe');
 
     if (checkBoxRememberMe === 'true')

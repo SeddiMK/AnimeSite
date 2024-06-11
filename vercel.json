@@ -1,11 +1,5 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "./index.py",
-      "use": "@vercel/python"
-    }
-  ],
   "rewrites": [{ "source": "/(.*)", "destination": "src/app.js" }],
   "headers": [
     {
@@ -13,7 +7,7 @@
       "headers": [{ "key": "Access-Control-Allow-Origin", "value": "*" }]
     },
     {
-      "source": "http://kodikapi.com/(.*)",
+      "source": "/kodikapi.com/(.*)",
       "headers": [{ "key": "Access-Control-Allow-Origin", "value": "*" }]
     }
   ]
