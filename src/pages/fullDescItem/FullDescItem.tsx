@@ -94,9 +94,9 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
     // 750
     if (ref !== null && width !== undefined && width <= 750) {
       setLeftOpenForm('14%');
-      setTopOpenForm('58rem');
+      setTopOpenForm('59rem');
       setLeftOpenFormComment('5%');
-      setTopOpenFormComment('79rem');
+      setTopOpenFormComment('96rem');
     }
     // 550
     if (ref !== null && width !== undefined && width <= 550) {
@@ -120,6 +120,7 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
       top: topOpenForm,
     });
   };
+
   const openFormComment = () => {
     setOpenFormComent(true);
     setFormStyle({

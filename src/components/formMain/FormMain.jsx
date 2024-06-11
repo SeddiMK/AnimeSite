@@ -1,6 +1,6 @@
 import './FormMain.scss';
 import React, { useEffect, useRef, createRef, useState } from 'react';
-import { Form } from 'react-router-dom';
+// import { Form } from 'react-router-dom';
 
 // validate
 import { useInput } from '../validateForm/Validate';
@@ -86,7 +86,7 @@ const FormMain = ({
   };
 
   // addComment -------------------------
-  let addComment = (e) => {
+  const addComment = (e) => {
     let comments = [];
     let commentValue = formText.current.value;
 
@@ -120,13 +120,13 @@ const FormMain = ({
   };
 
   // delComment ---------------------------
-  let delComment = (ind) => {
+  const delComment = (ind) => {
     newDelArr = comment.filter((el) => comment[ind] !== el);
 
     setComment(newDelArr);
   };
 
-  let handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     // e.preventDefault();
   };
 
@@ -148,13 +148,14 @@ const FormMain = ({
   return (
     <>
       {openFormComent && (
-        <Form
+        <form
           style={formStyle}
           action="#"
           className="form form-message-review"
           id="form-message-review"
           ref={formRef}
-          onSubmit={handleSubmit}>
+          // onSubmit={handleSubmit}
+        >
           <div className="form__top">
             <h1>Отзыв или комментарий</h1>
             <button
@@ -213,7 +214,7 @@ const FormMain = ({
               Опубликовать
             </button>
           </div>
-        </Form>
+        </form>
       )}
 
       <div className="comment__out">
