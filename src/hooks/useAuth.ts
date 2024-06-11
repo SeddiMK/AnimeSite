@@ -13,8 +13,8 @@ export const useAuth = () => {
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const auth = getAuth(); //--------------------------------------------------
-  auth.useDeviceLanguage(); // определение языка девайса ---------------------------
+  const auth = getAuth(); // !!!!!!!!!!!--------------------------------------------------
+  // auth.useDeviceLanguage(); // определение языка девайса ---------------------------
   // const user: User | null = auth.currentUser;
   // // остаться в сисеме без повторной аутентификации remeberMe
   // useEffect(() => {
