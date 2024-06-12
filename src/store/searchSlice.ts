@@ -85,6 +85,7 @@ export const fetchAnimeSearchSlice = createAsyncThunk<
     );
 
     if (resp.status !== 200) {
+      console.log(resp.status, 'resp.status');
       throw new Error('Server Error!');
     }
     const data: AnimeSearch[] = resp.data.results;

@@ -15,8 +15,9 @@
   left: 38%;
   top: 20%;
   //   transform: translateX(-50%);
-
-  max-width: 23.5em;
+  width: 100%;
+  max-width: 25.5rem;
+  min-width: 23rem;
   font-size: clamp(14px, 2.2vw, 18px);
   padding: 0.5rem;
   background-color: var(--background-form-color);

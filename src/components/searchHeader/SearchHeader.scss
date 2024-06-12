@@ -28,6 +28,8 @@
     flex-direction: row-reverse;
     justify-content: flex-end;
     align-items: flex-start;
+    width: 30rem;
+
     position: absolute;
     // top: -0.2em;
     // left: -24.7em;
@@ -37,7 +39,7 @@
     border: #000000 1px solid;
     border-radius: 0.5rem;
     font-size: 16px;
-    width: 360px;
+    width: 100%;
     padding: 0.7em 0.5em;
     margin-right: 0.4rem;
   }
@@ -85,13 +87,18 @@
 @media (max-width: 475px) {
   .search-header {
     &__search-block {
-      left: 2.5rem;
+      left: 50%;
     }
     &__search-inp {
-      left: -13.7em;
+      // left: -13.7em;
+      left: center;
+    }
+
+    &__popup-result {
+      left: center;
     }
     &__inp {
-      width: 270px;
+      // width: 270px;
     }
   }
 }

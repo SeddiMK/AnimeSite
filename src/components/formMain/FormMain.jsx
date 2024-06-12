@@ -1,6 +1,5 @@
 import './FormMain.scss';
 import React, { useEffect, useRef, createRef, useState } from 'react';
-// import { Form } from 'react-router-dom';
 
 // validate
 import { useInput } from '../validateForm/Validate';
@@ -9,6 +8,10 @@ import { useInput } from '../validateForm/Validate';
 import { useAuth } from '../../hooks/useAuth';
 
 const FormMain = ({
+  setOpenFTop,
+  setOpenFBut,
+  // btnComBRef,
+  // btnComTopRef,
   openFormComent,
   setOpenFormComent,
   setLengthComment,
@@ -16,6 +19,7 @@ const FormMain = ({
 }) => {
   const { displayName, photoUrl } = useAuth();
   const [comment, setComment] = useState([]);
+  // const [openFormComent, setOpenFormComent] = useState(false);
   const [commentRepeat, setCommentRepeat] = useState(false);
   const [email, setEmail] = useState('');
 
@@ -105,6 +109,7 @@ const FormMain = ({
 
       setCommentRepeat(false);
       setOpenFormComent(false);
+      setOpenFTop(false);
     } else if (commentValue === '') {
       inpMail.current.focus();
       comments = [...comment];
@@ -132,8 +137,24 @@ const FormMain = ({
 
   // close in window ----------------------------
   const handleClick = (e) => {
+    console.log(
+      formRef.current && !formRef.current.contains(e.target),
+      'ssssssssssssssssss'
+    );
+    // console.log(btnComTopRef, btnComBRef); // && (btnComTopRef !== null || btnComBRef !== null)
+    // if (btnComTopRef === null) {
     if (formRef.current && !formRef.current.contains(e.target)) {
       setOpenFormComent(false);
+      setOpenFTop(false);
+      setOpenFBut(false);
+
+      setLengthComment([]);
+    }
+
+    // if (btnComBRef === null) {
+    if (formRef.current && !formRef.current.contains(e.target)) {
+      setOpenFormComent(false);
+      setOpenFBut(false);
       setLengthComment([]);
     }
   };
@@ -144,7 +165,7 @@ const FormMain = ({
       document.removeEventListener('mousedown', handleClick);
     };
   });
-
+  //
   return (
     <>
       {openFormComent && (

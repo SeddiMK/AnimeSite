@@ -58,11 +58,17 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
   // open form adaptiv
   const [leftOpenForm, setLeftOpenForm] = useState('37%');
   const [topOpenForm, setTopOpenForm] = useState('31rem');
-  const [leftOpenFormComment, setLeftOpenFormComment] = useState('37%');
-  const [topOpenFormComment, setTopOpenFormComment] = useState('87rem');
+  const [leftOpenFormComment, setLeftOpenFormComment] = useState('37%'); // 37%
+  const [topOpenFormComment, setTopOpenFormComment] = useState(''); // 87rem
 
   // openComment ---------------------------------------------------
   const [openFormComent, setOpenFormComent] = useState(false);
+  const [openForm, setOpenForm] = useState(false);
+  const [openFTop, setOpenFTop] = useState(false);
+  const [openFBut, setOpenFBut] = useState(false);
+
+  // const btnComTopRef = useRef<HTMLButtonElement>(null);
+  // const btnComBRef = useRef<HTMLButtonElement>(null);
 
   const [lengthComment, setLengthComment] = useState([]);
 
@@ -91,27 +97,45 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
     box: 'border-box',
   });
   useEffect(() => {
+    // 750+
+    console.log(width);
+
+    if (ref !== null && width !== undefined && width > 650) {
+      setTopOpenFormComment('-35rem');
+    }
     // 750
-    if (ref !== null && width !== undefined && width <= 750) {
-      setLeftOpenForm('14%');
-      setTopOpenForm('59rem');
-      setLeftOpenFormComment('5%');
-      setTopOpenFormComment('96rem');
+    if (ref !== null && width !== undefined && width <= 650) {
+      setLeftOpenForm('-18%');
+      setTopOpenForm('12rem');
+      setLeftOpenFormComment('0%');
+      setTopOpenFormComment('-32rem');
     }
     // 550
-    if (ref !== null && width !== undefined && width <= 550) {
-      setTopOpenFormComment('119rem');
-      setTopOpenFormComment('119rem');
+    if (ref !== null && width !== undefined && width <= 650) {
+      setLeftOpenForm('-23.5%');
     }
 
-    if (ref !== null && width !== undefined && width <= 430)
-      setTopOpenFormComment('123rem');
-    if (ref !== null && width !== undefined && width <= 515)
-      setLeftOpenForm('7%');
+    if (ref !== null && width !== undefined && width <= 430) {
+      setLeftOpenFormComment('-3.5%');
+    }
+
+    // if (ref !== null && width !== undefined && width <= 515)
+    //   setLeftOpenForm('7%');
   }, [width]);
 
-  const openForm = () => {
+  const openFormTop = () => {
+    console.log(1111111111111111);
+    setOpenFTop(true);
+    setOpenFBut(false);
     setOpenFormComent(true);
+
+    // if (openFTop) {
+    //   setOpenFormComent(true);
+    // }
+    // else {
+    //   // setOpenFTop(false);
+    //   setOpenFormComent(false);
+    // }
     // console.log(width, height, '999999999999999');
     // console.log(leftOpenForm, topOpenForm, '8888888888');
 
@@ -122,28 +146,24 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
   };
 
   const openFormComment = () => {
+    setOpenFBut(true);
+    setOpenFTop(false);
     setOpenFormComent(true);
+
     setFormStyle({
       left: leftOpenFormComment,
       top: topOpenFormComment,
     });
   };
+
+  // console.log(
+  //   openFormComent,
+  //   openFTop,
+  //   openFBut,
+  //   'openFormComent , openFTop, openFBut'
+  // );
   // запрос для одного аниме
-  // const itemsAnimeSlice = useSelector(itemsAnimeSearch);
-
-  // const [itemAnimeSearchId, setItemAnimeSearchId] = useState<MaterialObject[]>(
-  //   []
-  // );
-  // const [itemAnimeLink, setItemAnimeLink] = useState('');
-  // const [itemAnimeTitle, setItemAnimeTitle] = useState('');
-  // const [itemAnimeTitleOrign, setItemAnimeTitleOrign] = useState('');
-  // const [itemAnimeOtherTitle, setItemAnimeOtherTitle] = useState('');
-
   const animeSearchItems = useSelector(itemsAnimeSearch); // -----------------------------
-  // const animeSearchItems = useRef<AnimeSearch[]>(useSelector(itemsAnimeSearch));
-  // const [animeSearchItems, setAnimeSearchItems] = useState(
-  //   useSelector(itemsAnimeSearch)
-  // );
 
   const [itemsAnmSch, setItemsAnmSch] = useState([]);
 
@@ -230,10 +250,7 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
   // Combine the parts into the desired format
   const formattedDate = `${day} ${month} ${year}`; // Output: "04 April 2024"
 
-  // ---------------------------------------------------------
-
-  // {status === 'loading'
-
+  // open popup ---------------------------------------------------------
   const softOpeningPopup = () => {
     setPopupAddList(true);
     setTimeout(() => {
@@ -241,6 +258,7 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
     }, 2000);
   };
 
+  // {status === 'loading'
   return (
     <main ref={wrapperRef} className="main full-desc-item">
       <canvas className="particles-canv" data-color="#B99970"></canvas>
@@ -288,7 +306,7 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
                         </div>
                         <div className="media__left-buttons">
                           <button
-                            className="media__left-buttons-online btn"
+                            className="media__left-buttons-online btn-media-left btn"
                             onClick={() =>
                               playerRef.current?.scrollIntoView({
                                 behavior: 'smooth',
@@ -297,12 +315,30 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
                             Смотреть онлайн
                           </button>
                           <button
-                            className="media__left-buttons-review btn"
-                            onClick={() => openForm()}>
+                            // ref={btnComTopRef}
+                            className="media__left-buttons-review btn-media-left btn"
+                            onClick={() => {
+                              openFormTop();
+                              // setOpenFormComent(!openFormComent);
+                            }}>
                             Написать отзыв
                           </button>
+                          {openFTop && (
+                            <FormMain
+                              setOpenFTop={setOpenFTop}
+                              setOpenFBut={setOpenFBut}
+                              // btnComBRef={null}
+                              // btnComTopRef={btnComTopRef}
+
+                              openFormComent={openFormComent}
+                              setOpenFormComent={setOpenFormComent}
+                              setLengthComment={setLengthComment}
+                              formStyle={formStyle}
+                            />
+                          )}
+
                           <button
-                            className="media__left-add-list btn"
+                            className="media__left-add-list btn-media-left btn"
                             onClick={() => {
                               dispatch(addListAnime(animeSearchItems[0].id));
                               softOpeningPopup();
@@ -310,6 +346,7 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
                             }}>
                             Добавить в список
                           </button>
+
                           <CSSTransition
                             nodeRef={popupAddRef}
                             className="alert"
@@ -463,24 +500,31 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
                     <div className="content__coment comment">
                       <div className="comment__add">
                         <button
+                          // ref={btnComBRef}
                           className="comment__btn-send-comment btn"
                           onClick={() => openFormComment()}>
                           Написать комментарий
                         </button>
+                        {openFBut && (
+                          <FormMain
+                            setOpenFTop={setOpenFTop}
+                            setOpenFBut={setOpenFBut}
+                            // btnComTopRef={null}
+                            // btnComBRef={btnComBRef}
+
+                            openFormComent={openFormComent}
+                            setOpenFormComent={setOpenFormComent}
+                            setLengthComment={setLengthComment}
+                            formStyle={formStyle}
+                          />
+                        )}
                       </div>
                       <div className="comment__body">
                         <h2>Комментарии</h2>
 
-                        <FormMain
-                          openFormComent={openFormComent}
-                          setOpenFormComent={setOpenFormComent}
-                          setLengthComment={setLengthComment}
-                          formStyle={formStyle}
-                        />
-
-                        {/* {lengthComment.length === 0 && (
-                    <p>Пока нет ни одного комментария</p>
-                  )} */}
+                        {lengthComment.length === 0 && (
+                          <p>Пока нет ни одного комментария</p>
+                        )}
                       </div>
                     </div>
                   </div>

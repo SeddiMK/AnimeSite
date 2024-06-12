@@ -76,8 +76,8 @@ a.active {
 @media (max-width: 357px) {
   .menu {
     &__list-r {
-      flex-direction: column;
-      gap: 1rem;
+      // flex-direction: column;
+      // gap: 1rem;
     }
   }
 }

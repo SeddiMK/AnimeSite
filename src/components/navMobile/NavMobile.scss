@@ -5,14 +5,15 @@
 }
 
 .nav-mobile__menu-items {
+  width: 80%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  position: fixed;
-  z-index: 10;
+  position: absolute;
+  z-index: 1;
   //   left: 0;
-  right: 9%;
-  top: 7rem;
+  right: 10%;
+  top: 7.4rem;
   background-color: var(--background-form-color);
   padding: 2rem;
   border-radius: 0.5rem;

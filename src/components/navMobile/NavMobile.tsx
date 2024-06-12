@@ -25,7 +25,7 @@ const NavMobile = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="nav-mobile__menu-items shadow-4xl   p-5 pt-0 bg-neutral-950 border-b border-b-white/20">
+            className="nav-mobile__menu-items">
             <MenuList />
           </motion.div>
         )}

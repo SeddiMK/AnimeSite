@@ -214,9 +214,11 @@ main.error,
 main.login,
 main.registaration,
 main.anime,
-main.full-desc-item,
 .login-user-cabinet {
   padding-top: 133px;
+}
+.main.full-desc-item {
+  padding-top: 60px;
 }
 .main.new-list {
   padding-top: 87px;
@@ -286,7 +288,14 @@ main.registaration {
     color: var(--nik-name-red);
   }
 }
-
+.btn-media-left {
+  max-width: 11rem;
+  width: 100%;
+  margin-bottom: 0.8rem;
+}
+.form__btn-close {
+  max-width: 4rem;
+}
 // img ------------------------
 .wrap-img-anime {
   // width: 15rem;
