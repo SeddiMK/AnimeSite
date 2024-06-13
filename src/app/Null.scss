@@ -31,7 +31,8 @@ body,
 html,
 body {
   font-size: var(--font-size);
-  min-width: var(--min-width);
+  // min-width: var(--min-width);
+  width: 100vw;
   height: 100vh;
 
   overflow-x: hidden;
