@@ -66,22 +66,22 @@
 @media (max-width: 650px) {
   .search-header {
     &__search-block {
+      left: -19.5rem;
       top: 4.2rem;
-      left: -15rem;
     }
   }
 }
 @media (max-width: 530px) {
   .search-header {
     &__search-block {
-      left: -15rem;
+      // left: -15rem;
     }
   }
 }
 @media (max-width: 475px) {
   .search-header {
     &__search-block {
-      left: -14.5rem;
+      // left: -14.5rem;
     }
   }
 }
@@ -102,8 +102,7 @@
 @media (max-width: 358px) {
   .search-header {
     &__search-block {
-      left: -19.5rem;
-      top: 8.5rem;
+      top: 6.5rem;
       width: 22rem;
     }
   }
