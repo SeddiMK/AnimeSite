@@ -126,7 +126,6 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
                 className="item-anime__link-full-desc"
                 to={`/fullDescItem/${elem.id}`}
                 onClick={() => dispatch(setIdFullDesc(elem.id))}>
-                <div className="item-anime__card"></div>
                 <div
                   className="item-anime__img-wrap wrap-img-anime"
                   ref={refCard}>
