@@ -1,12 +1,8 @@
 import React, { useRef, useState } from 'react';
 import './NavMobile.scss';
-
-import { useClickAway } from 'react-use';
-
 import MenuList from '../menuList/MenuList';
-
+import { useClickAway } from 'react-use';
 import { Squash as Hamburger } from 'hamburger-react';
-
 import { AnimatePresence, motion } from 'framer-motion';
 
 const NavMobile = () => {

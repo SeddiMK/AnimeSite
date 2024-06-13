@@ -69,18 +69,13 @@ const App = () => {
   //     </div>
   //     <Footer />
   //   </div>
-  // );
-
-  // {
-  //   "rewrites": [{ "source": "/(.*)", "destination": "/" }]
-  // }
 
   // useScript('./particles.js');
   // <BrowserRouter>
   //  {/* <RouterProvider router={router} />{' '} */}
   //  </BrowserRouter>
   //  {/* <ParticlesBg color="#d1aee3" num={50} type="cobweb" bg={true} /> */}
-  //  <div className="container"></div>    <div className="wrapper">
+
   return (
     <Provider store={store}>
       <BrowserRouter>

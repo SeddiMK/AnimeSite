@@ -1,7 +1,5 @@
 .nav-mobile {
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
+  display: none;
 }
 
 .nav-mobile__menu-items {
@@ -27,6 +25,18 @@
     color: var(--color-active-link);
   }
 }
+
+@media (max-width: 950px) {
+  .nav-mobile {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
+  .menu__list.active {
+    display: none;
+  }
+}
+
 @media (max-width: 358px) {
   .nav-mobile__menu-items {
     top: 11.4rem;
