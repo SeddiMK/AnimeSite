@@ -29,6 +29,8 @@ import Registration from '../pages/regisration/Registration';
 import LoginUserCabinet from '../pages/loginUserCabinet/LoginUserCabinet';
 import Error from '../pages/error/Error';
 
+import ScrollToTop from '../components/scrollToTop';
+
 // router
 import { router } from '../router/router';
 // -------------------------------------------------------
@@ -82,6 +84,8 @@ const App = () => {
   return (
     <Provider store={store}>
       <BrowserRouter>
+        <ScrollToTop />
+
         <div className="wrapper">
           <Header />
 
