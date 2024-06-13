@@ -7,7 +7,22 @@
   <link rel="icon" href="%PUBLIC_URL%/logo-icon-me.ico" />
   <!-- <meta name="viewport" content="width=device-width, initial-scale=1" /> -->
   <!-- <meta name="viewport" content="width=device-width, initial-scale=0.85, maximum-scale=0.85, user-scalable=0"> -->
-  <meta name="viewport" content="width=device-width; initial-scale=0.85; maximum-scale=0.85; user-scalable=no">
+  <meta name="viewport" content="width=device-width; initial-scale=0.85; maximum-scale=0.85; ">
+  <script>if (window.devicePixelRatio !== 1) {
+      // Костыль для определения иных устройств, с коэффициентом отличным от 1
+      var dpt = window.devicePixelRatio;
+      var widthM = window.screen.width * dpt;
+      var widthH = window.screen.height * dpt;
+      document.write(
+        '<meta name="viewport" content="width=' +
+        widthM +
+        ', height=' +
+        widthH +
+        '">'
+      );
+    }
+  </script>
+
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="theme-color" content="#000000" />
   <meta name="description" content="Web site created using create-react-app" />
