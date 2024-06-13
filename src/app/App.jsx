@@ -40,7 +40,7 @@ import { router } from '../router/router';
 import store from '../store/index';
 
 const App = () => {
-  // const location = useLocation();
+  // const location = useLocation(); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   // // Scroll to top if path changes
   // useLayoutEffect(() => {
   //   window.scrollTo(0, 0);
@@ -85,9 +85,6 @@ const App = () => {
         <div className="wrapper">
           <Header />
 
-          <div>kklkljkljkljkljkljkljkljkljkl</div>
-          <div>kklkljkljkljkljkljkljkljkljkl</div>
-          <div>kklkljkljkljkljkljkljkljkljkl</div>
           <div className="container">
             <Routes>
               <Route index element={<Main />} />

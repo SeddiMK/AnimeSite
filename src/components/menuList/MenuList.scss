@@ -11,8 +11,6 @@
     flex-wrap: wrap;
     width: 100%;
 
-    // flex: 1 1 70%;
-
     margin-right: 2rem;
   }
   &__list-r {
@@ -73,11 +71,12 @@
 a.active {
   color: var(--color-active-link);
 }
-@media (max-width: 357px) {
+@media (max-width: 358px) {
   .menu {
     &__list-r {
-      // flex-direction: column;
-      // gap: 1rem;
+      flex-direction: column;
+      gap: 1rem;
+      padding-left: 1.2rem;
     }
   }
 }

@@ -10,8 +10,6 @@ import { useAuth } from '../../hooks/useAuth';
 const FormMain = ({
   setOpenFTop,
   setOpenFBut,
-  // btnComBRef,
-  // btnComTopRef,
   openFormComent,
   setOpenFormComent,
   setLengthComment,
@@ -19,7 +17,6 @@ const FormMain = ({
 }) => {
   const { displayName, photoUrl } = useAuth();
   const [comment, setComment] = useState([]);
-  // const [openFormComent, setOpenFormComent] = useState(false);
   const [commentRepeat, setCommentRepeat] = useState(false);
   const [email, setEmail] = useState('');
 
@@ -137,11 +134,6 @@ const FormMain = ({
 
   // close in window ----------------------------
   const handleClick = (e) => {
-    console.log(
-      formRef.current && !formRef.current.contains(e.target),
-      'ssssssssssssssssss'
-    );
-    // console.log(btnComTopRef, btnComBRef); // && (btnComTopRef !== null || btnComBRef !== null)
     // if (btnComTopRef === null) {
     if (formRef.current && !formRef.current.contains(e.target)) {
       setOpenFormComent(false);

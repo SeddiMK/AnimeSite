@@ -14,7 +14,6 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  // height: 40rem;
   margin-bottom: 3rem;
   &__title {
     margin-bottom: 1rem;
@@ -36,7 +35,6 @@
   line-height: 1.5rem;
   text-align: left;
   &__dd {
-    // flex: 1 1 80%;
     width: 100%;
     margin-bottom: 1rem;
   }
@@ -206,7 +204,6 @@
     }
   }
   &__btn-send-comment {
-    // position: relative;
   }
 }
 

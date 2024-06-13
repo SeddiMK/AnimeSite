@@ -3,8 +3,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import { kodikApiKey } from '../../kodikcfg';
-
 import { CSSTransition } from 'react-transition-group';
 
 import useResizeObserver from 'use-resize-observer';
@@ -28,7 +26,6 @@ import {
 import SkeletonsFullDesc from '../../containers/SkeletonsFullDesc/SkeletonsFullDesc';
 
 import Particles from '../../containers/particles/Particles';
-import axios from 'axios';
 
 // ---------------------------------------------------------------------
 type FullDescItemProps = {
@@ -46,7 +43,7 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
   }>();
 
   const dispatch = useAppDispatch();
-  let { status } = useSelector((state: RootState) => state.animeSlice);
+  // let { status } = useSelector((state: RootState) => state.animeSlice);
   const randomHederClick = useSelector(
     (state: RootState) => state.searchSlice.randomHederClick
   );
@@ -63,43 +60,31 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
 
   // openComment ---------------------------------------------------
   const [openFormComent, setOpenFormComent] = useState(false);
-  const [openForm, setOpenForm] = useState(false);
+  // const [openForm, setOpenForm] = useState(false);
   const [openFTop, setOpenFTop] = useState(false);
   const [openFBut, setOpenFBut] = useState(false);
-
-  // const btnComTopRef = useRef<HTMLButtonElement>(null);
-  // const btnComBRef = useRef<HTMLButtonElement>(null);
 
   const [lengthComment, setLengthComment] = useState([]);
 
   const [formStyle, setFormStyle] = useState({});
   const [limitPar, setLimitPar] = useState(100);
-  // const [searchInpVal, setSearchInpVal] = useState<any>(''); //: string | undefined;
 
   const playerRef = useRef<null | HTMLDivElement>(null);
   const popupAddRef = useRef<null | HTMLDivElement>(null);
   const wrapperRef = useRef<null | HTMLDivElement>(null);
-  // const fullDescItemWrapRef = useRef<null | HTMLDivElement>(null);
 
   const animeItems = useSelector(itemsAnime);
-  // const [animeItems, setAnimeItems] = useState();
-  // const [itemRandomAnime, setItemRandomAnime] = useState('');
 
   const [popupAddList, setPopupAddList] = useState(false);
 
   const [isMount, setIsMount] = useState(false);
-
-  // const [idAnime, setIdAnime] = useState('');
-  // let aliImgMediaLeft = 'постер аниме поднятвным героем'; // данные из бекенда ----------
 
   // adaptiv form comment -----------------------------------------------------
   const { ref, width, height } = useResizeObserver<HTMLDivElement>({
     box: 'border-box',
   });
   useEffect(() => {
-    // 750+
-    console.log(width);
-
+    // 650+
     if (ref !== null && width !== undefined && width > 650) {
       setTopOpenFormComment('-35rem');
     }
@@ -129,16 +114,6 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
     setOpenFBut(false);
     setOpenFormComent(true);
 
-    // if (openFTop) {
-    //   setOpenFormComent(true);
-    // }
-    // else {
-    //   // setOpenFTop(false);
-    //   setOpenFormComent(false);
-    // }
-    // console.log(width, height, '999999999999999');
-    // console.log(leftOpenForm, topOpenForm, '8888888888');
-
     setFormStyle({
       left: leftOpenForm,
       top: topOpenForm,
@@ -156,12 +131,6 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
     });
   };
 
-  // console.log(
-  //   openFormComent,
-  //   openFTop,
-  //   openFBut,
-  //   'openFormComent , openFTop, openFBut'
-  // );
   // запрос для одного аниме
   const animeSearchItems = useSelector(itemsAnimeSearch); // -----------------------------
 
@@ -327,9 +296,6 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
                             <FormMain
                               setOpenFTop={setOpenFTop}
                               setOpenFBut={setOpenFBut}
-                              // btnComBRef={null}
-                              // btnComTopRef={btnComTopRef}
-
                               openFormComent={openFormComent}
                               setOpenFormComent={setOpenFormComent}
                               setLengthComment={setLengthComment}
@@ -509,9 +475,6 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
                           <FormMain
                             setOpenFTop={setOpenFTop}
                             setOpenFBut={setOpenFBut}
-                            // btnComTopRef={null}
-                            // btnComBRef={btnComBRef}
-
                             openFormComent={openFormComent}
                             setOpenFormComent={setOpenFormComent}
                             setLengthComment={setLengthComment}
