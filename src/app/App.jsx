@@ -105,5 +105,5 @@ const App = () => {
 };
 
 export default withErrorBoundary(App, {
-  FallbackComponent: <ErrorFallback />,
+  // FallbackComponent: <ErrorFallback />,
 });
