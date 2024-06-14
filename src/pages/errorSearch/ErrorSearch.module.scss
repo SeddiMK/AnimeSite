@@ -1,5 +1,5 @@
 .error {
-  padding: 2rem;
+  padding: 1rem;
   // background-color: #e9ebee;
 }
 
@@ -9,20 +9,14 @@
 
   // padding: 7rem 0 10rem 10rem;
   &:nth-child(2) {
-    grid-columns: 2 / 4;
+    // grid-columns: 2 / 4;
   }
 }
 
 .buttonBack {
   text-align: center;
-  height: 3rem;
+  height: 2rem;
   & a.button {
     // padding: 0.3rem;
-  }
-}
-
-@media (max-width: 358px) {
-  .error {
-    padding: 0.2rem;
   }
 }

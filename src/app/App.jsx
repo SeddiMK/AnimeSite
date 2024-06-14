@@ -37,7 +37,7 @@ import { router } from '../router/router';
 
 import store from '../store/index';
 import { ErrorBoundary, withErrorBoundary } from 'react-error-boundary';
-import { ErrorFallback } from '../pages/ErrorFallback/ErrorFallback';
+import { ErrorFallback } from '../pages/errorFallback/ErrorFallback';
 import Layout from '../containers/layout/Layout';
 
 const App = () => {
@@ -79,8 +79,6 @@ const App = () => {
   // <Layout />
   return (
     <Provider store={store}>
-      {/* <React.StrictMode>
-        <PersistGate persistor={persistor}> */}
       <BrowserRouter>
         <ScrollToTop />
         <div className="wrapper">
@@ -102,8 +100,6 @@ const App = () => {
           <Footer />
         </div>
       </BrowserRouter>
-      {/* </PersistGate>
-      </React.StrictMode> */}
     </Provider>
   );
 };

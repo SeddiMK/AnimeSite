@@ -26,7 +26,7 @@ import {
 import SkeletonsFullDesc from '../../containers/SkeletonsFullDesc/SkeletonsFullDesc';
 
 import Particles from '../../containers/particles/Particles';
-import { ErrorFallback } from '../ErrorFallback/ErrorFallback';
+import { ErrorFallback } from '../errorFallback/ErrorFallback';
 import Error from '../error/Error';
 
 // ---------------------------------------------------------------------
