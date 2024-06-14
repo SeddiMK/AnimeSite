@@ -257,9 +257,9 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
 
     return () => errorInterval();
   }, []);
+
   // {status === 'loading'
 
-  // animeSearchItemsNetWTime
   return (
     <main ref={wrapperRef} className="main full-desc-item">
       <canvas className="particles-canv" data-color="#B99970"></canvas>
