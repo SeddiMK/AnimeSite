@@ -26,6 +26,8 @@ import {
 import SkeletonsFullDesc from '../../containers/SkeletonsFullDesc/SkeletonsFullDesc';
 
 import Particles from '../../containers/particles/Particles';
+import { ErrorFallback } from '../ErrorFallback/ErrorFallback';
+import Error from '../error/Error';
 
 // ---------------------------------------------------------------------
 type FullDescItemProps = {
@@ -57,6 +59,10 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
   const [topOpenForm, setTopOpenForm] = useState('31rem');
   const [leftOpenFormComment, setLeftOpenFormComment] = useState('37%'); // 37%
   const [topOpenFormComment, setTopOpenFormComment] = useState(''); // 87rem
+
+  // error -----------------------------------------------------------
+  const [animeSearchItemsNetWTime, setAnimeSearchItemsNetWTime] =
+    useState(false);
 
   // openComment ---------------------------------------------------
   const [openFormComent, setOpenFormComent] = useState(false);
@@ -109,7 +115,6 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
   }, [width]);
 
   const openFormTop = () => {
-    console.log(1111111111111111);
     setOpenFTop(true);
     setOpenFBut(false);
     setOpenFormComent(true);
@@ -227,13 +232,50 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
     }, 2000);
   };
 
+  // error если долго(4000мс) грузится контент ------------------------------------
+  // const error = useState((state: RootState) => state.searchSlice.error);
+  useEffect(() => {
+    // проверяем есть ли в массиве объект
+    const errorInterval = () => {
+      if (
+        animeSearchItems[0]?.id === undefined ||
+        animeSearchItems.length === 0 ||
+        animeSearchItems === ('Network Error' as any)
+      ) {
+        setInterval(() => {
+          if (
+            animeSearchItems[0]?.id === undefined ||
+            animeSearchItems.length === 0 ||
+            animeSearchItems === ('Network Error' as any)
+          ) {
+            return setAnimeSearchItemsNetWTime(true);
+          }
+          // else return setAnimeSearchItemsNetWTime(false);
+        }, 4000);
+      }
+    };
+
+    return () => errorInterval();
+  }, []);
   // {status === 'loading'
+
+  // animeSearchItemsNetWTime
   return (
     <main ref={wrapperRef} className="main full-desc-item">
       <canvas className="particles-canv" data-color="#B99970"></canvas>
       <Particles wrapperRef={wrapperRef} />
 
-      {animeSearchItems.length === 0 ? (
+      {animeSearchItemsNetWTime && (
+        <ErrorFallback
+          error={
+            'Время заргрузки контента больше 4000мс. Попробуйте перезагрузить страницу.'
+          }
+        />
+      )}
+
+      {animeSearchItems.length === 0 ||
+      animeSearchItems === ('Network Error' as any) ||
+      animeSearchItems[0]?.id === undefined ? (
         <SkeletonsFullDesc />
       ) : (
         <>

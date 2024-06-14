@@ -330,6 +330,7 @@ const initialState: AnimeSearchSliceState = {
   searchInpVal: '',
   idFullDesc: '',
   randomHederClick: false,
+
   materialData: {
     shikimori_rating: 0,
     shikimori_votes: 0,

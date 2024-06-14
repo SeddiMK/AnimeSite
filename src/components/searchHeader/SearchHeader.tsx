@@ -13,6 +13,7 @@ import {
   itemsAnimeSearch,
   searchInpHeader,
 } from '../../store/searchSlice';
+import { ErrorFallback } from '../../pages/ErrorFallback/ErrorFallback';
 
 // type SearchProps = {
 //   value: string,
@@ -136,41 +137,50 @@ const SearchHeader = () => {
                   <h3>Аниме</h3>
                 </div>
                 <ul className="search-header__list">
-                  {animeSearchItems?.map((elem, ind) => (
-                    <li className="search-header__item item-search">
-                      <Link
-                        key={elem.id + ind}
-                        id="search-link"
-                        className="item-search__link"
-                        onClick={() => setClickLinkAnime(false)}
-                        to={`/fullDescItem/${elem.id}`}>
-                        <div className="item-search__img-wrap wrap-img-search">
-                          <img
-                            src={
-                              elem.material_data?.poster_url
-                                ? elem.material_data?.poster_url
-                                : elem.screenshots[0]
-                            }
-                            alt={'изображение аниме ' + elem.title}
-                            className="item-search__image img"
-                          />
-                        </div>
-                        <div className="item-search__title-year">
-                          <div className="item-search__title">
-                            <h2>
-                              {elem.title} <br /> {elem.title_orig}
-                            </h2>
-                          </div>
-                          <div className="item-search__year-kind">
-                            {elem.year} /{' '}
-                            {elem.material_data?.anime_kind
-                              ? elem.material_data?.anime_kind
-                              : elem.type}
-                          </div>
-                        </div>
-                      </Link>
-                    </li>
-                  ))}
+                  {animeSearchItems.length === 0 ||
+                    (animeSearchItems === ('Network Error' as any) ? (
+                      <ErrorFallback
+                        error={
+                          'Время заргрузки контента больше 4000мс. Попробуйте перезагрузить страницу.'
+                        }
+                      />
+                    ) : (
+                      animeSearchItems?.map((elem, ind) => (
+                        <li className="search-header__item item-search">
+                          <Link
+                            key={elem.id + ind}
+                            id="search-link"
+                            className="item-search__link"
+                            onClick={() => setClickLinkAnime(false)}
+                            to={`/fullDescItem/${elem.id}`}>
+                            <div className="item-search__img-wrap wrap-img-search">
+                              <img
+                                src={
+                                  elem.material_data?.poster_url
+                                    ? elem.material_data?.poster_url
+                                    : elem.screenshots[0]
+                                }
+                                alt={'изображение аниме ' + elem.title}
+                                className="item-search__image img"
+                              />
+                            </div>
+                            <div className="item-search__title-year">
+                              <div className="item-search__title">
+                                <h2>
+                                  {elem.title} <br /> {elem.title_orig}
+                                </h2>
+                              </div>
+                              <div className="item-search__year-kind">
+                                {elem.year} /{' '}
+                                {elem.material_data?.anime_kind
+                                  ? elem.material_data?.anime_kind
+                                  : elem.type}
+                              </div>
+                            </div>
+                          </Link>
+                        </li>
+                      ))
+                    ))}
                 </ul>
               </div>
             )}
