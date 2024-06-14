@@ -37,7 +37,7 @@ import { router } from '../router/router';
 
 import store from '../store/index';
 import { ErrorBoundary, withErrorBoundary } from 'react-error-boundary';
-import { ErrorFallback } from '../pages/errorFallback/ErrorFallback';
+import { ErrorFallback } from '../pages/ErrorFallback/ErrorFallback';
 import Layout from '../containers/layout/Layout';
 
 const App = () => {
@@ -77,6 +77,7 @@ const App = () => {
   //  {/* <ParticlesBg color="#d1aee3" num={50} type="cobweb" bg={true} /> */}
   //{/* <Outlet /> */}
   // <Layout />
+
   return (
     <Provider store={store}>
       <BrowserRouter>
@@ -105,5 +106,5 @@ const App = () => {
 };
 
 export default withErrorBoundary(App, {
-  // FallbackComponent: <ErrorFallback />,
+  FallbackComponent: <ErrorFallback />,
 });
