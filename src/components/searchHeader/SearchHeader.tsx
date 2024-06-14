@@ -113,13 +113,12 @@ const SearchHeader = () => {
   // console.log(searchInpBtn, 'searchInpBtn');
   // console.log(animeSearchItems, 'animeSearchItems-----');
   // console.log(!searchInpVal, '!searchInpVal');
+  // console.log(animeSearchItems, 'animeSearchItems');
+  // console.log(error, 'error');
 
   // if (searchInpValStore && animeItems.length === 0) {
   //   return <p> Ничего не нашли... &#128524; Пожалуйста измените запрос.</p>;
   // }
-  // console.log(animeSearchItems, 'animeSearchItems');
-  // console.log(error, 'error');
-
   return (
     <form
       className="search-header__form"
@@ -158,7 +157,9 @@ const SearchHeader = () => {
                     <ErrorSearch />
                   ) : (
                     animeSearchItems?.map((elem, ind) => (
-                      <li className="search-header__item item-search">
+                      <li
+                        key={elem.id + ind}
+                        className="search-header__item item-search">
                         <Link
                           key={elem.id + ind}
                           id="search-link"
