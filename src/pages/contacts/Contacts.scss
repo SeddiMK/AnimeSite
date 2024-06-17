@@ -37,6 +37,8 @@
   }
   &__my-contact-block {
     display: flex;
+    justify-content: flex-start;
+    text-align: start;
     & b {
       margin-right: 0.7rem;
     }
