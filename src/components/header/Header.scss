@@ -3,7 +3,8 @@
   z-index: 1;
   font-size: 1.1rem;
   max-width: var(--max-width);
-  width: 90vw;
+  // width: 90vw;
+  width: 90%;
 
   // position: absolute;
   // top: 0;
@@ -37,7 +38,7 @@
 
 @media (max-width: 650px) {
   .header {
-    width: 100%;
+    width: 98.5%;
   }
 }
 

@@ -267,7 +267,7 @@ main.registaration {
 }
 @media (max-width: 650px) {
   .container {
-    width: 100%;
+    width: 100vw;
     max-width: var(--max-width);
     &.login {
       overflow: hidden;
