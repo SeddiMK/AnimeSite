@@ -15,7 +15,7 @@ import { fetchAnimeListSlice, itemsAnime } from '../../store/animeSlice';
 import { setIdFullDesc } from '../../store/searchSlice';
 
 import { useSelector } from 'react-redux';
-import { ErrorFallback } from '../../pages/ErrorFallback/ErrorFallback';
+// import { ErrorFallback } from '../../pages/ErrorFallback/ErrorFallback';
 
 // ---------------------------------------------------------------------
 

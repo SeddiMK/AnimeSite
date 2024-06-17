@@ -35,6 +35,12 @@
   }
 }
 
+@media (max-width: 650px) {
+  .header {
+    width: 100%;
+  }
+}
+
 .login-btn {
   & a {
     // padding-left: rem;

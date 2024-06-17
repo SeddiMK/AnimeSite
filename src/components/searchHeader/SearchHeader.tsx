@@ -14,7 +14,7 @@ import {
   searchInpHeader,
   errorDis,
 } from '../../store/searchSlice';
-import { ErrorFallback } from '../../pages/ErrorFallback/ErrorFallback';
+// import { ErrorFallback } from '../../pages/ErrorFallback/ErrorFallback';
 import Error from '../../pages/error/Error';
 import ErrorSearch from '../../pages/errorSearch/ErrorSearch';
 // type SearchProps = {

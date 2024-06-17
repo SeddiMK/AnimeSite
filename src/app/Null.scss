@@ -260,8 +260,18 @@ main.registaration {
   }
 }
 .container {
+  max-width: var(--max-width);
   &.login {
     overflow: hidden;
+  }
+}
+@media (max-width: 650px) {
+  .container {
+    width: 100%;
+    max-width: var(--max-width);
+    &.login {
+      overflow: hidden;
+    }
   }
 }
 
