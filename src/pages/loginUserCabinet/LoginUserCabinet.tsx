@@ -39,7 +39,7 @@ const LoginUserCabinet: FC = () => {
   const navigate = useNavigate();
 
   // avatar image profile
-  // const avatarRef = useRef(null);
+  // const avatarRef = useRef<any>(null);
 
   const wrapperRef = useRef(null);
   // const storageFbRef = ref(storageFb);
@@ -135,6 +135,7 @@ const LoginUserCabinet: FC = () => {
           console.log('Аватар удален');
           // localStorage.setItem('clickUploadImg', 'false');
           setAvatarUrlFlag(false);
+
           // -----------------------------------update profile------------------------------
           updateProfile(user, {
             // displayName: 'Jane Q. User',

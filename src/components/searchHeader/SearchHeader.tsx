@@ -12,8 +12,11 @@ import {
   fetchAnimeSearchSlice,
   itemsAnimeSearch,
   searchInpHeader,
+  errorDis,
 } from '../../store/searchSlice';
-
+// import { ErrorFallback } from '../../pages/ErrorFallback/ErrorFallback';
+import Error from '../../pages/error/Error';
+import ErrorSearch from '../../pages/errorSearch/ErrorSearch';
 // type SearchProps = {
 //   value: string,
 // };
@@ -37,6 +40,9 @@ const SearchHeader = () => {
   const searchInpValStore = useSelector(
     (state: RootState) => state.searchSlice.searchInpVal
   );
+  // error ---------------------------------------------------
+  const [error, setError] = useState(false);
+  const errors = useSelector((state: RootState) => state.searchSlice.error);
 
   // кнопка очистки
   // const onClickClear = () => {
@@ -49,7 +55,7 @@ const SearchHeader = () => {
     debounce((inp: string) => {
       setSearchValue(inp);
       dispatch(searchInpHeader(inp));
-    }, 350),
+    }, 450),
     []
   );
   // fthAnimeSearchSlice -----------------------------
@@ -80,16 +86,18 @@ const SearchHeader = () => {
       document.removeEventListener('mousedown', handleClick);
     };
   });
-  // ----------------------------------------------
+  // -----------------------------------------------------------
   useEffect(() => {
     if (searchInpVal === '') {
       setSearchInpVal(searchInpVal);
+      dispatch(errorDis(''));
     } else if (inputRef.current) {
       updateInpSearchValue(inputRef.current.value);
       setSearchInpVal(inputRef.current.value);
     }
   }, [searchInpVal, searchInpValStore, updateInpSearchValue]);
 
+  // fetch запрос если в inp что то есть
   useEffect(() => {
     if (searchInpVal !== '') {
       fthAnimeSearchSlice();
@@ -97,9 +105,16 @@ const SearchHeader = () => {
     }
   }, [searchInpVal]);
 
+  // error нет данных -------------------------------------------
+  useEffect(() => {
+    if (errors !== '') setError(true);
+  }, [searchInpVal, animeSearchItems, errors]);
+
   // console.log(searchInpBtn, 'searchInpBtn');
   // console.log(animeSearchItems, 'animeSearchItems-----');
   // console.log(!searchInpVal, '!searchInpVal');
+  // console.log(animeSearchItems, 'animeSearchItems');
+  // console.log(error, 'error');
 
   // if (searchInpValStore && animeItems.length === 0) {
   //   return <p> Ничего не нашли... &#128524; Пожалуйста измените запрос.</p>;
@@ -136,41 +151,49 @@ const SearchHeader = () => {
                   <h3>Аниме</h3>
                 </div>
                 <ul className="search-header__list">
-                  {animeSearchItems?.map((elem, ind) => (
-                    <li className="search-header__item item-search">
-                      <Link
+                  {(error && animeSearchItems?.length === 0) ||
+                  animeSearchItems === ('Network Error' as any) ||
+                  animeSearchItems[0]?.id === undefined ? (
+                    <ErrorSearch />
+                  ) : (
+                    animeSearchItems?.map((elem, ind) => (
+                      <li
                         key={elem.id + ind}
-                        id="search-link"
-                        className="item-search__link"
-                        onClick={() => setClickLinkAnime(false)}
-                        to={`/fullDescItem/${elem.id}`}>
-                        <div className="item-search__img-wrap wrap-img-search">
-                          <img
-                            src={
-                              elem.material_data?.poster_url
-                                ? elem.material_data?.poster_url
-                                : elem.screenshots[0]
-                            }
-                            alt={'изображение аниме ' + elem.title}
-                            className="item-search__image img"
-                          />
-                        </div>
-                        <div className="item-search__title-year">
-                          <div className="item-search__title">
-                            <h2>
-                              {elem.title} <br /> {elem.title_orig}
-                            </h2>
+                        className="search-header__item item-search">
+                        <Link
+                          key={elem.id + ind}
+                          id="search-link"
+                          className="item-search__link"
+                          onClick={() => setClickLinkAnime(false)}
+                          to={`/fullDescItem/${elem.id}`}>
+                          <div className="item-search__img-wrap wrap-img-search">
+                            <img
+                              src={
+                                elem.material_data?.poster_url
+                                  ? elem.material_data?.poster_url
+                                  : elem.screenshots[0]
+                              }
+                              alt={'изображение аниме ' + elem.title}
+                              className="item-search__image img"
+                            />
                           </div>
-                          <div className="item-search__year-kind">
-                            {elem.year} /{' '}
-                            {elem.material_data?.anime_kind
-                              ? elem.material_data?.anime_kind
-                              : elem.type}
+                          <div className="item-search__title-year">
+                            <div className="item-search__title">
+                              <h2>
+                                {elem.title} <br /> {elem.title_orig}
+                              </h2>
+                            </div>
+                            <div className="item-search__year-kind">
+                              {elem.year} /{' '}
+                              {elem.material_data?.anime_kind
+                                ? elem.material_data?.anime_kind
+                                : elem.type}
+                            </div>
                           </div>
-                        </div>
-                      </Link>
-                    </li>
-                  ))}
+                        </Link>
+                      </li>
+                    ))
+                  )}
                 </ul>
               </div>
             )}

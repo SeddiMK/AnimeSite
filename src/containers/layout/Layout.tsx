@@ -1,6 +1,11 @@
 import React, { useLayoutEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 
+import { BrowserRouter } from 'react-router-dom';
+
+import { Provider } from 'react-redux';
+import store from '../../store/index';
+
 // components
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
@@ -45,7 +50,9 @@ const Layout = () => {
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
-
+  //  <Provider store={store}>
+  //         <BrowserRouter></BrowserRouter> </BrowserRouter>
+  //       </Provider>
   return (
     <>
       <div className="wrapper">

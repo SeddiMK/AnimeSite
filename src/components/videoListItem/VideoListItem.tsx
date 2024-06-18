@@ -15,6 +15,7 @@ import { fetchAnimeListSlice, itemsAnime } from '../../store/animeSlice';
 import { setIdFullDesc } from '../../store/searchSlice';
 
 import { useSelector } from 'react-redux';
+// import { ErrorFallback } from '../../pages/ErrorFallback/ErrorFallback';
 
 // ---------------------------------------------------------------------
 
@@ -37,6 +38,9 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
 
   const animeItemsRedux = useSelector(itemsAnime); //---------------------------
   const [animeItems, setAnimeItems] = useState<any[]>([]);
+
+  // error -----------------------------------------------------------
+  // const [animeSearchItemsNetWTime, setAnimeSearchItemsNetWTime] =useState(false);
 
   // запрос fetch в redux
   const fthAnimeSlice = async (yearNew) => {
@@ -107,18 +111,34 @@ const VideoListItem: React.FC<VideoListItemProps> = ({
     };
   }, [animeItems, refCard.current?.clientWidth]);
 
+  // error ---------------------------------------------------------
+
   // if (animeItems.length === 0) {
   //   return <Error />;
   // }
+
+  // console.log(animeItems);
+  // console.log(animeItems === ('Network Error' as any));
+
+  // // error если долго(4000мс) грузится контент ------------------------------------
+  // useEffect(() => {
+  //   // проверяем есть ли в массиве объект
+  //   if (animeItems[0]?.id === undefined) {
+  //     setTimeout(() => {
+  //       if (animeItems[0]?.id === undefined) {
+  //         return setAnimeSearchItemsNetWTime(true);
+  //       } else return setAnimeSearchItemsNetWTime(false);
+  //     }, 4000);
+  //   }
+  // }, [animeItems]);
+
   if (status === 'error') {
     return <Error />;
   }
-  // console.log(animeItems);
-
   // status === 'loading'   animeItems.length === 0
   return (
     <>
-      {animeItems.length === 0
+      {animeItems.length === 0 || animeItems === ('Network Error' as any)
         ? skeletons
         : animeItems?.map((elem, ind) => (
             <div key={elem.id + ind} className="anime__item item-anime">

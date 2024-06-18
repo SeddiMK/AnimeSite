@@ -1,0 +1,27 @@
+.error {
+  padding: 2rem;
+}
+.text {
+  margin-bottom: 1rem;
+}
+.textError {
+}
+
+.button {
+  background-color: var(--btn-send-com);
+  border-radius: 0.4rem;
+  padding: 1rem;
+  transition: all 0.25s ease-in-out;
+
+  &:hover {
+    background-color: var(--btn-send-com);
+    color: var(--color-active-link);
+    box-shadow: -3px -3px 3px #888;
+    transform: translate(2px, 2px);
+  }
+  &:active {
+    background-color: var(--btn-send-com);
+    box-shadow: none;
+    transform: translate(-2px, -2px);
+  }
+}

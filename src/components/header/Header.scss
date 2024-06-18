@@ -3,7 +3,8 @@
   z-index: 1;
   font-size: 1.1rem;
   max-width: var(--max-width);
-  width: 90vw;
+  // width: 90vw;
+  width: 90%;
 
   // position: absolute;
   // top: 0;
@@ -32,6 +33,12 @@
     width: 4rem;
     height: 3.5rem;
     margin-right: 1.5rem;
+  }
+}
+
+@media (max-width: 650px) {
+  .header {
+    width: 98.5%;
   }
 }
 

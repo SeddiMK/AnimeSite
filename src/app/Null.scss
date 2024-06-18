@@ -179,6 +179,9 @@ input {
 
   // overflow: hidden;
 }
+.container > .login-user-cabinet {
+  height: 90vh;
+}
 .main {
   display: flex;
   flex-direction: column;
@@ -215,21 +218,26 @@ main.full-desc-item {
 main.error,
 main.login,
 main.registaration,
-main.anime {
-  padding-top: 105px;
-}
-
-.login-user-cabinet {
-  padding-top: 83px;
-}
-.main.full-desc-item {
-  padding-top: 82px;
+main.anime,
+.login-user-cabinet,
+.main.full-desc-item,
+.main.contacts {
+  padding-top: 8rem;
 }
 .main.new-list {
-  padding-top: 87px;
+  padding-top: 7rem;
+}
+.login-user-cabinet,
+.main.full-desc-item,
+.main.contacts {
+  // padding-top: 8rem;
+}
+
+.main.new-list {
+  // padding-top: 87px;
 }
 .main.contacts {
-  padding-top: 68px;
+  // padding-top: 68px;
 }
 .container.main.login,
 main.registaration {
@@ -252,8 +260,18 @@ main.registaration {
   }
 }
 .container {
+  max-width: var(--max-width);
   &.login {
     overflow: hidden;
+  }
+}
+@media (max-width: 650px) {
+  .container {
+    width: 100vw;
+    max-width: var(--max-width);
+    &.login {
+      overflow: hidden;
+    }
   }
 }
 

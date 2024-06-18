@@ -29,77 +29,77 @@ import NewList from '../pages/newList/NewList';
 //   path?: string;
 // }
 
-export const router = createBrowserRouter([
-  {
-    element: <Layout />,
-    errorElement: <Error />,
-    children: [
-      {
-        path: '/',
-        element: <Main />,
-        errorElement: <Error />,
-      },
-      {
-        path: 'fullDescItem/:id',
-        element: <FullDescItem />,
-        errorElement: <Error />,
-      },
-      {
-        path: 'new/',
-        element: <NewList />,
-        errorElement: <Error />,
-      },
-      {
-        path: 'random-anime/',
-        element: <RandomAnime />,
-        errorElement: <Error />,
-      },
-      {
-        path: 'search/',
-        element: <SearchHeader />,
-        errorElement: <Error />,
-      },
-      {
-        path: 'contacts',
-        element: <Contacts />,
-        errorElement: <Error />,
-      },
-      {
-        path: 'login',
-        element: <Login />,
-        errorElement: <Error />,
-      },
-      {
-        path: 'registration',
-        element: <Registration />,
-        errorElement: <Error />,
-      },
-      {
-        path: 'login/user/:id',
-        element: <LoginUserCabinet />,
-        errorElement: <Error />,
-      },
-      {
-        path: '*',
-        element: <Error />,
-      },
-    ],
-  },
-]);
+// export const router = createBrowserRouter([
+//   {
+//     element: <Layout />,
+//     errorElement: <Error />,
+//     children: [
+//       {
+//         path: '/',
+//         element: <Main />,
+//         errorElement: <Error />,
+//       },
+//       {
+//         path: 'fullDescItem/:id',
+//         element: <FullDescItem />,
+//         errorElement: <Error />,
+//       },
+//       {
+//         path: 'new/',
+//         element: <NewList />,
+//         errorElement: <Error />,
+//       },
+//       {
+//         path: 'random-anime/',
+//         element: <RandomAnime />,
+//         errorElement: <Error />,
+//       },
+//       {
+//         path: 'search/',
+//         element: <SearchHeader />,
+//         errorElement: <Error />,
+//       },
+//       {
+//         path: 'contacts',
+//         element: <Contacts />,
+//         errorElement: <Error />,
+//       },
+//       {
+//         path: 'login',
+//         element: <Login />,
+//         errorElement: <Error />,
+//       },
+//       {
+//         path: 'registration',
+//         element: <Registration />,
+//         errorElement: <Error />,
+//       },
+//       {
+//         path: 'login/user/:id',
+//         element: <LoginUserCabinet />,
+//         errorElement: <Error />,
+//       },
+//       {
+//         path: '*',
+//         element: <Error />,
+//       },
+//     ],
+//   },
+// ]);
 
-// export const router = createBrowserRouter(
-//   createRoutesFromElements(
-//     <Route path="/" element={<Layout />} errorElement={<Error />}>
-//       <Route index element={<Main />} />
-//       <Route path="fullDescItem/:id" element={<FullDescItem />} />
-//       <Route path="new/" element={<NewList />} />
-//       <Route path="random-anime/" element={<RandomAnime />} />
-//       <Route path="search/" element={<SearchHeader />} />
-//       <Route path="contacts" element={<Contacts />} />
-//       <Route path="login" element={<Login />} />
-//       <Route path="login/user/:id" element={<LoginUserCabinet />} />
-//       <Route path="registration" element={<Registration />} />
-//       <Route path="*" element={<Error />} />
-//     </Route>
-//   )
-// );
+export const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Layout />} errorElement={<Error />}>
+      <Route index element={<Main />} />
+      <Route path="fullDescItem/:id" element={<FullDescItem />} />
+      <Route path="new/" element={<NewList />} />
+      <Route path="random-anime/" element={<RandomAnime />} />
+      <Route path="search/" element={<SearchHeader />} />
+      <Route path="contacts" element={<Contacts />} />
+      <Route path="login" element={<Login />} />
+      <Route path="login/user/:id" element={<LoginUserCabinet />} />
+      <Route path="registration" element={<Registration />} />
+      <Route path="*" element={<Error />} />
+    </Route>
+  )
+);

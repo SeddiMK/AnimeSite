@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import {
   RouterProvider,
-  // BrowserRouter as Router,
+  BrowserRouter as Router,
   Route,
   Routes,
   Outlet,
@@ -35,13 +35,13 @@ import ScrollToTop from '../components/scrollToTop';
 import { router } from '../router/router';
 // -------------------------------------------------------
 
-// -------------------------------------------------------
-
-//{/* <Outlet /> */}
-
 import store from '../store/index';
+import { ErrorBoundary, withErrorBoundary } from 'react-error-boundary';
+import { ErrorFallback } from '../pages/ErrorFallback/ErrorFallback';
+import Layout from '../containers/layout/Layout';
 
 const App = () => {
+  // скролл вверх при переходе на др стр
   // const location = useLocation(); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   // // Scroll to top if path changes
   // useLayoutEffect(() => {
@@ -75,18 +75,18 @@ const App = () => {
   //  {/* <RouterProvider router={router} />{' '} */}
   //  </BrowserRouter>
   //  {/* <ParticlesBg color="#d1aee3" num={50} type="cobweb" bg={true} /> */}
+  //{/* <Outlet /> */}
+  // <Layout />
 
   return (
     <Provider store={store}>
       <BrowserRouter>
         <ScrollToTop />
-
         <div className="wrapper">
           <Header />
-
           <div className="container">
             <Routes>
-              <Route index element={<Main />} />
+              <Route path="/" element={<Main />} />
               <Route path="fullDescItem/:id" element={<FullDescItem />} />
               <Route path="new/" element={<NewList />} />
               <Route path="random-anime/" element={<RandomAnime />} />
@@ -105,4 +105,6 @@ const App = () => {
   );
 };
 
-export default App;
+export default withErrorBoundary(App, {
+  FallbackComponent: <ErrorFallback />,
+});

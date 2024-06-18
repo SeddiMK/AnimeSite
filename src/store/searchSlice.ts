@@ -1,8 +1,10 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { RootState } from '.';
+import { RootState, useAppDispatch } from '.';
 // kodik---------------------------------------------------------------------
 import { kodikApiKey } from '../kodikcfg';
+import { useSelector } from 'react-redux';
+import { error } from 'console';
 // import { Client, MaterialObject, VideoLinks } from 'kodikwrapper';
 
 export type SearchAnimeParams = {
@@ -72,7 +74,7 @@ export type AnimeSearch = {
 export const fetchAnimeSearchSlice = createAsyncThunk<
   AnimeSearch[],
   SearchAnimeParams
->('search/fetchAnimeStatus', async (params) => {
+>('search/fetchAnimeStatus', async (params, { dispatch }) => {
   try {
     const { idAnime, searchInpVal, limitPar } = params;
 
@@ -108,6 +110,8 @@ export const fetchAnimeSearchSlice = createAsyncThunk<
     // let animesItemsSearchAll: AnimeSearch[] = [];
     let prevTitle: string | null = null;
 
+    // const dispatch = useAppDispatch();
+    // const error = useSelector(error);
     if (data.length !== 0) {
       // let prevTitle: string | null = material[0].title;
       for (const item of data) {
@@ -129,6 +133,8 @@ export const fetchAnimeSearchSlice = createAsyncThunk<
       }
     } else {
       console.log('нет данных для показа');
+      // dispatch();
+      dispatch(errorDis('нет данных для показа в блоке searchSlise-redux'));
     }
     // ----------- clien kodik ----------------------------------------------------
     // const [animesItemsSearch, setAnimesItemsSearch] = useState<any>([]);
@@ -330,6 +336,7 @@ const initialState: AnimeSearchSliceState = {
   searchInpVal: '',
   idFullDesc: '',
   randomHederClick: false,
+
   materialData: {
     shikimori_rating: 0,
     shikimori_votes: 0,
@@ -386,7 +393,7 @@ const searchSlice = createSlice({
     setIdFullDesc: (state, action: PayloadAction<string>) => {
       state.idFullDesc = action.payload;
     },
-    error: (state, action: PayloadAction<string>) => {
+    errorDis: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
     },
   },
@@ -425,7 +432,7 @@ export const {
   searchInpHeader,
   setIdFullDesc,
   clickRandomHeder,
-  error,
+  errorDis,
 } = searchSlice.actions;
 
 export const itemsAnimeSearch = (state: RootState) =>

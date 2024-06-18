@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import SearchHeader from '../searchHeader/SearchHeader';
 import MenuList from '../menuList/MenuList';
 import NavMobile from '../navMobile/NavMobile';
-import ErrorBoundary from '../../pages/ErrorBoundary/ErrorBoundary';
+import { ErrorBoundary } from 'react-error-boundary';
 
 // store -----------------------------------------------------------------
 import { useAppDispatch } from '../../store';
@@ -33,7 +33,10 @@ const Header: React.FC = () => {
 
   return (
     <header className="header">
-      <ErrorBoundary fallback={<p>Something went wrong</p>}>
+      <ErrorBoundary
+        fallback={
+          <p>Что то пошло не так. Попробуйте перезагрузить страницу.</p>
+        }>
         <div className="header__container">
           <Link to="/" className="header__logo">
             ME
