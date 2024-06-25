@@ -7,7 +7,7 @@ import MenuList from '../menuList/MenuList'
 import NavMobile from '../navMobile/NavMobile'
 import { ErrorBoundary } from 'react-error-boundary'
 
-// import logoSvg from '../../assets/image/logo/ME.svg'
+import logoSvg from '../../assets/image/logo/ME.svg'
 
 // store -----------------------------------------------------------------
 import { useAppDispatch } from '../../store'
@@ -43,14 +43,12 @@ const Header: React.FC = () => {
 				<div className='header__container'>
 					<Link to='/' className='header__logo'>
 						{/* ME */}
-						{/* <img className='img' src={logoSvg} alt="Image logo" />   */}
-						<svg
+						<img className='logo svg img ' src={logoSvg} alt='logo' />
+						{/* <svg
 							className='logo svg'
 							version='1.0'
 							xmlns='http://www.w3.org/2000/svg'
 							viewBox='0 0 124.000000 103.000000'
-							// x='100%'
-							y='100%'
 						>
 							<g
 								transform='translate(0.000000,103.000000) scale(0.100000,-0.100000)'
@@ -66,7 +64,7 @@ const Header: React.FC = () => {
 0 -47 50 -46 49 0 179 c0 98 3 182 7 185 3 4 91 7 195 7 l189 0 -3 -47z'
 								/>
 							</g>
-						</svg>
+						</svg> */}
 					</Link>
 					<nav className='header__nav menu'>
 						<ul className='nav-mobile'>
