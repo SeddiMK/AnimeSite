@@ -9,7 +9,7 @@ const Main = () => {
 	return (
 		<main ref={wrapperRef} className='main anime'>
 			<canvas className='particles-canv' data-color='#B99970'></canvas>
-			<Particles wrapperRef={wrapperRef} />
+			{/* <Particles wrapperRef={wrapperRef} /> */}
 			<div className='anime__wrap'>
 				{/* <div className="anime__title"></div>
         <div className="anime__sort"></div> */}
