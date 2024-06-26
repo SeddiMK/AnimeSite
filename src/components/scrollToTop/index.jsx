@@ -42,6 +42,8 @@ const ScrollToTop = ({ refEl }) => {
 			})
 		}
 
+		console.log(performance.memory)
+
 		// document.querySelector('#root').scroll({
 		// 	top: 0,
 		// 	left: 0,
