@@ -1,71 +1,71 @@
 .contacts {
-  font-size: 1.2rem;
-  &__desc-block {
-  }
-  &__description {
-  }
+	font-size: 1.2rem;
+	&__desc-block {
+	}
+	&__description {
+	}
 }
 .desc-block {
-  line-height: 2rem;
-  text-align: left;
-  &__steck {
-  }
-  & p {
-    &:not(:last-child) {
-      margin-bottom: 1rem;
-    }
-  }
+	line-height: 2rem;
+	text-align: left;
+	&__steck {
+	}
+	& p {
+		&:not(:last-child) {
+			margin-bottom: 1rem;
+		}
+	}
 }
 
 .contact {
-  // background-color: #fff;
+	// background-color: #fff;
 
-  padding: 2rem 0;
-  &__text {
-    margin-bottom: 0.9rem;
-  }
+	padding: 2rem 0;
+	&__text {
+		margin-bottom: 0.9rem;
+	}
 
-  &__my-contact {
-    &:not(:last-child) {
-      margin-bottom: 0.7rem;
-    }
-  }
-  &__my-contact-link {
-    & div:not(:last-child) {
-      margin-bottom: 0.7rem;
-    }
-  }
-  &__my-contact-block {
-    display: flex;
-    justify-content: flex-start;
-    text-align: start;
-    & b {
-      margin-right: 0.7rem;
-    }
-    &:not(:last-child) {
-      margin-bottom: 1rem;
-    }
-  }
-  &__icon {
-    margin-right: 0.7rem;
-  }
+	&__my-contact {
+		&:not(:last-child) {
+			margin-bottom: 0.7rem;
+		}
+	}
+	&__my-contact-link {
+		& div:not(:last-child) {
+			margin-bottom: 0.7rem;
+		}
+	}
+	&__my-contact-block {
+		display: flex;
+		justify-content: flex-start;
+		text-align: start;
+		& b {
+			margin-right: 0.7rem;
+		}
+		&:not(:last-child) {
+			margin-bottom: 1rem;
+		}
+	}
+	&__icon {
+		margin-right: 0.7rem;
+	}
 }
 
 .my-contact {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 
-  & b {
-    margin-right: 0.3rem;
-  }
-  & div {
-    margin-right: 0.3rem;
-  }
-  &__link {
-    display: flex;
-    transition: color 0.2s ease-in-out;
-    &:hover {
-      color: red;
-    }
-  }
+	& b {
+		margin-right: 0.3rem;
+	}
+	& div {
+		margin-right: 0.3rem;
+	}
+	&__link {
+		display: flex;
+		transition: color 0.2s ease-in-out;
+		&:hover {
+			color: red;
+		}
+	}
 }
