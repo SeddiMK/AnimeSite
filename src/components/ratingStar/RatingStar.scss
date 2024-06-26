@@ -1,0 +1,205 @@
+.rating__user-star {
+	max-width: 167px;
+}
+
+.rating-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row-reverse;
+	width: 100%;
+	padding: 0.3em 0.55em 0.3em 2.35em;
+	gap: 10px;
+	border-top-right-radius: 35px;
+	border-bottom-right-radius: 35px;
+	border: none;
+	position: relative;
+	background: #2b2b2b;
+	box-shadow:
+		0 1px 1px hsl(0deg 0% 0%/0.075),
+		0 2px 2px hsl(0deg 0% 0%/0.075),
+		0 4px 4px hsl(0deg 0% 0%/0.075),
+		0 8px 8px hsl(0deg 0% 0%/0.075),
+		0 16px 16px hsl(0deg 0% 0%/0.075);
+	.rating-value {
+		position: absolute;
+		top: -0.7em;
+		left: -1.2em;
+		border-radius: 50%;
+		height: 3em;
+		width: 3em;
+		background: #ffbb00;
+		box-shadow:
+			0 1px 1px hsl(0deg 0% 0%/0.075),
+			0 2px 2px hsl(0deg 0% 0%/0.075),
+			0 4px 4px hsl(0deg 0% 0%/0.075),
+			0 8px 8px hsl(0deg 0% 0%/0.075),
+			0 16px 16px hsl(0deg 0% 0%/0.075),
+			inset 0 0 10px #f7db5e,
+			0 0 10px #f7db5e;
+		&:before {
+			content: '0';
+			position: absolute;
+			top: 0.4em;
+			// bottom: 0;
+			left: 0.6em;
+			// right: 0;
+			margin: auto;
+			text-align: center;
+			line-height: 1em;
+			font-size: 1.75em;
+			// color: #2b2b2b;
+			color: #e5dbdb;
+
+			transform-origin: center;
+			transition: all 0.25s ease 0s;
+		}
+		&:after {
+			content: '';
+			position: absolute;
+			height: 3em;
+			width: 3em;
+			top: 0em;
+			left: 0em;
+
+			// height: 170px;
+			// width: 170px;
+			// top: -16px;
+			// left: -16px;
+
+			margin: auto;
+			border: 1px solid #ffbb00;
+			border-radius: 50%;
+			transition: all 0.4s ease-in;
+		}
+	}
+
+	.rating__inp {
+		display: none;
+	}
+	label {
+		height: 1.2em;
+		width: 1.2em;
+		transform-origin: 'center center';
+		svg {
+			transition: transform 0.4s ease-in-out;
+			opacity: 0.5;
+		}
+		&:hover {
+			svg {
+				transform: scale(1.25) rotate(10deg);
+			}
+		}
+	}
+}
+
+.rating__inp:checked ~ label svg {
+	opacity: 1;
+	transform: scale(1.25) rotate(10deg);
+}
+
+label:hover {
+	svg,
+	~ label svg {
+		opacity: 1;
+		transform: scale(1.25) rotate(10deg);
+	}
+}
+
+.rating__inp:checked {
+	+ label:hover svg {
+		opacity: 1;
+	}
+
+	~ label:hover {
+		svg,
+		~ label svg {
+			opacity: 1;
+		}
+	}
+}
+
+label:hover ~ .rating__inp:checked ~ label svg {
+	opacity: 1;
+}
+
+#rate1:checked ~ .rating-value:before {
+	content: '1';
+	font-size: 1.8em;
+}
+
+label[for='rate1']:hover ~ .rating-value:before {
+	content: '1' !important;
+	font-size: 2em !important;
+	top: 0.3em;
+	left: 0.5em;
+}
+
+#rate2:checked ~ .rating-value:before {
+	content: '2';
+	font-size: 1.8em;
+}
+
+label[for='rate2']:hover ~ .rating-value:before {
+	content: '2' !important;
+	font-size: 2em !important;
+	top: 0.3em;
+	left: 0.5em;
+}
+
+#rate3:checked ~ .rating-value:before {
+	content: '3';
+	font-size: 1.75em;
+}
+
+label[for='rate3']:hover ~ .rating-value:before {
+	content: '3' !important;
+	font-size: 2em !important;
+	top: 0.3em;
+	left: 0.5em;
+}
+
+#rate4:checked ~ .rating-value:before {
+	content: '4';
+	font-size: 1.75em;
+}
+
+label[for='rate4']:hover ~ .rating-value:before {
+	content: '4' !important;
+	font-size: 2em !important;
+	top: 0.3em;
+	left: 0.5em;
+}
+
+@keyframes pulse {
+	0% {
+		height: 3em;
+		width: 3em;
+		top: 0px;
+		left: 0px;
+		opacity: 1;
+	}
+	100% {
+		height: 4.5em;
+		width: 4.5em;
+		top: -0.65em;
+		left: -0.85em;
+		opacity: 0;
+	}
+}
+
+#rate5:checked ~ .rating-value:after {
+	animation: pulse 0.4s ease-out 1;
+}
+
+#rate5:checked ~ .rating-value:before {
+	content: '5';
+	font-size: 1.75em;
+}
+
+label[for='rate5']:hover ~ .rating-value:before {
+	content: '5' !important;
+	font-size: 2em !important;
+	top: 0.3em;
+	left: 0.5em;
+}

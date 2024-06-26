@@ -1,3 +1,48 @@
+:root {
+	box-sizing: border-box;
+	//   font-size: calc(1vw + 0.6em);
+	/* font-size: clamp(20px, 2vw, 32px);'Material Symbols Outlined', */
+
+	--max-width: 1080px;
+
+	--base-font: 'Ubuntu', 'Helvetica Neue', sans-serif;
+	/* --font-size: calc(1vw + 0.6em); */
+	--font-size: clamp(14px, 1vw, 32px);
+	--min-width: auto;
+	--main-color: #9bc53d;
+	--background-form-color: #e9ebee;
+	--background-root-color: #000;
+	--background-container-color: #dddddd;
+	--background-header-color: #d1aee3;
+	--background-vk-link-blue: #0077ff;
+	--background-google-link-grey: #aaaaaa;
+	--background-mail-link-wblue: #168de2;
+	--secondary-color: #ebfffa;
+	--btn-send-com: #e1579c;
+	--form-inp-email: #ffffff;
+	--form-border-color: #727272;
+	--nik-name-red: red;
+	--nik-time-opacity: rgba(179, 179, 179, 0.7);
+	--border-bottom: rgba(179, 179, 179, 0.5);
+	--color-active-link: #ffffff;
+	--background-form-white: #ffffff;
+
+	font-size: var(--font-size);
+}
+#root {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	flex-grow: 1;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 0;
+
+	background-color: var(--background-root-color);
+}
 * {
 	padding: 0px;
 	margin: 0px;
@@ -32,7 +77,10 @@ body,
 }
 html,
 body {
+	font-family: var(--base-font);
 	font-size: var(--font-size);
+	font-weight: 500;
+	line-height: 1;
 	// min-width: var(--min-width);
 
 	display: flex;
@@ -43,9 +91,7 @@ body {
 body {
 	/* color: $mainColor; */
 	background-color: #000;
-	line-height: 1;
-	font-family: var(--base-font);
-	font-size: var(--font-size);
+
 	/* text-rendering: optimizeLegibility; */
 	-ms-text-size-adjust: 100%;
 	-moz-text-size-adjust: 100%;
@@ -57,7 +103,6 @@ body {
 	justify-content: center;
 	align-items: center;
 
-	font-weight: 500;
 	height: 100%;
 }
 
@@ -108,51 +153,6 @@ input {
 	padding: 0.1rem 0.3rem;
 }
 
-:root {
-	box-sizing: border-box;
-	//   font-size: calc(1vw + 0.6em);
-	/* font-size: clamp(20px, 2vw, 32px);'Material Symbols Outlined', */
-
-	--max-width: 1080px;
-
-	--base-font: 'Ubuntu', 'Helvetica Neue', sans-serif;
-	/* --font-size: calc(1vw + 0.6em); */
-	--font-size: clamp(14px, 1vw, 32px);
-	--min-width: auto;
-	--main-color: #9bc53d;
-	--background-form-color: #e9ebee;
-	--background-root-color: #000;
-	--background-container-color: #dddddd;
-	--background-header-color: #d1aee3;
-	--background-vk-link-blue: #0077ff;
-	--background-google-link-grey: #aaaaaa;
-	--background-mail-link-wblue: #168de2;
-	--secondary-color: #ebfffa;
-	--btn-send-com: #e1579c;
-	--form-inp-email: #ffffff;
-	--form-border-color: #727272;
-	--nik-name-red: red;
-	--nik-time-opacity: rgba(179, 179, 179, 0.7);
-	--border-bottom: rgba(179, 179, 179, 0.5);
-	--color-active-link: #ffffff;
-	--background-form-white: #ffffff;
-
-	font-size: var(--font-size);
-}
-#root {
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: center;
-	flex-grow: 1;
-
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: 0;
-
-	background-color: var(--background-root-color);
-}
 .particles-cnt {
 	width: 100%;
 }
@@ -203,8 +203,6 @@ main.registaration {
 	box-sizing: border-box;
 	width: 100%;
 
-	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-
 	// height: calc(100vh - 186px);
 	height: 90vh;
 	overflow: hidden;
@@ -213,10 +211,15 @@ main.registaration {
 }
 
 .login-user-cabinet,
+main.full-desc-item,
 main.contacts,
-main.anime-random {
+main.anime-random,
+main.error,
+main.login,
+main.registaration {
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
+
 main.anime {
 	// height: 100vh;
 	padding-top: 1.3rem;
@@ -225,13 +228,14 @@ main.anime {
 main.full-desc-item {
 	padding-top: 1.3rem;
 }
+
+.login-user-cabinet,
 main.error,
 main.login,
 main.registaration,
 main.anime,
-.login-user-cabinet,
-.main.full-desc-item,
-.main.contacts {
+main.full-desc-item,
+main.contacts {
 	padding-top: 8rem;
 }
 .main.new-list {
