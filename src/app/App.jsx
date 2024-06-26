@@ -1,5 +1,5 @@
 import './Null.scss'
-import React, { useLayoutEffect } from 'react'
+import React, { useLayoutEffect, useRef } from 'react'
 import { BrowserRouter } from 'react-router-dom'
 
 import {
@@ -76,14 +76,14 @@ const App = () => {
 	//  {/* <ParticlesBg color="#d1aee3" num={50} type="cobweb" bg={true} /> */}
 	//{/* <Outlet /> */}
 	// <Layout />
-
+	const refRoot = useRef(null)
 	return (
 		<Provider store={store}>
 			<BrowserRouter>
-				<ScrollToTop />
+				<ScrollToTop refEl={refRoot} />
 				<div className='wrapper'>
 					<Header />
-					<div className='container'>
+					<div className='container' ref={refRoot}>
 						<Routes>
 							<Route path='/' element={<Main />} />
 							<Route path='fullDescItem/:id' element={<FullDescItem />} />
