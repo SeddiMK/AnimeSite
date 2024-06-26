@@ -56,7 +56,8 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font-family: 'Montserrat', sans-serif;
+
+	font-weight: 500;
 	height: 100%;
 }
 
@@ -110,13 +111,13 @@ input {
 :root {
 	box-sizing: border-box;
 	//   font-size: calc(1vw + 0.6em);
-	/* font-size: clamp(20px, 2vw, 32px); */
+	/* font-size: clamp(20px, 2vw, 32px);'Material Symbols Outlined', */
 
 	--max-width: 1080px;
 
 	--base-font: 'Ubuntu', 'Helvetica Neue', sans-serif;
 	/* --font-size: calc(1vw + 0.6em); */
-	--font-size: clamp(12px, 1vw, 32px);
+	--font-size: clamp(14px, 1vw, 32px);
 	--min-width: auto;
 	--main-color: #9bc53d;
 	--background-form-color: #e9ebee;
