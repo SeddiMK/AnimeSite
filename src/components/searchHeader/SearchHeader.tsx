@@ -52,12 +52,14 @@ const SearchHeader = () => {
 
 	// updateInpSearchValue --// сохраняет ссылку при перерендере----------------
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11
-	// const updateInpSearchValue = useCallback(
-	//   debounce((inp: string) => {
-	//     setSearchValue(inp);
-	//     dispatch(searchInpHeader(inp));
-	//   }, 450),
-	//   []
+	const updateInpSearchValue =
+		// useCallback(
+		debounce((inp: string) => {
+			setSearchValue(inp)
+			dispatch(searchInpHeader(inp))
+		}, 450)
+	//   ,
+	// []
 	// );
 	// fthAnimeSearchSlice -----------------------------
 	const fthAnimeSearchSlice = () => {
