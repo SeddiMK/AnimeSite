@@ -34,13 +34,13 @@ const ScrollToTop = ({ refEl }) => {
 		// 	'document.body.getBoundingClientRect()'
 		// )
 
-		if (window.scrollY > 400) {
+		if (!!document.getElementById('root')) {
+			document.getElementById('root').scroll({
+				top: 0,
+				left: 0,
+				behavior: 'smooth',
+			})
 		}
-		// document.getElementById('root').scroll({
-		// 	top: 0,
-		// 	left: 0,
-		// 	behavior: 'smooth',
-		// })
 
 		// document.querySelector('#root').scroll({
 		// 	top: 0,
