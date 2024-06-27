@@ -59,7 +59,6 @@ const SearchHeader = () => {
 		}, 450),
 		[]
 	)
-	console.log(updateInpSearchValue)
 
 	// fthAnimeSearchSlice -----------------------------
 	const fthAnimeSearchSlice = () => {
