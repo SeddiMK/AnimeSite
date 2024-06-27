@@ -245,17 +245,23 @@ main.full-desc-item {
 	// padding-top: 8rem;
 }
 
-.main.new-list {
+main.new-list {
 	// padding-top: 87px;
 }
-.main.contacts {
+main.contacts {
 	// padding-top: 68px;
 }
-main.login,
+
 main.registaration {
+	padding-top: 6rem;
+	padding-bottom: 2rem;
+}
+
+main.login {
 	padding-top: 8rem;
 	padding-bottom: 2rem;
 }
+
 @media (max-width: 358px) {
 	main.error,
 	main.login,

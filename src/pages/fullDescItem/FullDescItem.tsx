@@ -263,7 +263,7 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
 	return (
 		<main ref={wrapperRef} className='main full-desc-item'>
 			<canvas className='particles-canv' data-color='#B99970'></canvas>
-			<Particles wrapperRef={wrapperRef} />
+			{/* <Particles wrapperRef={wrapperRef} /> */}
 
 			{animeSearchItemsNetWTime && (
 				<ErrorFallback
