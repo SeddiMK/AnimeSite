@@ -52,15 +52,15 @@ const SearchHeader = () => {
 
 	// updateInpSearchValue --// сохраняет ссылку при перерендере----------------
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11
-	const updateInpSearchValue =
-		// useCallback(
+	const updateInpSearchValue = useCallback(
 		debounce((inp: string) => {
 			setSearchValue(inp)
 			dispatch(searchInpHeader(inp))
-		}, 450)
-	//   ,
-	// []
-	// );
+		}, 450),
+		[]
+	)
+	console.log(updateInpSearchValue)
+
 	// fthAnimeSearchSlice -----------------------------
 	const fthAnimeSearchSlice = () => {
 		dispatch(fetchAnimeSearchSlice({ searchInpVal, limitPar, idAnime }))
