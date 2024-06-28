@@ -3,12 +3,32 @@ import React, { useRef } from 'react'
 import { FaSkype, FaGithub, FaEnvelope, FaLink } from 'react-icons/fa'
 
 import Particles from '../../containers/particles/Particles'
+import ParticlesBg from 'particles-bg'
 
 const Contacts = () => {
 	const wrapperRef = useRef(null)
 	return (
 		<main ref={wrapperRef} className='main contacts'>
-			<canvas className='particles-canv' data-color='#B99970'></canvas>
+			<ParticlesBg
+				color='#d1aee3'
+				num={150}
+				type='cobweb'
+				bg={
+					{
+						position: 'absolute',
+						marginLeft: 'auto',
+						marginRight: 'auto',
+						left: 0,
+						right: 0,
+						textAlign: 'center',
+						zIndex: -999,
+						width: '100%',
+						height: 7220,
+					} as any
+				}
+			/>
+
+			{/* <canvas className='particles-canv' data-color='#B99970'></canvas> */}
 			{/* <Particles wrapperRef={wrapperRef} /> */}
 
 			<div className='contacts__description'>

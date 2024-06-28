@@ -128,7 +128,7 @@ const Registration = () => {
 
 	return (
 		<main ref={wrapperRef} className='main registaration'>
-			<canvas className='particles-canv' data-color='#B99970'></canvas>
+			{/* <canvas className='particles-canv' data-color='#B99970'></canvas> */}
 			{/* <Particles wrapperRef={wrapperRef} /> */}
 
 			<section className='registaration-block'>

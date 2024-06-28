@@ -13,7 +13,11 @@ import VideoLink from '../../components/videoLink/VideoLink'
 
 // store -----------------------
 import { RootState, useAppDispatch } from '../../store'
-import { fetchAnimeListSlice, itemsAnime } from '../../store/animeSlice'
+import {
+	fetchAnimeListSlice,
+	itemsAnime,
+	type AnimeItems,
+} from '../../store/animeSlice'
 import { addListAnime } from '../../store/userSlice'
 import {
 	fetchAnimeSearchSlice,
@@ -29,14 +33,16 @@ import Particles from '../../containers/particles/Particles'
 import { ErrorFallback } from '../ErrorFallback/ErrorFallback'
 import Error from '../error/Error'
 
+import ParticlesBg from 'particles-bg'
+
 // ---------------------------------------------------------------------
 type FullDescItemProps = {
 	flagRandomAnime: boolean
-	elem: {
-		link: string
-		title: string
-		title_orig: string
-	}
+	// elem: {
+	// 	link: string
+	// 	title: string
+	// 	title_orig: string
+	// }
 }
 
 const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
@@ -45,7 +51,7 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
 	}>()
 
 	const dispatch = useAppDispatch()
-	// let { status } = useSelector((state: RootState) => state.animeSlice);
+	let { status } = useSelector((state: RootState) => state.animeSlice)
 	const randomHederClick = useSelector(
 		(state: RootState) => state.searchSlice.randomHederClick
 	)
@@ -77,7 +83,8 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
 
 	const playerRef = useRef<null | HTMLDivElement>(null)
 	const popupAddRef = useRef<null | HTMLDivElement>(null)
-	const wrapperRef = useRef<null | HTMLDivElement>(null)
+	const refWrp = useRef<null | HTMLDivElement>(null)
+	const ref = useRef<null | HTMLDivElement>(null)
 
 	const animeItems = useSelector(itemsAnime)
 
@@ -86,10 +93,33 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
 	const [isMount, setIsMount] = useState(false)
 
 	// adaptiv form comment -----------------------------------------------------
-	const { ref, width, height } = useResizeObserver<HTMLDivElement>({
-		box: 'border-box',
-	})
+	// const [width, setWidth] = useState<number | undefined>(1920)
+	// const [height, setHeight] = useState<number | undefined>(1080)
+
+	const { width, height } = useResizeObserver<HTMLDivElement>({ ref })
+
 	useEffect(() => {
+		if (status === 'loading') {
+			// const { width, height } = useResizeObserver<HTMLDivElement>({ ref })
+			// setWidth(width)
+			// setHeight(height)
+		}
+	}, [status])
+
+	console.log(width, height, 'width,height')
+
+	// const jhksss = () => {
+	// const { ref, width, height } = useResizeObserver<HTMLDivElement>({
+	// 	box: 'border-box',
+	// })
+	// 	setWidth(width)
+	// 	setHeight(height)
+	// }
+
+	useEffect(() => {
+		if (ref !== null && width !== undefined) {
+			// jhksss(ref)
+		}
 		// 650+
 		if (ref !== null && width !== undefined && width > 650) {
 			setTopOpenFormComment('-35rem')
@@ -162,10 +192,6 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
 		)
 		document.getElementById('root')?.scrollIntoView() // при перерисовке скорит на верх стр
 	}
-
-	useEffect(() => {
-		// setAnimeItems();
-	}, [])
 
 	// добавляем данные в redux при первом рендере -----------
 	useEffect(() => {
@@ -240,13 +266,13 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
 			if (
 				animeSearchItems[0]?.id === undefined ||
 				animeSearchItems.length === 0 ||
-				animeSearchItems === ('Network Error' as any)
+				animeSearchItems === ('Network Error' as unknown as AnimeItems[])
 			) {
 				setInterval(() => {
 					if (
 						animeSearchItems[0]?.id === undefined ||
 						animeSearchItems.length === 0 ||
-						animeSearchItems === ('Network Error' as any)
+						animeSearchItems === ('Network Error' as unknown as AnimeItems[])
 					) {
 						return setAnimeSearchItemsNetWTime(true)
 					}
@@ -260,15 +286,42 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
 
 	// {status === 'loading'
 
+	// const { ref } = useResizeObserver<HTMLElement>({
+	// 	onResize: ({ width, height }) => {
+	// 		height
+	// 	},
+	// })
+	console.log(height, 'height obs')
+	// ref={ref}
 	return (
-		<main ref={wrapperRef} className='main full-desc-item'>
-			<canvas className='particles-canv' data-color='#B99970'></canvas>
-			{/* <Particles wrapperRef={wrapperRef} /> */}
+		<main ref={ref} className='main full-desc-item'>
+			{status === 'loading' && (
+				<ParticlesBg
+					color='#d1aee3'
+					num={50}
+					type='cobweb'
+					bg={
+						{
+							position: 'absolute',
+							marginLeft: 'auto',
+							marginRight: 'auto',
+							left: 0,
+							right: 0,
+							textAlign: 'center',
+							zIndex: -999,
+							width: '100%',
+							height: { height },
+						} as any
+					}
+				/>
+			)}
 
+			{/* <canvas className='particles-canv' data-color='#B99970'></canvas> */}
+			{/* <Particles wrapperRef={wrapperRef} /> */}
 			{animeSearchItemsNetWTime && (
 				<ErrorFallback
 					error={
-						'Время заргрузки контента больше 4000мс. Попробуйте перезагрузить страницу.'
+						'Время загрузки контента больше 4000мс. Попробуйте перезагрузить страницу.'
 					}
 				/>
 			)}
@@ -282,7 +335,7 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
 					{animeSearchItems.length !== 0 &&
 						animeSearchItems[0] !== undefined && (
 							<>
-								<div ref={ref} className='full-desc-item__wrap'>
+								<div ref={refWrp} className='full-desc-item__wrap'>
 									{/* <VideoLink linkVideo={animeSearchItems[0]?.link} />
 
             <div className="item-anime__title">

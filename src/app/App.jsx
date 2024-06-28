@@ -1,6 +1,7 @@
 import './Null.scss'
-import React, { useLayoutEffect, useRef } from 'react'
+import React, { useLayoutEffect, useRef, useEffect, useState } from 'react'
 import { BrowserRouter } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 import {
 	RouterProvider,
@@ -39,9 +40,16 @@ import { ErrorBoundary, withErrorBoundary } from 'react-error-boundary'
 import { ErrorFallback } from '../pages/ErrorFallback/ErrorFallback'
 import Layout from '../containers/layout/Layout'
 
+import ParticlesBg from 'particles-bg'
+
+import {
+	useWindowSize,
+	useWindowWidth,
+	useWindowHeight,
+} from '@react-hook/window-size'
+
 const App = () => {
 	// скролл вверх при переходе на др стр
-	// const location = useLocation(); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	// // Scroll to top if path changes
 	// useLayoutEffect(() => {
 	//   window.scrollTo(0, 0);
@@ -76,12 +84,86 @@ const App = () => {
 	//  {/* <ParticlesBg color="#d1aee3" num={50} type="cobweb" bg={true} /> */}
 	//{/* <Outlet /> */}
 	// <Layout />
+
+	// const animeItems = useSelector(itemsAnime)
+
 	const refRoot = useRef(null)
+	const wrapperRef = useRef(null)
+
+	const [width, setWidth] = useState(1920)
+	const [height, setHeight] = useState(1080)
+	const onlyHeight = useWindowHeight()
+
+	// const animeItems = useSelector(itemsAnime)
+	// // console.log(animeItems)
+	// console.log(animeItems.length)
+
+	const resizeHandler = () => {
+		// console.log(wrapperRef, 'wrapperRef.current');
+		const { clientHeight, clientWidth } = wrapperRef.current || {}
+		if (wrapperRef.current.clientHeight !== null) {
+			// setSize({ clientHeight, clientWidth })
+
+			// setWidth(clientWidth);
+			setHeight(clientHeight)
+		}
+	}
+
+	console.log(useWindowHeight(), 'sssshhhHHHHH')
+
+	useEffect(() => {
+		// window.addEventListener('resize', resizeHandler);
+		if (wrapperRef.current?.clientHeight !== null) resizeHandler()
+
+		if (
+			wrapperRef.current?.clientHeight !== height ||
+			window.innerWidth !== width
+		) {
+			setTimeout(() => {
+				setHeight(wrapperRef?.current?.clientHeight)
+				setWidth(window.innerWidth)
+			}, 300)
+		}
+		return () => {
+			window.removeEventListener('resize', resizeHandler())
+		}
+	}, [wrapperRef.current?.clientHeight])
+
+	// useEffect(() => {
+	// 	console.log(
+	// 		wrapperRef.current?.clientHeight,
+	// 		'wrapperRef.current?.clientHeight'
+	// 	)
+	// 	console.log(height, 'height')
+	// }, [location.pathname])
+
+	console.log(wrapperRef)
+
 	return (
 		<Provider store={store}>
 			<BrowserRouter>
 				<ScrollToTop refEl={refRoot} />
-				<div className='wrapper'>
+
+				<div ref={wrapperRef} className='wrapper'>
+					{/* <ParticlesBg
+						color='#d1aee3'
+						num={50}
+						type='cobweb'
+						bg={{
+							position: 'absolute',
+							marginLeft: 'auto',
+							marginRight: 'auto',
+							left: 0,
+							right: 0,
+							textAlign: 'center',
+							zIndex: -999,
+							width: '100%',
+							height: 11000,
+						}}
+					/> */}
+					{/* {animeItems.length !== 0 && (
+					
+				)} */}
 					<Header />
 					<div className='container' ref={refRoot}>
 						<Routes>

@@ -242,7 +242,7 @@ const LoginUserCabinet: FC = () => {
 		<>
 			{isAuth && (
 				<section ref={wrapperRef} className='login-user-cabinet user-cab'>
-					<canvas className='particles-canv' data-color='#B99970'></canvas>
+					{/* <canvas className='particles-canv' data-color='#B99970'></canvas> */}
 					{/* <Particles wrapperRef={wrapperRef} /> */}
 
 					<div className='user-cab__block-top'>

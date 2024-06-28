@@ -1,11 +1,17 @@
 {
 	"compilerOptions": {
-		"target": "es5", // Укажите целевую версию ECMAScript
+		"target": "es6", // Укажите целевую версию ECMAScript
+		"module": "commonjs", // Указываем генерацию кода модуля /esnext
 
-		"lib": ["dom", "dom.iterable", "esnext"], // Список файлов библиотеки для включения в компиляцию
+		"lib": ["es6", "dom", "dom.iterable", "esnext"], // Список файлов библиотеки для включения в компиляцию
 
 		"types": ["node", "jest", "express"],
 
+		"rootDir": "src",
+
+		"noImplicitAny": false,
+
+		"checkJs": true,
 		"allowJs": true, // Разрешить компиляцию файлов JavaScript
 
 		"skipLibCheck": true, // Пропустить проверку типов всех файлов объявлений
@@ -18,11 +24,7 @@
 
 		"forceConsistentCasingInFileNames": true, // Запрещаем ссылки с несогласованным регистром на один и тот же файл.
 
-		"module": "commonjs", // Указываем генерацию кода модуля /esnext
-
 		"noResolve": false,
-
-		"noImplicitAny": false,
 
 		"removeComments": true,
 
@@ -34,10 +36,10 @@
 
 		"resolveJsonModule": true, // Включить модули, импортированные с расширением .json
 
-		"noEmit": true, // Не выводить вывод (то есть не компилировать код, а только выполнять проверку типа)
+		// "noEmit": true, // Не выводить вывод (то есть не компилировать код, а только выполнять проверку типа)
 
 		"jsx": "react", // Поддержка JSX в файлах .tsx
-		"baseUrl": "src",
+		"baseUrl": ".",
 
 		// "sourceMap": true, // Создание соответствующего файла .map
 
@@ -50,15 +52,17 @@
 		// "incremental": true, // Включить инкрементную компиляцию путем чтения/записи информации из предыдущих компиляций в файл на диске
 
 		"noFallthroughCasesInSwitch": true, // Сообщать об ошибках для случаев падения в инструкции switch
-		"useUnknownInCatchVariables": false
+		"useUnknownInCatchVariables": false,
+		"experimentalDecorators": true
 	},
 
 	"include": [
 		"src/**/*", // *** Файлы TypeScript должны ввести проверку ***
 		"src/@types"
 	],
-	"types": ["react/next", "react-dom/next"],
-	"exclude": ["./node_modules/**/*", "build"], //  *** Файлы, которые не нужно вводить, проверять ***
 
-	"include": ["src/components", "src/@types/assets.d.ts"]
+	"types": ["react/next", "react-dom/next"],
+	"exclude": ["./node_modules/**/*", "build"] //  *** Файлы, которые не нужно вводить, проверять ***
+
+	// "include": ["src/components", "src/@types/assets.d.ts"]
 }

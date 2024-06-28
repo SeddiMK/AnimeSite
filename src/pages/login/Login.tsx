@@ -128,7 +128,7 @@ const Login: FC = () => {
 
 	return (
 		<main ref={wrapperRef} className='main login'>
-			<canvas className='particles-canv' data-color='#B99970'></canvas>
+			{/* <canvas className='particles-canv' data-color='#B99970'></canvas> */}
 			{/* <Particles wrapperRef={wrapperRef} /> */}
 
 			<div className='form-login-registaration lr-form'>
