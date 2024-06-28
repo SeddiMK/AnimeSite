@@ -1,6 +1,6 @@
 import './Null.scss'
 import React, { useLayoutEffect, useRef, useEffect, useState } from 'react'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import {
@@ -41,6 +41,7 @@ import { ErrorFallback } from '../pages/ErrorFallback/ErrorFallback'
 import Layout from '../containers/layout/Layout'
 
 import ParticlesBg from 'particles-bg'
+import ParticlesBgMain from '../containers/particlesBgMain/ParticlesBgMain.tsx'
 
 import {
 	useWindowSize,
@@ -94,40 +95,46 @@ const App = () => {
 	const [height, setHeight] = useState(1080)
 	const onlyHeight = useWindowHeight()
 
+	// useEffect(() => {
+	// 	if (status === 'loading') {
+	// 		// const { width, height } = useResizeObserver<HTMLDivElement>({ ref })
+	// 		setWth(width)
+	// 		setHht(height)
+	// 	}
+	// }, [status])
+
 	// const animeItems = useSelector(itemsAnime)
 	// // console.log(animeItems)
 	// console.log(animeItems.length)
 
-	const resizeHandler = () => {
-		// console.log(wrapperRef, 'wrapperRef.current');
-		const { clientHeight, clientWidth } = wrapperRef.current || {}
-		if (wrapperRef.current.clientHeight !== null) {
-			// setSize({ clientHeight, clientWidth })
+	// const resizeHandler = () => {
+	// 	// console.log(wrapperRef, 'wrapperRef.current');
+	// 	const { clientHeight, clientWidth } = wrapperRef.current || {}
+	// 	if (wrapperRef.current.clientHeight !== null) {
+	// 		// setSize({ clientHeight, clientWidth })
 
-			// setWidth(clientWidth);
-			setHeight(clientHeight)
-		}
-	}
+	// 		// setWidth(clientWidth);
+	// 		setHeight(clientHeight)
+	// 	}
+	// }
 
-	console.log(useWindowHeight(), 'sssshhhHHHHH')
+	// useEffect(() => {
+	// 	// window.addEventListener('resize', resizeHandler);
+	// 	if (wrapperRef.current?.clientHeight !== null) resizeHandler()
 
-	useEffect(() => {
-		// window.addEventListener('resize', resizeHandler);
-		if (wrapperRef.current?.clientHeight !== null) resizeHandler()
-
-		if (
-			wrapperRef.current?.clientHeight !== height ||
-			window.innerWidth !== width
-		) {
-			setTimeout(() => {
-				setHeight(wrapperRef?.current?.clientHeight)
-				setWidth(window.innerWidth)
-			}, 300)
-		}
-		return () => {
-			window.removeEventListener('resize', resizeHandler())
-		}
-	}, [wrapperRef.current?.clientHeight])
+	// 	if (
+	// 		wrapperRef.current?.clientHeight !== height ||
+	// 		window.innerWidth !== width
+	// 	) {
+	// 		setTimeout(() => {
+	// 			setHeight(wrapperRef?.current?.clientHeight)
+	// 			setWidth(window.innerWidth)
+	// 		}, 300)
+	// 	}
+	// 	return () => {
+	// 		window.removeEventListener('resize', resizeHandler())
+	// 	}
+	// }, [wrapperRef.current?.clientHeight])
 
 	// useEffect(() => {
 	// 	console.log(
@@ -139,12 +146,20 @@ const App = () => {
 
 	console.log(wrapperRef)
 
+	console.log(onlyHeight, 'sssshhhHHHHH')
+
+	console.log(
+		wrapperRef?.current?.clientHeight,
+		'wrapperRef?.current?.clientHeight========================='
+	)
 	return (
 		<Provider store={store}>
 			<BrowserRouter>
 				<ScrollToTop refEl={refRoot} />
 
 				<div ref={wrapperRef} className='wrapper'>
+					{/* <ParticlesBgMain wrapperHeight={wrapperRef?.current?.clientHeight} /> */}
+
 					{/* <ParticlesBg
 						color='#d1aee3'
 						num={50}
@@ -158,12 +173,10 @@ const App = () => {
 							textAlign: 'center',
 							zIndex: -999,
 							width: '100%',
-							height: 11000,
+							height: { wrapperRef?.current?.clientHeight },
 						}}
 					/> */}
-					{/* {animeItems.length !== 0 && (
-					
-				)} */}
+
 					<Header />
 					<div className='container' ref={refRoot}>
 						<Routes>

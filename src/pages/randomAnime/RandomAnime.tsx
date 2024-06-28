@@ -10,47 +10,27 @@ import { itemsAnime } from '../../store/animeSlice'
 
 import Particles from '../../containers/particles/Particles'
 import ParticlesBg from 'particles-bg'
+import ParticlesBgMain from '../../containers/particlesBgMain/ParticlesBgMain'
 
-type ParticlesBgProps = {
-	position: string
-	marginLeft: string
-	marginRight: string
-	left: number
-	right: number
-	textAlign: string
-	zIndex: number
-	// width: string
-	height: number
-}
+// type ParticlesBgProps = {
+// 	position: string
+// 	marginLeft: string
+// 	marginRight: string
+// 	left: number
+// 	right: number
+// 	textAlign: string
+// 	zIndex: number
+// 	// width: string
+// 	height: number
+// }
 
 const RandomAnime = () => {
 	// const [toggleRandom, setToggleRandom] = useState(true);
-	const animeItems = useSelector(itemsAnime)
-	const wrapperRef = useRef(null)
+	// const animeItems = useSelector(itemsAnime)
+	const wrapperRef = useRef<HTMLElement>(null)
 	return (
 		<main ref={wrapperRef} className='main anime-random'>
-			{animeItems.length !== 0 && (
-				<ParticlesBg
-					color='#d1aee3'
-					num={150}
-					type='cobweb'
-					bg={
-						{
-							position: 'absolute',
-							marginLeft: 'auto',
-							marginRight: 'auto',
-							left: 0,
-							right: 0,
-							textAlign: 'center',
-							zIndex: -999,
-							width: '100%',
-							height: 1840,
-						} as any
-					}
-				/>
-			)}
-			{/* <canvas className='particles-canv' data-color='#B99970'></canvas> */}
-			{/* <Particles wrapperRef={wrapperRef} /> */}
+			<ParticlesBgMain wrapperHeight={wrapperRef?.current?.clientHeight} />
 
 			<div className='anime-random__wrap'>
 				{/* <div className="anime__title"></div>

@@ -22,6 +22,7 @@ import LinksSocialRegistration from '../../components/linksSocialRegistration/Li
 // import { useAuth } from '../../hooks/useAuth';
 
 import Particles from '../../containers/particles/Particles'
+import ParticlesBgMain from '../../containers/particlesBgMain/ParticlesBgMain'
 
 // TS types
 interface typeUserData {
@@ -36,7 +37,7 @@ const Login: FC = () => {
 	const auth = getAuth()
 	auth.useDeviceLanguage() // определение языка девайса
 
-	const wrapperRef = useRef(null)
+	const wrapperRef = useRef<HTMLElement>(null)
 
 	const [emailHadle, setEmailHadle] = useState('')
 	const [sendEmailReset, setSendEmailReset] = useState(false)
@@ -128,8 +129,7 @@ const Login: FC = () => {
 
 	return (
 		<main ref={wrapperRef} className='main login'>
-			{/* <canvas className='particles-canv' data-color='#B99970'></canvas> */}
-			{/* <Particles wrapperRef={wrapperRef} /> */}
+			<ParticlesBgMain wrapperHeight={wrapperRef?.current?.clientHeight} />
 
 			<div className='form-login-registaration lr-form'>
 				<div className='lr-form__social-media login-social-media'>

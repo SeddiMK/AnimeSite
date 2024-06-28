@@ -10,47 +10,16 @@ import ParticlesBg from 'particles-bg'
 
 // store
 import { itemsAnime } from '../../store/animeSlice'
+import ParticlesBgMain from '../../containers/particlesBgMain/ParticlesBgMain'
 
 const Main = () => {
-	const wrapperRef = useRef(null)
+	const wrapperRef = useRef<HTMLElement>(null)
 	const animeItems = useSelector(itemsAnime)
-	const location = useLocation()
+	// const location = useLocation()
 
-	useEffect(() => {
-		// console.log(
-		// 	wrapperRef.current?.clientHeight,
-		// 	'wrapperRef.current?.clientHeight'
-		// )
-		// console.log(height, 'height')
-		console.log(location, 'location')
-	}, [location.pathname])
-
-	// console.log(animeItems)
-	// console.log(animeItems.length)
 	return (
 		<main ref={wrapperRef} className='main anime'>
-			{animeItems.length !== 0 && (
-				<ParticlesBg
-					color='#d1aee3'
-					num={150}
-					type='cobweb'
-					bg={
-						{
-							position: 'absolute',
-							marginLeft: 'auto',
-							marginRight: 'auto',
-							left: 0,
-							right: 0,
-							textAlign: 'center',
-							zIndex: -999,
-							width: '100%',
-							height: 7220,
-						} as any
-					}
-				/>
-			)}
-			{/* <canvas className='particles-canv' data-color='#B99970'></canvas> */}
-			{/* <Particles wrapperRef={wrapperRef} /> */}
+			{animeItems.length !== 0 && <ParticlesBgMain wrapperHeight={9050} />}
 
 			<div className='anime__wrap'>
 				{/* <div className="anime__title"></div>

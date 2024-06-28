@@ -9,35 +9,18 @@ import { itemsAnime } from '../../store/animeSlice'
 
 import Particles from '../../containers/particles/Particles'
 import ParticlesBg from 'particles-bg'
+import ParticlesBgMain from '../../containers/particlesBgMain/ParticlesBgMain'
 
 const NewList = () => {
-	const wrapperRef = useRef(null)
+	const wrapperRef = useRef<HTMLElement>(null)
 	const animeItems = useSelector(itemsAnime)
+
+	console.log(animeItems)
+	console.log(wrapperRef?.current?.clientHeight, 'newListRef?.current')
 
 	return (
 		<main ref={wrapperRef} className='main new-list'>
-			{animeItems.length !== 0 && (
-				<ParticlesBg
-					color='#d1aee3'
-					num={150}
-					type='cobweb'
-					bg={
-						{
-							position: 'absolute',
-							marginLeft: 'auto',
-							marginRight: 'auto',
-							left: 0,
-							right: 0,
-							textAlign: 'center',
-							zIndex: -999,
-							width: '100%',
-							height: 7220,
-						} as any
-					}
-				/>
-			)}
-			{/* <canvas className='particles-canv' data-color='#B99970'></canvas> */}
-			{/* <Particles wrapperRef={wrapperRef} /> */}
+			{animeItems.length !== 0 && <ParticlesBgMain wrapperHeight={7550} />}
 
 			<div className='new-list__wrap'>
 				<div className='new-list__title'>

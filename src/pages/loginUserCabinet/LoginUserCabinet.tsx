@@ -24,6 +24,7 @@ import { removeUser } from '../../store/userSlice'
 import { useAppDispatch } from '../../store'
 
 import LinksSocialRegistration from '../../components/linksSocialRegistration/LinksSocialRegistration'
+import ParticlesBgMain from '../../containers/particlesBgMain/ParticlesBgMain'
 
 // type Props = {
 //   src?: string | null | undefined;
@@ -41,7 +42,7 @@ const LoginUserCabinet: FC = () => {
 	// avatar image profile
 	// const avatarRef = useRef<any>(null);
 
-	const wrapperRef = useRef(null)
+	const wrapperRef = useRef<HTMLElement>(null)
 	// const storageFbRef = ref(storageFb);
 	// const imagesRef = ref(storageFb, 'images');
 	const [image, setImage] = useState(null)
@@ -242,8 +243,7 @@ const LoginUserCabinet: FC = () => {
 		<>
 			{isAuth && (
 				<section ref={wrapperRef} className='login-user-cabinet user-cab'>
-					{/* <canvas className='particles-canv' data-color='#B99970'></canvas> */}
-					{/* <Particles wrapperRef={wrapperRef} /> */}
+					<ParticlesBgMain wrapperHeight={wrapperRef?.current?.clientHeight} />
 
 					<div className='user-cab__block-top'>
 						<h2>

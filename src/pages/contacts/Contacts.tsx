@@ -4,32 +4,13 @@ import { FaSkype, FaGithub, FaEnvelope, FaLink } from 'react-icons/fa'
 
 import Particles from '../../containers/particles/Particles'
 import ParticlesBg from 'particles-bg'
+import ParticlesBgMain from '../../containers/particlesBgMain/ParticlesBgMain'
 
 const Contacts = () => {
-	const wrapperRef = useRef(null)
+	const wrapperRef = useRef<HTMLElement>(null)
 	return (
 		<main ref={wrapperRef} className='main contacts'>
-			<ParticlesBg
-				color='#d1aee3'
-				num={150}
-				type='cobweb'
-				bg={
-					{
-						position: 'absolute',
-						marginLeft: 'auto',
-						marginRight: 'auto',
-						left: 0,
-						right: 0,
-						textAlign: 'center',
-						zIndex: -999,
-						width: '100%',
-						height: 7220,
-					} as any
-				}
-			/>
-
-			{/* <canvas className='particles-canv' data-color='#B99970'></canvas> */}
-			{/* <Particles wrapperRef={wrapperRef} /> */}
+			<ParticlesBgMain wrapperHeight={wrapperRef?.current?.clientHeight} />
 
 			<div className='contacts__description'>
 				<div className='contacts__desc-block desc-block'>

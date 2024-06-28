@@ -18,6 +18,7 @@ import Particles from '../../containers/particles/Particles'
 
 // validation ------------------------------------------------------------
 import { PWD_REGEX, EMAIL_REGEX } from '../../containers/validation/Validation'
+import ParticlesBgMain from '../../containers/particlesBgMain/ParticlesBgMain'
 // -----------------------------------------------------------------------
 
 const Registration = () => {
@@ -48,7 +49,7 @@ const Registration = () => {
 			: [checkmarkAnimationRef, checkboxAnimationRef],
 		[0, 0.1] // -> delay by 0.1 seconds
 	)
-	const wrapperRef = useRef(null)
+	const wrapperRef = useRef<HTMLElement>(null)
 
 	// validation ------------------------------------------------------------
 
@@ -128,6 +129,7 @@ const Registration = () => {
 
 	return (
 		<main ref={wrapperRef} className='main registaration'>
+			<ParticlesBgMain wrapperHeight={wrapperRef?.current?.clientHeight} />
 			{/* <canvas className='particles-canv' data-color='#B99970'></canvas> */}
 			{/* <Particles wrapperRef={wrapperRef} /> */}
 

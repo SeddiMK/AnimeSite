@@ -29,11 +29,13 @@ import {
 // import Skeleton from '../../containers/sceleton/Skeleton';
 import SkeletonsFullDesc from '../../containers/SkeletonsFullDesc/SkeletonsFullDesc'
 
-import Particles from '../../containers/particles/Particles'
+// error
 import { ErrorFallback } from '../ErrorFallback/ErrorFallback'
 import Error from '../error/Error'
 
-import ParticlesBg from 'particles-bg'
+import { useWindowHeight } from '@react-hook/window-size'
+import ParticlesBgMain from '../../containers/particlesBgMain/ParticlesBgMain'
+import { ref } from 'firebase/storage'
 
 // ---------------------------------------------------------------------
 type FullDescItemProps = {
@@ -93,20 +95,28 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
 	const [isMount, setIsMount] = useState(false)
 
 	// adaptiv form comment -----------------------------------------------------
-	// const [width, setWidth] = useState<number | undefined>(1920)
-	// const [height, setHeight] = useState<number | undefined>(1080)
+	const [wth, setWth] = useState<number | undefined>(1920)
+	const [hht, setHht] = useState<number | undefined>(1500)
+	const [h, setH] = useState<number | undefined>(1500)
 
+	// const { width = 1920, height = 1500 } = useResizeObserver<HTMLDivElement>({
+	// 	ref: refWrp,
+	// })
+
+	// const { ref, width = 1920, height = 1500 } = useResizeObserver<HTMLElement>()
+	// const onlyHeight = useWindowHeight()
 	const { width, height } = useResizeObserver<HTMLDivElement>({ ref })
 
-	useEffect(() => {
-		if (status === 'loading') {
-			// const { width, height } = useResizeObserver<HTMLDivElement>({ ref })
-			// setWidth(width)
-			// setHeight(height)
-		}
-	}, [status])
+	// useEffect(() => {
+	// 	if (status === 'loading') {
+	// 		// const { width, height } = useResizeObserver<HTMLDivElement>({ ref })
+	// 		// setWth(width)
+	// 		// setHht(onlyHeight)
+	// 		setH(onlyHeight)
+	// 	}
+	// }, [status])
 
-	console.log(width, height, 'width,height')
+	// console.log(width, height, 'width,height')
 
 	// const jhksss = () => {
 	// const { ref, width, height } = useResizeObserver<HTMLDivElement>({
@@ -167,7 +177,7 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
 	}
 
 	// запрос для одного аниме
-	const animeSearchItems = useSelector(itemsAnimeSearch) // -----------------------------
+	const animeSearchItems = useSelector(itemsAnimeSearch)
 
 	const [itemsAnmSch, setItemsAnmSch] = useState([])
 
@@ -286,38 +296,13 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
 
 	// {status === 'loading'
 
-	// const { ref } = useResizeObserver<HTMLElement>({
-	// 	onResize: ({ width, height }) => {
-	// 		height
-	// 	},
-	// })
-	console.log(height, 'height obs')
-	// ref={ref}
+	// ref={ref} heightWrp={height}
 	return (
 		<main ref={ref} className='main full-desc-item'>
-			{status === 'loading' && (
-				<ParticlesBg
-					color='#d1aee3'
-					num={50}
-					type='cobweb'
-					bg={
-						{
-							position: 'absolute',
-							marginLeft: 'auto',
-							marginRight: 'auto',
-							left: 0,
-							right: 0,
-							textAlign: 'center',
-							zIndex: -999,
-							width: '100%',
-							height: { height },
-						} as any
-					}
-				/>
+			{animeSearchItems.length !== 0 && (
+				<ParticlesBgMain wrapperHeight={ref.current?.clientHeight} />
 			)}
 
-			{/* <canvas className='particles-canv' data-color='#B99970'></canvas> */}
-			{/* <Particles wrapperRef={wrapperRef} /> */}
 			{animeSearchItemsNetWTime && (
 				<ErrorFallback
 					error={
