@@ -107,14 +107,14 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
 		}
 		// 750
 		if (ref !== null && width !== undefined && width <= 650) {
-			setLeftOpenForm('-18%')
+			setLeftOpenForm('-17%')
 			setTopOpenForm('12rem')
 			setLeftOpenFormComment('0%')
 			setTopOpenFormComment('-32rem')
 		}
 		// 550
 		if (ref !== null && width !== undefined && width <= 650) {
-			setLeftOpenForm('-17.5%')
+			// setLeftOpenForm('-17.5%')
 		}
 
 		if (ref !== null && width !== undefined && width <= 430) {

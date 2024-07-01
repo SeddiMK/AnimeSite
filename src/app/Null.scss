@@ -311,6 +311,25 @@ main.login {
 		transform: translate(-2px, -2px);
 	}
 }
+
+@media (hover: hover) {
+	.btn {
+		&:hover {
+			background-color: var(--btn-send-com);
+			color: var(--color-active-link);
+		}
+	}
+}
+
+@media (hover: none) {
+	.btn {
+		&:active {
+			background-color: var(--btn-send-com);
+			color: var(--color-active-link);
+		}
+	}
+}
+
 .btn-reset-pwd {
 	transition: color 0.3s ease-in-out;
 	&:hover {
