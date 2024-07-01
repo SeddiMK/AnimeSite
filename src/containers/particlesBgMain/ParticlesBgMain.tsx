@@ -20,28 +20,18 @@ const ParticlesBgMain = ({ wrapperHeight }: any) => {
 	const [heightWrp, setHeightWrp] = useState<string | number>('100vh')
 
 	useEffect(() => {
-		if (
-			(animeSearchItems?.length !== 0 || animeItemsRedux?.length !== 0) &&
-			wrapperHeight !== undefined
-		)
-			setHeightWrp(wrapperHeight)
+		if (wrapperHeight !== undefined) setHeightWrp(wrapperHeight)
 	}, [animeSearchItems, animeItemsRedux, wrapperHeight])
-	// console.log(navigate, 'navigate')
+	// console.log(navigate, 'navigate') (animeSearchItems?.length !== 0 || animeItemsRedux?.length !== 0) &&
 	// console.log(location.pathname, 'location.pathname')
 
 	console.log(
 		animeSearchItems?.length !== 0 || animeItemsRedux?.length !== 0,
 		'animeSearchItems?.length !== 0 || animeItemsRedux?.length !== 0'
 	)
+
 	console.log(heightWrp, 'heightWrp-----  ParticlesBgMain')
 	console.log(wrapperHeight, 'wrapperHeight')
-	// if (wrapperRef !== undefined && wrapperRef.current) {
-	// const h = wrapperRef?.current?.clientHeight
-	// console.log(h, 'h')
-
-	// const h = { animeSearchItems?.length !== 0 ?  heightWrp: 1080}
-
-	// console.log(h, 'h----- ParticlesBgMain')
 
 	return (
 		<ParticlesBg

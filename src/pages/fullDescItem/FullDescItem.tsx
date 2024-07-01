@@ -11,7 +11,7 @@ import FormMain from '../../components/formMain/FormMain'
 import RatingStar from '../../components/ratingStar/RatingStar'
 import VideoLink from '../../components/videoLink/VideoLink'
 
-// store -----------------------
+// store
 import { RootState, useAppDispatch } from '../../store'
 import {
 	fetchAnimeListSlice,
@@ -35,7 +35,6 @@ import Error from '../error/Error'
 
 import { useWindowHeight } from '@react-hook/window-size'
 import ParticlesBgMain from '../../containers/particlesBgMain/ParticlesBgMain'
-import { ref } from 'firebase/storage'
 
 // ---------------------------------------------------------------------
 type FullDescItemProps = {
@@ -94,42 +93,14 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
 
 	const [isMount, setIsMount] = useState(false)
 
-	// adaptiv form comment -----------------------------------------------------
-	const [wth, setWth] = useState<number | undefined>(1920)
-	const [hht, setHht] = useState<number | undefined>(1500)
-	const [h, setH] = useState<number | undefined>(1500)
-
-	// const { width = 1920, height = 1500 } = useResizeObserver<HTMLDivElement>({
-	// 	ref: refWrp,
-	// })
-
-	// const { ref, width = 1920, height = 1500 } = useResizeObserver<HTMLElement>()
-	// const onlyHeight = useWindowHeight()
 	const { width, height } = useResizeObserver<HTMLDivElement>({ ref })
 
-	// useEffect(() => {
-	// 	if (status === 'loading') {
-	// 		// const { width, height } = useResizeObserver<HTMLDivElement>({ ref })
-	// 		// setWth(width)
-	// 		// setHht(onlyHeight)
-	// 		setH(onlyHeight)
-	// 	}
-	// }, [status])
+	// adaptiv form comment -----------------------------------------------------
+	// const { ref, width = 1920, height = 1500 } = useResizeObserver<HTMLElement>()
+	// const onlyHeight = useWindowHeight()
 
-	// console.log(width, height, 'width,height')
-
-	// const jhksss = () => {
-	// const { ref, width, height } = useResizeObserver<HTMLDivElement>({
-	// 	box: 'border-box',
-	// })
-	// 	setWidth(width)
-	// 	setHeight(height)
-	// }
-
+	// добавляем в стили положение в зависимости от ширины viewport
 	useEffect(() => {
-		if (ref !== null && width !== undefined) {
-			// jhksss(ref)
-		}
 		// 650+
 		if (ref !== null && width !== undefined && width > 650) {
 			setTopOpenFormComment('-35rem')
@@ -143,11 +114,11 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
 		}
 		// 550
 		if (ref !== null && width !== undefined && width <= 650) {
-			setLeftOpenForm('-23.5%')
+			setLeftOpenForm('-17.5%')
 		}
 
 		if (ref !== null && width !== undefined && width <= 430) {
-			setLeftOpenFormComment('-3.5%')
+			setLeftOpenFormComment('0%')
 		}
 
 		// if (ref !== null && width !== undefined && width <= 515)
@@ -238,13 +209,6 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
 		}
 	}, [flagRandomAnime, randomHederClick, isMount])
 
-	// console.log(itemRandomAnime, 'itemRandomAnime');
-	// console.log(flagRandomAnime, 'flagRandomAnime');
-	// console.log(animeItems, 'animeItems');
-	// console.log(animeSearchItems, 'animeSearchItems');
-	// console.log(itemAnimeSearchId, 'itemAnimeSearchId');
-	// console.log(itemAnimeLink, 'itemAnimeLink');
-
 	// --- format date ------------------------------------------------------
 	// Input date string
 	const dateString = itemAnime?.aired_at
@@ -293,6 +257,13 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
 
 		return () => errorInterval()
 	}, [])
+
+	// console.log(itemRandomAnime, 'itemRandomAnime');
+	// console.log(flagRandomAnime, 'flagRandomAnime');
+	// console.log(animeItems, 'animeItems');
+	// console.log(animeSearchItems, 'animeSearchItems');
+	// console.log(itemAnimeSearchId, 'itemAnimeSearchId');
+	// console.log(itemAnimeLink, 'itemAnimeLink');
 
 	// {status === 'loading'
 
