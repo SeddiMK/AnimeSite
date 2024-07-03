@@ -65,7 +65,7 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
 	const [leftOpenForm, setLeftOpenForm] = useState('-18%')
 	const [topOpenForm, setTopOpenForm] = useState('12rem')
 	const [leftOpenFormComment, setLeftOpenFormComment] = useState('0%') // 37%
-	const [topOpenFormComment, setTopOpenFormComment] = useState('') // 87rem
+	const [topOpenFormComment, setTopOpenFormComment] = useState('-33rem') // 87rem
 
 	// error -----------------------------------------------------------
 	const [animeSearchItemsNetWTime, setAnimeSearchItemsNetWTime] =
@@ -103,7 +103,7 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
 	useEffect(() => {
 		// 650+
 		if (ref !== null && width !== undefined && width > 650) {
-			setTopOpenFormComment('-35rem')
+			// setTopOpenFormComment('-33rem')
 		}
 		// 750
 		if (ref !== null && width !== undefined && width <= 650) {
