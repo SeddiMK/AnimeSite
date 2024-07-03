@@ -62,8 +62,8 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
 	))
 
 	// open form adaptiv
-	const [leftOpenForm, setLeftOpenForm] = useState('37%')
-	const [topOpenForm, setTopOpenForm] = useState('31rem')
+	const [leftOpenForm, setLeftOpenForm] = useState('-18%')
+	const [topOpenForm, setTopOpenForm] = useState('12rem')
 	const [leftOpenFormComment, setLeftOpenFormComment] = useState('37%') // 37%
 	const [topOpenFormComment, setTopOpenFormComment] = useState('') // 87rem
 
@@ -109,7 +109,7 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
 		if (ref !== null && width !== undefined && width <= 650) {
 			setLeftOpenForm('-17%')
 			setTopOpenForm('12rem')
-			setLeftOpenFormComment('0%')
+			setLeftOpenFormComment('-1%')
 			setTopOpenFormComment('-32rem')
 		}
 		// 550
