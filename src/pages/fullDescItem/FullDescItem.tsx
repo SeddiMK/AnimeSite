@@ -64,7 +64,7 @@ const FullDescItem: React.FC<FullDescItemProps> = ({ flagRandomAnime }) => {
 	// open form adaptiv
 	const [leftOpenForm, setLeftOpenForm] = useState('-18%')
 	const [topOpenForm, setTopOpenForm] = useState('12rem')
-	const [leftOpenFormComment, setLeftOpenFormComment] = useState('37%') // 37%
+	const [leftOpenFormComment, setLeftOpenFormComment] = useState('0%') // 37%
 	const [topOpenFormComment, setTopOpenFormComment] = useState('') // 87rem
 
 	// error -----------------------------------------------------------
