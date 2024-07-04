@@ -170,51 +170,11 @@ export const fetchAnimeListSlice = createAsyncThunk<AnimeItems[], AnimeParams>(
 			//       }
 			//     }
 
-			//     // let uniqueTitles = new Set();
-			//     // // let uniqueTitles = new Set();
-			//     // let uniqueArr = related.filter((item) => {
-			//     //   if (!uniqueTitles.has(item.title.toLowerCase())) {
-			//     //     uniqueTitles.add(item.title.toLowerCase());
-			//     //     return true;
-			//     //   }
-			//     //   return false;
-			//     // });
-
-			//     // console.log(uniqueArr, 'uniqueArr');
-
-			//     // if (related.length !== 0) {
-			//     //   for (const item of related) {
-			//     //   }
-			//     // }
-
-			//     // -------------------------------------------------------
-			//     // let pp = arr.filter(
-			//     //   (el, ind) =>
-			//     //     ind ===
-			//     //     arr.findIndex(
-			//     //       (elem) => elem.jobid === el.jobid && elem.id === el.id
-			//     //     )
-			//     // );
-
-			//     // console.log(related, 'related');
-
-			//     // if (related.length !== 0) {
-			//     //   // setAnimesItemsSearch([...new Set(related)]);
-			//     //   // setAnimesItemsSearch(related);
-			//     //   animesItemsSearch = related;
-			//     // } else {
-			//     //   console.log('не данных для показа');
-			//     //   // navigate('/error', { replace: true });
-			//     // }
-
 			//     titles = [...new Set(title)];
 			//     origTitles = [...new Set(origTitle)];
 
-			//     // const animeLinkVideo= (material[3].link); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-
-			//     // const title = (titles[0] + '. ' + origTitles[0]);
 			console.log()
-			// -----------------------------------------------------------------------------------------------
+			// -----------------------------------------------------------------------------
 			//     // countries(params?: CountriesParams): Promise<CountriesResponse>;
 			//     // genres(params?: GenresParams): Promise<GenresResponse>;
 			//     // list(params?: ListParams): Promise<ListResponse>;
