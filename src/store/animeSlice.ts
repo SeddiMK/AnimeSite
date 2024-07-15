@@ -98,6 +98,7 @@ export const fetchAnimeListSlice = createAsyncThunk<AnimeItems[], AnimeParams>(
 			let prevId: string | null = null
 
 			// filter uniq
+
 			// const seen = new Set();
 			// const uniqueObjects = objects.filter(obj => {
 			//     if (seen.has(obj.title)) {

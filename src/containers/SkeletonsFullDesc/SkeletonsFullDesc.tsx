@@ -1,15 +1,15 @@
-import React from 'react';
-import LoadingSvg from '../../assets/image/download/spinning-dots.svg';
-import ContentLoader from 'react-content-loader';
+import React from 'react'
+import LoadingSvg from '../../assets/image/download/spinning-dots.svg'
+import ContentLoader from 'react-content-loader'
 // https://skeletonreact.com/
 
-const SkeletonsFullDesc: React.FC = (props) => (
-  <div className="skeleton-full-desc">
-    <div className="skeleton-full-desc__loading loading">
-      <img src={LoadingSvg} alt="анимация загрузки страницы" />
-    </div>
+const SkeletonsFullDesc: React.FC = props => (
+	<div className='skeleton-full-desc'>
+		<div className='skeleton-full-desc__loading loading'>
+			<img src={LoadingSvg} alt='анимация загрузки страницы' />
+		</div>
 
-    {/* <ContentLoader
+		{/* <ContentLoader
       speed={2}
       width={1048}
       height={750}
@@ -48,8 +48,8 @@ const SkeletonsFullDesc: React.FC = (props) => (
       <rect x="350" y="433" rx="5" ry="5" width="55" height="13" />
       <rect x="352" y="470" rx="5" ry="5" width="78" height="38" />
       <rect x="487" y="40" rx="0" ry="0" width="84" height="7" />
-    </ContentLoader> */}
-  </div>
-);
+    </ContentLoader>  */}
+	</div>
+)
 
-export default SkeletonsFullDesc;
+export default SkeletonsFullDesc
