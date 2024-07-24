@@ -19,7 +19,7 @@ const Main = () => {
 
 	return (
 		<main ref={wrapperRef} className='main anime'>
-			{animeItems.length !== 0 && <ParticlesBgMain wrapperHeight={9050} />}
+			{animeItems.length !== 0 && <ParticlesBgMain wrapperHeight={4475} />}
 
 			<div className='anime__wrap'>
 				{/* <div className="anime__title"></div>

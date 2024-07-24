@@ -7,8 +7,8 @@ import VideoListItem from '../../components/videoListItem/VideoListItem'
 // store
 import { itemsAnime } from '../../store/animeSlice'
 
-import Particles from '../../containers/particles/Particles'
-import ParticlesBg from 'particles-bg'
+// import Particles from '../../containers/particles/Particles'
+// import ParticlesBg from 'particles-bg'
 import ParticlesBgMain from '../../containers/particlesBgMain/ParticlesBgMain'
 
 const NewList = () => {
@@ -20,7 +20,7 @@ const NewList = () => {
 
 	return (
 		<main ref={wrapperRef} className='main new-list'>
-			{animeItems.length !== 0 && <ParticlesBgMain wrapperHeight={7550} />}
+			{animeItems.length !== 0 && <ParticlesBgMain wrapperHeight={5130} />}
 
 			<div className='new-list__wrap'>
 				<div className='new-list__title'>

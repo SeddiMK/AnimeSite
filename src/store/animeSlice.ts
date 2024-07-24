@@ -196,6 +196,10 @@ export const fetchAnimeListSlice = createAsyncThunk<AnimeItems[], AnimeParams>(
 					return acc
 				}, {})
 			)
+			if (uniqueAnimesItems.length / 3 !== 0) {
+				uniqueAnimesItems.pop()
+			}
+
 			return uniqueAnimesItems //animesItems as AnimeItems[];
 		} catch (error) {
 			return error.message //rejectWithValue(
