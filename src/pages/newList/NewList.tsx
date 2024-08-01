@@ -1,8 +1,8 @@
-import './NewList.scss'
 import React, { useRef } from 'react'
 import { useSelector } from 'react-redux'
 
 import VideoListItem from '../../components/videoListItem/VideoListItem'
+import './NewList.scss'
 
 // store
 import { itemsAnime } from '../../store/animeSlice'

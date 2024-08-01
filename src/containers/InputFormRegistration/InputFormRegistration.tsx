@@ -1,6 +1,4 @@
 import React, { FC, useState, useEffect, useRef } from 'react'
-import './InputFormRegistration.scss'
-// import { Form } from 'react-router-dom';
 
 import {
 	animated,
@@ -19,6 +17,8 @@ import {
 	FaCheck,
 	FaTimes,
 } from 'react-icons/fa'
+
+import './InputFormRegistration.scss'
 
 // validation ------------------------------------------------------------
 import { USER_REGEX, PWD_REGEX, EMAIL_REGEX } from '../validation/Validation'

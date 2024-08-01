@@ -1,15 +1,9 @@
-import './RandomAnime.scss'
-import React, { useState, useRef } from 'react'
-import { useSelector } from 'react-redux'
+import React, { useRef } from 'react'
 
 // import { useToggle } from '../../hooks/useToggle';
 import FullDescItem from '../fullDescItem/FullDescItem'
+import './RandomAnime.scss'
 
-// store
-import { itemsAnime } from '../../store/animeSlice'
-
-import Particles from '../../containers/particles/Particles'
-import ParticlesBg from 'particles-bg'
 import ParticlesBgMain from '../../containers/particlesBgMain/ParticlesBgMain'
 
 // type ParticlesBgProps = {

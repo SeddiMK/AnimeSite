@@ -1,7 +1,10 @@
-import './Registration.scss'
 import React, { useEffect, useRef, useState } from 'react'
+
 import LinksSocialRegistration from '../../components/linksSocialRegistration/LinksSocialRegistration'
 import InputFormRegistration from '../../containers/InputFormRegistration/InputFormRegistration'
+
+import './Registration.scss'
+
 import { useNavigate } from 'react-router-dom'
 
 // store
@@ -13,8 +16,6 @@ import { useSpring, config, useSpringRef, useChain } from 'react-spring'
 
 // firebase
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
-
-import Particles from '../../containers/particles/Particles'
 
 // validation ------------------------------------------------------------
 import { PWD_REGEX, EMAIL_REGEX } from '../../containers/validation/Validation'

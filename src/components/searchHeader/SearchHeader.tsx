@@ -1,13 +1,13 @@
-import './SearchHeader.scss'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import debounce from 'lodash.debounce'
 
+import './SearchHeader.scss'
+
 // store
 import { RootState, useAppDispatch } from '../../store'
-
 import {
 	fetchAnimeSearchSlice,
 	itemsAnimeSearch,

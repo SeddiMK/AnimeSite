@@ -1,16 +1,13 @@
-import './Main.scss'
-import React, { useEffect, useRef } from 'react'
+import React, { useRef } from 'react'
 import { useSelector } from 'react-redux'
-import { useLocation } from 'react-router-dom'
 
 import VideoListItem from '../../components/videoListItem/VideoListItem'
+import './Main.scss'
 
-import Particles from '../../containers/particles/Particles'
-import ParticlesBg from 'particles-bg'
+import ParticlesBgMain from '../../containers/particlesBgMain/ParticlesBgMain'
 
 // store
 import { itemsAnime } from '../../store/animeSlice'
-import ParticlesBgMain from '../../containers/particlesBgMain/ParticlesBgMain'
 
 const Main = () => {
 	const wrapperRef = useRef<HTMLElement>(null)

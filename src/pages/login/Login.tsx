@@ -1,7 +1,6 @@
-import './Login.scss'
 import React, { useState, FC, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-
+import './Login.scss'
 // firebase
 import {
 	getAuth,
@@ -19,9 +18,6 @@ import { setUser } from '../../store/userSlice'
 import InputFormRegistration from '../../containers/InputFormRegistration/InputFormRegistration'
 import LinksSocialRegistration from '../../components/linksSocialRegistration/LinksSocialRegistration'
 
-// import { useAuth } from '../../hooks/useAuth';
-
-import Particles from '../../containers/particles/Particles'
 import ParticlesBgMain from '../../containers/particlesBgMain/ParticlesBgMain'
 
 // TS types

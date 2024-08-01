@@ -1,4 +1,3 @@
-import './VideoListItem.scss'
 import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -8,6 +7,8 @@ import Error from '../../pages/error/Error'
 // import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css'
 import Skeleton from '../../containers/sceleton/Skeleton'
+
+import './VideoListItem.scss'
 
 // store
 import { RootState, useAppDispatch } from '../../store'

@@ -1,9 +1,8 @@
-import './Contacts.scss'
 import React, { useRef } from 'react'
 import { FaSkype, FaGithub, FaEnvelope, FaLink } from 'react-icons/fa'
 
-import Particles from '../../containers/particles/Particles'
-import ParticlesBg from 'particles-bg'
+import './Contacts.scss'
+
 import ParticlesBgMain from '../../containers/particlesBgMain/ParticlesBgMain'
 
 const Contacts = () => {

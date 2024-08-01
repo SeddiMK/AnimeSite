@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import './Header.scss'
 import { Link, useNavigate } from 'react-router-dom'
 
 import SearchHeader from '../searchHeader/SearchHeader'
 import MenuList from '../menuList/MenuList'
 import NavMobile from '../navMobile/NavMobile'
+
 import { ErrorBoundary } from 'react-error-boundary'
 
 import logoSvg from '../../assets/image/logo/ME.svg'
+
+import './Header.scss'
 
 // store -----------------------------------------------------------------
 import { useAppDispatch } from '../../store'

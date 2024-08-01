@@ -1,8 +1,7 @@
-import './LoginUserCabinet.scss'
 import React, { FC, useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import Particles from '../../containers/particles/Particles'
+import './LoginUserCabinet.scss'
 
 // hooks ----------------------------------------------------------------
 import { useAuth } from '../../hooks/useAuth'

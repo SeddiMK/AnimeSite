@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { Link } from 'react-router-dom'
-import style from './Error.module.scss'
 import ParticlesBgMain from '../../containers/particlesBgMain/ParticlesBgMain'
+import style from './Error.module.scss'
 
 const Error: React.FC = () => {
 	const wrapperRef = useRef<HTMLElement>(null)

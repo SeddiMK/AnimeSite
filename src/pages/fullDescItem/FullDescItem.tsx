@@ -1,4 +1,3 @@
-import './FullDescItem.scss'
 import React, { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
@@ -10,6 +9,7 @@ import useResizeObserver from 'use-resize-observer'
 import FormMain from '../../components/formMain/FormMain'
 import RatingStar from '../../components/ratingStar/RatingStar'
 import VideoLink from '../../components/videoLink/VideoLink'
+import './FullDescItem.scss'
 
 // store
 import { RootState, useAppDispatch } from '../../store'

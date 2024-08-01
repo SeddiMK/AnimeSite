@@ -1,6 +1,5 @@
-import './FormMain.scss'
 import React, { useEffect, useRef, createRef, useState } from 'react'
-
+import './FormMain.scss'
 // validate
 import { useInput } from '../validateForm/Validate'
 
